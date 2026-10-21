@@ -591,17 +591,25 @@ html[data-paused="true"] *,html[data-paused="true"] *::before,html[data-paused="
       /* the offset column moves a little slower: quiet depth */
       if(desk)gsap.to('.col.offset',{y:-70,ease:'none',scrollTrigger:{trigger:'.work',start:'top bottom',end:'bottom top',scrub:SCRUB}});
 
-      /* ABOUT: the three fields start loosely grouped and soft, then close into an overlap as you scroll.
-         Nothing starts invisible: a fast skimmer always sees the fields, the labels and the text.
-         The copy is not scroll-bound. tune: end, the 0.6 spread, scale/opacity start */
+      /* ABOUT, in two beats while the section is pinned (desktop):
+         1. centred in the section, the three fields fade in apart and merge into the overlap; labels and "product" land as they meet.
+         2. the merged diagram moves left to its place, and the text fades in at the same time.
+         tune: end (pin length), the 0.8 spread, beat timings (merge 0 to 1, move 1.1 to 2) */
       var venn=document.querySelector('.venn'),grid=document.querySelector('.about-grid');
-      function shift(){if(!desk)return 0;var g=grid.getBoundingClientRect(),v=venn.getBoundingClientRect();return ((g.left+g.width/2)-(v.left+v.width/2))*.5}
+      /* layout offsets, not getBoundingClientRect: the venn's own x transform must not feed back into the measure on refresh */
+      function shift(){if(!desk)return 0;return (grid.offsetLeft+grid.offsetWidth/2)-(venn.offsetLeft+venn.offsetWidth/2)}
       function offset(el,axis){return axis==='x'?(el.offsetLeft+el.offsetWidth/2)-venn.offsetWidth/2:(el.offsetTop+el.offsetHeight/2)-venn.offsetHeight/2}
-      var at=gsap.timeline({defaults:{ease:'none'},scrollTrigger:{trigger:'#about',start:desk?'top 70%':'top 80%',end:desk?'top 10%':'bottom 70%',scrub:SCRUB,invalidateOnRefresh:true}});
-      at.fromTo('.orb',{x:function(i,el){return shift()+offset(el,'x')*.6},y:function(i,el){return offset(el,'y')*.6},scale:.8,opacity:.55},
-                       {x:0,y:0,scale:1,opacity:1,duration:1.2},0)
-        .fromTo('.olbl',{opacity:.4},{opacity:1,stagger:.08,duration:.25},.6)
-        .fromTo('.ocenter',{opacity:.4,scale:.92},{opacity:1,scale:1,duration:.3},.8);
+      var at=gsap.timeline({defaults:{ease:'none'},scrollTrigger:{trigger:'#about',start:desk?'top top':'top 80%',end:desk?'+=120%':'bottom 60%',scrub:SCRUB,pin:desk?'.about-pin':false,anticipatePin:1,invalidateOnRefresh:true}});
+      /* beat 1: appear and merge, centred */
+      at.fromTo('.venn',{x:function(){return shift()}},{x:function(){return shift()},duration:.01},0)
+        .fromTo('.orb',{x:function(i,el){return offset(el,'x')*.8},y:function(i,el){return offset(el,'y')*.8},scale:.6,opacity:0},
+                       {x:0,y:0,scale:1,opacity:1,duration:1},0)
+        .fromTo('.olbl',{opacity:0},{opacity:1,stagger:.06,duration:.2},.75)
+        .fromTo('.ocenter',{opacity:0,scale:.85},{opacity:1,scale:1,duration:.25},.85)
+      /* beat 2: move left, text appears with it */
+        .to('.venn',{x:0,duration:.9,ease:'power1.inOut'},1.1)
+        .fromTo('.about-copy .lead',{opacity:0,y:24},{opacity:1,y:0,duration:.55},1.4)
+        .fromTo('.about-copy dl',{opacity:0,y:14},{opacity:1,y:0,duration:.45},1.6);
 
       /* LABS */
       gsap.fromTo('.lab',{opacity:0,y:30},{opacity:1,y:0,ease:'none',stagger:.15,scrollTrigger:{trigger:'.labs',start:'top 88%',end:'top 55%',scrub:SCRUB}});
