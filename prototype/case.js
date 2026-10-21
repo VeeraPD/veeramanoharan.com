@@ -23,6 +23,12 @@
     check();setTimeout(check,1500);
   });
 
+  /* wide diagrams on phones: drop the edge fade once scrolled to the end, or when it all fits */
+  document.querySelectorAll('.dgwrap').forEach(function(w){
+    function upd(){w.classList.toggle('end',w.scrollLeft+w.clientWidth>=w.scrollWidth-4)}
+    w.addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();
+  });
+
   if(!MOTION){
     root.classList.add('simple');
     var els=document.querySelectorAll('.rv');

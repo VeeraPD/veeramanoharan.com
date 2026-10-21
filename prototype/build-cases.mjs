@@ -430,7 +430,7 @@ function section(s, i) {
   switch (s.type) {
     case 'bullets': body = `<ul class="blist">${s.items.map((t) => `<li>${t}</li>`).join('')}</ul>`; break;
     case 'prose': body = `<div class="prose">${s.paras.map((p) => `<p>${p}</p>`).join('')}</div>`; break;
-    case 'table': body = `<div class="tblwrap"><table class="tbl"><thead><tr>${s.head.map((h) => `<th scope="col">${h}</th>`).join('')}</tr></thead><tbody>${s.rows.map((r) => `<tr>${r.map((c) => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`; break;
+    case 'table': body = `<div class="tblwrap"><table class="tbl"><thead><tr>${s.head.map((h) => `<th scope="col">${h}</th>`).join('')}</tr></thead><tbody>${s.rows.map((r) => `<tr>${r.map((c, k) => `<td data-label="${esc(s.head[k].replace(/<[^>]+>/g, ''))}">${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`; break;
     case 'steps': body = `<ol class="steps">${s.items.map(([b, t]) => `<li><b>${b}</b><span>${t}</span></li>`).join('')}</ol>`; break;
     case 'quote': body = `<p class="quote">${s.text}</p>${s.note ? `<p class="note">${s.note}</p>` : ''}`; break;
     case 'shots': body = `<div class="shots">${s.shots.map((x) => `<figure><div class="frame"><img src="${x.img}" width="${x.w}" height="${x.h}" alt="${esc(x.alt)}" loading="lazy" decoding="async"></div><figcaption>${x.cap}</figcaption></figure>`).join('')}</div>`; break;
@@ -458,7 +458,7 @@ function section(s, i) {
   }
   /* figures: s.fig = { svg, cap, after } or an array of them; drawn before the body unless after:true */
   const figs = [].concat(s.fig || []);
-  const fig = (f) => `<figure class="fig${f.after ? ' after' : ''}"><div class="dgwrap">${f.svg()}</div><figcaption>${f.cap}</figcaption></figure>`;
+  const fig = (f) => `<figure class="fig${f.after ? ' after' : ''}"><div class="dgwrap">${f.svg()}</div><p class="swipe" aria-hidden="true">Scroll sideways for the full diagram →</p><figcaption>${f.cap}</figcaption></figure>`;
   const before = figs.filter((f) => !f.after).map(fig).join('');
   const after = figs.filter((f) => f.after).map(fig).join('');
   return `
