@@ -1,0 +1,89 @@
+---
+/**
+ * Hero visual: a product split into stacked layers, one per case study.
+ * Self-contained so it can be swapped for a richer drawing later.
+ * Live cases link to their page; coming-soon layers are muted and not linked.
+ */
+import { pad, casePath, type Case } from '../lib/cases';
+
+interface Props {
+  cases: Case[];
+}
+const layers = [...Astro.props.cases].sort((a, b) => a.data.number - b.data.number);
+const STEP = 62;
+const height = 12 + STEP * layers.length + 18;
+const y = (i: number) => 12 + STEP * i;
+---
+
+<svg
+  viewBox={`0 0 470 ${height}`}
+  class="stack mx-auto h-auto w-full max-w-[29rem] md:mx-0 md:justify-self-end"
+  role="group"
+  aria-label="A product split into stacked layers. Live layers link to their case studies."
+>
+  <path class="guide" d={`M40 30V${height - 30}M140 4V${height - 56}M240 30V${height - 30}`}></path>
+  {
+    layers.map((c, i) => {
+      const live = c.data.status === 'live';
+      const top = y(i);
+      const body = (
+        <>
+          <path d={`M140 ${top}L240 ${top + 26}L140 ${top + 52}L40 ${top + 26}Z`} />
+          <path d={`M40 ${top + 26}V${top + 34}L140 ${top + 60}L240 ${top + 34}V${top + 26}`} />
+          <path class="lead" d={`M244 ${top + 30}H262`} />
+          <text class="n" x="270" y={top + 34}>{pad(c.data.number)}</text>
+          <text x="298" y={top + 34}>{c.data.short ?? c.data.title}</text>
+        </>
+      );
+      return live ? (
+        <a href={casePath(c)} class="slab live" data-track="case-open" data-track-label={`hero-${pad(c.data.number)}`}>
+          {body}
+        </a>
+      ) : (
+        <g class="slab" aria-label={`Case ${pad(c.data.number)}: ${c.data.title}, coming soon`}>{body}</g>
+      );
+    })
+  }
+</svg>
+
+<style>
+  .stack .guide {
+    stroke: var(--color-line);
+    stroke-dasharray: 2 5;
+    fill: none;
+  }
+  .stack .slab path {
+    fill: var(--color-surface);
+    stroke: var(--color-line);
+    stroke-width: 1.2;
+  }
+  .stack .slab.live path {
+    fill: var(--color-surface2);
+    stroke: var(--color-accent);
+    stroke-width: 1.5;
+  }
+  .stack .slab.live:hover path,
+  .stack .slab.live:focus-visible path {
+    fill: #2d2620;
+    stroke: var(--color-ink);
+  }
+  .stack .slab.live:focus-visible {
+    outline: none;
+  }
+  .stack .slab path.lead {
+    fill: none;
+  }
+  .stack text {
+    font: 500 13px var(--font-mono);
+    fill: var(--color-muted);
+  }
+  .stack .live text {
+    fill: var(--color-ink);
+  }
+  .stack .n {
+    fill: var(--color-muted);
+  }
+  .stack .live .n {
+    fill: var(--color-accent);
+  }
+</style>

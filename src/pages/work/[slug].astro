@@ -1,0 +1,164 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { getLiveCases, getNeighbours, pad, casePath, type Case } from '../../lib/cases';
+
+export async function getStaticPaths() {
+  const live = await getLiveCases();
+  return live.map((entry) => ({ params: { slug: entry.data.slug }, props: { entry } }));
+}
+
+interface Props {
+  entry: Case;
+}
+const { entry } = Astro.props;
+const c = entry.data;
+const { Content } = await render(entry);
+const { prev, next } = await getNeighbours(entry);
+const summary = c.summary!;
+
+const summaryItems = [
+  ['Problem', summary.problem],
+  ['Role', summary.role],
+  ['Timeline', summary.timeline],
+  ['Team', summary.team],
+];
+const optionLabel = { A: 'Option A', B: 'Option B' } as const;
+---
+
+<Base title={c.title} description={`${c.title}. ${c.problem}`}>
+  <p class="pt-9 font-mono text-[0.8rem] text-muted">
+    <a class="hover:text-accent" href="/#work">← All work</a>
+    <span aria-hidden="true"> / </span>Case {pad(c.number)}
+  </p>
+
+  <header class="grid gap-5 pt-7 pb-14">
+    <p class="font-mono text-sm text-muted">{c.type} · {c.year}</p>
+    <h1 class="max-w-[16ch] text-[clamp(2.4rem,6vw,4.2rem)] leading-[1.03] font-bold tracking-tight text-balance">{c.title}</h1>
+    <dl class="mt-3 grid grid-cols-2 border border-line bg-surface md:grid-cols-5">
+      {
+        summaryItems.map(([k, v]) => (
+          <div class="grid content-start gap-1.5 border-r border-b border-line p-5 md:border-b-0 [&:nth-child(2n)]:border-r-0 md:[&:nth-child(2n)]:border-r">
+            <dt class="eyebrow">{k}</dt>
+            <dd class="text-[0.95rem]">{v}</dd>
+          </div>
+        ))
+      }
+      <div class="col-span-2 grid content-start gap-1.5 bg-accent-soft p-5 md:col-span-1">
+        <dt class="eyebrow text-accent">Result</dt>
+        <dd class="text-[0.95rem]">{summary.result}</dd>
+      </div>
+    </dl>
+    {
+      c.thumbnail ? (
+        <img src={c.thumbnail.src} alt={c.thumbnail.alt} width="1120" height="480" class="aspect-[21/9] w-full border border-line object-cover" />
+      ) : (
+        <div class="grid aspect-[21/9] place-items-center border border-line bg-surface2 font-mono text-xs text-muted" role="img" aria-label="Placeholder for the lead image">[Lead image]</div>
+      )
+    }
+  </header>
+
+  <section class="grid gap-3 border-t border-line py-14 md:grid-cols-[minmax(0,3fr)_minmax(0,9fr)] md:gap-12" aria-labelledby="h-context">
+    <h2 id="h-context" class="eyebrow md:sticky md:top-6 md:self-start md:pt-2">Context and user</h2>
+    <div class="grid max-w-[64ch] gap-4"><Content /></div>
+  </section>
+
+  <section class="grid gap-3 border-t border-line py-14 md:grid-cols-[minmax(0,3fr)_minmax(0,9fr)] md:gap-12" aria-labelledby="h-insight">
+    <h2 id="h-insight" class="eyebrow md:sticky md:top-6 md:self-start md:pt-2">Insight</h2>
+    <p class="max-w-[30ch] border-l-[3px] border-accent py-1 pl-6 text-[clamp(1.3rem,2.4vw,1.8rem)] leading-tight font-semibold">{c.insight}</p>
+  </section>
+
+  <section class="grid gap-3 border-t border-line py-14 md:grid-cols-[minmax(0,3fr)_minmax(0,9fr)] md:gap-12" aria-labelledby="h-decisions">
+    <h2 id="h-decisions" class="eyebrow md:sticky md:top-6 md:self-start md:pt-2">Key decisions</h2>
+    <ol class="grid gap-0">
+      {
+        c.decisions.map((d, i) => (
+          <li class="grid gap-3.5 border-t border-line py-7 first:border-t-0 first:pt-0">
+            <h3 class="text-xl font-semibold">{i + 1} · {d.question}</h3>
+            <div class="grid gap-4 md:grid-cols-2">
+              {(['A', 'B'] as const).map((k) => {
+                const o = k === 'A' ? d.optionA : d.optionB;
+                const chosen = d.chosen === k;
+                return (
+                  <div class:list={['grid min-w-0 content-start gap-2.5', chosen ? 'border-2 border-accent bg-accent-soft p-[1.2rem]' : 'border border-line bg-surface p-5']}>
+                    <p class="flex items-center justify-between font-mono text-xs tracking-wider text-muted uppercase">
+                      <span>{optionLabel[k]}</span>
+                      {chosen && <span class="bg-accent px-2 py-0.5 text-accent-ink">Chosen</span>}
+                    </p>
+                    <h4 class="font-semibold">{o.title}</h4>
+                    <p class="text-[0.95rem] text-muted">{o.detail}</p>
+                  </div>
+                );
+              })}
+            </div>
+            <p class="text-[0.95rem]"><strong class="font-semibold text-accent">Why.</strong> {d.reason}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="grid gap-3 border-t border-line py-14 md:grid-cols-[minmax(0,3fr)_minmax(0,9fr)] md:gap-12" aria-labelledby="h-shipped">
+    <h2 id="h-shipped" class="eyebrow md:sticky md:top-6 md:self-start md:pt-2">What shipped</h2>
+    <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        c.shipped.map((s) => (
+          <li class="grid content-start gap-2">
+            {s.src && s.kind === 'image' ? (
+              <img src={s.src} alt={s.alt} width="640" height="480" loading="lazy" class="aspect-[4/3] w-full border border-line object-cover" />
+            ) : s.src && s.kind === 'video' ? (
+              <video src={s.src} controls preload="metadata" aria-label={s.alt} class="aspect-[4/3] w-full border border-line bg-surface2 object-cover" />
+            ) : s.src ? (
+              <a class="grid aspect-[4/3] place-items-center border border-line bg-surface2 p-3 text-center text-sm hover:border-accent" href={s.src}>{s.alt}</a>
+            ) : (
+              <div class="grid aspect-[4/3] place-items-center border border-line bg-surface2 p-3 text-center font-mono text-xs text-muted" role="img" aria-label={s.alt}>
+                [{s.kind}]
+              </div>
+            )}
+            {s.caption && <p class="text-sm text-muted">{s.caption}</p>}
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="grid gap-3 border-t border-line py-14 md:grid-cols-[minmax(0,3fr)_minmax(0,9fr)] md:gap-12" aria-labelledby="h-outcome">
+    <h2 id="h-outcome" class="eyebrow md:sticky md:top-6 md:self-start md:pt-2">Outcome</h2>
+    <ul class="grid gap-4 sm:grid-cols-3">
+      {
+        c.outcome.map((o) => (
+          <li class="grid content-start gap-2 border border-line bg-surface p-6">
+            <strong class="text-[1.9rem] leading-none font-semibold text-accent">{o.value}</strong>
+            <span class="text-[0.95rem] text-muted">{o.label}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="grid gap-3 border-t border-line py-14 md:grid-cols-[minmax(0,3fr)_minmax(0,9fr)] md:gap-12" aria-labelledby="h-next">
+    <h2 id="h-next" class="eyebrow md:sticky md:top-6 md:self-start md:pt-2">What I'd do next</h2>
+    <p class="max-w-[64ch]">{c.next}</p>
+  </section>
+
+  {
+    (prev || next) && (
+      <nav class="grid gap-4 border-t border-line py-14 sm:grid-cols-2" aria-label="Other case studies">
+        {prev ? (
+          <a class="grid gap-1.5 border border-line bg-surface p-6 hover:border-accent" href={casePath(prev)} rel="prev" data-track="case-open" data-track-label={`prev-${pad(prev.data.number)}`}>
+            <span class="eyebrow text-accent">← Previous · Case {pad(prev.data.number)}</span>
+            <strong class="font-semibold">{prev.data.title}</strong>
+          </a>
+        ) : (
+          <span class="hidden sm:block" />
+        )}
+        {next && (
+          <a class="grid gap-1.5 border border-line bg-surface p-6 hover:border-accent sm:text-right" href={casePath(next)} rel="next" data-track="case-open" data-track-label={`next-${pad(next.data.number)}`}>
+            <span class="eyebrow text-accent">Next · Case {pad(next.data.number)} →</span>
+            <strong class="font-semibold">{next.data.title}</strong>
+          </a>
+        )}
+      </nav>
+    )
+  }
+</Base>

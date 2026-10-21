@@ -1,0 +1,137 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import CaseCard from '../components/CaseCard.astro';
+import HeroStack from '../components/HeroStack.astro';
+import { site } from '../config/site';
+import { getOrderedCases, getLiveCases, pad, casePath } from '../lib/cases';
+
+const cases = await getOrderedCases();
+const live = await getLiveCases();
+const liveNumbers = new Map(live.map((c) => [c.data.number, c]));
+const skills = (await getCollection('skills')).sort((a, b) => a.data.number - b.data.number);
+const testimonials = await getCollection('testimonials');
+const lab = await getCollection('lab');
+const showTestimonials = testimonials.length >= 3;
+const soonCount = cases.length - live.length;
+
+const meta = [
+  ['Based', 'India'],
+  ['Focus', 'Consumer and AI products'],
+  ['Background', 'IISc, NID, HCLTech, IIM Lucknow'],
+  ['Open for', 'Full-time PM roles in India and the Middle East'],
+];
+---
+
+<Base title={site.name} description={site.description}>
+  <div class="grid items-center gap-12 py-12 md:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] md:gap-12 md:py-20">
+    <div class="grid justify-items-start gap-7">
+      <h1 class="text-[clamp(2.8rem,7vw,5.2rem)] leading-none font-bold tracking-tight text-balance">
+        Products, taken apart.
+      </h1>
+      <p class="max-w-[56ch] text-[clamp(1.1rem,1.8vw,1.3rem)] leading-normal">
+        Product manager. I find real user problems, make the hard calls, and ship AI products end to end.
+      </p>
+      <dl class="grid w-full max-w-xl grid-cols-1 gap-x-5 gap-y-0.5 border-t border-line pt-5 text-sm sm:grid-cols-[auto_1fr] sm:gap-y-1.5">
+        {
+          meta.map(([k, v]) => (
+            <>
+              <dt class="eyebrow pt-0.5">{k}</dt>
+              <dd class="mb-2.5 sm:mb-0">{v}</dd>
+            </>
+          ))
+        }
+      </dl>
+      <div class="flex flex-wrap gap-3">
+        <a class="btn btn-primary" href="#work">See the work</a>
+        <a class="btn" href={site.resumes.b2b.file} download data-track="resume-download" data-track-label="b2b">Download resume</a>
+      </div>
+    </div>
+    <HeroStack cases={cases} />
+  </div>
+
+  <section id="work" class="border-t border-line py-14 md:py-22" aria-labelledby="h-work">
+    <div class="mb-10 flex flex-wrap items-baseline justify-between gap-4">
+      <h2 id="h-work" class="section-title">Case studies</h2>
+      <p class="text-[0.95rem] text-muted">{live.length} live. {soonCount} coming soon.</p>
+    </div>
+    <ul class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      {cases.map((c) => <li class="grid"><CaseCard entry={c} /></li>)}
+    </ul>
+  </section>
+
+  {
+    showTestimonials && (
+      <section class="border-t border-line py-14 md:py-22" aria-labelledby="h-kind">
+        <h2 id="h-kind" class="section-title mb-10">Kind words</h2>
+        <ul class="grid gap-5 md:grid-cols-3">
+          {testimonials.map((t) => (
+            <li class="grid content-between gap-5 border border-line bg-surface p-6">
+              <blockquote class="text-[1.05rem] leading-relaxed">“{t.data.quote}”</blockquote>
+              <p class="text-sm text-muted">
+                {t.data.linkedin ? (
+                  <a class="link-underline text-ink" href={t.data.linkedin} rel="noopener" data-track="linkedin-click" data-track-label="testimonial">{t.data.name}</a>
+                ) : (
+                  <span class="text-ink">{t.data.name}</span>
+                )}
+                <br />
+                {t.data.role}, {t.data.organisation}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  <section class="border-t border-line py-14 md:py-22" aria-labelledby="h-skills">
+    <div class="mb-10 flex flex-wrap items-baseline justify-between gap-4">
+      <h2 id="h-skills" class="section-title">Skills, with proof</h2>
+      <p class="text-[0.95rem] text-muted">Each skill points to the case that shows it.</p>
+    </div>
+    <ol class="border-t border-line">
+      {
+        skills.map((s) => {
+          const target = liveNumbers.get(s.data.case);
+          const label = `Case ${pad(s.data.case)}`;
+          return (
+            <li class="grid grid-cols-[2.5rem_minmax(0,1fr)] items-baseline gap-x-3 gap-y-1 border-b border-line py-5 md:grid-cols-[3.5rem_minmax(0,1.1fr)_minmax(0,1.8fr)_9rem] md:gap-x-5">
+              <span class="font-mono text-sm text-muted">{pad(s.data.number)}</span>
+              <h3 class="text-[1.1rem] font-semibold">{s.data.name}</h3>
+              <p class="col-start-2 text-[0.95rem] text-muted md:col-start-auto">{s.data.proof}</p>
+              {target ? (
+                <a class="col-start-2 font-mono text-[0.8rem] text-accent hover:underline md:col-start-auto md:text-right" href={casePath(target)} data-track="case-open" data-track-label={`skill-${pad(s.data.case)}`}>
+                  {label} →
+                </a>
+              ) : (
+                <span class="col-start-2 font-mono text-[0.8rem] text-muted md:col-start-auto md:text-right">{label}</span>
+              )}
+            </li>
+          );
+        })
+      }
+    </ol>
+  </section>
+
+  <section id="lab" class="border-t border-line py-14 md:py-22" aria-labelledby="h-lab">
+    <div class="mb-10 flex flex-wrap items-baseline justify-between gap-4">
+      <h2 id="h-lab" class="section-title">AI Lab</h2>
+      <p class="text-[0.95rem] text-muted">Small things I built to learn.</p>
+    </div>
+    <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        lab.map((t) => (
+          <li class="grid">
+            <a class="grid min-h-52 content-between gap-6 border border-line bg-surface p-5 hover:border-accent" href={t.data.url} rel="noopener">
+              <div>
+                <h3 class="text-[1.05rem] font-semibold">{t.data.title}</h3>
+                <p class="mt-2 text-[0.95rem] text-muted">Learned: {t.data.learning}</p>
+              </div>
+              <span class="font-mono text-xs font-medium text-accent">Open live →</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Base>

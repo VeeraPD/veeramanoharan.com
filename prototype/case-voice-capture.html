@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en" data-mode="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Voice capture · Case 03 · R. Veera Manoharan</title>
+<script>(function(){var r=document.documentElement,m=null,mo=null;try{m=localStorage.getItem('mode');mo=localStorage.getItem('motion')}catch(e){}r.setAttribute('data-mode',m==='cream'?'cream':'dark');if(mo==='off')r.setAttribute('data-paused','true')})();</script>
+<meta name="description" content="A discovery study on speech-to-text for Hinglish and Indian accents: hypotheses, an engine comparison, unit economics and a build, pivot or kill rule. In progress.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&display=swap">
+<link rel="stylesheet" href="case.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="a03" viewBox="0 0 200 150"><g transform="translate(100 75) scale(.95)" fill="currentColor"><rect x="-72" y="-5" width="8" height="10" rx="4"/><rect x="-56" y="-13" width="8" height="26" rx="4"/><rect x="-40" y="-22" width="8" height="44" rx="4"/><rect x="-24" y="-15" width="8" height="30" rx="4"/><rect x="-8" y="-29" width="8" height="58" rx="4"/><rect x="8" y="-18" width="8" height="36" rx="4"/><rect x="24" y="-9" width="8" height="18" rx="4"/><rect x="40" y="-24" width="8" height="48" rx="4"/><rect x="56" y="-12" width="8" height="24" rx="4"/></g></symbol></svg>
+<a class="skip" href="#main">Skip to content</a>
+<div class="page">
+  <header class="top">
+    <a class="logo" href="index.html" aria-label="Veera, home">
+      <svg viewBox="0 0 30 30" aria-hidden="true"><path class="dot" d="M15 2.5C22 2 28 7 27.5 15 27 23 21 28 14 27.5 7 27 2.5 21 3 14 3.5 7.5 9 3 15 2.5Z"/><path class="mk" d="M9 11l6 10 6-10" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Veera</a>
+    <div class="hright">
+      <a class="back" href="index.html#work">← <span>All work</span></a>
+      <button class="iconbtn" id="mode" type="button" aria-label="Switch to light theme">
+        <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 14.6A8 8 0 0 1 9.4 4.5a8 8 0 1 0 10.1 10.1Z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <header class="open">
+      <p class="label">Case 03 · Discovery · In progress · 2026 · 5 min read</p>
+      <h1>Voice capture for Hinglish: testing whether to build</h1>
+      <p class="stand">My own difficulty transcribing Hindi-English recordings prompted this study. I am testing whether existing engines are meaningfully better than built-in recognition, and whether that improvement supports a paid product.</p>
+      <p class="links"><a class="pill ghost" href="#decisions">Skip to the decisions</a></p>
+      <div class="lead-img art grain mesh g-rose" role="img" aria-label="Abstract sound wave"><svg aria-hidden="true"><use href="#a03"/></svg></div>
+      <div class="tldr" aria-label="TL;DR"><div><p class="label">Problem</p><p>Phone speech-to-text breaks on regional accents and on Hinglish, the Hindi-English mix many Indians speak every day.</p></div><div><p class="label">What I did</p><p>Designed a comparison of four engines on real recordings and Indian-accent speech data, scored on transcription errors, speed and cost, with numeric decision thresholds set before testing.</p></div><div><p class="label">Status</p><p>In progress. No engine winner, validated willingness to pay or build decision yet. The findings will be published here, including a kill if that is what the data says.</p></div></div>
+    </header>
+
+    <dl class="summary" style="--cols:4">
+      <div><dt class="label">Role</dt><dd>Solo: framing, research, model evaluation, business case</dd></div>
+      <div><dt class="label">Type</dt><dd>Discovery and evaluation study (pre-build)</dd></div>
+      <div><dt class="label">Status</dt><dd>In progress, October 2026</dd></div>
+      <div><dt class="label">Skills</dt><dd>User research, AI evaluation, unit economics, build-or-kill judgment</dd></div>
+    </dl>
+
+    <section class="sec" aria-labelledby="s0">
+      <p class="label">Problem</p>
+      <div>
+        <h2 id="s0">Built for American English</h2>
+        <p class="intro">Phone speech-to-text works well for American English. It breaks for many Indian speakers.</p><ul class="blist"><li>Regional accents and dialects produce wrong words and broken sentences.</li><li>Indians often mix Hindi and English in one sentence (Hinglish). Built-in engines handle this badly.</li><li>I saw this first-hand: built-in phone recognition struggled with local accents, and transcribing my own long Hindi-English recordings took real effort.</li></ul>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s1">
+      <p class="label">Users</p>
+      <div>
+        <h2 id="s1">Who feels it, and who would pay</h2>
+        <figure class="fig"><div class="dgwrap"><svg class="dg narrow" viewBox="0 0 600 400" role="img" aria-label="Segments by ease of reach and willingness to pay. Students are easy to reach with low to medium willingness to pay, so they are the test group. Sales and client-facing professionals are harder to reach but pay the most. Field workers and SMB owners are hard to reach with medium willingness to pay. Students can show whether the transcripts are accurate; only sales professionals can show whether they would pay, so they are interviewed directly."><defs><marker id="d5a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk" d="M0,0L10,5L0,10z"/></marker><marker id="d5h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk hot" d="M0,0L10,5L0,10z"/></marker></defs><path class="ax" d="M70 340H560M70 340V20"/><path class="grid" d="M315 24V336M74 180H556"/><text class="q" x="80" y="40" text-anchor="start">Sell here</text><text class="q" x="552" y="40" text-anchor="end">Ideal</text><text class="q" x="80" y="326" text-anchor="start">Avoid</text><text class="q" x="552" y="326" text-anchor="end">Test here</text><text class="lb" x="560" y="362" text-anchor="end">EASE OF REACH →</text><text class="lb" transform="translate(44 340) rotate(-90)">WILLINGNESS TO PAY →</text><circle class="pt hot" cx="460" cy="250" r="8"/><text class="t" x="448" y="278" text-anchor="end">Students</text><text class="s" x="448" y="294" text-anchor="end">primary for testing</text><circle class="pt" cx="190" cy="78" r="8"/><text class="t" x="204" y="74" text-anchor="start">Sales and</text><text class="t" x="204" y="92" text-anchor="start">client-facing pros</text><circle class="pt" cx="140" cy="196" r="8"/><text class="s" x="154" y="200" text-anchor="start">Field workers, SMBs</text><path class="ln hot dash" d="M452 242C426 176 300 122 202 108" marker-end="url(#d5h)"/><text class="al hot" x="372" y="140" text-anchor="start">accuracy: test with students</text><text class="al hot" x="372" y="155" text-anchor="start">willingness to pay: ask sales</text><text class="lb" x="70" y="384" text-anchor="start">POSITIONS ARE QUALITATIVE, FROM DESK RESEARCH</text></svg></div><figcaption>Two different questions, two different groups. Students are cheap to reach for testing transcript accuracy. They cannot show whether sales teams would pay, so buyer interviews go to sales and client-facing professionals directly.</figcaption></figure><div class="tblwrap"><table class="tbl"><thead><tr><th scope="col">Segment</th><th scope="col">Use case</th><th scope="col">Willingness to pay</th></tr></thead><tbody><tr><td><b>Students (primary for testing)</b></td><td>Record lectures, get notes and summaries</td><td>Low to medium; easy to reach</td></tr><tr><td><b>Sales and client-facing professionals</b></td><td>Calls and meetings in mixed language</td><td>High. Globally, sales teams bring most AI notetaker revenue (Sacra on Otter.ai)</td></tr><tr><td>Field workers and SMB owners</td><td>Voice notes instead of typing</td><td>Medium; large but harder to reach</td></tr></tbody></table></div>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s2">
+      <p class="label">Hypotheses</p>
+      <div>
+        <h2 id="s2">What the study must prove or kill</h2>
+        <ul class="blist"><li><b>H1. The gap is in Hinglish and regional accents, not Indian English overall.</b> A general engine can look fine on average and still fail the users who need it most.</li><li><b>H2. An India-first engine closes the gap.</b> At least one engine cuts Hinglish word errors by 25% or more against Apple's free baseline.</li><li><b>H3. The economics work for one paying segment.</b> A heavy user's monthly audio cost is under 40% of a plan price that segment says it would pay.</li></ul>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s3">
+      <p class="label">Research plan</p>
+      <div>
+        <h2 id="s3">Two kinds of validation before any build</h2>
+        <figure class="fig"><div class="dgwrap"><svg class="dg " viewBox="0 0 800 262" role="img" aria-label="The study pipeline. Real clips and the open Svarah set go through four engines: Sarvam, OpenAI mini, Deepgram Nova-3 and Apple built-in as the free baseline. Each is scored on word error rate by accent and by language mix, speed and cost per hour. A decision rule set in advance turns the scores into build, pivot or kill."><defs><marker id="d6a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk" d="M0,0L10,5L0,10z"/></marker><marker id="d6h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk hot" d="M0,0L10,5L0,10z"/></marker></defs><rect class="bx " x="0" y="36" width="170" height="84" rx="10"/><text class="t" x="85" y="66.5" text-anchor="middle">Real clips</text><text class="s" x="85" y="83.5" text-anchor="middle">20 to 30 lectures,</text><text class="s" x="85" y="98.5" text-anchor="middle">calls, Hinglish</text><rect class="bx " x="0" y="144" width="170" height="70" rx="10"/><text class="t" x="85" y="167.5" text-anchor="middle">Svarah set</text><text class="s" x="85" y="184.5" text-anchor="middle">open Indian-accent</text><text class="s" x="85" y="199.5" text-anchor="middle">speech</text><path class="ln " d="M170 78H200"/><path class="ln " d="M170 179H200"/><path class="ln" d="M200 36V214"/><path class="ln " d="M200 43H228" marker-end="url(#d6a)"/><rect class="bx " x="230" y="18" width="170" height="50" rx="10"/><text class="t" x="315" y="39" text-anchor="middle">Sarvam</text><text class="s" x="315" y="56" text-anchor="middle">India-first</text><path class="ln " d="M200 101H228" marker-end="url(#d6a)"/><rect class="bx " x="230" y="76" width="170" height="50" rx="10"/><text class="t" x="315" y="97" text-anchor="middle">OpenAI mini</text><text class="s" x="315" y="114" text-anchor="middle">general</text><path class="ln " d="M200 159H228" marker-end="url(#d6a)"/><rect class="bx " x="230" y="134" width="170" height="50" rx="10"/><text class="t" x="315" y="155" text-anchor="middle">Deepgram Nova-3</text><text class="s" x="315" y="172" text-anchor="middle">Hinglish mode</text><path class="ln " d="M200 217H228" marker-end="url(#d6a)"/><rect class="bx ghost" x="230" y="192" width="170" height="50" rx="10"/><text class="t" x="315" y="213" text-anchor="middle">Apple built-in</text><text class="s" x="315" y="230" text-anchor="middle">free baseline</text><path class="ln " d="M400 43H430"/><path class="ln " d="M400 101H430"/><path class="ln " d="M400 159H430"/><path class="ln " d="M400 217H430"/><path class="ln" d="M430 43V217"/><path class="ln " d="M430 130H458" marker-end="url(#d6a)"/><rect class="bx " x="460" y="64" width="160" height="132" rx="10"/><text class="t" x="540" y="103.5" text-anchor="middle">Scored</text><text class="s" x="540" y="120.5" text-anchor="middle">WER by accent</text><text class="s" x="540" y="135.5" text-anchor="middle">WER by language mix</text><text class="s" x="540" y="150.5" text-anchor="middle">speed</text><text class="s" x="540" y="165.5" text-anchor="middle">cost per hour</text><path class="ln " d="M620 130H632V48H646" marker-end="url(#d6a)"/><rect class="bx hot" x="648" y="18" width="152" height="60" rx="10"/><text class="t" x="724" y="44" text-anchor="middle">Decision rule</text><text class="s" x="724" y="61" text-anchor="middle">set before testing</text><path class="ln hot" d="M724 78V96"/><path class="ln hot" d="M664 96H784"/><path class="ln hot" d="M664 96V138" marker-end="url(#d6h)"/><rect class="bx " x="640" y="140" width="50" height="40" rx="10"/><text class="t" x="665" y="165" text-anchor="middle">Build</text><path class="ln hot" d="M724 96V138" marker-end="url(#d6h)"/><rect class="bx " x="700" y="140" width="50" height="40" rx="10"/><text class="t" x="725" y="165" text-anchor="middle">Pivot</text><path class="ln hot" d="M784 96V138" marker-end="url(#d6h)"/><rect class="bx " x="760" y="140" width="50" height="40" rx="10"/><text class="t" x="785" y="165" text-anchor="middle">Kill</text><text class="al" x="724" y="210" text-anchor="middle">one number</text><text class="al" x="724" y="225" text-anchor="middle">drives the call</text></svg></div><figcaption>The technical test as a pipeline. Same clips, four engines, the same scores, and a decision rule written before the first clip is tested.</figcaption></figure><ol class="steps"><li><b>Buyer interviews</b><span>Sales and client-facing professionals, the segment most likely to pay: how they capture calls today, where voice fails them, and what they pay for now. Students are interviewed on the same workflow questions, but their answers are not used as evidence of willingness to pay.</span></li><li><b>Accent test</b><span>20 to 30 real clips (lectures, client calls, Hindi-English mixes) from speakers across north, south, east and west India, plus open Indian-accent data such as AI4Bharat's Svarah set.</span></li><li><b>Engines compared</b><span>Sarvam (built for Indian languages), OpenAI's mini transcription model, Deepgram Nova-3 (Hinglish mode), and Apple's built-in engine as the free baseline.</span></li><li><b>Metric</b><span>Word error rate (WER) by accent and by language mix, plus speed and cost per hour.</span></li></ol>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s4">
+      <p class="label">Decision rule</p>
+      <div>
+        <h2 id="s4">Set before the first clip is tested</h2>
+        <div class="tblwrap"><table class="tbl"><thead><tr><th scope="col">If the data shows</th><th scope="col">Then</th></tr></thead><tbody><tr><td>The best engine cuts Hinglish WER by 25% or more against Apple's baseline, <i>and</i> its heavy-user cost is under 40% of a plan price the paying segment accepts in interviews</td><td><b>Build</b> a narrow pilot for that segment</td></tr><tr><td>The best engine improves Hinglish WER by less than 25%</td><td><b>Pivot</b>: compete on output (summaries, action items) on top of free transcripts</td></tr><tr><td>Every engine, including the best, gets more than 1 word in 4 wrong on Hinglish (WER above 25%)</td><td><b>Kill</b> for now: at that error rate, correcting the transcript takes longer than typing notes. Revisit when models improve</td></tr></tbody></table></div><p class="outro">If the accuracy bar is met but the cost bar is not, the answer is a pivot to capped plans, not a build.</p>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s5">
+      <p class="label">Engines</p>
+      <div>
+        <h2 id="s5">Engines and list prices</h2>
+        <div class="tblwrap"><table class="tbl"><thead><tr><th scope="col">Engine</th><th scope="col">Built for</th><th scope="col">Cost per hour (list, Oct 2026)</th><th scope="col">WER</th></tr></thead><tbody><tr><td>Sarvam</td><td>Indian languages</td><td>Rs 30</td><td>In testing</td></tr><tr><td>OpenAI mini transcribe</td><td>General, multilingual</td><td>About $0.18 ($0.003 a minute)</td><td>In testing</td></tr><tr><td>Deepgram Nova-3</td><td>General, with a Hinglish mode</td><td>About $0.46 ($0.0077 a minute)</td><td>In testing</td></tr><tr><td>Apple built-in</td><td>On-device baseline</td><td>Free</td><td>In testing</td></tr></tbody></table></div>
+      </div>
+    </section>
+
+    <section class="sec" id="decisions" aria-labelledby="s6">
+      <p class="label">Decisions and trade-offs</p>
+      <div>
+        <h2 id="s6">Four calls, and what each one cost</h2>
+        <div class="decs">
+          <article class="dec">
+            <h3><span>01</span>Test before build</h3>
+            <div class="opts">
+              <div class="opt chosen"><p class="label">What I chose <span class="tick">Chosen</span></p><p>1 to 2 weeks of evaluation first</p></div>
+              <div class="opt"><p class="label">What I gave up</p><p>Speed to a demo</p></div>
+            </div>
+            <p class="why"><b>Why.</b> Choosing an engine by assumption risks building on the wrong base.</p>
+          </article>
+          <article class="dec">
+            <h3><span>02</span>Cloud engine over on-device</h3>
+            <div class="opts">
+              <div class="opt chosen"><p class="label">What I chose <span class="tick">Chosen</span></p><p>Pick the winner of the accent test; keep Apple's engine as an offline backup</p></div>
+              <div class="opt"><p class="label">What I gave up</p><p>Free, private, offline-first</p></div>
+            </div>
+            <p class="why"><b>Why.</b> Accuracy on local accents is the whole product.</p>
+          </article>
+          <article class="dec">
+            <h3><span>03</span>Pricing model</h3>
+            <div class="opts">
+              <div class="opt chosen"><p class="label">What I chose <span class="tick">Chosen</span></p><p>Monthly plans with an hours allowance</p></div>
+              <div class="opt"><p class="label">What I gave up</p><p>A simple one-time price</p></div>
+            </div>
+            <p class="why"><b>Why.</b> Every hour of audio costs money. A one-time price loses money on heavy users.</p>
+          </article>
+          <article class="dec">
+            <h3><span>04</span>Differentiation</h3>
+            <div class="opts">
+              <div class="opt chosen"><p class="label">What I chose <span class="tick">Chosen</span></p><p>Win on output: summaries, action items, exports for one user group</p></div>
+              <div class="opt"><p class="label">What I gave up</p><p>Competing on raw transcription</p></div>
+            </div>
+            <p class="why"><b>Why.</b> Phone makers keep improving free recorders. Raw transcripts will become a commodity.</p>
+          </article></div>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s7">
+      <p class="label">Product shape</p>
+      <div>
+        <h2 id="s7">If we build: compete above the transcript</h2>
+        <div class="prose"><p>The transcript itself is becoming free: phone makers keep improving their built-in recorders. So the engine layer is a cost to manage, and the product is what sits on top of it.</p></div><figure class="fig after"><div class="dgwrap"><svg class="dg " viewBox="0 0 800 250" role="img" aria-label="If built, the product shape. Capture from a phone recorder. Audio goes to the accent-test winning cloud engine, with Apple on-device as the offline backup. Both produce a transcript, which phone makers give away. The product competes above the transcript, on summaries, action items and exports for one user group."><defs><marker id="d7a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk" d="M0,0L10,5L0,10z"/></marker><marker id="d7h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk hot" d="M0,0L10,5L0,10z"/></marker></defs><text class="lb" x="0" y="16" text-anchor="start">CAPTURE</text><rect class="bx " x="0" y="28" width="150" height="60" rx="10"/><text class="t" x="75" y="54" text-anchor="middle">Phone recorder</text><text class="s" x="75" y="71" text-anchor="middle">lectures, calls</text><path class="ln " d="M150 58H206" marker-end="url(#d7a)"/><path class="ln dash" d="M178 58V158H206" marker-end="url(#d7a)"/><text class="lb" x="208" y="16" text-anchor="start">ENGINE</text><rect class="bx " x="208" y="28" width="170" height="60" rx="10"/><text class="t" x="293" y="54" text-anchor="middle">Test winner</text><text class="s" x="293" y="71" text-anchor="middle">cloud, accent-tuned</text><rect class="bx ghost" x="208" y="128" width="170" height="60" rx="10"/><text class="t" x="293" y="154" text-anchor="middle">Apple on-device</text><text class="s" x="293" y="171" text-anchor="middle">offline backup</text><path class="ln " d="M378 58H404V96H430" marker-end="url(#d7a)"/><path class="ln dash" d="M378 158H404V120H430" marker-end="url(#d7a)"/><rect class="bx " x="432" y="78" width="140" height="60" rx="10"/><text class="t" x="502" y="104" text-anchor="middle">Transcript</text><text class="s" x="502" y="121" text-anchor="middle">a commodity</text><text class="al" x="502" y="160" text-anchor="middle">phone makers</text><text class="al" x="502" y="175" text-anchor="middle">give this away</text><path class="ln " d="M572 108H596"/><path class="ln hot" d="M596 46V182"/><rect class="zone" x="612" y="8" width="188" height="214" rx="14"/><text class="lb hot" x="626" y="28" text-anchor="start">WHERE WE COMPETE</text><path class="ln hot" d="M596 62H624" marker-end="url(#d7h)"/><rect class="bx hot" x="626" y="40" width="160" height="44" rx="10"/><text class="t" x="706" y="65.5" text-anchor="middle">Summaries</text><path class="ln hot" d="M596 122H624" marker-end="url(#d7h)"/><rect class="bx hot" x="626" y="100" width="160" height="44" rx="10"/><text class="t" x="706" y="125.5" text-anchor="middle">Action items</text><path class="ln hot" d="M596 182H624" marker-end="url(#d7h)"/><rect class="bx hot" x="626" y="160" width="160" height="44" rx="10"/><text class="t" x="706" y="185.5" text-anchor="middle">Exports</text><text class="al hot" x="706" y="240" text-anchor="middle">for one user group</text></svg></div><figcaption>The architecture if the study says build. Capture and transcription are swappable and commoditising; the value, and the reason to pay, sits in the output layer for one user group.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s8">
+      <p class="label">Unit economics</p>
+      <div>
+        <h2 id="s8">What one heavy user costs</h2>
+        <div class="prose"><p>One 1-hour lecture a day for a month (about 22 hours) costs about <b>Rs 660</b> on Sarvam or about <b>$4</b> on OpenAI's mini model at list prices.</p><p>To keep audio under 40% of revenue, that heavy user's plan would need to cost about <b>Rs 1,650 a month on Sarvam</b>, or about <b>$10 on OpenAI's mini model</b>. Students rate their willingness to pay low to medium, so Sarvam cannot serve heavy student use profitably without an hours cap. Prices at that level point to sales and client-facing professionals, which is why the buyer interviews go to them.</p></div>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s9">
+      <p class="label">What I learned</p>
+      <div>
+        <h2 id="s9">So far</h2>
+        <ul class="blist"><li>Writing the build, pivot or kill rule before testing keeps the study honest.</li><li>Averages hide the problem. The test is designed around the users a general engine fails, not the typical case.</li></ul>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s10">
+      <p class="label">Roadmap</p>
+      <div>
+        <h2 id="s10">Now, next, later</h2>
+        <div class="road"><div><p class="label">Now</p><ul><li>Finish the accent test</li><li>Fill the WER table</li></ul></div><div><p class="label">Next</p><ul><li>Make the build, pivot or kill call</li><li>Publish it here, with the number</li></ul></div><div><p class="label">Later</p><ul><li>If build: a pilot with one student cohort</li><li>If pivot: summaries on top of free transcripts</li></ul></div></div>
+      </div>
+    </section>
+
+    <nav class="pn" aria-label="More cases">
+      <a href="case-alpine-skies.html"><span class="label">← Case 02</span><b>Alpine Skies</b></a>
+      <a href="index.html#work"><span class="label">All work →</span><b>Back to the index</b></a>
+    </nav>
+  </main>
+  <footer class="legal"><span>© R. Veera Manoharan</span><span>Case 03</span></footer>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="case.js"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+---
+import { site } from '../config/site';
+const { provider, code } = site.analytics;
+---
+
+{
+  provider === 'goatcounter' && (
+    <script is:inline async data-goatcounter={`https://${code}.goatcounter.com/count`} src="//gc.zgo.at/count.js" />
+  )
+}
+{provider === 'plausible' && <script is:inline defer data-domain={code} src="https://plausible.io/js/script.js" />}
+{
+  provider !== 'none' && (
+    <script is:inline>
+      {`
+      // Click events: any element with data-track="<event>" and optional data-track-label="<detail>".
+      // Events: case-open, resume-download, email-click, linkedin-click.
+      document.addEventListener('click', function (e) {
+        var el = e.target instanceof Element ? e.target.closest('[data-track]') : null;
+        if (!el) return;
+        var name = el.getAttribute('data-track');
+        var label = el.getAttribute('data-track-label');
+        var full = label ? name + '/' + label : name;
+        try {
+          if (window.goatcounter && window.goatcounter.count) {
+            window.goatcounter.count({ path: full, title: full, event: true });
+          } else if (window.plausible) {
+            window.plausible(name, { props: { label: label || '' } });
+          }
+        } catch (err) { /* analytics must never block navigation */ }
+      });
+      `}
+    </script>
+  )
+}

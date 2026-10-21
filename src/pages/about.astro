@@ -1,0 +1,100 @@
+---
+import Base from '../layouts/Base.astro';
+
+const path = [
+  ['IISc', '[One line on IISc]'],
+  ['NID', '[One line on NID]'],
+  ['HCLTech', '[One line on six years at HCLTech]'],
+  ['IIM Lucknow', '[One line on the MBA]'],
+];
+const principles = [
+  ['[Principle 1]', '[Two sentences on what it means in practice.]'],
+  ['[Principle 2]', '[Two sentences on what it means in practice.]'],
+  ['[Principle 3]', '[Two sentences on what it means in practice.]'],
+  ['[Principle 4]', '[Two sentences on what it means in practice.]'],
+];
+const glance = [
+  ['Education', 'IISc · NID · IIM Lucknow (MBA) [add degrees and years]'],
+  ['Experience', 'HCLTech, six years. XR product design and enterprise delivery in regulated industries. [add roles]'],
+  ['Red Dot award', '[Add award details]'],
+  ['US design patent', '[Add patent number and title]'],
+  ['Intel x IIML', '3rd runner-up [add details]'],
+  ['Tools', '[Add tools list]'],
+];
+---
+
+<Base
+  title="About"
+  current="about"
+  description="Background, principles and a short enterprise story from R. Veera Manoharan: IISc, NID, six years at HCLTech, now MBA at IIM Lucknow."
+>
+  <div class="grid gap-12 py-12 md:grid-cols-[minmax(0,7fr)_minmax(0,3fr)] md:gap-14 md:py-20">
+    <div class="grid content-start gap-6">
+      <p class="eyebrow">About</p>
+      <h1 class="text-[clamp(2.2rem,5vw,3.6rem)] leading-[1.05] font-bold tracking-tight text-balance">[Story headline in one line]</h1>
+      <p class="placeholder max-w-[56ch] text-[clamp(1.1rem,1.8vw,1.3rem)] leading-normal">
+        [Two or three sentences on how a design and engineering background led to product management.]
+      </p>
+      <ol class="mt-2 grid border border-line sm:grid-cols-2 lg:grid-cols-4">
+        {
+          path.map(([name, line]) => (
+            <li class="grid gap-1 border-b border-line bg-surface p-5 last:border-b-0 sm:odd:border-r lg:border-r lg:border-b-0 lg:last:border-r-0">
+              <strong>{name}</strong>
+              <span class="placeholder text-[0.95rem]">{line}</span>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+    <div class="grid aspect-[4/5] max-w-xs place-items-center self-start border border-line bg-surface2 text-center font-mono text-xs text-muted md:max-w-none" role="img" aria-label="Placeholder for a portrait of R. Veera Manoharan">
+      [Portrait]
+    </div>
+  </div>
+
+  <section class="border-t border-line py-14 md:py-22" aria-labelledby="h-think">
+    <h2 id="h-think" class="section-title mb-10">How I think about products</h2>
+    <ol class="grid gap-4 md:grid-cols-2">
+      {
+        principles.map(([t, d], i) => (
+          <li class="grid content-start gap-2.5 border border-line bg-surface p-6">
+            <span class="font-mono text-sm text-accent">{i + 1}</span>
+            <h3 class="text-[1.15rem] font-semibold">{t}</h3>
+            <p class="placeholder text-[0.95rem]">{d}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="border-t border-line py-14 md:py-22" aria-labelledby="h-client">
+    <div class="mb-10 flex flex-wrap items-baseline justify-between gap-4">
+      <h2 id="h-client" class="section-title">An enterprise engagement</h2>
+      <p class="text-[0.95rem] text-muted">Client anonymised.</p>
+    </div>
+    <div class="grid gap-4 border border-line bg-surface p-6 md:p-8">
+      <p class="eyebrow">[Regulated industry] · [Your role]</p>
+      <p class="placeholder">[Situation: what the client needed and why it was hard.]</p>
+      <p class="placeholder">[What I did, and the trade-off I made.]</p>
+      <p class="placeholder">[What changed as a result.]</p>
+    </div>
+  </section>
+
+  <section class="border-t border-line py-14 md:py-22" aria-labelledby="h-glance">
+    <h2 id="h-glance" class="section-title mb-10">Background at a glance</h2>
+    <div class="overflow-x-auto">
+      <table class="w-full border-t border-line text-left">
+        <caption class="sr-only">Education, experience, awards and tools</caption>
+        <tbody>
+          {
+            glance.map(([k, v]) => (
+              <tr class="border-b border-line align-top max-md:block max-md:py-4">
+                <th scope="row" class="eyebrow w-1/4 py-4 pr-6 pt-[1.15rem] font-normal max-md:block max-md:w-auto max-md:py-0 max-md:pb-1">{k}</th>
+                <td class:list={['py-4 max-md:block max-md:py-0', /\[/.test(v) && 'text-muted']}>{v}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+</Base>

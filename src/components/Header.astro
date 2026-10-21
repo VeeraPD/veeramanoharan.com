@@ -1,0 +1,52 @@
+---
+import { site } from '../config/site';
+
+interface Props {
+  current?: 'about';
+}
+const { current } = Astro.props;
+
+const links = [
+  { label: 'Work', href: '/#work' },
+  { label: 'AI Lab', href: '/#lab' },
+  { label: 'About', href: '/about/', key: 'about' },
+  { label: 'Resume', href: '#resumes' },
+];
+---
+
+<header class="flex items-center justify-between gap-4 border-b border-line py-5">
+  <a href="/" class="font-semibold tracking-tight">{site.name}</a>
+
+  <nav aria-label="Main" class="hidden items-center gap-7 text-[0.95rem] text-muted md:flex">
+    {
+      links.map((l) => (
+        <a
+          href={l.href}
+          class:list={['hover:text-ink', current === l.key && 'text-ink']}
+          aria-current={current === l.key ? 'page' : undefined}
+        >
+          {l.label}
+        </a>
+      ))
+    }
+    <a href="#contact" class="btn btn-primary">Get in touch</a>
+  </nav>
+
+  <details class="relative md:hidden">
+    <summary
+      class="cursor-pointer list-none border border-line px-3 py-2 font-mono text-[0.8rem] [&::-webkit-details-marker]:hidden"
+    >
+      Menu
+    </summary>
+    <div class="absolute right-0 top-[calc(100%+0.5rem)] z-30 grid w-64 gap-4 border border-line bg-surface p-5">
+      {
+        links.map((l) => (
+          <a href={l.href} aria-current={current === l.key ? 'page' : undefined}>
+            {l.label}
+          </a>
+        ))
+      }
+      <a href="#contact" class="btn btn-primary justify-center">Get in touch</a>
+    </div>
+  </details>
+</header>

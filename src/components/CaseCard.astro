@@ -1,0 +1,57 @@
+---
+import { pad, casePath, type Case } from '../lib/cases';
+
+interface Props {
+  entry: Case;
+}
+const { entry } = Astro.props;
+const c = entry.data;
+const live = c.status === 'live';
+const Tag = live ? 'a' : 'div';
+const attrs = live
+  ? { href: casePath(entry), 'data-track': 'case-open', 'data-track-label': pad(c.number) }
+  : {};
+const statusLabel = live ? 'Live' : 'Coming soon';
+---
+
+<Tag
+  {...attrs}
+  class:list={[
+    'grid min-w-0 grid-rows-[auto_1fr] border bg-surface',
+    live ? 'border-line hover:border-accent' : 'border-dashed border-line bg-transparent',
+  ]}
+>
+  {
+    c.thumbnail ? (
+      <img src={c.thumbnail.src} alt={c.thumbnail.alt} width="640" height="400" loading="lazy" class="aspect-[16/10] w-full border-b border-line object-cover" />
+    ) : (
+      <div class="grid aspect-[16/10] place-items-center border-b border-line bg-surface2 font-mono text-xs text-muted" aria-hidden="true">
+        [Thumbnail]
+      </div>
+    )
+  }
+  <div class="grid content-start gap-3 p-5 md:p-6">
+    <div class="flex items-center justify-between">
+      <span class:list={['font-mono text-[0.95rem]', live ? 'text-accent' : 'text-muted']}>{pad(c.number)}</span>
+      <span
+        class:list={[
+          'border px-2 py-[3px] font-mono text-[0.7rem] tracking-wider uppercase',
+          live ? 'border-accent text-accent' : 'border-line text-muted',
+        ]}>{statusLabel}</span
+      >
+    </div>
+    <h3 class:list={['text-xl leading-snug font-semibold text-balance', !live && 'text-muted']}>{c.title}</h3>
+    <p class="text-[0.95rem] text-muted">{c.problem}</p>
+    <p class="font-mono text-xs text-muted">{c.type} · {c.year} · {statusLabel}</p>
+    {
+      live && c.tags.length > 0 && (
+        <ul class="flex flex-wrap gap-1.5">
+          {c.tags.map((t) => (
+            <li class="rounded-full border border-line px-2.5 py-px text-[0.8rem] text-muted">{t}</li>
+          ))}
+        </ul>
+      )
+    }
+    {live && c.result && <p class="border-t border-line pt-3 text-[0.95rem]">{c.result}</p>}
+  </div>
+</Tag>

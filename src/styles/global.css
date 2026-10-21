@@ -1,0 +1,98 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/schibsted-grotesk';
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/500.css';
+
+@theme {
+  --color-bg: #12100e;
+  --color-surface: #1a1816;
+  --color-surface2: #221f1c;
+  --color-line: #38342e;
+  --color-ink: #f1ece4;
+  --color-muted: #a8a299;
+  --color-accent: #e8893a;
+  --color-accent-ink: #1a0f05;
+  --color-accent-soft: #241b12;
+  --font-sans: 'Schibsted Grotesk Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    background: var(--color-bg);
+  }
+  body {
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .gutter {
+    padding-left: max(1rem, env(safe-area-inset-left, 0px));
+    padding-right: max(1rem, env(safe-area-inset-right, 0px));
+  }
+  .wrap {
+    max-width: 70rem;
+    margin-inline: auto;
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid var(--color-ink);
+    border-radius: 2px;
+    padding: 0.7rem 1.1rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1.2;
+    color: var(--color-ink);
+  }
+  .btn:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+  .btn-primary {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-accent-ink);
+  }
+  .btn-primary:hover {
+    background: var(--color-ink);
+    border-color: var(--color-ink);
+    color: var(--color-bg);
+  }
+  .placeholder {
+    color: var(--color-muted);
+  }
+  .section-title {
+    font-size: clamp(1.7rem, 3.2vw, 2.3rem);
+    line-height: 1.15;
+    font-weight: 600;
+    text-wrap: balance;
+  }
+  .link-underline {
+    border-bottom: 1px solid var(--color-line);
+    padding-bottom: 2px;
+  }
+  .link-underline:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+}

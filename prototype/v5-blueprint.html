@@ -1,0 +1,735 @@
+﻿<!doctype html>
+<html lang="en" data-mode="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Veera Product Notebook</title>
+<script>
+/* theme + motion preference, set before first paint. Dark by default. */
+(function(){
+  var r=document.documentElement,m=null,mo=null;
+  try{m=localStorage.getItem('mode');mo=localStorage.getItem('motion')}catch(e){}
+  r.setAttribute('data-mode',m==='cream'?'cream':'dark');
+  if(mo==='off')r.setAttribute('data-motion','off');
+})();
+</script>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="R. Veera Manoharan, product manager. Consumer and AI products where data, ML and design meet.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* ==========================================================================
+   TOKENS
+   Layout: blueprint frame. Hairline page edges, square corner markers on key
+   boxes, a framed hero, then scroll-scrubbed sections that play both ways.
+   Accent appears in two places only: the active nav marker and number tags.
+   ========================================================================== */
+:root{
+  /* colours: dark (default) */
+  --bg:#141317; --panel:#1b1a1f; --panel2:#232128; --ink:#eeeaf3; --muted:#9d97a8; --line:#34313b;
+  --accent:#c6b6f2; --on-accent:#141317;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+  /* fonts */
+  --f-sans:"Geist",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"Geist Mono",ui-monospace,"SF Mono",Consolas,monospace;
+  /* easing + durations (GSAP uses its own; these are for CSS hovers) */
+  --ease:cubic-bezier(0.2,0.8,0.2,1);
+  --d-hover:.3s;
+  color-scheme:dark;
+}
+html[data-mode="cream"]{
+  --bg:#f3eee5; --panel:#fbf8f2; --panel2:#ece5d8; --ink:#1d1b18; --muted:#5f584d; --line:#d6ccbb;
+  --accent:#5d6b12; --on-accent:#fbf8f2;
+  --shadow:0 10px 30px rgba(0,0,0,.08);
+  color-scheme:light;
+}
+
+/* Lenis (inlined from lenis@1.1.13/dist/lenis.css) */
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}
+.lenis.lenis-stopped{overflow:hidden}
+.lenis.lenis-smooth iframe{pointer-events:none}
+
+/* ==========================================================================
+   BASE
+   ========================================================================== */
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--f-sans);-webkit-font-smoothing:antialiased;transition:background-color .4s var(--ease),color .4s var(--ease)}
+h1,h2,h3,p,ul,ol,figure,blockquote,dl,dd{margin:0;padding:0}
+ul,ol{list-style:none}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit;color:inherit}
+button{background:none;border:0;padding:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4px}
+.mono,.label{font-family:var(--f-mono)}
+.label{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.skip{position:absolute;left:12px;top:-60px;z-index:200;background:var(--ink);color:var(--bg);padding:10px 14px;font:500 13px var(--f-mono)}
+.skip:focus{top:12px}
+.page{max-width:1240px;margin:0 auto;position:relative;border-inline:1px solid var(--line);
+  padding-left:max(clamp(16px,4vw,48px),env(safe-area-inset-left,0px));padding-right:max(clamp(16px,4vw,48px),env(safe-area-inset-right,0px))}
+
+/* blueprint corner markers: put <i class="cm tl"></i> etc. inside a positioned box */
+.cm{position:absolute;width:7px;height:7px;border:1px solid var(--ink);background:var(--bg);z-index:3;pointer-events:none}
+.cm.tl{left:-4px;top:-4px}.cm.tr{right:-4px;top:-4px}.cm.bl{left:-4px;bottom:-4px}.cm.br{right:-4px;bottom:-4px}
+
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:60;display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:16px;background:color-mix(in srgb,var(--bg) 82%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);margin-inline:calc(-1*max(clamp(16px,4vw,48px),env(safe-area-inset-left,0px)));padding-inline:max(clamp(16px,4vw,48px),env(safe-area-inset-left,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:70}
+.logo{font:600 17px var(--f-sans);letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+.logo i{width:10px;height:10px;border:1.5px solid var(--ink)}
+nav.main{display:flex;gap:2px}
+nav.main a{position:relative;font:500 12px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:8px 12px;transition:color var(--d-hover) var(--ease)}
+nav.main a::before{content:"";position:absolute;left:3px;top:50%;width:5px;height:5px;margin-top:-2.5px;background:var(--accent);scale:0;transition:scale var(--d-hover) var(--ease)}
+nav.main a:hover,nav.main a.on{color:var(--ink)}
+nav.main a.on::before{scale:1}
+.hright{display:flex;align-items:center;gap:8px}
+.iconbtn{width:36px;height:36px;display:grid;place-items:center;border:1px solid var(--line);transition:border-color var(--d-hover) var(--ease)}
+.iconbtn:hover{border-color:var(--ink)}
+.iconbtn svg{width:17px;height:17px;fill:none;stroke:var(--ink);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.iconbtn .moon{display:none}
+html[data-mode="dark"] .iconbtn .sun{display:none}
+html[data-mode="dark"] .iconbtn .moon{display:block}
+.btn{display:inline-flex;align-items:center;gap:10px;font:500 14px var(--f-sans);padding:11px 18px;background:var(--ink);color:var(--bg);transition:translate var(--d-hover) var(--ease)}
+.btn:hover{translate:0 -2px}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.btn.sm{font-size:13px;padding:8px 14px}
+.menu{display:none;position:relative}
+.menu summary{list-style:none;cursor:pointer;font:500 12px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;padding:9px 12px;border:1px solid var(--ink)}
+.menu summary::-webkit-details-marker{display:none}
+.menu .pop{position:absolute;right:0;top:calc(100% + 8px);width:220px;background:var(--panel);border:1px solid var(--line);padding:10px;display:grid}
+.menu .pop a{font:500 12px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;padding:10px 6px}
+
+/* ==========================================================================
+   HERO: a framed box, the statement split into three phrases around the photo
+   ========================================================================== */
+.hero{position:relative;z-index:1;padding-block:24px 28px;min-height:min(calc(100svh - 70px),900px);display:flex}
+.hbox{position:relative;flex:1;border:1px solid var(--line);display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);grid-template-rows:auto 1fr auto;gap:20px 28px;padding:clamp(20px,3vw,40px)}
+.hw{font:400 clamp(2.1rem,4.4vw,4.1rem)/1.02 var(--f-sans);letter-spacing:-.035em;max-width:10ch;will-change:transform,filter,opacity}
+.w1{grid-column:1;grid-row:1}
+.w2{grid-column:3;grid-row:2;justify-self:end;align-self:center;text-align:right}
+.w3{grid-column:1;grid-row:3;align-self:end}
+.htag{grid-column:3;grid-row:1;justify-self:end;text-align:right}
+.hcta{grid-column:1;grid-row:2;align-self:end;display:flex;gap:10px;flex-wrap:wrap}
+.hmeta{grid-column:3;grid-row:3;justify-self:end;align-self:end;display:grid;gap:6px;text-align:right}
+.hmeta div{display:flex;gap:14px;justify-content:flex-end}
+.hmeta dt{color:var(--muted)}
+.hmeta dd{font:500 12px var(--f-mono);letter-spacing:.04em}
+
+/* the photo, with a field of points around it: noise that organises into an orbit when you come near */
+.portrait{grid-column:2;grid-row:1/4;align-self:center;position:relative;width:clamp(220px,22vw,300px)}
+.portrait .fieldwrap{position:absolute;inset:-90px -110px;z-index:0;pointer-events:none}
+.portrait canvas{width:100%;height:100%;display:block}
+.portrait .frame{position:relative;z-index:1;aspect-ratio:4/5;overflow:hidden;background:var(--panel2)}
+.portrait img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(.15) contrast(1.02)}
+.portrait figcaption{position:relative;z-index:1;display:flex;justify-content:space-between;gap:10px;margin-top:10px}
+.portrait figcaption span:last-child{color:var(--ink)}
+
+/* ==========================================================================
+   SECTIONS
+   ========================================================================== */
+.panel{position:relative;z-index:5;background:var(--panel);margin-inline:calc(-1*max(clamp(16px,4vw,48px),env(safe-area-inset-left,0px)));padding:96px max(clamp(16px,4vw,48px),env(safe-area-inset-left,0px));border-top:1px solid var(--line)}
+.sec{position:relative;padding-block:110px;border-top:1px solid var(--line)}
+.sh{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:40px}
+.sh h2{font:500 clamp(2rem,4vw,3.2rem)/1.05 var(--f-sans);letter-spacing:-.035em}
+
+/* case study index */
+.index{width:100%;border-collapse:collapse}
+.index th{text-align:left;font:500 11px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:0 12px 12px;border-bottom:1px solid var(--line)}
+.index td{padding:20px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
+.index tr.row{transition:translate var(--d-hover) var(--ease)}
+.index tr.row td{transition:translate var(--d-hover) var(--ease)}
+.index tr.row:hover td{translate:6px 0}
+.index .ic{width:46px}
+.index .ic svg{width:34px;height:26px;color:var(--muted);display:block}
+.index .t{font:500 1.18rem/1.25 var(--f-sans);letter-spacing:-.015em}
+.index .t a::after{content:"";position:absolute;inset:0}
+.index tr.row{position:relative}
+.index .tg span{display:inline-block;font:500 11px var(--f-mono);letter-spacing:.05em;text-transform:uppercase;padding:4px 9px;border:1px solid var(--line);color:var(--muted);transition:color var(--d-hover) var(--ease),border-color var(--d-hover) var(--ease)}
+.index tr.row:hover .tg span,.index tr.row:focus-within .tg span{color:var(--ink);border-color:var(--ink)}
+.index .yr{font:500 12px var(--f-mono);color:var(--muted);white-space:nowrap}
+.index .res{color:var(--muted);font-size:.95rem}
+.index tr.soon .t{color:var(--muted)}
+.index tr.row:focus-within{outline:2px solid var(--ink);outline-offset:-2px}
+.index tr.row a:focus-visible{outline:none}
+
+/* pinned layered object */
+.stack-sec{position:relative;border-top:1px solid var(--line)}
+.pinwrap{position:relative;min-height:min(100svh,960px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr) minmax(0,1fr);align-items:center;gap:24px;padding-block:60px}
+.pin-intro{display:grid;gap:14px;align-self:start;padding-top:40px}
+.pin-intro h2{font:500 clamp(1.8rem,3.2vw,2.6rem)/1.08 var(--f-sans);letter-spacing:-.03em}
+.pin-intro p{color:var(--muted);max-width:30ch}
+.stage{position:relative;height:430px;perspective:1400px;transform-style:preserve-3d}
+.card-bg{position:absolute;left:50%;top:50%;width:min(100%,480px);height:372px;translate:-50% -50%;background:var(--panel2);border:1px solid var(--line)}
+.ly{position:absolute;left:50%;top:50%;width:min(92%,440px);height:66px;translate:-50% -50%;transform:translateY(calc((var(--i) - 1.5) * 78px));display:flex;align-items:center;gap:16px;padding:0 18px;background:var(--panel);border:1px solid var(--ink);transform-style:preserve-3d;backface-visibility:hidden}
+.ly .nm{font:500 12px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.ly .bd{color:var(--muted);font-size:.92rem;line-height:1.35}
+.slabels{display:grid;gap:22px;align-self:center}
+.slabels li{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:baseline}
+.slabels .n{font:500 11px var(--f-mono);color:var(--muted)}
+.slabels b{font:500 1.05rem var(--f-sans)}
+.slabels li>span:last-child{grid-column:2;color:var(--muted);font-size:.9rem}
+.giant{position:absolute;left:0;right:0;bottom:2%;display:grid;justify-items:center;gap:8px;pointer-events:none}
+.giant .mask{overflow:hidden;border-bottom:1px solid var(--ink);padding-inline:4px}
+.giant .word{display:block;font:700 clamp(4.5rem,15vw,13rem)/.82 var(--f-sans);letter-spacing:-.05em;text-transform:uppercase}
+
+/* principles */
+.prows{display:grid;gap:56px}
+.prow{position:relative;border:1px solid var(--line);padding:44px clamp(20px,4vw,48px) 40px}
+.prow .tagn{position:absolute;top:-11px;left:24px;font:500 11px/1 var(--f-mono);letter-spacing:.06em;padding:5px 8px;background:var(--accent);color:var(--on-accent)}
+.prow .txt{max-width:560px;display:grid;gap:10px}
+.prow.r .txt{margin-left:auto}
+.prow h3{font:500 clamp(1.4rem,2.6vw,2rem)/1.15 var(--f-sans);letter-spacing:-.025em}
+.prow p{color:var(--muted)}
+.ln{display:block;overflow:hidden;padding-bottom:.06em}
+.lni{display:block}
+
+/* what I do */
+.cells{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.cell{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:26px 24px 30px;display:grid;gap:10px;align-content:start;transition:background-color var(--d-hover) var(--ease)}
+.cell .n{font:500 11px var(--f-mono);color:var(--muted)}
+.cell h3{font:500 1.25rem/1.2 var(--f-sans);letter-spacing:-.02em}
+.cell p{color:var(--muted);font-size:.95rem}
+.cell:hover{background:var(--panel)}
+
+/* labs */
+.labs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.lab{position:relative;border:1px solid var(--line);padding:22px;display:grid;gap:10px;align-content:start;transition:border-color var(--d-hover) var(--ease)}
+.lab:hover{border-color:var(--ink)}
+.lab b{font:500 1.1rem var(--f-sans)}
+.lab span{color:var(--muted);font-size:.95rem}
+.lab em{font:500 11px var(--f-mono);font-style:normal;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+
+/* quote */
+.quote{position:relative;border:1px solid var(--line);padding:clamp(28px,5vw,56px);display:grid;gap:28px}
+.qstack{display:grid}
+.qi{grid-area:1/1;display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:40px;align-items:end;opacity:0;visibility:hidden;transition:opacity .5s var(--ease),visibility 0s linear .5s}
+.qi.on{opacity:1;visibility:visible;transition:opacity .5s var(--ease)}
+.qi blockquote{font:400 clamp(1.4rem,2.8vw,2.1rem)/1.25 var(--f-sans);letter-spacing:-.02em}
+.qi figcaption{border-block:1px solid var(--line);padding-block:12px;display:grid;gap:2px}
+.qi figcaption span{color:var(--muted);font-size:.9rem}
+.qnav{display:flex;gap:6px}
+.qdot{width:26px;height:26px;display:grid;place-items:center}
+.qdot i{width:8px;height:8px;border:1px solid var(--ink)}
+.qdot[aria-current="true"] i{background:var(--ink)}
+
+/* contact: the docked panel grows into this band */
+.band{position:relative;z-index:5;background:var(--ink);color:var(--bg);margin-inline:calc(-1*max(clamp(16px,4vw,48px),env(safe-area-inset-left,0px)));padding:96px max(clamp(16px,4vw,48px),env(safe-area-inset-left,0px)) 64px}
+.band h2{font:500 clamp(2.2rem,6vw,5rem)/1 var(--f-sans);letter-spacing:-.045em;max-width:16ch}
+.band .label{color:color-mix(in srgb,var(--bg) 65%,var(--ink))}
+.band form{margin-top:40px;display:flex;max-width:620px;border-bottom:1px solid var(--bg)}
+.band input{flex:1;min-width:0;background:transparent;border:0;padding:14px 0;font-size:1.15rem;color:var(--bg)}
+.band input::placeholder{color:color-mix(in srgb,var(--bg) 55%,var(--ink))}
+.band input:focus{outline:none}
+.band form:focus-within{border-bottom-width:2px}
+.band .go{width:52px;display:grid;place-items:center;color:var(--bg)}
+.band .go svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:translate var(--d-hover) var(--ease)}
+.band .go:hover svg{translate:4px 0}
+.band .note{margin-top:12px;font-size:.9rem;min-height:1.5em;color:color-mix(in srgb,var(--bg) 70%,var(--ink))}
+.bmeta{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-top:56px}
+.bmeta .mail{font:500 14px var(--f-mono)}
+.bmeta .mail:hover{text-decoration:underline}
+.socials{display:flex;gap:8px;flex-wrap:wrap}
+.socials a{font:500 12px var(--f-mono);letter-spacing:.05em;text-transform:uppercase;padding:7px 12px;border:1px solid color-mix(in srgb,var(--bg) 40%,var(--ink))}
+.socials a:hover{border-color:var(--bg)}
+.legal{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-block:22px 40px;font:500 11.5px var(--f-mono);color:var(--muted)}
+
+/* docked corner CTA */
+.dock-in{position:relative;background:var(--ink);color:var(--bg);padding:16px 16px 14px;box-shadow:var(--shadow);transform-origin:100% 100%}
+.dock{position:fixed;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:80;width:min(340px,calc(100vw - 32px));color:var(--bg);opacity:0;visibility:hidden;translate:0 12px;transition:opacity .35s var(--ease),translate .35s var(--ease),visibility 0s linear .35s}
+.dock.show{opacity:1;visibility:visible;translate:0 0;transition:opacity .35s var(--ease),translate .35s var(--ease)}
+.dock p{font:500 15px/1.25 var(--f-sans);letter-spacing:-.01em;margin-bottom:10px}
+.dock form{display:flex;border-bottom:1px solid var(--bg)}
+.dock input{flex:1;min-width:0;background:transparent;border:0;padding:8px 0;color:var(--bg);font-size:.95rem}
+.dock input::placeholder{color:color-mix(in srgb,var(--bg) 55%,var(--ink))}
+.dock input:focus{outline:none}
+.dock .go{width:36px;display:grid;place-items:center;color:var(--bg)}
+.dock .go svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.dock .x{position:absolute;top:6px;right:8px;width:24px;height:24px;color:var(--bg);opacity:.7;font:500 14px var(--f-mono)}
+.dock .note{font-size:.8rem;margin-top:6px;min-height:1.2em;color:color-mix(in srgb,var(--bg) 70%,var(--ink))}
+.dock .mini{display:none;font:500 13px var(--f-mono);letter-spacing:.04em;color:var(--bg)}
+@media(max-width:767px){
+  .dock{width:auto}
+  .dock .dock-in{padding:12px 16px}
+  .dock p,.dock form,.dock .note,.dock .x{display:none}
+  .dock .mini{display:block}
+}
+
+/* honors tab */
+.honors{position:fixed;right:0;top:42%;z-index:75;display:flex;translate:calc(100% - 34px) 0;transition:translate .4s var(--ease);padding-right:env(safe-area-inset-right,0px)}
+.honors:hover,.honors:focus-within,.honors.open{translate:0 0}
+.honors .tab{writing-mode:vertical-rl;rotate:180deg;width:34px;padding:14px 0;background:var(--panel2);border:1px solid var(--line);border-left:0;font:500 11px var(--f-mono);letter-spacing:.1em;text-transform:uppercase}
+.honors .pnl{width:250px;background:var(--panel);border:1px solid var(--line);padding:16px 18px;display:grid;gap:12px}
+.honors li{display:grid;gap:2px}
+.honors b{font:500 1rem var(--f-sans)}
+.honors span{font-size:.85rem;color:var(--muted)}
+
+/* motion fallback (reduced motion, motion off, or no GSAP): simple fades */
+.simple .fade{opacity:0;translate:0 14px;transition:opacity .6s var(--ease),translate .6s var(--ease)}
+.simple .fade.in{opacity:1;translate:0 0}
+html[data-motion="off"] .fade{translate:none!important}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media(max-width:980px){
+  .cells{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .labs{grid-template-columns:1fr 1fr}
+  .pinwrap{grid-template-columns:1fr 1.4fr}
+  .slabels{display:none}
+  .qi{grid-template-columns:1fr;gap:20px}
+}
+@media(max-width:767px){
+  nav.main{display:none}.menu{display:block}
+  .hero{min-height:0}
+  .hbox{grid-template-columns:1fr;grid-template-rows:none}
+  .w1,.w2,.w3,.htag,.hcta,.hmeta,.portrait{grid-column:1;grid-row:auto;justify-self:start;text-align:left}
+  .htag{order:-1}
+  .w2{align-self:start}
+  .portrait{justify-self:center;margin-block:30px}
+  .portrait .fieldwrap{inset:-50px -40px}
+  .hmeta{justify-self:start}.hmeta div{justify-content:flex-start}
+  .index thead{display:none}
+  .index tr.row{display:grid;grid-template-columns:40px 1fr;gap:4px 12px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .index td{border:0;padding:0}
+  .index .ic{grid-row:1/4}
+  .index .tg,.index .yr,.index .res{grid-column:2}
+  /* pinned sequence becomes a stacked reveal */
+  .pinwrap{grid-template-columns:1fr;min-height:0;gap:28px}
+  .pin-intro{padding-top:0}
+  .stage{height:auto;perspective:none;display:grid;gap:10px;padding:18px;border:1px solid var(--line);background:var(--panel2)}
+  .card-bg{display:none}
+  .ly{position:static;translate:none;transform:none!important;width:auto;height:auto;padding:14px 16px;flex-wrap:wrap}
+  .giant{position:static;margin-top:20px}
+  .cells,.labs{grid-template-columns:1fr}
+  .sec{padding-block:72px}
+  .panel{padding-block:72px}
+  .honors{top:auto;bottom:calc(140px + env(safe-area-inset-bottom,0px))}
+}
+@media (prefers-reduced-motion:reduce){
+  *{scroll-behavior:auto!important}
+  .simple .fade{translate:none;transition:opacity .4s linear}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i01" viewBox="0 0 34 26"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="2" width="30" height="22" rx="2"/><path d="M7 9c3-2 5 2 8 0s5-2 8 0M7 15c3-2 5 2 8 0"/></g></symbol>
+  <symbol id="i05" viewBox="0 0 34 26"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="6" cy="13" r="3" fill="currentColor"/><path d="M9 13h7M16 13l9-8M16 13h9M16 13l9 8"/><rect x="25" y="2" width="6" height="6"/><rect x="25" y="10" width="6" height="6"/><rect x="25" y="18" width="6" height="6"/></g></symbol>
+  <symbol id="i04" viewBox="0 0 34 26"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="2" width="30" height="6" rx="3"/><rect x="2" y="12" width="13" height="5"/><rect x="19" y="12" width="13" height="5"/><rect x="2" y="20" width="13" height="4"/><rect x="19" y="20" width="13" height="4"/></g></symbol>
+  <symbol id="i02" viewBox="0 0 34 26"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M2 23L12 8l6 9 5-6 9 12Z"/><circle cx="25" cy="6" r="3"/></g></symbol>
+  <symbol id="i03" viewBox="0 0 34 26"><g fill="currentColor"><rect x="3" y="11" width="2.4" height="4"/><rect x="8" y="7" width="2.4" height="12"/><rect x="13" y="3" width="2.4" height="20"/><rect x="18" y="8" width="2.4" height="10"/><rect x="23" y="5" width="2.4" height="16"/><rect x="28" y="10" width="2.4" height="6"/></g></symbol>
+  <symbol id="i06" viewBox="0 0 34 26"><g fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="13" height="22"/><rect x="19" y="2" width="13" height="22"/><path d="M5 8h7M22 8h7M5 13h5M22 13h5"/></g></symbol>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="page">
+  <header class="top">
+    <a class="logo" href="#top"><i aria-hidden="true"></i>Veera</a>
+    <div class="hright">
+      <nav class="main" aria-label="Main">
+        <a href="#work" data-sec="work">Work</a>
+        <a href="#method" data-sec="method">Method</a>
+        <a href="#principles" data-sec="principles">Principles</a>
+        <a href="#labs" data-sec="labs">AI Labs</a>
+        <a href="#contact" data-sec="contact">Contact</a>
+      </nav>
+      <button class="iconbtn" id="mode" type="button" aria-label="Switch to light theme">
+        <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 14.6A8 8 0 0 1 9.4 4.5a8 8 0 1 0 10.1 10.1Z"/></svg>
+      </button>
+      <details class="menu"><summary>Menu</summary><div class="pop"><a href="#work">Work</a><a href="#method">Method</a><a href="#principles">Principles</a><a href="#labs">AI Labs</a><a href="#contact">Contact</a></div></details>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- 1. HERO: framed box, statement in three phrases, photo with an interactive field -->
+    <section class="hero" id="top" aria-labelledby="h1">
+      <div class="hbox">
+        <i class="cm tl"></i><i class="cm tr"></i><i class="cm bl"></i><i class="cm br"></i>
+        <h1 id="h1" style="display:contents">
+          <span class="hw w1">I build consumer products</span>
+          <span class="hw w2">where data, ML</span>
+          <span class="hw w3">and design meet.</span>
+        </h1>
+        <p class="htag label">R. Veera Manoharan<br>Product manager</p>
+        <div class="hcta">
+          <a class="btn" href="#work" data-track="hero-cta">See the work</a>
+          <a class="btn ghost" href="#" data-track="resume">Resume</a>
+        </div>
+        <figure class="portrait" id="portrait">
+          <div class="fieldwrap" aria-hidden="true"><canvas id="field"></canvas></div>
+          <div class="frame"><img src="images/placeholder-portrait.webp" width="720" height="894" alt="Placeholder portrait. Replace with a photo of Veera." decoding="async"></div>
+          <figcaption class="label"><span>Placeholder photo</span><span id="fieldHint">Come closer</span></figcaption>
+        </figure>
+        <dl class="hmeta label">
+          <div><dt>Based</dt><dd>Lucknow, India</dd></div>
+          <div><dt>Focus</dt><dd>Consumer and AI</dd></div>
+          <div><dt>Before</dt><dd>IISc · NID · HCLTech XR</dd></div>
+          <div><dt>Open to</dt><dd>PM roles, India and Middle East</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- 2. WIPE: this panel enters from the bottom right and covers the hero -->
+    <section class="panel" id="work" aria-labelledby="hw">
+      <i class="cm tl"></i><i class="cm tr"></i>
+      <div class="sh"><h2 id="hw">Selected work</h2><span class="label">2 live · 4 in progress</span></div>
+      <table class="index">
+        <thead><tr><th scope="col"><span class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Icon</span></th><th scope="col">Case</th><th scope="col">Type</th><th scope="col">Year</th><th scope="col">Result</th></tr></thead>
+        <tbody>
+          <tr class="row"><td class="ic"><svg aria-hidden="true"><use href="#i01"/></svg></td><td class="t"><a href="#" data-track="case-open" data-track-label="01">AI notes app for iPad</a></td><td class="tg"><span>Shipped work</span></td><td class="yr">[Year]</td><td class="res">[Outcome first: lifted X by Y%]</td></tr>
+          <tr class="row"><td class="ic"><svg aria-hidden="true"><use href="#i05"/></svg></td><td class="t"><a href="#" data-track="case-open" data-track-label="05">Multi-agent router</a></td><td class="tg"><span>Shipped work</span></td><td class="yr">[Year]</td><td class="res">[Outcome first: cut X by Y%]</td></tr>
+          <tr class="row soon"><td class="ic"><svg aria-hidden="true"><use href="#i04"/></svg></td><td class="t">AI shopping search: Amazon.in vs Flipkart</td><td class="tg"><span>AI eval · soon</span></td><td class="yr">[Year]</td><td class="res">Where it fails and what to fix.</td></tr>
+          <tr class="row soon"><td class="ic"><svg aria-hidden="true"><use href="#i02"/></svg></td><td class="t">Alpine Skies + experiment</td><td class="tg"><span>Strategy · soon</span></td><td class="yr">[Year]</td><td class="res">[One-line result]</td></tr>
+          <tr class="row soon"><td class="ic"><svg aria-hidden="true"><use href="#i03"/></svg></td><td class="t">Voice capture for Indian accents</td><td class="tg"><span>Discovery · soon</span></td><td class="yr">[Year]</td><td class="res">[One-line result]</td></tr>
+          <tr class="row soon"><td class="ic"><svg aria-hidden="true"><use href="#i06"/></svg></td><td class="t">Agentforce in Slack vs Copilot Studio in Teams</td><td class="tg"><span>Teardown · soon</span></td><td class="yr">[Year]</td><td class="res">[One-line result]</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 3 + 4. PINNED LAYERED OBJECT, then the giant word -->
+    <section class="stack-sec" id="method" aria-labelledby="hm">
+      <div class="pinwrap">
+        <div class="pin-intro">
+          <p class="label">How a case comes together</p>
+          <h2 id="hm">Four layers, one decision</h2>
+          <p>Every case on this site is written in the same four layers.</p>
+        </div>
+        <div class="stage" id="stage">
+          <div class="card-bg" aria-hidden="true"><i class="cm tl"></i><i class="cm tr"></i><i class="cm bl"></i><i class="cm br"></i></div>
+          <div class="ly" style="--i:0"><span class="nm">01 Problem</span><span class="bd">Who hurts, and how much</span></div>
+          <div class="ly" style="--i:1"><span class="nm">02 Insight</span><span class="bd">What the research actually showed</span></div>
+          <div class="ly" style="--i:2"><span class="nm">03 Solution</span><span class="bd">The call made, and the one not made</span></div>
+          <div class="ly" style="--i:3"><span class="nm">04 Impact</span><span class="bd">The number, or an honest signal</span></div>
+        </div>
+        <ol class="slabels" aria-hidden="true">
+          <li><span class="n">01</span><b>Problem</b><span>Start from the user</span></li>
+          <li><span class="n">02</span><b>Insight</b><span>Find what is true</span></li>
+          <li><span class="n">03</span><b>Solution</b><span>Make the trade-off</span></li>
+          <li><span class="n">04</span><b>Impact</b><span>Measure, then decide</span></li>
+        </ol>
+        <div class="giant">
+          <p class="label tiny">What it adds up to</p>
+          <div class="mask"><span class="word">Impact</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. NUMBERED PRINCIPLES -->
+    <section class="sec" id="principles" aria-labelledby="hp">
+      <div class="sh"><h2 id="hp">How I work</h2><span class="label">Placeholders in my voice</span></div>
+      <div class="prows">
+        <article class="prow l"><span class="tagn">01</span><i class="cm tl"></i><i class="cm br"></i>
+          <div class="txt"><h3 class="split">[Principle one, in under eight words]</h3><p class="split">[Two lines on what it means in practice and where it showed up in your work. Replace with your own words.]</p></div></article>
+        <article class="prow r"><span class="tagn">02</span><i class="cm tl"></i><i class="cm br"></i>
+          <div class="txt"><h3 class="split">[Principle two, in under eight words]</h3><p class="split">[Two lines on what it means in practice and where it showed up in your work. Replace with your own words.]</p></div></article>
+        <article class="prow l"><span class="tagn">03</span><i class="cm tl"></i><i class="cm br"></i>
+          <div class="txt"><h3 class="split">[Principle three, in under eight words]</h3><p class="split">[Two lines on what it means in practice and where it showed up in your work. Replace with your own words.]</p></div></article>
+      </div>
+    </section>
+
+    <!-- WHAT I DO -->
+    <section class="sec" id="do" aria-labelledby="hd">
+      <div class="sh"><h2 id="hd">What I do</h2><span class="label">Placeholders. Replace with proof.</span></div>
+      <ol class="cells">
+        <li class="cell fade"><span class="n">01</span><h3>Product sense</h3><p>Start from the user's job, not the feature list.</p></li>
+        <li class="cell fade"><span class="n">02</span><h3>Data and ML</h3><p>Pick the metric before the model.</p></li>
+        <li class="cell fade"><span class="n">03</span><h3>AI evaluation</h3><p>Write the eval before the launch.</p></li>
+        <li class="cell fade"><span class="n">04</span><h3>Stakeholder management</h3><p>Make the trade-off visible and agreed.</p></li>
+        <li class="cell fade"><span class="n">05</span><h3>Execution</h3><p>Small specs, short loops, clear owners.</p></li>
+        <li class="cell fade"><span class="n">06</span><h3>Design and XR</h3><p>Six years of spatial product design.</p></li>
+      </ol>
+    </section>
+
+    <!-- AI LABS -->
+    <section class="sec" id="labs" aria-labelledby="hl">
+      <div class="sh"><h2 id="hl">AI Labs</h2><span class="label">Small things built to learn</span></div>
+      <div class="labs">
+        <a class="lab fade" href="#"><i class="cm tl"></i><i class="cm br"></i><em>Lab 01</em><b>[Lab project one]</b><span>[What I learned, in one line]</span></a>
+        <a class="lab fade" href="#"><i class="cm tl"></i><i class="cm br"></i><em>Lab 02</em><b>[Lab project two]</b><span>[What I learned, in one line]</span></a>
+        <a class="lab fade" href="#"><i class="cm tl"></i><i class="cm br"></i><em>Lab 03</em><b>[Lab project three]</b><span>[What I learned, in one line]</span></a>
+      </div>
+    </section>
+
+    <!-- KIND WORDS -->
+    <section class="sec" id="words" aria-labelledby="hk">
+      <div class="sh"><h2 id="hk">Kind words</h2><span class="label">Placeholders until real quotes arrive</span></div>
+      <div class="quote fade" id="quotes"><i class="cm tl"></i><i class="cm tr"></i><i class="cm bl"></i><i class="cm br"></i>
+        <div class="qstack">
+          <figure class="qi on" id="q0"><blockquote>“[Placeholder. Two or three lines from a manager on how I frame problems.]”</blockquote><figcaption><b>[Name]</b><span>[Role], [Organisation]</span></figcaption></figure>
+          <figure class="qi" id="q1"><blockquote>“[Placeholder. A line from a teammate on how I handle trade-offs.]”</blockquote><figcaption><b>[Name]</b><span>[Role], [Organisation]</span></figcaption></figure>
+          <figure class="qi" id="q2"><blockquote>“[Placeholder. A line from a client or classmate on shipping together.]”</blockquote><figcaption><b>[Name]</b><span>[Role], [Organisation]</span></figcaption></figure>
+        </div>
+        <div class="qnav" role="group" aria-label="Choose a quote">
+          <button class="qdot" type="button" aria-current="true" aria-label="Quote 1"><i></i></button>
+          <button class="qdot" type="button" aria-current="false" aria-label="Quote 2"><i></i></button>
+          <button class="qdot" type="button" aria-current="false" aria-label="Quote 3"><i></i></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. CONTACT: the docked panel grows into this band -->
+    <section class="band" id="contact" aria-labelledby="hc">
+      <p class="label">Contact</p>
+      <h2 id="hc">Hiring for consumer or AI product? Let's talk.</h2>
+      <form class="cform" novalidate>
+        <label class="sr" for="bandEmail" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Your work email</label>
+        <input id="bandEmail" type="email" autocomplete="email" placeholder="Your work email">
+        <button class="go" type="submit" aria-label="Send"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+      </form>
+      <p class="note" role="status" aria-live="polite"></p>
+      <div class="bmeta">
+        <p class="label"><a class="mail" href="mailto:hello@example.com">hello@example.com</a> · Lucknow <time id="clock">--:--</time> IST</p>
+        <div class="socials"><a href="#" rel="noopener">LinkedIn</a><a href="#" rel="noopener">GitHub</a><a href="#">Resume</a></div>
+      </div>
+    </section>
+  </main>
+  <footer class="legal"><span>© R. Veera Manoharan</span><button class="label" id="motionBtn" type="button" aria-pressed="true">Motion: on</button></footer>
+</div>
+
+<!-- docked CTA -->
+<aside class="dock" id="dock" aria-label="Quick contact"><div class="dock-in">
+  <a class="mini" href="#contact">Hiring? Let's talk <span aria-hidden="true">→</span></a>
+  <button class="x" id="dockX" type="button" aria-label="Hide">×</button>
+  <p>Hiring for consumer or AI product?</p>
+  <form class="cform" novalidate>
+    <label for="dockEmail" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Your work email</label>
+    <input id="dockEmail" type="email" autocomplete="email" placeholder="Your work email">
+    <button class="go" type="submit" aria-label="Send"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+  </form>
+  <p class="note" role="status" aria-live="polite"></p>
+</div></aside>
+
+<aside class="honors" id="honors" aria-label="Honors">
+  <button class="tab" type="button" aria-expanded="false" aria-controls="honorsPnl">Honors</button>
+  <div class="pnl" id="honorsPnl"><p class="label">Honors</p><ul style="display:grid;gap:10px"><li><b>Red Dot Design Award</b><span>[Year] · [Product]</span></li><li><b>US design patent, granted</b><span>[Number] · [Title]</span></li></ul></div>
+</aside>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(function(){
+  var root=document.documentElement;root.classList.add('js');
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
+  var motionOff=root.getAttribute('data-motion')==='off';
+  var hasGsap=!!(window.gsap&&window.ScrollTrigger);
+  var MOTION=!reduce&&!motionOff&&hasGsap;
+  function store(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+  var heroP=0; /* hero scatter progress, read by the photo field */
+
+  /* theme */
+  var modeBtn=document.getElementById('mode');
+  function modeUI(){modeBtn.setAttribute('aria-label',root.dataset.mode==='dark'?'Switch to light theme':'Switch to dark theme')}
+  modeUI();
+  modeBtn.addEventListener('click',function(){var m=root.dataset.mode==='dark'?'cream':'dark';root.dataset.mode=m;store('mode',m);modeUI()});
+
+  /* motion switch: off means simple fades only (applies on reload so every trigger is rebuilt cleanly) */
+  var mb=document.getElementById('motionBtn');
+  mb.setAttribute('aria-pressed',String(!motionOff));mb.textContent='Motion: '+(motionOff?'off':'on');
+  mb.addEventListener('click',function(){store('motion',motionOff?'on':'off');location.reload()});
+
+  /* ---------- PHOTO FIELD: points drift as noise; near the photo they settle into an orbit around it.
+     tune: N, RING (px outside the photo), PULL (how fast they organise) ---------- */
+  (function(){
+    var cv=document.getElementById('field');if(!cv||!cv.getContext)return;
+    var ctx=cv.getContext('2d'),wrap=document.getElementById('portrait'),frame=wrap.querySelector('.frame');
+    var N=190,RING=26,PULL=.045,W=0,H=0,dpr=Math.min(2,window.devicePixelRatio||1),pts=[],m=.08,goal=.08,mx=-1e4,my=-1e4,ink='#eeeaf3';
+    function size(){var r=cv.getBoundingClientRect();W=r.width;H=r.height;cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);ctx.setTransform(dpr,0,0,dpr,0,0)}
+    function readInk(){ink=getComputedStyle(root).getPropertyValue('--ink').trim()||ink}
+    size();readInk();
+    if('ResizeObserver' in window)new ResizeObserver(size).observe(cv);
+    new MutationObserver(readInk).observe(root,{attributes:true,attributeFilter:['data-mode']});
+    for(var i=0;i<N;i++)pts.push({x:Math.random(),y:Math.random(),vx:(Math.random()-.5)*.0007,vy:(Math.random()-.5)*.0007,a:i/N*Math.PI*2+Math.random()*.2,k:1+Math.random()*.16,r:Math.random()*1.2+.6,w:.6+Math.random()*.8});
+    var still=!MOTION;
+    var hint=document.getElementById('fieldHint');if(hint&&!fine)hint.textContent='Touch around it';if(hint&&still)hint.textContent='';
+    if(still)goal=m=.55;
+    /* the closer the pointer is to the photo, the more the noise organises (full at the photo edge, none 320px away) */
+    var box=wrap.closest('.hbox')||wrap,rest=still?.55:.08;
+    box.addEventListener('pointermove',function(e){var r=cv.getBoundingClientRect(),f=frame.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top;
+      var dx=Math.max(f.left-e.clientX,0,e.clientX-f.right),dy=Math.max(f.top-e.clientY,0,e.clientY-f.bottom),d=Math.sqrt(dx*dx+dy*dy);
+      goal=Math.max(rest,1-d/320)});
+    box.addEventListener('pointerleave',function(){goal=rest;mx=my=-1e4});
+    var vis=true;if('IntersectionObserver' in window)new IntersectionObserver(function(es){vis=es[0].isIntersecting}).observe(cv);
+    (function loop(t){
+      requestAnimationFrame(loop);if(!vis)return;
+      m+=(goal-m)*PULL;
+      var fr=frame.getBoundingClientRect(),cr=cv.getBoundingClientRect();
+      var cx=fr.left-cr.left+fr.width/2,cy=fr.top-cr.top+fr.height/2,rx=fr.width/2+RING,ry=fr.height/2+RING;
+      var s=heroP;ctx.clearRect(0,0,W,H);ctx.fillStyle=ink;
+      for(var i=0;i<pts.length;i++){var p=pts[i];
+        if(!still){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>1)p.vx*=-1;if(p.y<0||p.y>1)p.vy*=-1}
+        var ang=p.a+(still?0:t*.00005*p.w);
+        var tx=cx+Math.cos(ang)*rx*p.k,ty=cy+Math.sin(ang)*ry*p.k;
+        var nx=p.x*W,ny=p.y*H,x=nx+(tx-nx)*m,y=ny+(ty-ny)*m;
+        var dx=x-mx,dy=y-my,d=Math.sqrt(dx*dx+dy*dy);if(d<60&&d>0){x+=dx/d*(60-d)*.5;y+=dy/d*(60-d)*.5}
+        if(s>0){x+=(x-cx)*s*.9;y+=(y-cy)*s*.9}
+        ctx.globalAlpha=(.18+.6*m)*(1-s);ctx.beginPath();ctx.arc(x,y,p.r,0,6.283);ctx.fill();
+      }
+      ctx.globalAlpha=1;
+    })(performance.now());
+  })();
+
+  /* ---------- SIMPLE MODE: reduced motion, motion off, or GSAP missing ---------- */
+  function simple(){
+    root.classList.add('simple');
+    var els=document.querySelectorAll('.fade,.sh,.prow,.index,.stage,.giant,.hw');
+    els.forEach(function(el){el.classList.add('fade')});
+    if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});els.forEach(function(el){io.observe(el)})}
+    else els.forEach(function(el){el.classList.add('in')});
+  }
+
+  /* line splitter (SplitText-style masks, no plugin): wraps each rendered line in an overflow mask */
+  function splitLines(el){
+    var words=el.textContent.trim().split(/\s+/);el.textContent='';
+    var spans=words.map(function(w,i){var s=document.createElement('span');s.textContent=w+(i<words.length-1?' ':'');el.appendChild(s);return s});
+    var lines=[],top=null;spans.forEach(function(s){if(s.offsetTop!==top){lines.push([]);top=s.offsetTop}lines[lines.length-1].push(s.textContent)});
+    el.textContent='';
+    lines.forEach(function(l){var o=document.createElement('span');o.className='ln';var i=document.createElement('span');i.className='lni';i.textContent=l.join('');o.appendChild(i);el.appendChild(o)});
+    el.setAttribute('aria-label',words.join(' '));
+    return el.querySelectorAll('.lni');
+  }
+
+  /* ---------- SCROLL CHOREOGRAPHY (GSAP + ScrollTrigger + Lenis) ---------- */
+  function choreo(){
+    gsap.registerPlugin(ScrollTrigger);
+    /* 9. smooth scroll: Lenis on fine pointers only, lerp 0.1 */
+    var lenis=null;
+    if(fine&&window.Lenis){
+      lenis=new Lenis({lerp:.1,smoothWheel:true});
+      lenis.on('scroll',ScrollTrigger.update);
+      gsap.ticker.add(function(t){lenis.raf(t*1000)});gsap.ticker.lagSmoothing(0);
+      document.addEventListener('click',function(e){var a=e.target.closest('a[href^="#"]');if(!a||a.getAttribute('href').length<2)return;var tgt=document.querySelector(a.getAttribute('href'));if(!tgt)return;e.preventDefault();lenis.scrollTo(tgt,{offset:-60})});
+    }
+    var S=.8;
+    var mm=gsap.matchMedia();
+    mm.add({desk:'(min-width:768px)',mob:'(max-width:767px)'},function(c){
+      var desk=c.conditions.desk;
+
+      /* 1. hero scatter: phrases blur 0 to 6px, fade, drift 40 to 80px, one after another */
+      var htl=gsap.timeline({defaults:{ease:'none'},scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:S,pin:desk,pinSpacing:false,onUpdate:function(s){heroP=s.progress}}});
+      htl.to('.w1',{filter:'blur(6px)',opacity:0,x:-70,y:-40,duration:.4},0)
+         .to('.w2',{filter:'blur(6px)',opacity:0,x:80,y:-20,duration:.4},.2)
+         .to('.w3',{filter:'blur(6px)',opacity:0,x:-50,y:60,duration:.4},.4)
+         .to('.hcta,.hmeta,.htag',{opacity:0,y:16,duration:.3},.45)
+         .to('.portrait .frame,.portrait figcaption',{opacity:.35,scale:.96,duration:.5},.35);
+
+      /* 2. hero wipe: the work panel enters from the bottom right and covers the hero */
+      if(desk){
+        gsap.fromTo('#work',{clipPath:'inset(42% 0% 0% 58% round 36px)'},{clipPath:'inset(0% 0% 0% 0% round 0px)',ease:'none',scrollTrigger:{trigger:'#work',start:'top bottom',end:'top 15%',scrub:S}});
+      }
+
+      /* 6. heading fades: 30% to 100% opacity from 80% to 60% of the viewport */
+      gsap.utils.toArray('.sh h2,.pin-intro h2').forEach(function(h){
+        gsap.fromTo(h,{opacity:.3},{opacity:1,ease:'none',scrollTrigger:{trigger:h,start:'top 80%',end:'top 60%',scrub:S}});
+      });
+      /* text reveals */
+      gsap.utils.toArray('.fade,.sh .label').forEach(function(el){
+        gsap.fromTo(el,{opacity:0,y:20},{opacity:1,y:0,ease:'none',scrollTrigger:{trigger:el,start:'top 80%',end:'top 60%',scrub:S}});
+      });
+
+      /* 8. case index: rows fade in with a 60ms stagger */
+      gsap.from('.index .row',{opacity:0,y:14,duration:.5,stagger:.06,ease:'power2.out',scrollTrigger:{trigger:'.index',start:'top 80%',toggleActions:'play none none reverse'}});
+
+      /* 3 + 4. pinned layered object (desktop), stacked reveal (mobile) */
+      if(desk){
+        var L=gsap.utils.toArray('.ly');
+        /* isometric: square layers, tilted 60deg and turned 45deg; Problem sits on top */
+        gsap.set(L,{rotationX:60,rotation:-45,width:250,height:250,y:function(i){return (i-1.5)*12},zIndex:function(i){return 4-i},transformPerspective:1600});
+        gsap.set('.ly .bd',{opacity:0});gsap.set('.slabels li',{opacity:0,x:-12});
+        gsap.set('.card-bg',{opacity:0,scale:.94});gsap.set('.giant .word',{yPercent:112});gsap.set('.giant .tiny',{opacity:0});
+        gsap.set('.giant .mask',{borderBottomColor:'rgba(0,0,0,0)'});
+        var tl=gsap.timeline({defaults:{ease:'none'},scrollTrigger:{trigger:'#method',start:'top top',end:'+=320%',scrub:S,pin:'.pinwrap',anticipatePin:1}});
+        tl.to(L,{y:function(i){return (i-1.5)*72},duration:1})                                  /* layers separate vertically */
+          .to('.slabels li',{opacity:1,x:0,stagger:.3,duration:.3})                             /* labels one by one */
+          .to(L,{rotationX:0,rotation:0,y:function(i){return (i-1.5)*78},height:66,width:440,duration:1.3}) /* iso to flat, top-down */
+          .to('.card-bg',{opacity:1,scale:1,duration:.5},'-=.5')                                  /* settles into a card */
+          .to('.ly .bd',{opacity:1,stagger:.08,duration:.35},'<')
+          .to('.slabels li',{opacity:.25,duration:.3},'<')
+          .to('#stage',{opacity:.15,duration:.7},'+=.35')                                         /* object fades to 15% */
+          .to('.giant .tiny',{opacity:1,duration:.3},'<')
+          .to('.giant .mask',{borderBottomColor:getComputedStyle(document.documentElement).getPropertyValue('--ink').trim(),duration:.3},'<')
+          .to('.giant .word',{yPercent:0,duration:.9},'<');                                       /* giant word rises from the mask line */
+      }else{
+        gsap.from('.ly',{opacity:0,y:18,stagger:.08,duration:.5,scrollTrigger:{trigger:'#stage',start:'top 80%',toggleActions:'play none none reverse'}});
+        gsap.fromTo('.giant .word',{yPercent:112},{yPercent:0,ease:'none',scrollTrigger:{trigger:'.giant',start:'top 85%',end:'top 55%',scrub:S}});
+      }
+
+      /* 5. numbered principles: lines rise out of masks, each row on its own trigger */
+      gsap.utils.toArray('.prow').forEach(function(row){
+        var lines=row.querySelectorAll('.lni');
+        var t=gsap.timeline({defaults:{ease:'none'},scrollTrigger:{trigger:row,start:'top 80%',end:'top 45%',scrub:S}});
+        t.fromTo(row.querySelectorAll('.cm,.tagn'),{opacity:0},{opacity:1,duration:.3},0)
+         .fromTo(lines,{yPercent:105},{yPercent:0,stagger:.12,duration:.5},0);
+      });
+
+      /* 7. docked CTA: appears after the first scroll, grows into the contact band */
+      gsap.fromTo('#contact',{clipPath:'inset(62% 0% 0% 70% round 28px)'},{clipPath:'inset(0% 0% 0% 0% round 0px)',ease:'none',scrollTrigger:{trigger:'#contact',start:'top bottom',end:'top 35%',scrub:S}});
+      gsap.to('#dock .dock-in',{scale:.9,opacity:0,ease:'none',scrollTrigger:{trigger:'#contact',start:'top bottom',end:'top 70%',scrub:S}});
+    });
+
+    /* nav: active section marker */
+    document.querySelectorAll('nav.main a[data-sec]').forEach(function(a){
+      var sec=document.getElementById(a.dataset.sec);if(!sec)return;
+      ScrollTrigger.create({trigger:sec,start:'top 50%',end:'bottom 50%',onToggle:function(s){a.classList.toggle('on',s.isActive)}});
+    });
+    ScrollTrigger.create({start:80,end:'max',onToggle:function(s){dockShow(s.isActive)}});
+    if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){ScrollTrigger.refresh()});
+  }
+
+  /* split principle lines first, after fonts settle, so lines are measured in the real font */
+  function start(){
+    document.querySelectorAll('.split').forEach(splitLines);
+    if(MOTION)choreo();else simple();
+  }
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(start);else start();
+
+  /* docked CTA visibility (also used in simple mode) */
+  var dock=document.getElementById('dock'),dismissed=false;
+  function dockShow(on){dock.classList.toggle('show',on&&!dismissed)}
+  document.getElementById('dockX').addEventListener('click',function(){dismissed=true;dockShow(false)});
+  if(!MOTION){
+    addEventListener('scroll',function(){var c=document.getElementById('contact').getBoundingClientRect();dockShow(scrollY>80&&c.top>innerHeight*.7)},{passive:true});
+  }
+
+  /* forms: there is no backend yet, so say so plainly */
+  document.querySelectorAll('.cform').forEach(function(f){
+    f.addEventListener('submit',function(e){e.preventDefault();
+      var inp=f.querySelector('input'),note=f.parentNode.querySelector('.note');
+      if(!inp.value||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inp.value)){note.textContent='Enter a work email, like name@company.com.';inp.focus();return}
+      note.textContent='This form is not connected yet, so nothing was sent. Email hello@example.com directly.';
+    });
+  });
+
+  /* quotes */
+  var qs=document.querySelectorAll('.qi'),dots=document.querySelectorAll('.qdot'),qbox=document.getElementById('quotes'),qi=0,hold=false;
+  function q(n){qs[qi].classList.remove('on');dots[qi].setAttribute('aria-current','false');qi=n;qs[qi].classList.add('on');dots[qi].setAttribute('aria-current','true')}
+  dots.forEach(function(d,i){d.addEventListener('click',function(){q(i)})});
+  ['mouseenter','focusin'].forEach(function(ev){qbox.addEventListener(ev,function(){hold=true})});
+  ['mouseleave','focusout'].forEach(function(ev){qbox.addEventListener(ev,function(){hold=false})});
+  if(MOTION)setInterval(function(){if(!hold)q((qi+1)%qs.length)},7000);
+
+  /* clock */
+  var clk=document.getElementById('clock');
+  function time(){try{clk.textContent=new Intl.DateTimeFormat('en-IN',{hour:'2-digit',minute:'2-digit',hour12:false,timeZone:'Asia/Kolkata'}).format(new Date())}catch(e){}}
+  time();setInterval(time,30000);
+
+  /* honors tab: hover or focus opens, tap toggles */
+  var hon=document.getElementById('honors'),ht=hon.querySelector('.tab');
+  ht.addEventListener('click',function(){var o=!hon.classList.contains('open');hon.classList.toggle('open',o);ht.setAttribute('aria-expanded',String(o))});
+
+  /* analytics hook: GoatCounter when its script is present */
+  document.addEventListener('click',function(e){var el=e.target.closest('[data-track]');if(!el)return;var p=el.dataset.track+(el.dataset.trackLabel?'-'+el.dataset.trackLabel:'');try{if(window.goatcounter&&goatcounter.count)goatcounter.count({path:p,title:p,event:true})}catch(x){}});
+
+  document.querySelectorAll('.menu .pop a').forEach(function(a){a.addEventListener('click',function(){a.closest('details').removeAttribute('open')})});
+})();
+</script>
+</body>
+</html>

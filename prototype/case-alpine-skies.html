@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en" data-mode="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Alpine Skies · Case 02 · R. Veera Manoharan</title>
+<script>(function(){var r=document.documentElement,m=null,mo=null;try{m=localStorage.getItem('mode');mo=localStorage.getItem('motion')}catch(e){}r.setAttribute('data-mode',m==='cream'?'cream':'dark');if(mo==='off')r.setAttribute('data-paused','true')})();</script>
+<meta name="description" content="Alpine Skies, a free browser flight sim: why every early decision optimised for time to first flight, and how it is measured.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&display=swap">
+<link rel="stylesheet" href="case.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="page">
+  <header class="top">
+    <a class="logo" href="index.html" aria-label="Veera, home">
+      <svg viewBox="0 0 30 30" aria-hidden="true"><path class="dot" d="M15 2.5C22 2 28 7 27.5 15 27 23 21 28 14 27.5 7 27 2.5 21 3 14 3.5 7.5 9 3 15 2.5Z"/><path class="mk" d="M9 11l6 10 6-10" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Veera</a>
+    <div class="hright">
+      <a class="back" href="index.html#work">← <span>All work</span></a>
+      <button class="iconbtn" id="mode" type="button" aria-label="Switch to light theme">
+        <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 14.6A8 8 0 0 1 9.4 4.5a8 8 0 1 0 10.1 10.1Z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <header class="open">
+      <p class="label">Case 02 · B2C · Live · 2026 · 6 min read</p>
+      <h1>Alpine Skies: a browser flight sim, shipped and live</h1>
+      <p class="stand">A free flight simulator over the Swiss Alps that anyone can play in seconds, with no install and no sign-up wall. Every early decision optimised for time to first flight.</p>
+      <p class="links"><a class="pill" href="https://alpine-skies.vercel.app" rel="noopener">Play it ↗</a><a class="pill ghost" href="#decisions">Skip to the decisions</a></p>
+      <figure class="lead-img"><img src="images/alpine-cover.webp" width="1600" height="900" style="aspect-ratio:16/9" alt="Alpine Skies key art: a jet flying down a green Swiss valley toward a ring. Fly the Swiss Alps." decoding="async"></figure>
+      <div class="tldr" aria-label="TL;DR"><div><p class="label">Problem</p><p>Casual plane fans choose between heavy sims that take hours to learn and web games that feel cheap. Nothing good starts in a browser tab in under a minute.</p></div><div><p class="label">What I did</p><p>Built and shipped a browser flight sim with guest play, a difficulty ladder and a retention loop, using AI coding tools for the build.</p></div><div><p class="label">Result</p><p>Live at alpine-skies.vercel.app. A performance pass cut cold load from 8.4 s to about 4.6 s (Intel Iris Xe laptop). Player numbers are not published yet; the first-mission funnel comes next.</p></div></div>
+    </header>
+
+    <dl class="summary" style="--cols:4">
+      <div><dt class="label">Role</dt><dd>Solo: product, design, build with AI coding tools</dd></div>
+      <div><dt class="label">Platform</dt><dd>Web browser (WebGL), no install</dd></div>
+      <div><dt class="label">Status</dt><dd>Live, version 1.23 (Oct 2026)</dd></div>
+      <div><dt class="label">Skills</dt><dd>Execution, engagement design, metrics, AI-assisted building</dd></div>
+    </dl>
+
+    <section class="sec" aria-labelledby="s0">
+      <p class="label">Problem</p>
+      <div>
+        <h2 id="s0">No middle ground for casual pilots</h2>
+        <p class="intro">Casual players who like planes have two bad options.</p><ul class="blist"><li><b>Serious sims</b> (e.g. Microsoft Flight Simulator) need a strong PC, a big download and hours to learn.</li><li><b>Quick web games</b> load fast but feel cheap and give no reason to come back.</li></ul><p class="outro">There was no middle ground: a good-looking flight you can start in a browser tab in under a minute.</p>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s1">
+      <p class="label">Users</p>
+      <div>
+        <h2 id="s1">Two needs, one return loop</h2>
+        <figure class="fig"><div class="dgwrap"><svg class="dg " viewBox="0 0 800 250" role="img" aria-label="Player journey. Opens the tab, guest start with no sign-up, first flight in seconds, first mission, comes back. Two needs: players who want a quick flight are served at first flight; players who want to learn are served at first mission through Flight School. Returning is a stage both groups reach, not a separate group. The Daily Challenge loops them back into missions. Each step has its funnel metric."><defs><marker id="d3a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk" d="M0,0L10,5L0,10z"/></marker><marker id="d3h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk hot" d="M0,0L10,5L0,10z"/></marker></defs><rect class="chip" x="325" y="6" width="150" height="32" rx="16"/><text class="s" x="400" y="26" text-anchor="middle">Need: a quick flight</text><rect class="chip" x="505" y="6" width="120" height="32" rx="16"/><text class="s" x="565" y="26" text-anchor="middle">Need: to learn</text><path class="ln dash" d="M400 38V94" marker-end="url(#d3a)"/><path class="ln dash" d="M565 38V94" marker-end="url(#d3a)"/><text class="lb" x="82" y="86" text-anchor="middle">LANDING</text><text class="lb" x="412" y="86" text-anchor="middle">FIRST FLIGHT</text><text class="lb" x="577" y="86" text-anchor="middle">FIRST MISSION</text><text class="lb hot" x="742" y="86" text-anchor="middle">7-DAY RETURN</text><rect class="bx " x="0" y="96" width="140" height="70" rx="10"/><text class="t" x="70" y="127" text-anchor="middle">Opens the tab</text><text class="s" x="70" y="144" text-anchor="middle">from a shared link</text><rect class="bx hot" x="165" y="96" width="140" height="70" rx="10"/><text class="t" x="235" y="127" text-anchor="middle">Guest start</text><text class="s" x="235" y="144" text-anchor="middle">no sign-up wall</text><rect class="bx " x="330" y="96" width="140" height="70" rx="10"/><text class="t" x="400" y="119.5" text-anchor="middle">First flight</text><text class="s" x="400" y="136.5" text-anchor="middle">in the air</text><text class="s" x="400" y="151.5" text-anchor="middle">in seconds</text><rect class="bx " x="495" y="96" width="140" height="70" rx="10"/><text class="t" x="565" y="119.5" text-anchor="middle">First mission</text><text class="s" x="565" y="136.5" text-anchor="middle">Flight School</text><text class="s" x="565" y="151.5" text-anchor="middle">or Campaign</text><rect class="bx hot" x="660" y="96" width="140" height="70" rx="10"/><text class="t" x="730" y="119.5" text-anchor="middle">Comes back</text><text class="s" x="730" y="136.5" text-anchor="middle">Daily Challenge,</text><text class="s" x="730" y="151.5" text-anchor="middle">leaderboard</text><path class="ln " d="M140 131H163" marker-end="url(#d3a)"/><path class="ln " d="M305 131H328" marker-end="url(#d3a)"/><path class="ln " d="M470 131H493" marker-end="url(#d3a)"/><path class="ln " d="M635 131H658" marker-end="url(#d3a)"/><path class="ln hot" d="M740 166V206H575V170" marker-end="url(#d3h)"/><text class="al hot" x="658" y="224" text-anchor="middle">a reason to return every day</text></svg></div><figcaption>One journey, two needs. Each need is met at a different step, every step has a funnel metric, and the Daily Challenge brings players of both kinds back into missions.</figcaption></figure><div class="tblwrap"><table class="tbl"><thead><tr><th scope="col">Need</th><th scope="col">Who has it</th><th scope="col">How the product serves it</th></tr></thead><tbody><tr><td><b>A quick, good-looking flight (primary)</b></td><td>Casual aviation fans on a laptop, no setup</td><td>Guest start, missions sorted by length</td></tr><tr><td>Learning to fly without feeling lost</td><td>People curious about flying, new to sims</td><td>Flight School and the difficulty ladder</td></tr></tbody></table></div><p class="outro">Returning is a stage, not a third kind of player: a beginner can also be a returning player. So return is measured as a funnel step for both needs, and the Daily Challenge, leaderboard and stars serve both.</p>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s2">
+      <p class="label">Key insight</p>
+      <div>
+        <h2 id="s2" class="vh">Key insight</h2>
+        <p class="quote">The first 60 seconds decide everything.</p><p class="note">A browser game competes with every other tab. If a player hits a sign-up form or a confusing cockpit, they close the tab. So every early decision optimised for time to first flight. Depth comes later, once the player cares.</p>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s3">
+      <p class="label">Goals and metrics</p>
+      <div>
+        <h2 id="s3">What success means</h2>
+        <div class="tree"><div class="ns"><span class="label">North Star</span><b>Missions completed per weekly player</b><span>North Star. It captures both engagement and progress.</span></div><div class="ls" style="--n:3"><div class="l1"><b>First flight started</b><span>Share of visitors in the air within a minute</span></div><div class="l1"><b>First mission completed</b><span>Share of new players who finish a mission in session 1</span></div><div class="l1"><b>Return within 7 days</b><span>Share of new players who come back</span></div></div><p class="guard"><b>Health:</b> frame rate on low-end laptops, and load time.</p></div>
+      </div>
+    </section>
+
+    <section class="sec" id="decisions" aria-labelledby="s4">
+      <p class="label">Decisions and trade-offs</p>
+      <div>
+        <h2 id="s4">Four calls, one I would undo</h2>
+        <div class="decs">
+          <article class="dec">
+            <h3><span>01</span>Guest start</h3>
+            <div class="opts">
+              <div class="opt chosen"><p class="label">What I chose <span class="tick">Chosen</span></p><p>Play instantly as a guest; save codes move progress across devices</p></div>
+              <div class="opt"><p class="label">What I gave up</p><p>Early email capture for growth</p></div>
+            </div>
+            <p class="why"><b>Why.</b> Sign-up friction kills first sessions.</p>
+          </article>
+          <article class="dec">
+            <h3><span>02</span>Visual quality vs speed</h3>
+            <div class="opts">
+              <div class="opt chosen"><p class="label">What I chose <span class="tick">Chosen</span></p><p>Balanced visuals against frame rate on average laptops</p></div>
+              <div class="opt"><p class="label">What I gave up</p><p>Peak graphics</p></div>
+            </div>
+            <p class="why"><b>Why.</b> A beautiful game that stutters loses players anyway. This is the call behind the 8.4 s to 4.6 s load cut.</p>
+          </article>
+          <article class="dec">
+            <h3><span>03</span>Retention loop</h3>
+            <div class="opts">
+              <div class="opt chosen"><p class="label">What I chose <span class="tick">Chosen</span></p><p>Daily Challenge, achievements, leaderboard, stars and coins</p></div>
+              <div class="opt"><p class="label">What I gave up</p><p>Build time on new aircraft and maps</p></div>
+            </div>
+            <p class="why"><b>Why.</b> New content is expensive to build; reasons to return are cheap. A bet, not yet measured: the 7-day return rate will test it.</p>
+          </article>
+          <article class="dec">
+            <h3><span>04</span>Five modes</h3>
+            <div class="opts">
+              <div class="opt chosen"><p class="label">What I chose <span class="tick">Chosen</span></p><p>Flight School, Campaign, Free Flight, Quick Challenges, Daily Challenge</p></div>
+              <div class="opt"><p class="label">What I gave up</p><p>A single polished mode</p></div>
+            </div>
+            <p class="why"><b>Why.</b> Each mode served a different need. But it broke my own rule about the first 60 seconds: play-testing found the menus confusing. For new players this was a mistake, and the onboarding test below checks whether skipping the mode menu fixes it.</p>
+          </article></div>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s5">
+      <p class="label">Solution</p>
+      <div>
+        <h2 id="s5">From tab to cockpit in seconds</h2>
+        <figure><div class="vframe browser"><span class="url">alpine-skies.vercel.app</span><img src="images/alpine-flight.webp" style="display:block;width:100%;height:auto;aspect-ratio:2/1;object-fit:cover" alt="In flight: the objective, distance to the next ring and the keys to press" loading="lazy" decoding="async"></div><figcaption class="vcap">In flight: the objective, the next ring and the keys, on screen.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s6">
+      <p class="label">What shipped</p>
+      <div>
+        <h2 id="s6">Live, with logins, missions and a leaderboard</h2>
+        <div class="shots"><figure><div class="frame"><img src="images/alpine-home.webp" width="1400" height="700" alt="Home screen: the next mission, missions, free flight, a daily challenge and the flying style" loading="lazy" decoding="async"></div><figcaption>Home: the next mission first, then the other modes and the flying style.</figcaption></figure><figure><div class="frame"><img src="images/alpine-missions.webp" width="1366" height="768" alt="Missions on a terrain map, filtered by length, with star goals" loading="lazy" decoding="async"></div><figcaption>Missions on a map, sorted by length, with clear star goals.</figcaption></figure></div>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s7">
+      <p class="label">Execution</p>
+      <div>
+        <h2 id="s7">Ship, play-test, fix, repeat</h2>
+        <ol class="steps"><li><b>Rebuild on real terrain</b><span>The Bernese Oberland from swisstopo open data, tuned to run on laptop graphics.</span></li><li><b>Play-test feedback</b><span>Menus and levels were confusing, there was not enough to do, and progress was not saved.</span></li><li><b>Revamp, versions 1.15 to 1.23</b><span>Missions sorted by length, Flight School, a daily challenge, guest saves, a leaderboard and clearer in-flight guidance.</span></li><li><b>Measure</b><span>Product analytics added on the web build, and accounts, progress saves and the leaderboard in Supabase, so the next round is judged on what players do.</span></li></ol>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s8">
+      <p class="label">Experiment</p>
+      <div>
+        <h2 id="s8">A/B test on onboarding<span class="tag-planned">Planned</span></h2>
+        <ul class="blist"><li><b>Hypothesis:</b> dropping players straight into a 60-second guided flight (vs the mode menu) raises first-mission completion.</li><li><b>Primary metric:</b> share of new players who complete a mission in session 1.</li><li><b>Guardrail:</b> 7-day return rate must not fall.</li><li><b>Decision rule:</b> ship the guided start if completion rises with no drop in return rate; otherwise keep the menu and test a shorter Flight School.</li><li><b>Traffic check first:</b> if there are too few new players each week for an A/B test to detect a real change, compare the funnel before and after the change and run moderated play sessions instead. The result will say which method was used.</li></ul><figure class="fig after"><div class="dgwrap"><svg class="dg " viewBox="0 0 800 196" role="img" aria-label="The onboarding A/B test. Control: open the tab, pick from the mode menu, the mode loads, then the first mission. Variant: open the tab, a 60-second guided flight, then the first mission. The variant removes the menu step. Metric: share of new players completing a mission in session 1."><defs><marker id="d4a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk" d="M0,0L10,5L0,10z"/></marker><marker id="d4h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk hot" d="M0,0L10,5L0,10z"/></marker></defs><text class="lb" x="0" y="16" text-anchor="start">CONTROL</text><rect class="bx " x="0" y="24" width="150" height="58" rx="10"/><text class="t" x="75" y="56.5" text-anchor="middle">Opens the tab</text><rect class="bx " x="180" y="24" width="150" height="58" rx="10"/><text class="t" x="255" y="49" text-anchor="middle">Mode menu</text><text class="s" x="255" y="66" text-anchor="middle">picks one of five</text><rect class="bx " x="360" y="24" width="150" height="58" rx="10"/><text class="t" x="435" y="56.5" text-anchor="middle">Mode loads</text><rect class="bx " x="540" y="24" width="150" height="58" rx="10"/><text class="t" x="615" y="56.5" text-anchor="middle">First mission</text><path class="ln " d="M150 53H178" marker-end="url(#d4a)"/><path class="ln " d="M330 53H358" marker-end="url(#d4a)"/><path class="ln " d="M510 53H538" marker-end="url(#d4a)"/><text class="lb hot" x="0" y="116" text-anchor="start">VARIANT</text><rect class="bx " x="0" y="124" width="150" height="58" rx="10"/><text class="t" x="75" y="156.5" text-anchor="middle">Opens the tab</text><rect class="bx hot" x="180" y="124" width="330" height="58" rx="10"/><text class="t" x="345" y="149" text-anchor="middle">60-second guided flight</text><text class="s" x="345" y="166" text-anchor="middle">straight into the air</text><rect class="bx " x="540" y="124" width="150" height="58" rx="10"/><text class="t" x="615" y="156.5" text-anchor="middle">First mission</text><path class="ln hot" d="M150 153H178" marker-end="url(#d4h)"/><path class="ln hot" d="M510 153H538" marker-end="url(#d4h)"/><text class="lb" x="706" y="90" text-anchor="start">MEASURED</text><text class="s" x="706" y="108" text-anchor="start">mission done</text><text class="s" x="706" y="124" text-anchor="start">in session 1</text><path class="ln" d="M694 53V153" /></svg></div><figcaption>The variant removes one step, the mode menu, and replaces it with a 60-second guided flight. Both arms are measured at the same point: a mission completed in session 1.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s9">
+      <p class="label">Results</p>
+      <div>
+        <h2 id="s9">Live and faster; player numbers next</h2>
+        <div class="tblwrap"><table class="tbl"><thead><tr><th scope="col">Measure</th><th scope="col">Result</th></tr></thead><tbody><tr><td>Status</td><td><b>Live</b> with logins, missions, a leaderboard and a cloud backend</td></tr><tr><td>Cold load, Intel Iris Xe laptop</td><td><b>8.4 s to about 4.6 s</b> after a performance pass (version 1.15)</td></tr><tr><td>Feedback that changed the product</td><td>"Menus and levels are confusing; not enough to do." Led to missions by length, Flight School and the daily challenge</td></tr><tr><td>Player funnel</td><td>Not published yet: visitors, first flight, first mission, 7-day return</td></tr></tbody></table></div>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s10">
+      <p class="label">What I learned</p>
+      <div>
+        <h2 id="s10">The tools built it; the calls stayed mine</h2>
+        <ul class="blist"><li>AI coding tools speed up the build. The product decisions, scope and quality bar stayed mine.</li><li>My own first-60-seconds rule was right, and I broke it with five modes. Writing the rule down is what made the mistake visible.</li></ul>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s11">
+      <p class="label">Roadmap</p>
+      <div>
+        <h2 id="s11">Now, next, later</h2>
+        <div class="road"><div><p class="label">Now</p><ul><li>Publish the player funnel: visitors, first flight, first mission, 7-day return</li><li>Run the onboarding test (A/B if traffic allows) and publish the result here</li></ul></div><div><p class="label">Next</p><ul><li>Fake-door test for cosmetic aircraft before building any</li><li>Watch the first-mission funnel weekly</li></ul></div><div><p class="label">Later</p><ul><li>New mission types if return rate holds</li><li>Finish cross-device sign-in</li></ul></div></div>
+      </div>
+    </section>
+
+    <nav class="pn" aria-label="More cases">
+      <a href="case-atelier.html"><span class="label">← Case 01</span><b>Atélier</b></a>
+      <a href="case-voice-capture.html"><span class="label">Case 03 →</span><b>Voice capture</b></a>
+    </nav>
+  </main>
+  <footer class="legal"><span>© R. Veera Manoharan</span><span>Case 02</span></footer>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="case.js"></script>
+</body>
+</html>

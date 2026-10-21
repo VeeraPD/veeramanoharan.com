@@ -1,0 +1,6 @@
+[
+  { "id": "lab1", "title": "[Tile title 1]", "learning": "[One learning]", "url": "https://example.com/lab-1" },
+  { "id": "lab2", "title": "[Tile title 2]", "learning": "[One learning]", "url": "https://example.com/lab-2" },
+  { "id": "lab3", "title": "[Tile title 3]", "learning": "[One learning]", "url": "https://example.com/lab-3" },
+  { "id": "lab4", "title": "[Tile title 4]", "learning": "[One learning]", "url": "https://example.com/lab-4" }
+]

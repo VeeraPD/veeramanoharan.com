@@ -1,0 +1,11 @@
+[
+  { "id": "s01", "number": 1, "name": "[Skill name 01]", "proof": "[One-line proof]", "case": 1 },
+  { "id": "s02", "number": 2, "name": "[Skill name 02]", "proof": "[One-line proof]", "case": 5 },
+  { "id": "s03", "number": 3, "name": "[Skill name 03]", "proof": "[One-line proof]", "case": 1 },
+  { "id": "s04", "number": 4, "name": "[Skill name 04]", "proof": "[One-line proof]", "case": 4 },
+  { "id": "s05", "number": 5, "name": "[Skill name 05]", "proof": "[One-line proof]", "case": 5 },
+  { "id": "s06", "number": 6, "name": "[Skill name 06]", "proof": "[One-line proof]", "case": 2 },
+  { "id": "s07", "number": 7, "name": "[Skill name 07]", "proof": "[One-line proof]", "case": 3 },
+  { "id": "s08", "number": 8, "name": "[Skill name 08]", "proof": "[One-line proof]", "case": 1 },
+  { "id": "s09", "number": 9, "name": "[Skill name 09]", "proof": "[One-line proof]", "case": 6 }
+]

@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en" data-mode="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Multi-agent router · AI Lab · R. Veera Manoharan</title>
+<script>(function(){var r=document.documentElement,m=null,mo=null;try{m=localStorage.getItem('mode');mo=localStorage.getItem('motion')}catch(e){}r.setAttribute('data-mode',m==='cream'?'cream':'dark');if(mo==='off')r.setAttribute('data-paused','true')})();</script>
+<meta name="description" content="An AI Lab experiment: a frontier model plans and reviews, low-cost models do the work. A benchmark against a Claude-only setup on cost, quality and time is running.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&display=swap">
+<link rel="stylesheet" href="case.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="a05" viewBox="0 0 200 150"><g transform="translate(100 75) scale(.95)" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M-52 0H-6M-6 0L40 -44M-6 0H40M-6 0L40 44"/><circle cx="-58" cy="0" r="13" fill="currentColor" stroke="none"/><circle cx="-6" cy="0" r="8"/><rect x="40" y="-60" width="34" height="32" rx="7" fill="currentColor" opacity=".45" stroke="none"/><rect x="40" y="-16" width="34" height="32" rx="7" fill="currentColor" opacity=".45" stroke="none"/><rect x="40" y="28" width="34" height="32" rx="7" fill="currentColor" opacity=".45" stroke="none"/></g></symbol></svg>
+<a class="skip" href="#main">Skip to content</a>
+<div class="page">
+  <header class="top">
+    <a class="logo" href="index.html" aria-label="Veera, home">
+      <svg viewBox="0 0 30 30" aria-hidden="true"><path class="dot" d="M15 2.5C22 2 28 7 27.5 15 27 23 21 28 14 27.5 7 27 2.5 21 3 14 3.5 7.5 9 3 15 2.5Z"/><path class="mk" d="M9 11l6 10 6-10" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Veera</a>
+    <div class="hright">
+      <a class="back" href="index.html#labs">← <span>AI Labs</span></a>
+      <button class="iconbtn" id="mode" type="button" aria-label="Switch to light theme">
+        <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 14.6A8 8 0 0 1 9.4 4.5a8 8 0 1 0 10.1 10.1Z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <header class="open">
+      <p class="label">AI Lab · Technical experiment · 2026 · 3 min read</p>
+      <h1>Multi-agent router</h1>
+      <p class="stand">Can low-cost models do most of the work if a frontier model only plans and reviews? A personal tool, and an experiment in trading cost against quality.</p>
+      <p class="links"><a class="pill ghost" href="#decisions">Skip to the decisions</a></p>
+      <div class="lead-img art grain mesh g-sky" role="img" aria-label="Abstract diagram of one input routed to three workers"><svg aria-hidden="true"><use href="#a05"/></svg></div>
+      <div class="tldr" aria-label="TL;DR"><div><p class="label">Problem</p><p>Using a frontier model for every step is expensive and slow. Most steps are routine and do not need it.</p></div><div><p class="label">What I did</p><p>Built a three-layer agent setup: frontier models only plan, review and sign off; low-cost models do the work in parallel.</p></div><div><p class="label">Status</p><p>Working on my own projects. No benchmark result yet: the comparison against a Claude-only setup is running.</p></div></div>
+    </header>
+
+    <dl class="summary" style="--cols:5">
+      <div><dt class="label">Role</dt><dd>Solo: framing, build, evaluation</dd></div>
+      <div><dt class="label">Type</dt><dd>Technical experiment</dd></div>
+      <div><dt class="label">Models</dt><dd>Claude directs; lead models own streams; DeepSeek and Gemini Flash work</dd></div>
+      <div><dt class="label">Status</dt><dd>Working (Oct 2026)</dd></div>
+      <div><dt class="label">Skills</dt><dd>AI evals, cost vs quality vs latency</dd></div>
+    </dl>
+
+    <section class="sec" aria-labelledby="s0">
+      <p class="label">Problem</p>
+      <div>
+        <h2 id="s0">One model for everything is expensive</h2>
+        <p class="intro">I was using a frontier model for every step of my AI work. Most of those steps did not need it.</p><ul class="blist"><li>Drafting boilerplate code, reformatting text and summarising files are routine tasks.</li><li>Planning, judging quality and fixing hard bugs need the strongest model.</li><li>Paying top price for both meant costs grew with every project.</li></ul>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s1">
+      <p class="label">How it works</p>
+      <div>
+        <h2 id="s1">Plan at the top, work at the bottom</h2>
+        <figure class="fig"><div class="dgwrap"><svg class="dg " viewBox="0 0 800 446" role="img" aria-label="The router as an org with three layers and dedicated roles. Layer 1: a Director (Claude) plans and signs off. Layer 2: Engineering, Content and Research leads break work down and review their stream. Layer 3: low-cost worker models act as coder, tester, writer, editor, researcher and summariser. Staff roles serve every layer: Dispatcher, QA reviewer, Budget keeper and Escalation."><defs><marker id="d8a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk" d="M0,0L10,5L0,10z"/></marker><marker id="d8h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk hot" d="M0,0L10,5L0,10z"/></marker></defs><text class="lb" x="0" y="22" text-anchor="start">LAYER 1 · FRONTIER MODEL</text><rect class="bx hot" x="310" y="32" width="180" height="62" rx="10"/><text class="t" x="400" y="59" text-anchor="middle">Director</text><text class="s" x="400" y="76" text-anchor="middle">Claude · plans, signs off</text><path class="ln " d="M400 94V118H120V142" marker-end="url(#d8a)"/><path class="ln " d="M400 118V142" marker-end="url(#d8a)"/><path class="ln " d="M400 118H680V142" marker-end="url(#d8a)"/><text class="lb" x="0" y="134" text-anchor="start">LAYER 2 · LEADS</text><rect class="bx " x="30" y="144" width="180" height="60" rx="10"/><text class="t" x="120" y="170" text-anchor="middle">Engineering lead</text><text class="s" x="120" y="187" text-anchor="middle">breaks down, reviews</text><rect class="bx " x="310" y="144" width="180" height="60" rx="10"/><text class="t" x="400" y="170" text-anchor="middle">Content lead</text><text class="s" x="400" y="187" text-anchor="middle">breaks down, reviews</text><rect class="bx " x="590" y="144" width="180" height="60" rx="10"/><text class="t" x="680" y="170" text-anchor="middle">Research lead</text><text class="s" x="680" y="187" text-anchor="middle">breaks down, reviews</text><text class="lb" x="0" y="338" text-anchor="start">LAYER 3 · WORKERS</text><path class="ln " d="M120 204V230H60V262" marker-end="url(#d8a)"/><path class="ln " d="M120 230H180V262" marker-end="url(#d8a)"/><rect class="bx " x="5" y="264" width="110" height="54" rx="10"/><text class="t" x="60" y="287" text-anchor="middle">Coder</text><text class="s" x="60" y="304" text-anchor="middle">low-cost model</text><rect class="bx " x="125" y="264" width="110" height="54" rx="10"/><text class="t" x="180" y="287" text-anchor="middle">Tester</text><text class="s" x="180" y="304" text-anchor="middle">low-cost model</text><path class="ln " d="M400 204V230H340V262" marker-end="url(#d8a)"/><path class="ln " d="M400 230H460V262" marker-end="url(#d8a)"/><rect class="bx " x="285" y="264" width="110" height="54" rx="10"/><text class="t" x="340" y="287" text-anchor="middle">Writer</text><text class="s" x="340" y="304" text-anchor="middle">low-cost model</text><rect class="bx " x="405" y="264" width="110" height="54" rx="10"/><text class="t" x="460" y="287" text-anchor="middle">Editor</text><text class="s" x="460" y="304" text-anchor="middle">low-cost model</text><path class="ln " d="M680 204V230H620V262" marker-end="url(#d8a)"/><path class="ln " d="M680 230H740V262" marker-end="url(#d8a)"/><rect class="bx " x="565" y="264" width="110" height="54" rx="10"/><text class="t" x="620" y="287" text-anchor="middle">Researcher</text><text class="s" x="620" y="304" text-anchor="middle">low-cost model</text><rect class="bx " x="685" y="264" width="110" height="54" rx="10"/><text class="t" x="740" y="287" text-anchor="middle">Summariser</text><text class="s" x="740" y="304" text-anchor="middle">low-cost model</text><text class="lb hot" x="0" y="378" text-anchor="start">STAFF ROLES · SERVE EVERY LAYER</text><rect class="bx " x="0" y="386" width="185" height="56" rx="10"/><text class="t" x="92.5" y="410" text-anchor="middle">Dispatcher</text><text class="s" x="92.5" y="427" text-anchor="middle">cheapest capable model</text><rect class="bx hot" x="205" y="386" width="185" height="56" rx="10"/><text class="t" x="297.5" y="410" text-anchor="middle">QA reviewer</text><text class="s" x="297.5" y="427" text-anchor="middle">checks every output</text><rect class="bx " x="410" y="386" width="185" height="56" rx="10"/><text class="t" x="502.5" y="410" text-anchor="middle">Budget keeper</text><text class="s" x="502.5" y="427" text-anchor="middle">cost cap per task</text><rect class="bx " x="615" y="386" width="185" height="56" rx="10"/><text class="t" x="707.5" y="410" text-anchor="middle">Escalation</text><text class="s" x="707.5" y="427" text-anchor="middle">one retry, then up</text></svg></div><figcaption>Three layers. Frontier capacity sits only where judgment is needed; the volume of work happens in Layer 3 at low-cost prices.</figcaption></figure><ul class="blist"><li><b>Layer 1, Director (Claude):</b> owns the goal, splits it into streams, gives the final sign-off.</li><li><b>Layer 2, Leads:</b> one per stream. Each breaks its stream into steps and reviews the result.</li><li><b>Layer 3, Workers:</b> low-cost models with one job each, run in parallel.</li><li><b>Every output is reviewed.</b> A failed step gets one retry, then moves up a layer.</li></ul>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s2">
+      <p class="label">Key insight</p>
+      <div>
+        <h2 id="s2" class="vh">Key insight</h2>
+        <p class="quote">The cheap model doesn't need to be right every time. The system does.</p><p class="note">A low-cost worker that is right most of the time, inside an org that reviews every output and escalates misses, can match a frontier-only setup at a fraction of the cost. The structure, and especially the reviewer, is the product.</p>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s3">
+      <p class="label">Goals and metrics</p>
+      <div>
+        <h2 id="s3">Cost, quality and time, as one decision</h2>
+        <div class="tree"><div class="ns"><span class="label">North Star</span><b>Cost per accepted task</b><span>North Star. Cheap output that fails review is not a saving.</span></div><div class="ls" style="--n:3"><div class="l1"><b>Quality pass rate</b><span>Share of tasks that pass a simple rubric</span></div><div class="l1"><b>Time per task</b><span>Wall-clock time, with parallel steps</span></div><div class="l1"><b>Escalation rate</b><span>Share of steps that end up back with Claude</span></div></div><p class="guard"><b>Guardrail:</b> pass rate no more than 5 points below the Claude-only baseline. That is the trade I accept for at least 40% lower cost: a failed step is caught in review and retried, so a small quality drop costs little. Past 5 points, rework eats the savings.</p></div>
+      </div>
+    </section>
+
+    <section class="sec" id="decisions" aria-labelledby="s4">
+      <p class="label">Decisions and trade-offs</p>
+      <div>
+        <h2 id="s4">Three calls, and what each one cost</h2>
+        <div class="decs">
+          <article class="dec">
+            <h3><span>01</span>Orchestrator</h3>
+            <div class="opts">
+              <div class="opt chosen"><p class="label">What I chose <span class="tick">Chosen</span></p><p>A frontier model plans and reviews</p></div>
+              <div class="opt"><p class="label">What I gave up</p><p>The lowest possible cost</p></div>
+            </div>
+            <p class="why"><b>Why.</b> Planning and judging are where cheap models fail most.</p>
+          </article>
+          <article class="dec">
+            <h3><span>02</span>Review every output</h3>
+            <div class="opts">
+              <div class="opt chosen"><p class="label">What I chose <span class="tick">Chosen</span></p><p>Claude checks worker results</p></div>
+              <div class="opt"><p class="label">What I gave up</p><p>Some of the savings</p></div>
+            </div>
+            <p class="why"><b>Why.</b> Unchecked cheap output creates rework, which costs more.</p>
+          </article>
+          <article class="dec">
+            <h3><span>03</span>Escalation cap</h3>
+            <div class="opts">
+              <div class="opt chosen"><p class="label">What I chose <span class="tick">Chosen</span></p><p>One retry, then escalate</p></div>
+              <div class="opt"><p class="label">What I gave up</p><p>Maximum savings on hard tasks</p></div>
+            </div>
+            <p class="why"><b>Why.</b> Endless retries waste time and money.</p>
+          </article></div>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s5">
+      <p class="label">Proof</p>
+      <div>
+        <h2 id="s5">Benchmark against a Claude-only baseline</h2>
+        <div class="tblwrap"><table class="tbl"><thead><tr><th scope="col">Metric</th><th scope="col">Target vs Claude only</th><th scope="col">Status</th></tr></thead><tbody><tr><td>Cost per task</td><td>At least 40% lower</td><td>Benchmark running</td></tr><tr><td>Quality pass rate</td><td>No more than 5 points lower</td><td>Benchmark running</td></tr><tr><td>Time per task</td><td>Faster on multi-step tasks</td><td>Benchmark running</td></tr><tr><td>Escalation rate</td><td>Under 20% of steps</td><td>Benchmark running</td></tr></tbody></table></div><p class="outro"><b>How it runs:</b> 20 to 30 real tasks across code, writing and summaries, each through both setups, scored with a simple pass or fail rubric, noting where the router failed.</p>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s6">
+      <p class="label">Where it breaks</p>
+      <div>
+        <h2 id="s6">Known failure modes</h2>
+        <ul class="blist"><li><b>Data privacy:</b> sending work to some third-party providers may break company policy. Fix: an approved-provider list per team.</li><li><b>Reviewer cost:</b> if Claude has to redo too much, savings disappear. Watch the escalation rate.</li><li><b>Silent errors:</b> a confident wrong answer can pass review. Fix: stricter checks on high-risk tasks, such as code that touches data.</li></ul>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s7">
+      <p class="label">What I learned</p>
+      <div>
+        <h2 id="s7">Evaluation is the real work</h2>
+        <ul class="blist"><li>Routing logic is easy to write and hard to trust without a benchmark.</li></ul>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s8">
+      <p class="label">Next</p>
+      <div>
+        <h2 id="s8">What happens next</h2>
+        <ul class="blist"><li>Finish the 20 to 30 task benchmark and publish the table above with real numbers, including one real failure and its fix.</li></ul>
+      </div>
+    </section>
+
+    <nav class="pn" aria-label="More cases">
+      <a href="index.html#labs"><span class="label">← AI Labs</span><b>Back to the index</b></a>
+      <a href="index.html#labs"><span class="label">AI Labs →</span><b>Back to the index</b></a>
+    </nav>
+  </main>
+  <footer class="legal"><span>© R. Veera Manoharan</span><span>AI Lab</span></footer>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="case.js"></script>
+</body>
+</html>
