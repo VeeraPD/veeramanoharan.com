@@ -1,57 +1,76 @@
 {
-  "generated": "2026-10-23",
-  "method": "AI-generated concept illustrations based on project descriptions; not product screenshots",
-  "style": "Colored editorial notebook illustrations: warm ivory paper, loose plum ink lines, colored-pencil texture, lavender, coral, sage and butter-yellow fills",
+  "updated": "2026-10-23",
+  "method": "Native SVG illustrations and live HTML titles over original theme-aware multicolored textured gradient backgrounds. No people or raster thumbnails.",
   "assets": [
     {
       "source": "case-ticketpilot.html",
-      "asset": "thumb-ticketpilot-v3.webp",
-      "alt": "Illustration of service requests routed to support teams with a human review checkpoint"
+      "title": "TicketPilot",
+      "description": "AI ticket routing & review",
+      "background": "g-peach",
+      "symbol": "thumb-routing"
     },
     {
       "source": "case-atelier.html",
-      "asset": "thumb-atelier-v3.webp",
-      "alt": "Illustration of handwritten tablet notes connected to matching ideas through semantic search"
+      "title": "At?lier",
+      "description": "Find handwritten notes by meaning",
+      "background": "g-lav",
+      "symbol": "thumb-notes"
     },
     {
       "source": "case-voice-capture.html",
-      "asset": "thumb-voice-v3.webp",
-      "alt": "Illustration of Hindi-English voice waves becoming a transcript"
+      "title": "Voice Capture",
+      "description": "Speech recognition for Hinglish",
+      "background": "g-rose",
+      "symbol": "a03"
     },
     {
       "source": "case-medtech-genai.html",
-      "asset": "thumb-medtech-v3.webp",
-      "alt": "Illustration of medical-device engineering analyses combined into a reviewed document"
+      "title": "MedTech GenAI",
+      "description": "AI drafts. Engineers approve.",
+      "background": "g-mint",
+      "symbol": "a07"
     },
     {
       "source": "case-ensemble.html",
-      "asset": "thumb-ensemble-v3.webp",
-      "alt": "Illustration of one AI lead coordinating three parallel coding workstreams"
+      "title": "Ensemble",
+      "description": "Coordinate AI coding agents",
+      "background": "g-sky",
+      "symbol": "a05"
     },
     {
       "source": "case-alpine-skies.html",
-      "asset": "thumb-alpine-v3.webp",
-      "alt": "Illustration of a glider flying through an Alpine mission ring"
+      "title": "Alpine Skies",
+      "description": "A flight simulator in your browser",
+      "background": "g-mint",
+      "symbol": "a02"
     },
     {
       "source": "fun/game-theory-playground.html",
-      "asset": "thumb-game-theory-v3.webp",
-      "alt": "Illustration of two players making choices at a strategic crossroads"
+      "title": "Game Theory",
+      "description": "Explore strategy through play",
+      "background": "g-butter",
+      "symbol": "f1"
     },
     {
       "source": "fun/nuit-loop-studio.html",
-      "asset": "thumb-nuit-v3.webp",
-      "alt": "Illustration of a circular music sequencer, keys and loop waveforms"
+      "title": "Nuit Loop Studio",
+      "description": "Build melodies, chords & loops",
+      "background": "g-lav",
+      "symbol": "f2"
     },
     {
       "source": "fun/ocean-waves-simulator.html",
-      "asset": "thumb-ocean-v3.webp",
-      "alt": "Illustration of a small boat riding simulated ocean waves"
+      "title": "Aegis HydroSim",
+      "description": "An interactive ocean wave simulator",
+      "background": "g-sky",
+      "symbol": "f3"
     },
     {
       "source": "case-resume-copilot.html",
-      "asset": "thumb-resume-v3.webp",
-      "alt": "Illustration of resume claims linked to supporting evidence"
+      "title": "Resume Fit Copilot",
+      "description": "Check claims against your evidence",
+      "background": "g-peach",
+      "symbol": "a07"
     }
   ]
 }
