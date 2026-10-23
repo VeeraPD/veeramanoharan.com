@@ -381,6 +381,29 @@ html[data-paused="true"] *,html[data-paused="true"] *::before,html[data-paused="
 .lab .thumb-card .thumb-copy{inset:auto 16px 18px;gap:5px}
 @media(max-width:480px){.thumb-card .thumb-copy{inset:auto 18px 20px}.thumb-name{font-size:1.7rem}.thumb-description{font-size:.8rem}}
 
+
+/* Detailed cutout illustrations keep the original textured card surface visible. */
+.card .inner.thumb-card img.thumb-illustration,.lab .th.thumb-card img.thumb-illustration{position:absolute;inset:1% 9% auto;width:82%;height:64%;object-fit:contain;display:block;z-index:1}
+.thumb-card.project-ticketpilot{--a:#75443c;--b:#56425f;--c:#694b32;--base:#31242a}
+html[data-mode="cream"] .thumb-card.project-ticketpilot{--a:#f4bba4;--b:#d5c3ed;--c:#f6d5a2;--base:#f8e5d8}
+.thumb-card.project-atelier{--a:#584374;--b:#3f476d;--c:#68445f;--base:#292538}
+html[data-mode="cream"] .thumb-card.project-atelier{--a:#d5c1ef;--b:#c0cff0;--c:#e7c4e3;--base:#eee5f8}
+.thumb-card.project-voice{--a:#743e59;--b:#5e354a;--c:#805057;--base:#30212e}
+html[data-mode="cream"] .thumb-card.project-voice{--a:#edb4ce;--b:#dfbcdf;--c:#f3c3b4;--base:#f7e0ea}
+.thumb-card.project-medtech{--a:#365b4e;--b:#416255;--c:#375755;--base:#22342e}
+html[data-mode="cream"] .thumb-card.project-medtech{--a:#b9ddcb;--b:#d0e4bc;--c:#b1d9cf;--base:#e0efe4}
+.thumb-card.project-ensemble{--a:#284c78;--b:#38477c;--c:#2e6073;--base:#202d42}
+html[data-mode="cream"] .thumb-card.project-ensemble{--a:#b0ceef;--b:#c1c7ef;--c:#afe0eb;--base:#dfebf8}
+.thumb-card.project-alpine{--a:#405f36;--b:#536541;--c:#365f4a;--base:#26342a}
+html[data-mode="cream"] .thumb-card.project-alpine{--a:#c3dda4;--b:#e2e7a2;--c:#b7d7b3;--base:#e6eed6}
+.thumb-card.project-game-theory{--a:#74602e;--b:#78503c;--c:#62613c;--base:#373024}
+html[data-mode="cream"] .thumb-card.project-game-theory{--a:#f1d584;--b:#f4be92;--c:#e4d79e;--base:#f9edce}
+.thumb-card.project-nuit{--a:#443464;--b:#633f70;--c:#313c68;--base:#262039}
+html[data-mode="cream"] .thumb-card.project-nuit{--a:#c5b4e6;--b:#e0b4df;--c:#b9c2e9;--base:#e9dff5}
+.thumb-card.project-ocean{--a:#225b66;--b:#286879;--c:#2d6a5a;--base:#1b303a}
+html[data-mode="cream"] .thumb-card.project-ocean{--a:#a3d9dc;--b:#acd9ef;--c:#b5e0ca;--base:#dcefee}
+.thumb-card.project-resume{--a:#75472f;--b:#7b5340;--c:#695137;--base:#362725}
+html[data-mode="cream"] .thumb-card.project-resume{--a:#edb48b;--b:#f4c6aa;--c:#e8cb9b;--base:#f8e4d2}
 </style>
 </head>
 <body>
@@ -474,19 +497,19 @@ html[data-paused="true"] *,html[data-paused="true"] *::before,html[data-paused="
       <div class="work">
         <div class="col">
           <article class="card rv live">
-            <div class="img" style="--ar:3/2"><div class="inner thumb-card grain mesh g-peach" aria-hidden="true"><svg><use href="#thumb-routing"/></svg><div class="thumb-copy"><span class="thumb-name">TicketPilot</span><span class="thumb-description">AI ticket routing & review</span></div></div></div>
+            <div class="img" style="--ar:3/2"><div class="inner thumb-card grain mesh g-peach project-ticketpilot" aria-hidden="true"><img class="thumb-illustration" src="images/illustration-ticketpilot-v4.webp" width="1200" height="800" alt="" loading="lazy" decoding="async"><div class="thumb-copy"><span class="thumb-name">TicketPilot</span><span class="thumb-description">AI ticket routing & review</span></div></div></div>
             <div class="meta"><span class="chip peach">B2B · AI · Prototype</span><span class="year">2026 · 9 min read</span></div>
             <h3><a class="stretch" href="case-ticketpilot.html" data-track="case-open" data-track-label="01">TicketPilot: AI-powered IT support</a></h3>
             <p class="line">Natural-language requests, smarter routing and human review. 25-case RAG test: correct automatic routing improved from 36% to 76%; human approval remains.</p>
           </article>
           <article class="card rv live">
-            <div class="img" style="--ar:3/2"><div class="inner thumb-card grain mesh g-lav" aria-hidden="true"><svg><use href="#thumb-notes"/></svg><div class="thumb-copy"><span class="thumb-name">At?lier</span><span class="thumb-description">Find handwritten notes by meaning</span></div></div></div>
+            <div class="img" style="--ar:3/2"><div class="inner thumb-card grain mesh g-lav project-atelier" aria-hidden="true"><img class="thumb-illustration" src="images/illustration-atelier-v4.webp" width="1200" height="800" alt="" loading="lazy" decoding="async"><div class="thumb-copy"><span class="thumb-name">Atélier</span><span class="thumb-description">Find handwritten notes by meaning</span></div></div></div>
             <div class="meta"><span class="chip lav">B2C · AI · Built</span><span class="year">2026 · 6 min read</span></div>
             <h3><a class="stretch" href="case-atelier.html" data-track="case-open" data-track-label="03">Atélier: search your handwritten notes by meaning</a></h3>
             <p class="line">Feature-complete and demoed to faculty; the search eval and a classmate beta are next.</p>
           </article>
           <article class="card rv live">
-            <div class="img" style="--ar:3/2"><div class="inner thumb-card grain mesh g-rose" aria-hidden="true"><svg><use href="#a03"/></svg><div class="thumb-copy"><span class="thumb-name">Voice Capture</span><span class="thumb-description">Speech recognition for Hinglish</span></div></div></div>
+            <div class="img" style="--ar:3/2"><div class="inner thumb-card grain mesh g-rose project-voice" aria-hidden="true"><img class="thumb-illustration" src="images/illustration-voice-v4.webp" width="1200" height="800" alt="" loading="lazy" decoding="async"><div class="thumb-copy"><span class="thumb-name">Voice Capture</span><span class="thumb-description">Speech recognition for Hinglish</span></div></div></div>
             <div class="meta"><span class="chip rose">Discovery · In progress</span><span class="year">2026 · 6 min read</span></div>
             <h3><a class="stretch" href="case-voice-capture.html" data-track="case-open" data-track-label="05">Voice capture for Hinglish</a></h3>
             <p class="line">Do any engines beat built-in recognition on Hinglish by enough to matter, and would anyone pay? Thresholds set before testing.</p>
@@ -494,13 +517,13 @@ html[data-paused="true"] *,html[data-paused="true"] *::before,html[data-paused="
         </div>
         <div class="col offset">
           <article class="card rv live">
-            <div class="img" style="--ar:3/2"><div class="inner thumb-card grain mesh g-mint" aria-hidden="true"><svg><use href="#a07"/></svg><div class="thumb-copy"><span class="thumb-name">MedTech GenAI</span><span class="thumb-description">AI drafts. Engineers approve.</span></div></div></div>
+            <div class="img" style="--ar:3/2"><div class="inner thumb-card grain mesh g-mint project-medtech" aria-hidden="true"><img class="thumb-illustration" src="images/illustration-medtech-v4.webp" width="1200" height="800" alt="" loading="lazy" decoding="async"><div class="thumb-copy"><span class="thumb-name">MedTech GenAI</span><span class="thumb-description">AI drafts. Engineers approve.</span></div></div></div>
             <div class="meta"><span class="chip mint">AI product · MedTech · Pilot</span><span class="year">2026 · 5 min read</span></div>
             <h3><a class="stretch" href="case-medtech-genai.html" data-track="case-open" data-track-label="02">Making GenAI useful in medical device engineering</a></h3>
             <p class="line">A local LLM assistant cut usability analysis and report drafting time by about 50%, with engineers approving every output.</p>
           </article>
           <article class="card rv live">
-            <div class="img" style="--ar:3/2"><div class="inner thumb-card grain mesh g-sky" aria-hidden="true"><svg><use href="#a05"/></svg><div class="thumb-copy"><span class="thumb-name">Ensemble</span><span class="thumb-description">Coordinate AI coding agents</span></div></div></div>
+            <div class="img" style="--ar:3/2"><div class="inner thumb-card grain mesh g-sky project-ensemble" aria-hidden="true"><img class="thumb-illustration" src="images/illustration-ensemble-v4.webp" width="1200" height="800" alt="" loading="lazy" decoding="async"><div class="thumb-copy"><span class="thumb-name">Ensemble</span><span class="thumb-description">Coordinate AI coding agents</span></div></div></div>
             <div class="meta"><span class="chip sky">Dev tool · AI · Open source</span><span class="year">2026 · 7 min read</span></div>
             <h3><a class="stretch" href="case-ensemble.html" data-track="case-open" data-track-label="04">Ensemble: an AI lead that directs cheaper AI workers</a></h3>
             <p class="line">A strong model plans and reviews, cheaper ones build in parallel. A small cost study found no clear saving at this size.</p>
@@ -534,11 +557,11 @@ html[data-paused="true"] *,html[data-paused="true"] *::before,html[data-paused="
     <section class="blk" id="fun" aria-labelledby="hl">
       <div class="sh"><h2 id="hl">Fun projects</h2><span class="label rv">Built to play and to learn</span></div>
       <div class="labs">
-        <a class="lab rv" href="case-alpine-skies.html" data-track="fun-open" data-track-label="alpine"><div class="th thumb-card grain mesh g-mint" aria-hidden="true"><svg><use href="#a02"/></svg><div class="thumb-copy"><span class="thumb-name">Alpine Skies</span><span class="thumb-description">A flight simulator in your browser</span></div></div><b>Alpine Skies</b><span>A free flight sim over the Swiss Alps that runs in a browser tab, no sign-up. Live, with a short write-up of the product calls.</span></a>
-        <a class="lab rv" href="fun/game-theory-playground.html" data-track="fun-open" data-track-label="game-theory"><div class="th thumb-card grain mesh g-butter" aria-hidden="true"><svg><use href="#f1"/></svg><div class="thumb-copy"><span class="thumb-name">Game Theory</span><span class="thumb-description">Explore strategy through play</span></div></div><b>Game Theory Playground</b><span>The Crossroads Guild: play the prisoner's dilemma, a tournament, an evolving valley, an ultimatum game and an auction.</span></a>
-        <a class="lab rv" href="fun/nuit-loop-studio.html" data-track="fun-open" data-track-label="nuit-loop"><div class="th thumb-card grain mesh g-lav" aria-hidden="true"><svg><use href="#f2"/></svg><div class="thumb-copy"><span class="thumb-name">Nuit Loop Studio</span><span class="thumb-description">Build melodies, chords & loops</span></div></div><b>Nuit Loop Studio</b><span>A small loop studio: chords, a melody and tab, with slowed, reverb and delay effects.</span></a>
-        <a class="lab rv" href="fun/ocean-waves-simulator.html" data-track="fun-open" data-track-label="ocean"><div class="th thumb-card grain mesh g-sky" aria-hidden="true"><svg><use href="#f3"/></svg><div class="thumb-copy"><span class="thumb-name">Aegis HydroSim</span><span class="thumb-description">An interactive ocean wave simulator</span></div></div><b>Aegis HydroSim</b><span>A 3D ocean wave simulator with a boat and several camera views, built on three.js.</span></a>
-        <a class="lab rv" href="case-resume-copilot.html" data-track="fun-open" data-track-label="resume-copilot"><div class="th thumb-card grain mesh g-peach" aria-hidden="true"><svg><use href="#a07"/></svg><div class="thumb-copy"><span class="thumb-name">Resume Fit Copilot</span><span class="thumb-description">Check claims against your evidence</span></div></div><b>Resume Fit Copilot</b><span>A resume checker that holds your real evidence. Six AI test users found four blockers; the product was reset to checker-first.</span></a>
+        <a class="lab rv" href="case-alpine-skies.html" data-track="fun-open" data-track-label="alpine"><div class="th thumb-card grain mesh g-mint project-alpine" aria-hidden="true"><img class="thumb-illustration" src="images/illustration-alpine-v4.webp" width="1200" height="800" alt="" loading="lazy" decoding="async"><div class="thumb-copy"><span class="thumb-name">Alpine Skies</span><span class="thumb-description">A flight simulator in your browser</span></div></div><b>Alpine Skies</b><span>A free flight sim over the Swiss Alps that runs in a browser tab, no sign-up. Live, with a short write-up of the product calls.</span></a>
+        <a class="lab rv" href="fun/game-theory-playground.html" data-track="fun-open" data-track-label="game-theory"><div class="th thumb-card grain mesh g-butter project-game-theory" aria-hidden="true"><img class="thumb-illustration" src="images/illustration-game-theory-v4.webp" width="1200" height="800" alt="" loading="lazy" decoding="async"><div class="thumb-copy"><span class="thumb-name">Game Theory</span><span class="thumb-description">Explore strategy through play</span></div></div><b>Game Theory Playground</b><span>The Crossroads Guild: play the prisoner's dilemma, a tournament, an evolving valley, an ultimatum game and an auction.</span></a>
+        <a class="lab rv" href="fun/nuit-loop-studio.html" data-track="fun-open" data-track-label="nuit-loop"><div class="th thumb-card grain mesh g-lav project-nuit" aria-hidden="true"><img class="thumb-illustration" src="images/illustration-nuit-v4.webp" width="1200" height="800" alt="" loading="lazy" decoding="async"><div class="thumb-copy"><span class="thumb-name">Nuit Loop Studio</span><span class="thumb-description">Build melodies, chords & loops</span></div></div><b>Nuit Loop Studio</b><span>A small loop studio: chords, a melody and tab, with slowed, reverb and delay effects.</span></a>
+        <a class="lab rv" href="fun/ocean-waves-simulator.html" data-track="fun-open" data-track-label="ocean"><div class="th thumb-card grain mesh g-sky project-ocean" aria-hidden="true"><img class="thumb-illustration" src="images/illustration-ocean-v4.webp" width="1200" height="800" alt="" loading="lazy" decoding="async"><div class="thumb-copy"><span class="thumb-name">Aegis HydroSim</span><span class="thumb-description">An interactive ocean wave simulator</span></div></div><b>Aegis HydroSim</b><span>A 3D ocean wave simulator with a boat and several camera views, built on three.js.</span></a>
+        <a class="lab rv" href="case-resume-copilot.html" data-track="fun-open" data-track-label="resume-copilot"><div class="th thumb-card grain mesh g-peach project-resume" aria-hidden="true"><img class="thumb-illustration" src="images/illustration-resume-v4.webp" width="1200" height="800" alt="" loading="lazy" decoding="async"><div class="thumb-copy"><span class="thumb-name">Resume Fit Copilot</span><span class="thumb-description">Check claims against your evidence</span></div></div><b>Resume Fit Copilot</b><span>A resume checker that holds your real evidence. Six AI test users found four blockers; the product was reset to checker-first.</span></a>
       </div>
     </section>
   </main>

@@ -1,76 +1,96 @@
 {
   "updated": "2026-10-23",
-  "method": "Native SVG illustrations and live HTML titles over original theme-aware multicolored textured gradient backgrounds. No people or raster thumbnails.",
+  "method": "AI-generated person-free colored-pencil illustrations with transparent backgrounds, live HTML app titles, and ten distinct theme-aware multicolored textured palettes.",
   "assets": [
     {
       "source": "case-ticketpilot.html",
       "title": "TicketPilot",
       "description": "AI ticket routing & review",
       "background": "g-peach",
-      "symbol": "thumb-routing"
+      "slug": "ticketpilot",
+      "asset": "illustration-ticketpilot-v4.webp",
+      "paletteClass": "project-ticketpilot"
     },
     {
       "source": "case-atelier.html",
-      "title": "At?lier",
+      "title": "Atélier",
       "description": "Find handwritten notes by meaning",
       "background": "g-lav",
-      "symbol": "thumb-notes"
+      "slug": "atelier",
+      "asset": "illustration-atelier-v4.webp",
+      "paletteClass": "project-atelier"
     },
     {
       "source": "case-voice-capture.html",
       "title": "Voice Capture",
       "description": "Speech recognition for Hinglish",
       "background": "g-rose",
-      "symbol": "a03"
+      "slug": "voice",
+      "asset": "illustration-voice-v4.webp",
+      "paletteClass": "project-voice"
     },
     {
       "source": "case-medtech-genai.html",
       "title": "MedTech GenAI",
       "description": "AI drafts. Engineers approve.",
       "background": "g-mint",
-      "symbol": "a07"
+      "slug": "medtech",
+      "asset": "illustration-medtech-v4.webp",
+      "paletteClass": "project-medtech"
     },
     {
       "source": "case-ensemble.html",
       "title": "Ensemble",
       "description": "Coordinate AI coding agents",
       "background": "g-sky",
-      "symbol": "a05"
+      "slug": "ensemble",
+      "asset": "illustration-ensemble-v4.webp",
+      "paletteClass": "project-ensemble"
     },
     {
       "source": "case-alpine-skies.html",
       "title": "Alpine Skies",
       "description": "A flight simulator in your browser",
       "background": "g-mint",
-      "symbol": "a02"
+      "slug": "alpine",
+      "asset": "illustration-alpine-v4.webp",
+      "paletteClass": "project-alpine"
     },
     {
       "source": "fun/game-theory-playground.html",
       "title": "Game Theory",
       "description": "Explore strategy through play",
       "background": "g-butter",
-      "symbol": "f1"
+      "slug": "game-theory",
+      "asset": "illustration-game-theory-v4.webp",
+      "paletteClass": "project-game-theory"
     },
     {
       "source": "fun/nuit-loop-studio.html",
       "title": "Nuit Loop Studio",
       "description": "Build melodies, chords & loops",
       "background": "g-lav",
-      "symbol": "f2"
+      "slug": "nuit",
+      "asset": "illustration-nuit-v4.webp",
+      "paletteClass": "project-nuit"
     },
     {
       "source": "fun/ocean-waves-simulator.html",
       "title": "Aegis HydroSim",
       "description": "An interactive ocean wave simulator",
       "background": "g-sky",
-      "symbol": "f3"
+      "slug": "ocean",
+      "asset": "illustration-ocean-v4.webp",
+      "paletteClass": "project-ocean"
     },
     {
       "source": "case-resume-copilot.html",
       "title": "Resume Fit Copilot",
       "description": "Check claims against your evidence",
       "background": "g-peach",
-      "symbol": "a07"
+      "slug": "resume",
+      "asset": "illustration-resume-v4.webp",
+      "paletteClass": "project-resume"
     }
   ]
 }
