@@ -1,0 +1,190 @@
+1
+00:00:00,706 --> 00:00:05,679
+TicketPilot classifies support issues, recommends the right team,
+and finds
+
+2
+00:00:05,719 --> 00:00:08,258
+relevant fixes from resolved tickets.
+
+3
+00:00:09,081 --> 00:00:13,481
+Follow one request, from a blocked employee to a confirmed
+outcome.
+
+4
+00:00:15,416 --> 00:00:20,941
+Meet Maya, a sales employee who cannot open her dashboard before a
+customer meeting.
+
+5
+00:00:21,749 --> 00:00:26,913
+In Northstar's employee portal, she describes the problem and
+submits a request.
+
+6
+00:00:27,721 --> 00:00:30,871
+She does not need to know which support team owns it.
+
+7
+00:00:31,693 --> 00:00:36,274
+Her request now has a reference: I N C, twenty forty-eight.
+
+8
+00:00:39,556 --> 00:00:44,960
+TicketPilot classifies Maya's issue and recommends Applications,
+using similar
+
+9
+00:00:45,000 --> 00:00:46,289
+resolved tickets.
+
+10
+00:00:47,111 --> 00:00:52,196
+Daniel, the support engineer, receives that classification with
+matching cases
+
+11
+00:00:52,236 --> 00:00:53,928
+and a suggested fix.
+
+12
+00:00:54,736 --> 00:00:59,664
+He reviews the evidence before approving the route, and can
+override it when needed.
+
+13
+00:01:07,396 --> 00:01:09,615
+Daniel opens a matching case.
+
+14
+00:01:10,423 --> 00:01:15,268
+Here, the request first went to Security, but Applications
+resolved it.
+
+15
+00:01:16,090 --> 00:01:19,337
+The notes describe restoring the reporting role mapping.
+
+16
+00:01:20,159 --> 00:01:22,823
+That is the evidence behind the suggestion.
+
+17
+00:01:23,646 --> 00:01:28,615
+Daniel can inspect the source before deciding whether it applies
+to Maya's issue.
+
+18
+00:01:31,896 --> 00:01:34,462
+TicketPilot has classified the issue.
+
+19
+00:01:35,284 --> 00:01:38,768
+Daniel approves its proposed route to Applications.
+
+20
+00:01:39,576 --> 00:01:41,934
+He can override that route if needed.
+
+21
+00:01:42,743 --> 00:01:45,143
+The classification is already done.
+
+22
+00:01:48,196 --> 00:01:53,058
+The suggested fix brings the relevant steps and a knowledge
+reference into the same
+
+23
+00:01:53,098 --> 00:01:54,096
+workspace.
+
+24
+00:01:54,918 --> 00:02:00,346
+Daniel reviews the instructions, records the work, and sends Maya
+an update.
+
+25
+00:02:01,154 --> 00:02:04,873
+The access change is simulated in this portfolio demo.
+
+26
+00:02:05,696 --> 00:02:10,679
+In a real deployment, an authorized team would perform and verify
+that work.
+
+27
+00:02:13,946 --> 00:02:16,429
+Maya returns to the same request.
+
+28
+00:02:17,237 --> 00:02:20,526
+She can see what support did and what to check next.
+
+29
+00:02:21,334 --> 00:02:26,748
+She opens her dashboard, verifies access, and selects Confirm it
+works.
+
+30
+00:02:27,571 --> 00:02:31,123
+If the issue remains, she can select Still need help.
+
+31
+00:02:31,932 --> 00:02:36,846
+Closing a ticket is only useful when the employee's problem is
+actually solved.
+
+32
+00:02:40,126 --> 00:02:42,998
+Meet Elena, the IT service manager.
+
+33
+00:02:43,806 --> 00:02:49,030
+She sees Maya's closed request alongside service health and how
+engineers handled
+
+34
+00:02:49,070 --> 00:02:51,151
+TicketPilot's recommendations.
+
+35
+00:02:51,973 --> 00:02:56,692
+The goal is fewer avoidable transfers and less repeated
+investigation.
+
+36
+00:02:57,514 --> 00:03:00,151
+These dashboard numbers are sample data.
+
+37
+00:03:00,973 --> 00:03:06,623
+A pilot must measure actual handoffs, resolution time, and
+employee outcomes.
+
+38
+00:03:11,016 --> 00:03:13,888
+For employees, one request to track.
+
+39
+00:03:14,696 --> 00:03:19,596
+For support, an owner recommendation and a relevant fix with
+sources.
+
+40
+00:03:20,404 --> 00:03:23,763
+For leaders, visibility into service outcomes.
+
+41
+00:03:24,571 --> 00:03:28,041
+That is the value proposition to validate in a pilot.
+
+42
+00:03:31,316 --> 00:03:33,618
+Explore the guided demo yourself.
+
+43
+00:03:34,427 --> 00:03:40,035
+Then read the product case study for the evidence, product
+decisions, and rollout plan.

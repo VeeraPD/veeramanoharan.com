@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "title": "Clearer Path",
+  "type": "Original procedural instrumental",
+  "seconds": 240,
+  "bpm": 92,
+  "sample_rate": 44100,
+  "instruments": "Sine-based warm pads, plucked tones, bass and synthesized noise shaker",
+  "external_assets": [],
+  "usage": "Created for this project; may be used, edited and distributed with no attribution requested. No third-party recording, melody, sample or loop was used.",
+  "sha256": "aea6229240962c94ee8d888d778355da63bcf1758f1e62f61b18abbe7fcc4515"
+}

@@ -1,0 +1,3298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Theory Playground: The Crossroads Guild</title>
+  <style>
+    :root {
+      --bg: #f6f3ec;
+      --bg-elevated: #ffffff;
+      --bg-subtle: #ede7da;
+      --bg-inset: #e2dac9;
+      --text: #1e1c18;
+      --text-muted: #5a554c;
+      --border: #d4cbb8;
+      --accent: #2251c5;
+      --accent-hover: #193e9c;
+      --accent-soft: #e1e9fc;
+      
+      --coop: #0d746b;
+      --coop-bg: #d7f3ef;
+      --coop-border: #7fd4c9;
+      
+      --defect: #be123c;
+      --defect-bg: #ffe3e8;
+      --defect-border: #f7a1b5;
+
+      --gold: #b45309;
+      --gold-bg: #fef3c7;
+      --gold-border: #f59e0b;
+
+      --strat-allc: #15803d;
+      --strat-alld: #dc2626;
+      --strat-tft: #2563eb;
+      --strat-grudge: #6d28d9;
+      --strat-rand: #d97706;
+      --strat-tf2t: #0d9488;
+      --strat-custom: #db2777;
+
+      --shadow-sm: 0 2px 6px rgba(30, 28, 24, 0.06);
+      --shadow-md: 0 8px 22px rgba(30, 28, 24, 0.1);
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 22px;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      --transition: 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #131317;
+        --bg-elevated: #1d1e24;
+        --bg-subtle: #272830;
+        --bg-inset: #0e0e12;
+        --text: #f4f2ed;
+        --text-muted: #a8a49b;
+        --border: #373843;
+        --accent: #60a5fa;
+        --accent-hover: #93c5fd;
+        --accent-soft: #1d2f4f;
+
+        --coop: #2dd4bf;
+        --coop-bg: #103532;
+        --coop-border: #1e665f;
+
+        --defect: #fb7185;
+        --defect-bg: #3b1522;
+        --defect-border: #7c243c;
+
+        --gold: #fbbf24;
+        --gold-bg: #3a290b;
+        --gold-border: #d97706;
+
+        --strat-allc: #4ade80;
+        --strat-alld: #fb7185;
+        --strat-tft: #60a5fa;
+        --strat-grudge: #a78bfa;
+        --strat-rand: #fbbf24;
+        --strat-tf2t: #2dd4bf;
+        --strat-custom: #f472b6;
+
+        --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.35);
+        --shadow-md: 0 8px 26px rgba(0, 0, 0, 0.5);
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --bg: #131317;
+      --bg-elevated: #1d1e24;
+      --bg-subtle: #272830;
+      --bg-inset: #0e0e12;
+      --text: #f4f2ed;
+      --text-muted: #a8a49b;
+      --border: #373843;
+      --accent: #60a5fa;
+      --accent-hover: #93c5fd;
+      --accent-soft: #1d2f4f;
+
+      --coop: #2dd4bf;
+      --coop-bg: #103532;
+      --coop-border: #1e665f;
+
+      --defect: #fb7185;
+      --defect-bg: #3b1522;
+      --defect-border: #7c243c;
+
+      --gold: #fbbf24;
+      --gold-bg: #3a290b;
+      --gold-border: #d97706;
+
+      --strat-allc: #4ade80;
+      --strat-alld: #fb7185;
+      --strat-tft: #60a5fa;
+      --strat-grudge: #a78bfa;
+      --strat-rand: #fbbf24;
+      --strat-tf2t: #2dd4bf;
+      --strat-custom: #f472b6;
+
+      --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.35);
+      --shadow-md: 0 8px 26px rgba(0, 0, 0, 0.5);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .tabular {
+      font-variant-numeric: tabular-nums;
+    }
+
+    button, input, select {
+      font: inherit;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* Header & Navigation */
+    .app-header {
+      background: var(--bg-elevated);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 30;
+    }
+
+    .header-top {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-sub {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      padding-left: 8px;
+      border-left: 2px solid var(--border);
+    }
+
+    .brand svg {
+      width: 30px;
+      height: 30px;
+      flex-shrink: 0;
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .seed-box {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-subtle);
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      border: 1px solid var(--border);
+    }
+
+    .seed-box label {
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .seed-box input {
+      width: 68px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2px 6px;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      min-height: 30px;
+    }
+
+    .icon-btn {
+      min-width: 44px;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--bg-subtle);
+      transition: background var(--transition), transform var(--transition);
+    }
+
+    .icon-btn:hover {
+      background: var(--border);
+    }
+
+    .icon-btn:active {
+      transform: scale(0.96);
+    }
+
+    .nav-tabs-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 16px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .nav-tabs-wrap::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 6px;
+      min-width: max-content;
+    }
+
+    .tab-btn {
+      min-height: 48px;
+      padding: 8px 14px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      border-bottom: 3px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: color var(--transition), border-color var(--transition);
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover {
+      color: var(--text);
+    }
+
+    .tab-btn[aria-selected="true"] {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .tab-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--bg-subtle);
+      font-size: 0.75rem;
+      font-weight: 800;
+    }
+
+    .tab-btn[aria-selected="true"] .tab-num {
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    /* Main Container */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 16px 64px;
+    }
+
+    .mode-section {
+      display: none;
+      animation: fadeIn 0.22s ease-out;
+    }
+
+    .mode-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Teaching Header */
+    .mode-header {
+      margin-bottom: 20px;
+    }
+
+    .mode-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 4px;
+    }
+
+    h1 {
+      font-size: clamp(1.35rem, 3vw, 1.85rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .what-this-shows {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+
+    .explainer-details {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 8px 14px;
+      font-size: 0.92rem;
+    }
+
+    .explainer-details summary {
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--accent);
+      min-height: 30px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .explainer-details p {
+      margin-top: 8px;
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    /* Inline Tooltip */
+    .term-tip {
+      position: relative;
+      display: inline-block;
+      border-bottom: 2px dotted var(--accent);
+      color: inherit;
+      font-weight: 700;
+      cursor: help;
+      padding: 0 1px;
+    }
+
+    .term-tip::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%) scale(0.96);
+      width: 240px;
+      background: var(--text);
+      color: var(--bg);
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      font-weight: 500;
+      line-height: 1.35;
+      box-shadow: var(--shadow-md);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s, transform 0.15s;
+      z-index: 50;
+      text-align: left;
+    }
+
+    .term-tip:hover::after,
+    .term-tip:focus::after,
+    .term-tip.tip-open::after {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+
+    /* Grid Layouts & Cards */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    @media (min-width: 880px) {
+      .grid-2 {
+        grid-template-columns: 1.18fr 0.82fr;
+        align-items: start;
+      }
+      .grid-sidebar-left {
+        grid-template-columns: 370px 1fr;
+        align-items: start;
+      }
+    }
+
+    .card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    /* Buttons */
+    .btn {
+      min-height: 46px;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform var(--transition), background var(--transition), box-shadow var(--transition);
+      border: 1px solid transparent;
+    }
+
+    .btn:active:not(:disabled) {
+      transform: translateY(1px) scale(0.98);
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #ffffff;
+    }
+    :root[data-theme="dark"] .btn-primary {
+      color: #0e131f;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) .btn-primary {
+        color: #0e131f;
+      }
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: var(--accent-hover);
+    }
+
+    .btn-secondary {
+      background: var(--bg-subtle);
+      border-color: var(--border);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      background: var(--border);
+    }
+
+    .btn-coop {
+      background: var(--coop-bg);
+      color: var(--coop);
+      border: 2px solid var(--coop-border);
+      font-size: 1.05rem;
+      padding: 12px 16px;
+      min-height: 62px;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .btn-coop:hover:not(:disabled) {
+      background: var(--coop);
+      color: #fff;
+      border-color: var(--coop);
+    }
+
+    .btn-defect {
+      background: var(--defect-bg);
+      color: var(--defect);
+      border: 2px solid var(--defect-border);
+      font-size: 1.05rem;
+      padding: 12px 16px;
+      min-height: 62px;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .btn-defect:hover:not(:disabled) {
+      background: var(--defect);
+      color: #fff;
+      border-color: var(--defect);
+    }
+
+    .btn-sublabel {
+      font-size: 0.74rem;
+      font-weight: 600;
+      opacity: 0.88;
+    }
+
+    /* Character Portraits & Speech Bubbles */
+    .char-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--bg-subtle);
+      border: 2px solid var(--border);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .char-avatar.lg {
+      width: 74px;
+      height: 74px;
+      border-width: 3px;
+    }
+
+    .char-avatar.sm {
+      width: 34px;
+      height: 34px;
+      border-width: 2px;
+    }
+
+    .char-avatar svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .speech-bubble {
+      position: relative;
+      background: var(--bg-elevated);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: var(--shadow-sm);
+      line-height: 1.4;
+      animation: popIn 0.24s ease-out;
+    }
+
+    .strat-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+    }
+
+    /* Suspect Roster Strip (Mode 1) */
+    .suspect-strip {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    @media (min-width: 640px) {
+      .suspect-strip {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (min-width: 980px) {
+      .suspect-strip {
+        grid-template-columns: repeat(6, 1fr);
+      }
+    }
+
+    .suspect-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 8px 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-align: left;
+      transition: border-color var(--transition), transform var(--transition), opacity var(--transition);
+      min-height: 54px;
+    }
+
+    .suspect-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .suspect-card.ruled-out {
+      opacity: 0.42;
+      text-decoration: line-through;
+    }
+
+    /* Arena Stage (Mode 1) */
+    .encounter-stage {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 10px;
+      align-items: center;
+      background: var(--bg-subtle);
+      padding: 16px;
+      border-radius: var(--radius-md);
+      margin-bottom: 14px;
+      border: 1px solid var(--border);
+    }
+
+    .fighter-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 6px;
+    }
+
+    .fighter-name {
+      font-weight: 800;
+      font-size: 0.92rem;
+    }
+
+    .fighter-sub {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .fighter-gold {
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: var(--gold);
+    }
+
+    .action-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .stage-reveal {
+      min-height: 76px;
+      background: var(--bg-inset);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+    }
+
+    .move-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      font-weight: 800;
+      font-size: 0.85rem;
+      animation: popIn 0.22s ease-out;
+    }
+
+    .move-chip.C {
+      background: var(--coop-bg);
+      color: var(--coop);
+      border: 1px solid var(--coop-border);
+    }
+
+    .move-chip.D {
+      background: var(--defect-bg);
+      color: var(--defect);
+      border: 1px solid var(--defect-border);
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.88); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Payoff Matrix */
+    .matrix-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 6px;
+      text-align: center;
+    }
+
+    .matrix-table th {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 700;
+      padding: 4px;
+    }
+
+    .matrix-cell {
+      background: var(--bg-subtle);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 8px;
+      transition: transform 0.25s, border-color 0.25s, background 0.25s, box-shadow 0.25s;
+    }
+
+    .matrix-cell.highlight {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      transform: scale(1.03);
+      box-shadow: var(--shadow-md);
+    }
+
+    .matrix-scores {
+      font-size: 1.1rem;
+      font-weight: 800;
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .matrix-desc {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+      font-weight: 600;
+    }
+
+    /* Timeline */
+    .timeline-strip {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 5px;
+      margin-top: 10px;
+    }
+
+    .timeline-slot {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 2px;
+      text-align: center;
+      font-size: 0.72rem;
+      min-height: 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .dot-move {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      font-size: 0.66rem;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .dot-move.C { background: var(--coop); color: #fff; }
+    .dot-move.D { background: var(--defect); color: #fff; }
+
+    .reveal-banner {
+      background: var(--accent-soft);
+      border: 2px solid var(--accent);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-top: 16px;
+      animation: flipReveal 0.4s ease-out;
+    }
+
+    @keyframes flipReveal {
+      0% { transform: perspective(500px) rotateX(-20deg); opacity: 0; }
+      100% { transform: perspective(500px) rotateX(0); opacity: 1; }
+    }
+
+    /* Controls & Leaderboard (Mode 2) */
+    .control-group {
+      margin-bottom: 14px;
+    }
+
+    .control-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.86rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      height: 8px;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    select, input[type="text"], input[type="number"] {
+      width: 100%;
+      min-height: 44px;
+      padding: 8px 12px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+    }
+
+    .leaderboard-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .leader-row {
+      background: var(--bg-subtle);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      cursor: pointer;
+      text-align: left;
+      width: 100%;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+
+    .leader-row:hover, .leader-row.selected {
+      border-color: var(--accent);
+    }
+
+    .leader-row.selected {
+      background: var(--accent-soft);
+    }
+
+    .leader-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      gap: 8px;
+    }
+
+    .leader-bar-track {
+      height: 10px;
+      background: var(--bg-inset);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .leader-bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 0.55s cubic-bezier(0.2, 0.9, 0.2, 1);
+    }
+
+    .takeaway-box {
+      background: var(--bg-subtle);
+      border-left: 4px solid var(--accent);
+      padding: 14px;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      margin-top: 16px;
+      font-size: 0.92rem;
+    }
+
+    /* Mode 3: Evolution Canvas & Valley */
+    .canvas-container {
+      position: relative;
+      width: 100%;
+      height: 290px;
+      background: var(--bg-inset);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .canvas-container canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .preset-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .preset-btn {
+      min-height: 44px;
+      padding: 8px 14px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      border-radius: 999px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .preset-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Mode 4: Ultimatum Coins */
+    .coin-stack-bar {
+      display: flex;
+      height: 38px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      margin: 14px 0;
+      font-weight: 800;
+      font-size: 0.85rem;
+    }
+
+    .coin-you {
+      background: var(--coop);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: width 0.15s;
+    }
+
+    .coin-ai {
+      background: var(--accent);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: width 0.15s;
+    }
+
+    /* Mode 5: Auction House */
+    .segmented-toggle {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+      gap: 6px;
+      background: var(--bg-subtle);
+      padding: 4px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      margin-bottom: 16px;
+    }
+
+    .seg-btn {
+      min-height: 42px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+    }
+
+    .seg-btn.active {
+      background: var(--bg-elevated);
+      color: var(--text);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .bidders-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    @media (min-width: 600px) {
+      .bidders-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .bidder-card {
+      background: var(--bg-subtle);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 10px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .bidder-card.winner {
+      border-color: var(--gold-border);
+      background: var(--gold-bg);
+    }
+
+    .celebrate-glow {
+      animation: pulseGlow 0.9s ease-out;
+    }
+
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 0 0 rgba(34, 81, 197, 0.55); }
+      100% { box-shadow: 0 0 0 18px rgba(34, 81, 197, 0); }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="header-top">
+      <div class="brand">
+        <svg viewBox="0 0 36 36" aria-hidden="true">
+          <rect x="2" y="2" width="14" height="14" rx="4" fill="var(--coop)" />
+          <rect x="20" y="2" width="14" height="14" rx="4" fill="var(--defect)" />
+          <rect x="2" y="20" width="14" height="14" rx="4" fill="var(--accent)" />
+          <rect x="20" y="20" width="14" height="14" rx="4" fill="var(--gold)" />
+          <circle cx="18" cy="18" r="5" fill="var(--bg-elevated)" stroke="var(--text)" stroke-width="2"/>
+        </svg>
+        <span>Game Theory Playground</span>
+        <span class="brand-sub">The Crossroads Guild</span>
+      </div>
+
+      <div class="header-controls">
+        <div class="seed-box">
+          <label for="global-seed">Seed</label>
+          <input id="global-seed" type="number" value="42" aria-label="Random generator seed" />
+        </div>
+        <button id="theme-toggle" class="icon-btn" type="button" aria-label="Toggle color theme" title="Toggle light or dark theme">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="nav-tabs-wrap">
+      <nav class="nav-tabs" role="tablist" aria-label="Storybook Game Modes">
+        <button class="tab-btn" role="tab" id="tab-1" aria-selected="true" aria-controls="panel-1" data-mode="1">
+          <span class="tab-num">1</span> Merchant's Crossroads
+        </button>
+        <button class="tab-btn" role="tab" id="tab-2" aria-selected="false" aria-controls="panel-2" data-mode="2">
+          <span class="tab-num">2</span> Grand Guild Cup
+        </button>
+        <button class="tab-btn" role="tab" id="tab-3" aria-selected="false" aria-controls="panel-3" data-mode="3">
+          <span class="tab-num">3</span> The Living Valley
+        </button>
+        <button class="tab-btn" role="tab" id="tab-4" aria-selected="false" aria-controls="panel-4" data-mode="4">
+          <span class="tab-num">4</span> Tavern Treasure Split
+        </button>
+        <button class="tab-btn" role="tab" id="tab-5" aria-selected="false" aria-controls="panel-5" data-mode="5">
+          <span class="tab-num">5</span> Royal Curio Bazaar
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- MODE 1: PLAY PRISONER'S DILEMMA ("THE MERCHANT'S CROSSROADS") -->
+    <section id="panel-1" class="mode-section active" role="tabpanel" aria-labelledby="tab-1">
+      <div class="mode-header">
+        <div class="mode-title-row">
+          <h1>The Merchant's Crossroads (Prisoner's Dilemma)</h1>
+          <div class="strat-pill tabular">Best Haul: <span id="pd-best-score">0</span> Gold</div>
+        </div>
+        <p class="what-this-shows">What this shows: Why two traders might snatch from each other, even when sharing goods makes both richer.</p>
+        <details class="explainer-details">
+          <summary>How this works (3 sentences)</summary>
+          <p>
+            In a <span class="term-tip" tabindex="0" data-tip="A game where each player chooses between mutual cooperation and personal gain.">Prisoner's Dilemma</span>, snatching the chest always earns more gold in a single day no matter what the other trader chooses.
+            When you trade for 10 days in a row, your past choices build a reputation that changes how the hooded traveler treats you tomorrow.
+            Sharing goods earns 3 gold each per day, while mutual snatching traps both traders with just 1 measly coin each.
+          </p>
+        </details>
+      </div>
+
+      <!-- Suspect Roster Deduction Bar -->
+      <div style="margin-bottom:6px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+        <span style="font-size:0.82rem; font-weight:800; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.04em;">
+          Suspect Roster: Who is under the hood? (Click a card to cross off suspects as you deduce their habits)
+        </span>
+      </div>
+      <div class="suspect-strip" id="pd-suspect-strip"></div>
+
+      <div class="grid-2">
+        <div class="card" id="pd-arena-card">
+          <div class="encounter-stage tabular">
+            <div class="fighter-col">
+              <div class="char-avatar lg" id="pd-user-avatar"></div>
+              <div class="fighter-name">You (Guild Trader)</div>
+              <div class="fighter-sub">Your Caravan</div>
+              <div class="fighter-gold"><span id="pd-user-score">0</span> Gold</div>
+            </div>
+
+            <div style="text-align:center;">
+              <div class="strat-pill" id="pd-round-indicator" style="font-size:0.9rem;">Day 1 / 10</div>
+              <div style="font-size:0.75rem; color:var(--text-muted); margin-top:6px; font-weight:700;">VS</div>
+            </div>
+
+            <div class="fighter-col">
+              <div class="char-avatar lg" id="pd-opp-avatar"></div>
+              <div class="fighter-name" id="pd-opp-label">Hooded Traveler</div>
+              <div class="fighter-sub" id="pd-opp-sub">Mystery Guild Member</div>
+              <div class="fighter-gold"><span id="pd-opp-score">0</span> Gold</div>
+            </div>
+          </div>
+
+          <div class="speech-bubble" id="pd-speech-bubble" style="margin-bottom:14px;">
+            "Step up to the wagon, friend. Shall we share our goods fairly, or test our luck?"
+          </div>
+
+          <div class="action-pair">
+            <button type="button" class="btn btn-coop" id="btn-play-coop">
+              <span style="display:inline-flex; align-items:center; gap:6px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+                Share Goods (Cooperate)
+              </span>
+              <span class="btn-sublabel">Offer an honest trade</span>
+            </button>
+            <button type="button" class="btn btn-defect" id="btn-play-defect">
+              <span style="display:inline-flex; align-items:center; gap:6px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                Snatch Chest (Defect)
+              </span>
+              <span class="btn-sublabel">Grab the gold and run</span>
+            </button>
+          </div>
+
+          <div class="stage-reveal" id="pd-stage" aria-live="polite">
+            <span style="color: var(--text-muted); font-size: 0.9rem;">Choose Share Goods or Snatch Chest above to begin Day 1.</span>
+          </div>
+
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.8rem; color:var(--text-muted); font-weight:700;">
+              <span>10-Day Caravan Log (Top: You, Bottom: Traveler)</span>
+              <button type="button" id="pd-new-match" style="color:var(--accent); font-weight:800; min-height:36px; padding:4px 8px;">New Hooded Traveler</button>
+            </div>
+            <div class="timeline-strip tabular" id="pd-timeline"></div>
+          </div>
+
+          <div id="pd-reveal-box" style="display:none;"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">
+            <span><span class="term-tip" tabindex="0" data-tip="A table showing the gold each trader gets for every combination of choices.">Crossroads Payoff Matrix</span></span>
+            <span style="font-size:0.78rem; color:var(--text-muted); font-weight:600;">(Your Gold, Their Gold)</span>
+          </div>
+          <table class="matrix-table tabular" aria-label="Crossroads Payoff Matrix">
+            <thead>
+              <tr>
+                <th></th>
+                <th>They Share</th>
+                <th>They Snatch</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>You Share</th>
+                <td id="cell-CC" class="matrix-cell">
+                  <div class="matrix-scores"><span style="color:var(--coop)">+3</span>, <span style="color:var(--coop)">+3</span></div>
+                  <div class="matrix-desc">Prosperous Trade</div>
+                </td>
+                <td id="cell-CD" class="matrix-cell">
+                  <div class="matrix-scores"><span style="color:var(--coop)">+0</span>, <span style="color:var(--defect)">+5</span></div>
+                  <div class="matrix-desc">Robbed Blind!</div>
+                </td>
+              </tr>
+              <tr>
+                <th>You Snatch</th>
+                <td id="cell-DC" class="matrix-cell">
+                  <div class="matrix-scores"><span style="color:var(--defect)">+5</span>, <span style="color:var(--coop)">+0</span></div>
+                  <div class="matrix-desc">Heist Jackpot</div>
+                </td>
+                <td id="cell-DD" class="matrix-cell">
+                  <div class="matrix-scores"><span style="color:var(--defect)">+1</span>, <span style="color:var(--defect)">+1</span></div>
+                  <div class="matrix-desc">Bitter Scuffle</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="margin-top: 20px;">
+            <div class="card-title" style="font-size:0.95rem;">Meet the 6 Guild Characters</div>
+            <div id="pd-strat-glossary" style="display:grid; gap:10px; font-size:0.84rem;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODE 2: TOURNAMENT ("THE GRAND GUILD CUP") -->
+    <section id="panel-2" class="mode-section" role="tabpanel" aria-labelledby="tab-2">
+      <div class="mode-header">
+        <div class="mode-title-row">
+          <h1>The Grand Guild Cup (Tournament)</h1>
+        </div>
+        <p class="what-this-shows">What this shows: How honorable, forgiving traders beat greedy bandits when the whole guild trades together.</p>
+        <details class="explainer-details">
+          <summary>How this works (3 sentences)</summary>
+          <p>
+            In a <span class="term-tip" tabindex="0" data-tip="A contest where every character trades with every other character and a twin of themselves.">round-robin tournament</span>, all guild members play a full trading season against everyone else and their own twin.
+            Adding <span class="term-tip" tabindex="0" data-tip="Accidental courier blunders in thick fog where an intended Share turns into a Snatch, or vice versa.">foggy weather (noise)</span> tests whether traders can forgive an honest courier blunder without starting an endless feud.
+            Characters who are <span class="term-tip" tabindex="0" data-tip="Never snatches first.">nice</span>, <span class="term-tip" tabindex="0" data-tip="Pushes back immediately when cheated.">retaliating</span>, and <span class="term-tip" tabindex="0" data-tip="Returns to sharing once the score is settled.">forgiving</span> rise to the top of the guild.
+          </p>
+        </details>
+      </div>
+
+      <div class="grid-2 grid-sidebar-left">
+        <div class="card">
+          <div class="card-title">Guild Cup Rules</div>
+
+          <div class="control-group">
+            <div class="control-label tabular">
+              <label for="tourn-rounds">Trading Days per Match</label>
+              <span id="tourn-rounds-val">50 Days</span>
+            </div>
+            <input type="range" id="tourn-rounds" min="5" max="200" value="50" />
+          </div>
+
+          <div class="control-group">
+            <div class="control-label tabular">
+              <label for="tourn-noise">Foggy Weather (Blunder Chance)</label>
+              <span id="tourn-noise-val">0%</span>
+            </div>
+            <input type="range" id="tourn-noise" min="0" max="20" value="0" />
+          </div>
+
+          <hr style="border:none; border-top:1px solid var(--border); margin: 16px 0;" />
+
+          <div class="card-title" style="font-size:0.95rem;">
+            <span>Custom Challenger Builder</span>
+            <label style="font-size:0.8rem; font-weight:700; display:flex; align-items:center; gap:6px; cursor:pointer;">
+              <input type="checkbox" id="custom-enabled" checked style="width:18px; height:18px; accent-color:var(--accent);" />
+              Enter Cup
+            </label>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="custom-name">Challenger Name</label>
+            <input type="text" id="custom-name" value="Ranger Voss" maxlength="22" />
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="custom-first">Day 1 Opening Move</label>
+            <select id="custom-first">
+              <option value="C">Share Goods (Cooperate)</option>
+              <option value="D">Snatch Chest (Defect)</option>
+            </select>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="custom-rule">Code of Conduct (Later Days)</label>
+            <select id="custom-rule">
+              <option value="copy">Copy rival's last move (Mirror style)</option>
+              <option value="row_1">Snatch if rival snatched 1 time in a row</option>
+              <option value="row_2" selected>Snatch if rival snatched 2 times in a row</option>
+              <option value="row_3">Snatch if rival snatched 3 times in a row</option>
+              <option value="total_1">Snatch forever after 1 total betrayal</option>
+              <option value="total_2">Snatch forever after 2 total betrayals</option>
+              <option value="total_3">Snatch forever after 3 total betrayals</option>
+              <option value="mutual_c">Share only after mutual sharing</option>
+            </select>
+          </div>
+
+          <button type="button" class="btn btn-primary" id="btn-run-tournament" style="width:100%; margin-top:6px;">
+            Run Grand Guild Cup
+          </button>
+
+          <div style="margin-top:20px;">
+            <div class="card-title" style="font-size:0.9rem;">Past Cup Champions</div>
+            <div id="tourn-history-list" style="font-size:0.82rem; color:var(--text-muted); display:grid; gap:6px;"></div>
+          </div>
+        </div>
+
+        <div class="card" id="tourn-results-card">
+          <div class="card-title">
+            <span>Guild Standings (Click any character for their story)</span>
+            <span id="tourn-meta-badge" class="strat-pill tabular">Ready</span>
+          </div>
+          <div id="tourn-leaderboard" class="leaderboard-list tabular" aria-live="polite"></div>
+
+          <!-- Head-to-Head Story Spotlight -->
+          <div id="tourn-spotlight" class="card" style="margin-top:16px; background:var(--bg-subtle); padding:14px;"></div>
+
+          <div id="tourn-takeaway" class="takeaway-box"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODE 3: EVOLUTION ("THE LIVING VALLEY") -->
+    <section id="panel-3" class="mode-section" role="tabpanel" aria-labelledby="tab-3">
+      <div class="mode-header">
+        <div class="mode-title-row">
+          <h1>The Living Valley (Evolution)</h1>
+        </div>
+        <p class="what-this-shows">What this shows: How prosperous characters inspire new apprentices while losing philosophies vanish from the valley.</p>
+        <details class="explainer-details">
+          <summary>How this works (3 sentences)</summary>
+          <p>
+            Under <span class="term-tip" tabindex="0" data-tip="A rule where characters earning above the valley average recruit more apprentices next generation.">replicator dynamics</span>, each generation trades across the valley and successful characters grow their share of the town.
+            Any guild philosophy that falls below 0.1% of the valley loses its last workshop and goes extinct.
+            Who survives depends on the starting mix of neighbors and whether foggy blunders break fragile alliances.
+          </p>
+        </details>
+      </div>
+
+      <div class="preset-row">
+        <span style="font-size:0.85rem; font-weight:800; align-self:center; margin-right:4px;">Story Presets:</span>
+        <button type="button" class="preset-btn" data-preset="defectors">1. Bandits Overrun the Town</button>
+        <button type="button" class="preset-btn" data-preset="nicewins">2. Fair Traders Triumph</button>
+        <button type="button" class="preset-btn" data-preset="noisy">3. Foggy Confusion (Willow Shines)</button>
+      </div>
+
+      <div class="grid-2 grid-sidebar-left">
+        <div class="card">
+          <div class="card-title">Starting Valley Guilds</div>
+          <div id="evo-sliders-wrap" class="tabular"></div>
+
+          <hr style="border:none; border-top:1px solid var(--border); margin: 14px 0;" />
+
+          <div class="control-group">
+            <div class="control-label tabular">
+              <label for="evo-noise">Valley Fog (Blunder Chance)</label>
+              <span id="evo-noise-val">2%</span>
+            </div>
+            <input type="range" id="evo-noise" min="0" max="20" value="2" />
+          </div>
+
+          <div class="control-group">
+            <div class="control-label tabular">
+              <label for="evo-speed">Season Speed</label>
+              <span id="evo-speed-val">Normal</span>
+            </div>
+            <input type="range" id="evo-speed" min="1" max="3" value="2" />
+          </div>
+
+          <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:8px; margin-top:12px;">
+            <button type="button" class="btn btn-primary" id="btn-evo-play">Play</button>
+            <button type="button" class="btn btn-secondary" id="btn-evo-step">Next Gen</button>
+            <button type="button" class="btn btn-secondary" id="btn-evo-reset">Reset</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">
+            <span>Valley Guild Share Over Generations</span>
+            <span id="evo-gen-badge" class="strat-pill tabular">Gen 0</span>
+          </div>
+
+          <!-- Town Square Dominant Banner -->
+          <div id="evo-town-square" style="display:flex; align-items:center; gap:12px; background:var(--bg-subtle); padding:10px 14px; border-radius:var(--radius-sm); margin-bottom:12px; border:1px solid var(--border);"></div>
+
+          <div class="canvas-container">
+            <canvas id="evo-canvas" aria-label="Stacked area chart of character guild shares over generations"></canvas>
+          </div>
+          <div id="evo-readout" class="tabular" style="margin-top:12px; display:flex; flex-wrap:wrap; gap:6px; font-size:0.8rem;"></div>
+          <div id="evo-takeaway" class="takeaway-box"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODE 4: ULTIMATUM GAME ("THE TAVERN TREASURE SPLIT") -->
+    <section id="panel-4" class="mode-section" role="tabpanel" aria-labelledby="tab-4">
+      <div class="mode-header">
+        <div class="mode-title-row">
+          <h1>The Tavern Treasure Split (Ultimatum Game)</h1>
+          <div class="strat-pill tabular" id="ult-round-pill">Expedition 1 / 5</div>
+        </div>
+        <p class="what-this-shows">What this shows: Why pride and fairness matter so much that partners will sink a treasure chest to punish greed.</p>
+        <details class="explainer-details">
+          <summary>How this works (3 sentences)</summary>
+          <p>
+            You and Captain Mara haul up a chest of 100 gold coins, and one of you proposes how to divide the loot.
+            If the responder accepts, both pocket their share, but if they feel insulted and reject, they kick the chest overboard so both get zero.
+            Cold <span class="term-tip" tabindex="0" data-tip="Assuming a person cares only about getting more coins than zero, with no pride or sense of fairness.">rational</span> logic says a partner should accept even 1 coin, yet real people reject stingy splits below 30 coins.
+          </p>
+        </details>
+      </div>
+
+      <div class="grid-2">
+        <div class="card" id="ult-play-card">
+          <div class="encounter-stage tabular">
+            <div class="fighter-col">
+              <div class="char-avatar lg" id="ult-user-avatar"></div>
+              <div class="fighter-name">You</div>
+              <div class="fighter-sub">Expedition Partner</div>
+              <div class="fighter-gold"><span id="ult-user-coins">0</span> Gold</div>
+            </div>
+
+            <div style="text-align:center;">
+              <div class="strat-pill" id="ult-role-badge">You Propose</div>
+              <div style="font-size:0.75rem; color:var(--text-muted); margin-top:6px; font-weight:700;">100 Gold Chest</div>
+            </div>
+
+            <div class="fighter-col">
+              <div class="char-avatar lg" id="ult-mara-avatar"></div>
+              <div class="fighter-name">Captain Mara</div>
+              <div class="fighter-sub">Proud Corsair</div>
+              <div class="fighter-gold"><span id="ult-ai-coins">0</span> Gold</div>
+            </div>
+          </div>
+
+          <div class="speech-bubble" id="ult-speech-bubble" style="margin-bottom:16px;">
+            "Another chest of 100 gold on the tavern table! Make me a fair offer, mate, or into the harbor it goes."
+          </div>
+
+          <div id="ult-propose-ui">
+            <div class="control-label tabular" style="font-size:0.98rem;">
+              <label for="ult-offer-slider">Offer to Captain Mara:</label>
+              <span id="ult-offer-label" style="color:var(--accent); font-weight:800;">40 coins (You keep 60)</span>
+            </div>
+            <input type="range" id="ult-offer-slider" min="0" max="100" value="40" />
+
+            <div class="coin-stack-bar tabular">
+              <div id="ult-bar-you" class="coin-you" style="width:60%;">You: 60</div>
+              <div id="ult-bar-ai" class="coin-ai" style="width:40%;">Mara: 40</div>
+            </div>
+
+            <button type="button" class="btn btn-primary" id="btn-ult-propose" style="width:100%;">
+              Slide Offer Across the Table
+            </button>
+          </div>
+
+          <div id="ult-respond-ui" style="display:none;">
+            <p id="ult-ai-offer-text" style="font-size:1.02rem; font-weight:800; margin-bottom:8px;"></p>
+            <div class="coin-stack-bar tabular">
+              <div id="ult-resp-bar-you" class="coin-you" style="width:50%;">You: 50</div>
+              <div id="ult-resp-bar-ai" class="coin-ai" style="width:50%;">Mara: 50</div>
+            </div>
+            <div class="action-pair" style="margin-top:14px;">
+              <button type="button" class="btn btn-coop" id="btn-ult-accept">
+                <span>Accept Split</span>
+                <span class="btn-sublabel">Pocket your share</span>
+              </button>
+              <button type="button" class="btn btn-defect" id="btn-ult-reject">
+                <span>Toss in Harbor (Reject)</span>
+                <span class="btn-sublabel">Both get 0 gold</span>
+              </button>
+            </div>
+          </div>
+
+          <div id="ult-summary-box" style="display:none;"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">
+            <span>Tavern Ledger & Pride Check</span>
+            <button type="button" id="btn-ult-restart" style="font-size:0.82rem; color:var(--accent); font-weight:800; min-height:36px;">New Expedition</button>
+          </div>
+          <div id="ult-history-log" class="tabular" style="display:grid; gap:8px; font-size:0.88rem;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODE 5: AUCTION HOUSE ("THE ROYAL CURIO BAZAAR") -->
+    <section id="panel-5" class="mode-section" role="tabpanel" aria-labelledby="tab-5">
+      <div class="mode-header">
+        <div class="mode-title-row">
+          <h1>The Royal Curio Bazaar (Auction House)</h1>
+          <div class="strat-pill tabular">Net Profit: <span id="auc-total-profit">0</span> Gold</div>
+        </div>
+        <p class="what-this-shows">What this shows: How bazaar rules change your best bid and why winning a mystery pirate jar often loses gold.</p>
+        <details class="explainer-details">
+          <summary>How this works (3 sentences)</summary>
+          <p>
+            In a <span class="term-tip" tabindex="0" data-tip="The highest bidder wins the curio and pays their exact sealed bid.">first-price auction</span>, bidding your full value leaves zero profit, so clever collectors shade their bids downward.
+            In a <span class="term-tip" tabindex="0" data-tip="The highest bidder wins the curio but pays only the runner-up's bid.">second-price auction</span>, bidding your exact true value is always best because the price you pay is set by the second-highest rival.
+            When bidding on the Sunken Pirate Jar where everyone only guesses the coin count, the winner usually had the wildest overestimate and suffers the <span class="term-tip" tabindex="0" data-tip="Overpaying in an auction because winning means your guess was more optimistic than every other collector's.">winner's curse</span>.
+          </p>
+        </details>
+      </div>
+
+      <div class="grid-2">
+        <div class="card" id="auc-arena-card">
+          <div class="segmented-toggle" role="group" aria-label="Bazaar Rule Mode">
+            <button type="button" class="seg-btn active" data-aucmode="first">First-Price Seal</button>
+            <button type="button" class="seg-btn" data-aucmode="second">Second-Price (Vickrey)</button>
+            <button type="button" class="seg-btn" data-aucmode="common">Sunken Pirate Jar</button>
+          </div>
+
+          <div style="background:var(--bg-subtle); border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px; margin-bottom:14px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+              <div>
+                <div style="font-size:0.78rem; color:var(--text-muted); font-weight:800;" id="auc-val-label">CURIO: CLOCKWORK OWL (YOUR RESALE VALUE)</div>
+                <div class="tabular" style="font-size:1.75rem; font-weight:800;" id="auc-user-value">80 Gold</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-size:0.78rem; color:var(--text-muted); font-weight:800;">GUILD ADVISOR TIP</div>
+                <div class="tabular" style="font-size:1rem; font-weight:800; color:var(--accent);" id="auc-optimal-hint">Bid 60 Gold (3/4 of value)</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <div class="control-label tabular">
+              <label for="auc-bid-slider">Your Sealed Envelope Bid</label>
+              <span id="auc-bid-display" style="font-size:1.1rem; font-weight:800; color:var(--accent);">60 Gold</span>
+            </div>
+            <input type="range" id="auc-bid-slider" min="0" max="120" value="60" />
+          </div>
+
+          <div style="display:flex; gap:10px;">
+            <button type="button" class="btn btn-primary" id="btn-auc-submit" style="flex:1;">Unseal All Bids</button>
+            <button type="button" class="btn btn-secondary" id="btn-auc-next">Next Lot</button>
+          </div>
+
+          <div class="bidders-grid tabular" id="auc-bidders-grid"></div>
+
+          <div id="auc-speech-bubble" class="speech-bubble" style="margin-top:14px;">
+            "Place your sealed envelope on the velvet cushion! Let us see who takes this lot home."
+          </div>
+
+          <div id="auc-outcome-box" class="takeaway-box" style="display:none;"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Meet Your Rival Collectors & Rules</div>
+          <div style="display:grid; gap:12px; font-size:0.88rem;">
+            <div style="padding:12px; background:var(--bg-subtle); border-radius:var(--radius-sm);">
+              <strong>1. First-Price Sealed Bid</strong>
+              <p style="color:var(--text-muted); margin-top:4px;">
+                If a curio is worth 80 gold to you and you bid 80, your profit when you win is zero. Against 3 rivals, shading your bid to <strong>3/4 of your value (60 gold)</strong> balances your odds of winning with a healthy profit.
+              </p>
+            </div>
+            <div style="padding:12px; background:var(--bg-subtle); border-radius:var(--radius-sm);">
+              <strong>2. Second-Price (Vickrey) Sealed Bid</strong>
+              <p style="color:var(--text-muted); margin-top:4px;">
+                The winner pays only what the second-place rival bid. Overbidding risks buying at a loss, and underbidding misses profitable wins. <strong>Bidding your exact true value</strong> is always the dominant choice.
+              </p>
+            </div>
+            <div style="padding:12px; background:var(--bg-subtle); border-radius:var(--radius-sm);">
+              <strong>3. Sunken Pirate Jar & The Winner's Curse</strong>
+              <p style="color:var(--text-muted); margin-top:4px;">
+                The Barnacle Jar holds the same true coin count for everyone, and each collector squints through the glass to make a noisy guess. Bold Barnaby bids his full optimistic guess and usually overpays!
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      "use strict";
+
+      /* ==========================================================
+         1. SEEDABLE PRNG (Mulberry32) & SAFE LOCALSTORAGE
+         ========================================================== */
+      let currentSeed = 42;
+      let rngState = 42;
+
+      function setSeed(seedVal) {
+        const parsed = parseInt(seedVal, 10);
+        currentSeed = Number.isFinite(parsed) ? parsed : 42;
+        rngState = currentSeed >>> 0;
+      }
+
+      function nextRandom() {
+        rngState = (rngState + 0x6D2B79F5) >>> 0;
+        let t = Math.imul(rngState ^ (rngState >>> 15), 1 | rngState);
+        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      }
+
+      function safeGetStorage(key, fallback) {
+        try {
+          const raw = window.localStorage.getItem(key);
+          return raw !== null ? JSON.parse(raw) : fallback;
+        } catch (e) {
+          return fallback;
+        }
+      }
+
+      function safeSetStorage(key, value) {
+        try {
+          window.localStorage.setItem(key, JSON.stringify(value));
+        } catch (e) {
+          // Storage blocked; continue gracefully
+        }
+      }
+
+      /* ==========================================================
+         2. EXPRESSIVE INLINE SVG CHARACTER PORTRAITS
+         mood: "idle" | "happy" | "angry"
+         ========================================================== */
+      function getCharacterAvatarSVG(charId, mood) {
+        const m = mood || "idle";
+        // Mouth and eyebrow helpers
+        const mouthHappy = '<path d="M24 44 Q32 51 40 44" stroke="#1e1c18" stroke-width="2.5" fill="none" stroke-linecap="round"/>';
+        const mouthIdle = '<path d="M26 45 Q32 47 38 45" stroke="#1e1c18" stroke-width="2.5" fill="none" stroke-linecap="round"/>';
+        const mouthAngry = '<path d="M25 48 Q32 42 39 48" stroke="#1e1c18" stroke-width="2.5" fill="none" stroke-linecap="round"/>';
+        const mouth = m === "happy" ? mouthHappy : m === "angry" ? mouthAngry : mouthIdle;
+
+        const browsAngry = '<path d="M20 28 L28 32 M44 28 L36 32" stroke="#1e1c18" stroke-width="2.5" stroke-linecap="round"/>';
+        const browsHappy = '<path d="M20 29 Q24 26 28 29 M36 29 Q40 26 44 29" stroke="#1e1c18" stroke-width="2" fill="none" stroke-linecap="round"/>';
+        const brows = m === "angry" ? browsAngry : m === "happy" ? browsHappy : "";
+
+        if (charId === "mystery") {
+          const eyeGlow = m === "angry" ? "#fb7185" : m === "happy" ? "#2dd4bf" : "#fbbf24";
+          return `<svg viewBox="0 0 64 64" aria-hidden="true">
+            <rect width="64" height="64" fill="#27262c"/>
+            <path d="M10 60 C12 34 20 12 32 10 C44 12 52 34 54 60 Z" fill="#3b3847" stroke="#18171c" stroke-width="2"/>
+            <path d="M18 58 C20 36 24 20 32 18 C40 20 44 36 46 58 Z" fill="#141318"/>
+            <circle cx="26" cy="34" r="3" fill="${eyeGlow}"/>
+            <circle cx="38" cy="34" r="3" fill="${eyeGlow}"/>
+          </svg>`;
+        }
+
+        if (charId === "user") {
+          return `<svg viewBox="0 0 64 64" aria-hidden="true">
+            <rect width="64" height="64" fill="#dbeafe"/>
+            <circle cx="32" cy="36" r="16" fill="#f6d0b1"/>
+            <path d="M14 26 L32 12 L50 26 Z" fill="#1d4ed8"/>
+            <circle cx="46" cy="18" r="4" fill="#f59e0b"/>
+            <circle cx="26" cy="35" r="2.3" fill="#1e1c18"/>
+            <circle cx="38" cy="35" r="2.3" fill="#1e1c18"/>
+            ${brows}${mouth}
+          </svg>`;
+        }
+
+        if (charId === "allc") {
+          // Pip the Optimist (Baker hat, warm sunny colors)
+          return `<svg viewBox="0 0 64 64" aria-hidden="true">
+            <rect width="64" height="64" fill="#dcfce7"/>
+            <circle cx="32" cy="38" r="16" fill="#fde0c4"/>
+            <path d="M16 26 C14 14 26 10 32 12 C38 10 50 14 48 26 Z" fill="#ffffff" stroke="#15803d" stroke-width="2"/>
+            <circle cx="26" cy="36" r="2.4" fill="#1e1c18"/>
+            <circle cx="38" cy="36" r="2.4" fill="#1e1c18"/>
+            <circle cx="21" cy="40" r="3" fill="#fca5a5" opacity="0.7"/>
+            <circle cx="43" cy="40" r="3" fill="#fca5a5" opacity="0.7"/>
+            ${brows}${mouth}
+          </svg>`;
+        }
+
+        if (charId === "alld") {
+          // Baron Vex (Crimson highwayman hat & mustache)
+          return `<svg viewBox="0 0 64 64" aria-hidden="true">
+            <rect width="64" height="64" fill="#ffe4e6"/>
+            <circle cx="32" cy="38" r="15" fill="#e8c3a5"/>
+            <path d="M8 26 L56 26 L42 12 L22 12 Z" fill="#9f1239"/>
+            <rect x="20" y="29" width="24" height="7" rx="3" fill="#1e1c18"/>
+            <circle cx="26" cy="32.5" r="2" fill="#ffffff"/>
+            <circle cx="38" cy="32.5" r="2" fill="#ffffff"/>
+            <path d="M22 43 Q32 40 42 43" stroke="#4c0519" stroke-width="2.5" fill="none"/>
+            ${mouth}
+          </svg>`;
+        }
+
+        if (charId === "tft") {
+          // Mirror Maya (Cobalt headband with gold gem)
+          return `<svg viewBox="0 0 64 64" aria-hidden="true">
+            <rect width="64" height="64" fill="#dbeafe"/>
+            <path d="M14 46 C14 20 50 20 50 46" fill="#1e3a8a"/>
+            <circle cx="32" cy="37" r="15" fill="#f3c6a5"/>
+            <rect x="17" y="23" width="30" height="5" rx="2" fill="#2563eb"/>
+            <polygon points="32,19 36,25 32,29 28,25" fill="#fbbf24"/>
+            <circle cx="26" cy="35" r="2.3" fill="#1e1c18"/>
+            <circle cx="38" cy="35" r="2.3" fill="#1e1c18"/>
+            ${brows}${mouth}
+          </svg>`;
+        }
+
+        if (charId === "grudge") {
+          // Old Ironclad (Blacksmith helm & heavy beard)
+          return `<svg viewBox="0 0 64 64" aria-hidden="true">
+            <rect width="64" height="64" fill="#ede9fe"/>
+            <circle cx="32" cy="36" r="16" fill="#e2b897"/>
+            <path d="M16 40 C16 56 48 56 48 40 Z" fill="#4b5563"/>
+            <path d="M15 28 C15 12 49 12 49 28 Z" fill="#5b21b6"/>
+            <rect x="30" y="18" width="4" height="12" fill="#d1d5db"/>
+            <circle cx="25" cy="34" r="2.3" fill="#1e1c18"/>
+            <circle cx="39" cy="34" r="2.3" fill="#1e1c18"/>
+            ${brows}${mouth}
+          </svg>`;
+        }
+
+        if (charId === "rand") {
+          // Jester Jinx (Two-pronged jester cap)
+          return `<svg viewBox="0 0 64 64" aria-hidden="true">
+            <rect width="64" height="64" fill="#fef3c7"/>
+            <circle cx="32" cy="38" r="15" fill="#f9d8b6"/>
+            <path d="M16 26 Q10 10 26 18 L32 24 L38 18 Q54 10 48 26 Z" fill="#d97706"/>
+            <circle cx="14" cy="14" r="3.5" fill="#fbbf24"/>
+            <circle cx="50" cy="14" r="3.5" fill="#fbbf24"/>
+            <circle cx="26" cy="35" r="2.5" fill="#1e1c18"/>
+            <circle cx="38" cy="35" r="2.5" fill="#1e1c18"/>
+            ${brows}${mouth}
+          </svg>`;
+        }
+
+        if (charId === "tf2t") {
+          // Sage Willow (Herbalist leaf crown & glasses)
+          return `<svg viewBox="0 0 64 64" aria-hidden="true">
+            <rect width="64" height="64" fill="#ccfbf1"/>
+            <circle cx="32" cy="37" r="15" fill="#f1c8a8"/>
+            <path d="M16 25 Q32 16 48 25" stroke="#0d9488" stroke-width="5" fill="none" stroke-linecap="round"/>
+            <circle cx="25" cy="35" r="5" stroke="#0f766e" stroke-width="2" fill="none"/>
+            <circle cx="39" cy="35" r="5" stroke="#0f766e" stroke-width="2" fill="none"/>
+            <line x1="30" y1="35" x2="34" y2="35" stroke="#0f766e" stroke-width="2"/>
+            <circle cx="25" cy="35" r="2" fill="#1e1c18"/>
+            <circle cx="39" cy="35" r="2" fill="#1e1c18"/>
+            ${brows}${mouth}
+          </svg>`;
+        }
+
+        if (charId === "mara") {
+          // Captain Mara (Corsair tricorn hat)
+          return `<svg viewBox="0 0 64 64" aria-hidden="true">
+            <rect width="64" height="64" fill="#fae8ff"/>
+            <circle cx="32" cy="38" r="15" fill="#eab692"/>
+            <path d="M10 27 L32 11 L54 27 Z" fill="#701a75"/>
+            <path d="M14 27 H50" stroke="#fbbf24" stroke-width="3"/>
+            <circle cx="26" cy="35" r="2.4" fill="#1e1c18"/>
+            <circle cx="38" cy="35" r="2.4" fill="#1e1c18"/>
+            ${brows}${mouth}
+          </svg>`;
+        }
+
+        // Custom challenger / auction collectors fallback
+        return `<svg viewBox="0 0 64 64" aria-hidden="true">
+          <rect width="64" height="64" fill="#fce7f3"/>
+          <circle cx="32" cy="37" r="15" fill="#f5cfa8"/>
+          <path d="M16 25 L32 13 L48 25 Z" fill="#db2777"/>
+          <circle cx="26" cy="35" r="2.4" fill="#1e1c18"/>
+          <circle cx="38" cy="35" r="2.4" fill="#1e1c18"/>
+          ${brows}${mouth}
+        </svg>`;
+      }
+
+      /* ==========================================================
+         3. SHARED GUILD CHARACTERS & STRATEGIES
+         ========================================================== */
+      const PAYOFFS = {
+        CC: [3, 3],
+        CD: [0, 5],
+        DC: [5, 0],
+        DD: [1, 1]
+      };
+
+      const BUILTIN_STRATEGIES = [
+        {
+          id: "tft",
+          name: "Mirror Maya",
+          stratTitle: "Tit-for-Tat",
+          role: "Fair-Minded Merchant",
+          color: "var(--strat-tft)",
+          hex: "#2563eb",
+          catchphrase: "Give respect, get respect. Cross me, and I push back.",
+          traits: { nice: true, forgiving: true, retaliating: true },
+          desc: "Starts by sharing on Day 1, then copies whatever you actually did in the previous round.",
+          endQuotes: {
+            friend: "A pleasure trading with an honest partner! Our wagons are both full.",
+            foe: "You tried to play me for a fool, so I matched your steel coin for coin."
+          },
+          decide: function (myHist, oppHist) {
+            if (oppHist.length === 0) return "C";
+            return oppHist[oppHist.length - 1];
+          }
+        },
+        {
+          id: "tf2t",
+          name: "Sage Willow",
+          stratTitle: "Tit-for-Two-Tats",
+          role: "Patient Herbalist",
+          color: "var(--strat-tf2t)",
+          hex: "#0d9488",
+          catchphrase: "Everyone makes one mistake. Two is a choice.",
+          traits: { nice: true, forgiving: true, retaliating: false },
+          desc: "Starts by sharing and only snatches if you snatched in both of the last two rounds.",
+          endQuotes: {
+            friend: "Peace and patience brewed a rich harvest for us both.",
+            foe: "I forgave your first slip, traveler, but your repeated greed forced my hand."
+          },
+          decide: function (myHist, oppHist) {
+            const n = oppHist.length;
+            if (n >= 2 && oppHist[n - 1] === "D" && oppHist[n - 2] === "D") {
+              return "D";
+            }
+            return "C";
+          }
+        },
+        {
+          id: "grudge",
+          name: "Old Ironclad",
+          stratTitle: "Grudger",
+          role: "Stern Blacksmith",
+          color: "var(--strat-grudge)",
+          hex: "#6d28d9",
+          catchphrase: "Fool me once, and the bridge between us burns.",
+          traits: { nice: true, forgiving: false, retaliating: true },
+          desc: "Shares gladly until you snatch even once, then slams his forge shut and snatches forever.",
+          endQuotes: {
+            friend: "You kept your word from first day to last. My forge is always open to you!",
+            foe: "You broke my trust once, and Old Ironclad never forgives a traitor."
+          },
+          decide: function (myHist, oppHist) {
+            return oppHist.indexOf("D") !== -1 ? "D" : "C";
+          }
+        },
+        {
+          id: "allc",
+          name: "Pip the Optimist",
+          stratTitle: "Always Cooperate",
+          role: "Cheerful Baker",
+          color: "var(--strat-allc)",
+          hex: "#15803d",
+          catchphrase: "A shared loaf tastes twice as sweet!",
+          traits: { nice: true, forgiving: true, retaliating: false },
+          desc: "Shares goods in every single round no matter how badly he gets robbed.",
+          endQuotes: {
+            friend: "Hooray! Ten days of friendship and warm bread for everyone!",
+            foe: "Ouch, my empty pockets hurt, yet I still believe there is good in you!"
+          },
+          decide: function () {
+            return "C";
+          }
+        },
+        {
+          id: "alld",
+          name: "Baron Vex",
+          stratTitle: "Always Defect",
+          role: "Greedy Highwayman",
+          color: "var(--strat-alld)",
+          hex: "#dc2626",
+          catchphrase: "Why share the treasure when I can take it all?",
+          traits: { nice: false, forgiving: false, retaliating: true },
+          desc: "Snatches the chest in every single round to exploit trusting souls.",
+          endQuotes: {
+            friend: "Hah! Thanks for all the free crates, gullible friend!",
+            foe: "Hmph. You guarded your chest well, so neither of us got rich."
+          },
+          decide: function () {
+            return "D";
+          }
+        },
+        {
+          id: "rand",
+          name: "Jester Jinx",
+          stratTitle: "Random",
+          role: "Chaotic Trickster",
+          color: "var(--strat-rand)",
+          hex: "#d97706",
+          catchphrase: "Heads we share, tails I snatch!",
+          traits: { nice: false, forgiving: true, retaliating: false },
+          desc: "Flips a 50/50 coin behind his back before every round to pick Share or Snatch.",
+          endQuotes: {
+            friend: "Did you find a pattern in my madness? Even I did not know what I would do next!",
+            foe: "The coin giveth, and the coin taketh away! Mostly taketh!"
+          },
+          decide: function () {
+            return nextRandom() < 0.5 ? "C" : "D";
+          }
+        }
+      ];
+
+      function renderCharBadge(strat) {
+        return `<span class="strat-pill" style="border-color:${strat.color}">
+          <span class="char-avatar sm" style="width:20px;height:20px;border-width:1px;">${getCharacterAvatarSVG(strat.id, "idle")}</span>
+          <span>${strat.name} <span style="opacity:0.75;font-weight:500;">(${strat.stratTitle})</span></span>
+        </span>`;
+      }
+
+      function applyNoise(move, noiseProb) {
+        if (noiseProb > 0 && nextRandom() < noiseProb) {
+          return move === "C" ? "D" : "C";
+        }
+        return move;
+      }
+
+      function playHeadToHead(stratA, stratB, rounds, noiseProb) {
+        const histA = [];
+        const histB = [];
+        let scoreA = 0;
+        let scoreB = 0;
+
+        for (let r = 0; r < rounds; r++) {
+          const rawA = stratA.decide(histA, histB);
+          const rawB = stratB.decide(histB, histA);
+          const moveA = applyNoise(rawA, noiseProb);
+          const moveB = applyNoise(rawB, noiseProb);
+          const [pA, pB] = PAYOFFS[moveA + moveB];
+          scoreA += pA;
+          scoreB += pB;
+          histA.push(moveA);
+          histB.push(moveB);
+        }
+        return { scoreA, scoreB, histA, histB };
+      }
+
+      /* ==========================================================
+         4. NAVIGATION, SEED & THEME CONTROLS
+         ========================================================== */
+      const seedInput = document.getElementById("global-seed");
+      seedInput.addEventListener("change", () => {
+        setSeed(seedInput.value);
+      });
+
+      const tabButtons = document.querySelectorAll(".tab-btn");
+      const modeSections = document.querySelectorAll(".mode-section");
+
+      function switchMode(modeId) {
+        tabButtons.forEach((btn) => {
+          const isSelected = btn.getAttribute("data-mode") === String(modeId);
+          btn.setAttribute("aria-selected", isSelected ? "true" : "false");
+        });
+        modeSections.forEach((sec) => {
+          sec.classList.toggle("active", sec.id === "panel-" + modeId);
+        });
+        if (String(modeId) === "3") {
+          drawEvolutionChart();
+        }
+      }
+
+      tabButtons.forEach((btn) => {
+        btn.addEventListener("click", () => switchMode(btn.getAttribute("data-mode")));
+      });
+
+      document.addEventListener("click", (e) => {
+        const tip = e.target.closest(".term-tip");
+        document.querySelectorAll(".term-tip.tip-open").forEach((el) => {
+          if (el !== tip) el.classList.remove("tip-open");
+        });
+        if (tip) {
+          tip.classList.toggle("tip-open");
+        }
+      });
+
+      const themeToggleBtn = document.getElementById("theme-toggle");
+      themeToggleBtn.addEventListener("click", () => {
+        const root = document.documentElement;
+        const current = root.getAttribute("data-theme");
+        const systemDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        let nextTheme = "dark";
+        if (current === "dark" || (!current && systemDark)) {
+          nextTheme = "light";
+        }
+        root.setAttribute("data-theme", nextTheme);
+        drawEvolutionChart();
+      });
+
+      /* ==========================================================
+         5. MODE 1: PLAY THE PRISONER'S DILEMMA
+         ========================================================== */
+      const pdState = {
+        round: 1,
+        maxRounds: 10,
+        userScore: 0,
+        oppScore: 0,
+        userHist: [],
+        oppHist: [],
+        roundPoints: [],
+        opponent: BUILTIN_STRATEGIES[0],
+        finished: false,
+        bestScore: safeGetStorage("gtp_pd_best", 0)
+      };
+
+      const elPdBest = document.getElementById("pd-best-score");
+      const elPdUserScore = document.getElementById("pd-user-score");
+      const elPdOppScore = document.getElementById("pd-opp-score");
+      const elPdRound = document.getElementById("pd-round-indicator");
+      const elPdOppLabel = document.getElementById("pd-opp-label");
+      const elPdOppSub = document.getElementById("pd-opp-sub");
+      const elPdUserAvatar = document.getElementById("pd-user-avatar");
+      const elPdOppAvatar = document.getElementById("pd-opp-avatar");
+      const elPdSpeech = document.getElementById("pd-speech-bubble");
+      const elPdStage = document.getElementById("pd-stage");
+      const elPdTimeline = document.getElementById("pd-timeline");
+      const elPdRevealBox = document.getElementById("pd-reveal-box");
+      const btnCoop = document.getElementById("btn-play-coop");
+      const btnDefect = document.getElementById("btn-play-defect");
+
+      function populateGlossaryAndSuspects() {
+        const suspectWrap = document.getElementById("pd-suspect-strip");
+        suspectWrap.innerHTML = BUILTIN_STRATEGIES.map((s) => `
+          <button type="button" class="suspect-card" data-suspect="${s.id}" title="Click to toggle suspect elimination">
+            <span class="char-avatar sm" style="border-color:${s.color}">${getCharacterAvatarSVG(s.id, "idle")}</span>
+            <div style="overflow:hidden;">
+              <div style="font-weight:800; font-size:0.78rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${s.name}</div>
+              <div style="font-size:0.68rem; color:var(--text-muted);">${s.stratTitle}</div>
+            </div>
+          </button>
+        `).join("");
+
+        suspectWrap.querySelectorAll(".suspect-card").forEach((card) => {
+          card.addEventListener("click", () => {
+            card.classList.toggle("ruled-out");
+          });
+        });
+
+        const wrap = document.getElementById("pd-strat-glossary");
+        wrap.innerHTML = BUILTIN_STRATEGIES.map((s) => `
+          <div style="display:flex; align-items:flex-start; gap:10px; padding:8px 10px; background:var(--bg-subtle); border-radius:8px; border-left:4px solid ${s.color};">
+            <span class="char-avatar sm">${getCharacterAvatarSVG(s.id, "idle")}</span>
+            <div>
+              <div style="font-weight:800;">${s.name} <span style="font-weight:600; color:var(--text-muted);">(${s.stratTitle})</span></div>
+              <div style="font-size:0.78rem; font-style:italic; color:var(--accent);">"${s.catchphrase}"</div>
+              <div style="color:var(--text-muted); font-size:0.78rem; margin-top:2px;">${s.desc}</div>
+            </div>
+          </div>
+        `).join("");
+      }
+
+      function initPdMatch() {
+        const idx = Math.floor(nextRandom() * BUILTIN_STRATEGIES.length);
+        pdState.opponent = BUILTIN_STRATEGIES[idx];
+        pdState.round = 1;
+        pdState.userScore = 0;
+        pdState.oppScore = 0;
+        pdState.userHist = [];
+        pdState.oppHist = [];
+        pdState.roundPoints = [];
+        pdState.finished = false;
+
+        document.querySelectorAll(".suspect-card").forEach((c) => c.classList.remove("ruled-out"));
+
+        elPdBest.textContent = pdState.bestScore;
+        elPdUserScore.textContent = "0";
+        elPdOppScore.textContent = "0";
+        elPdRound.textContent = "Day 1 / 10";
+        elPdOppLabel.textContent = "Hooded Traveler";
+        elPdOppSub.textContent = "Mystery Guild Member";
+        elPdUserAvatar.innerHTML = getCharacterAvatarSVG("user", "idle");
+        elPdOppAvatar.innerHTML = getCharacterAvatarSVG("mystery", "idle");
+        elPdOppAvatar.style.borderColor = "var(--border)";
+        elPdSpeech.textContent = '"Step up to the wagon, friend. Shall we share our goods fairly, or test our luck?"';
+        elPdRevealBox.style.display = "none";
+        btnCoop.disabled = false;
+        btnDefect.disabled = false;
+
+        clearMatrixHighlight();
+        elPdStage.innerHTML = `<span style="color: var(--text-muted); font-size: 0.9rem;">Pick Share Goods or Snatch Chest to start Day 1.</span>`;
+        renderPdTimeline();
+      }
+
+      function clearMatrixHighlight() {
+        ["CC", "CD", "DC", "DD"].forEach((key) => {
+          const cell = document.getElementById("cell-" + key);
+          if (cell) cell.classList.remove("highlight");
+        });
+      }
+
+      function getMysteryHintQuote(userMove, oppMove, roundNum) {
+        if (userMove === "C" && oppMove === "C") {
+          const pool = [
+            '"Pleasure doing business with an honest traveler!"',
+            '"A fair trade! May our wagons both prosper."',
+            '"Good goods, fairly shared. Let us keep this up."'
+          ];
+          return pool[roundNum % pool.length];
+        }
+        if (userMove === "D" && oppMove === "C") {
+          const pool = [
+            '"Hey! You snatched the chest while my hand was open! I will remember that..."',
+            '"So that is how you play? Betraying a fair trade?"',
+            '"You took my goods and left me nothing! Watch yourself tomorrow."'
+          ];
+          return pool[roundNum % pool.length];
+        }
+        if (userMove === "C" && oppMove === "D") {
+          const pool = [
+            '"Heh, too slow! The gold in this chest is all mine today."',
+            '"Never leave your wagon unguarded at the Crossroads!"',
+            '"I took my opportunity while you offered a handshake."'
+          ];
+          return pool[roundNum % pool.length];
+        }
+        const pool = [
+          '"Clashing blades over the chest leaves us both with scraps!"',
+          '"Neither of us trusts the other an inch, eh?"',
+          '"One measly coin each. A bitter scuffle in the dust."'
+        ];
+        return pool[roundNum % pool.length];
+      }
+
+      function renderPdTimeline() {
+        let html = "";
+        for (let i = 0; i < pdState.maxRounds; i++) {
+          const uMove = pdState.userHist[i];
+          const oMove = pdState.oppHist[i];
+          const pts = pdState.roundPoints[i];
+          if (uMove) {
+            html += `<div class="timeline-slot">
+              <span style="color:var(--text-muted); font-size:0.66rem; font-weight:700;">D${i + 1}</span>
+              <span class="dot-move ${uMove}" title="You chose ${uMove === 'C' ? 'Share' : 'Snatch'}">${uMove}</span>
+              <span class="dot-move ${oMove}" title="Traveler chose ${oMove === 'C' ? 'Share' : 'Snatch'}">${oMove}</span>
+              <span style="font-weight:800;">+${pts[0]}</span>
+            </div>`;
+          } else {
+            html += `<div class="timeline-slot" style="opacity:0.45;">
+              <span style="color:var(--text-muted); font-size:0.66rem;">D${i + 1}</span>
+              <span>-</span>
+              <span>-</span>
+              <span></span>
+            </div>`;
+          }
+        }
+        elPdTimeline.innerHTML = html;
+      }
+
+      function playPdRound(userMove) {
+        if (pdState.finished) return;
+
+        const dayNum = pdState.round;
+        const oppMove = pdState.opponent.decide(pdState.oppHist, pdState.userHist);
+        const key = userMove + oppMove;
+        const [uPts, oPts] = PAYOFFS[key];
+
+        pdState.userHist.push(userMove);
+        pdState.oppHist.push(oppMove);
+        pdState.roundPoints.push([uPts, oPts]);
+        pdState.userScore += uPts;
+        pdState.oppScore += oPts;
+
+        elPdUserScore.textContent = pdState.userScore;
+        elPdOppScore.textContent = pdState.oppScore;
+
+        // Update facial expressions
+        const userMood = oppMove === "D" ? "angry" : "happy";
+        const oppMood = userMove === "D" ? "angry" : "happy";
+        elPdUserAvatar.innerHTML = getCharacterAvatarSVG("user", userMood);
+        elPdOppAvatar.innerHTML = getCharacterAvatarSVG("mystery", oppMood);
+
+        elPdSpeech.textContent = getMysteryHintQuote(userMove, oppMove, dayNum);
+
+        clearMatrixHighlight();
+        const activeCell = document.getElementById("cell-" + key);
+        if (activeCell) activeCell.classList.add("highlight");
+
+        const uVerb = userMove === "C" ? "shared your goods" : "snatched the chest";
+        const oVerb = oppMove === "C" ? "shared their goods" : "snatched the chest";
+
+        elPdStage.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+            <span class="move-chip ${userMove}">You: ${userMove === 'C' ? 'Shared' : 'Snatched'} (+${uPts} Gold)</span>
+            <span class="move-chip ${oppMove}">Traveler: ${oppMove === 'C' ? 'Shared' : 'Snatched'} (+${oPts} Gold)</span>
+          </div>
+          <div style="font-size:0.86rem; color:var(--text-muted); font-weight:600;">
+            Day ${dayNum}: You ${uVerb}, and the Hooded Traveler ${oVerb}.
+          </div>
+        `;
+
+        renderPdTimeline();
+
+        if (pdState.userHist.length >= pdState.maxRounds) {
+          finishPdMatch();
+        } else {
+          pdState.round += 1;
+          elPdRound.textContent = `Day ${pdState.round} / ${pdState.maxRounds}`;
+        }
+      }
+
+      function finishPdMatch() {
+        pdState.finished = true;
+        btnCoop.disabled = true;
+        btnDefect.disabled = true;
+        elPdRound.textContent = "10 Days Complete";
+
+        const opp = pdState.opponent;
+        const userDefections = pdState.userHist.filter((m) => m === "D").length;
+        const finalMood = userDefections <= 2 ? "happy" : "angry";
+
+        elPdOppLabel.textContent = opp.name;
+        elPdOppSub.textContent = `${opp.role} (${opp.stratTitle})`;
+        elPdOppAvatar.innerHTML = getCharacterAvatarSVG(opp.id, finalMood);
+        elPdOppAvatar.style.borderColor = opp.color;
+
+        const customQuote = userDefections <= 2 ? opp.endQuotes.friend : opp.endQuotes.foe;
+        elPdSpeech.textContent = `"${customQuote}"`;
+
+        let isNewRecord = false;
+        if (pdState.userScore > pdState.bestScore) {
+          pdState.bestScore = pdState.userScore;
+          safeSetStorage("gtp_pd_best", pdState.bestScore);
+          elPdBest.textContent = pdState.bestScore;
+          isNewRecord = true;
+          const card = document.getElementById("pd-arena-card");
+          card.classList.remove("celebrate-glow");
+          void card.offsetWidth;
+          card.classList.add("celebrate-glow");
+        }
+
+        elPdRevealBox.style.display = "block";
+        elPdRevealBox.innerHTML = `
+          <div class="reveal-banner">
+            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-bottom:10px;">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <span class="char-avatar" style="border-color:${opp.color}">${getCharacterAvatarSVG(opp.id, finalMood)}</span>
+                <div>
+                  <div style="font-size:0.76rem; font-weight:800; text-transform:uppercase; color:var(--text-muted);">Traveler Unmasked!</div>
+                  <div style="font-size:1.1rem; font-weight:800;">${opp.name} <span style="font-size:0.88rem; color:var(--accent);">(${opp.stratTitle})</span></div>
+                </div>
+              </div>
+              <div class="tabular" style="font-weight:800; font-size:1.05rem;">
+                Final Haul: You ${pdState.userScore} - ${pdState.oppScore} ${opp.name}
+                ${isNewRecord ? ' <span style="color:var(--coop);">(New Best!)</span>' : ''}
+              </div>
+            </div>
+            <p style="font-size:0.9rem; margin-bottom:6px; font-style:italic;">"${customQuote}"</p>
+            <p style="font-size:0.9rem; margin-bottom:12px;"><strong>Strategy Secret:</strong> ${opp.desc}</p>
+            <button type="button" class="btn btn-primary" id="btn-pd-play-again">Meet Another Mystery Traveler</button>
+          </div>
+        `;
+
+        document.getElementById("btn-pd-play-again").addEventListener("click", initPdMatch);
+      }
+
+      btnCoop.addEventListener("click", () => playPdRound("C"));
+      btnDefect.addEventListener("click", () => playPdRound("D"));
+      document.getElementById("pd-new-match").addEventListener("click", initPdMatch);
+
+      /* ==========================================================
+         6. MODE 2: TOURNAMENT ("THE GRAND GUILD CUP")
+         ========================================================== */
+      const elTournRounds = document.getElementById("tourn-rounds");
+      const elTournRoundsVal = document.getElementById("tourn-rounds-val");
+      const elTournNoise = document.getElementById("tourn-noise");
+      const elTournNoiseVal = document.getElementById("tourn-noise-val");
+      const elTournLeaderboard = document.getElementById("tourn-leaderboard");
+      const elTournSpotlight = document.getElementById("tourn-spotlight");
+      const elTournTakeaway = document.getElementById("tourn-takeaway");
+      const elTournHistory = document.getElementById("tourn-history-list");
+      const elTournBadge = document.getElementById("tourn-meta-badge");
+
+      let lastTournamentData = null;
+
+      elTournRounds.addEventListener("input", () => {
+        elTournRoundsVal.textContent = elTournRounds.value + " Days";
+      });
+      elTournNoise.addEventListener("input", () => {
+        elTournNoiseVal.textContent = elTournNoise.value + "%";
+      });
+
+      function buildCustomStrategy() {
+        const nameRaw = document.getElementById("custom-name").value.trim();
+        const name = nameRaw.length > 0 ? nameRaw : "Ranger Voss";
+        const firstMove = document.getElementById("custom-first").value === "D" ? "D" : "C";
+        const rule = document.getElementById("custom-rule").value;
+
+        const isNice = firstMove === "C";
+        const isForgiving = !rule.startsWith("total_");
+        const isRetaliating = rule !== "mutual_c";
+
+        return {
+          id: "custom",
+          name: name,
+          stratTitle: "Custom Challenger",
+          role: "Guild Adventurer",
+          color: "var(--strat-custom)",
+          hex: "#db2777",
+          catchphrase: "I play by my own code of honor!",
+          traits: { nice: isNice, forgiving: isForgiving, retaliating: isRetaliating },
+          desc: "Custom strategy crafted in the Guildhall.",
+          decide: function (myHist, oppHist) {
+            const n = oppHist.length;
+            if (n === 0) return firstMove;
+
+            if (rule === "copy") {
+              return oppHist[n - 1];
+            }
+            if (rule.startsWith("row_")) {
+              const streak = parseInt(rule.split("_")[1], 10);
+              if (n < streak) return "C";
+              for (let i = 1; i <= streak; i++) {
+                if (oppHist[n - i] !== "D") return "C";
+              }
+              return "D";
+            }
+            if (rule.startsWith("total_")) {
+              const limit = parseInt(rule.split("_")[1], 10);
+              let totalD = 0;
+              for (let i = 0; i < n; i++) {
+                if (oppHist[i] === "D") totalD++;
+              }
+              return totalD >= limit ? "D" : "C";
+            }
+            if (rule === "mutual_c") {
+              return (myHist[n - 1] === "C" && oppHist[n - 1] === "C") ? "C" : "D";
+            }
+            return "C";
+          }
+        };
+      }
+
+      function renderSpotlight(charId) {
+        if (!lastTournamentData) return;
+        const entry = lastTournamentData.results.find((r) => r.strat.id === charId) || lastTournamentData.results[0];
+        const s = entry.strat;
+        const breakdown = lastTournamentData.pairDetails[s.id] || [];
+
+        elTournLeaderboard.querySelectorAll(".leader-row").forEach((row) => {
+          row.classList.toggle("selected", row.getAttribute("data-charid") === s.id);
+        });
+
+        const bestMatch = breakdown.slice().sort((a, b) => b.myAvg - a.myAvg)[0];
+        const worstMatch = breakdown.slice().sort((a, b) => a.myAvg - b.myAvg)[0];
+
+        elTournSpotlight.innerHTML = `
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
+            <span class="char-avatar" style="border-color:${s.color}">${getCharacterAvatarSVG(s.id, "happy")}</span>
+            <div>
+              <div style="font-size:0.75rem; font-weight:800; text-transform:uppercase; color:var(--text-muted);">Head-to-Head Story Spotlight</div>
+              <div style="font-size:1.05rem; font-weight:800;">${s.name} <span style="font-size:0.85rem; color:var(--accent);">(${s.stratTitle})</span></div>
+              <div style="font-size:0.8rem; font-style:italic; color:var(--text-muted);">"${s.catchphrase}"</div>
+            </div>
+          </div>
+          <p style="font-size:0.88rem; margin-bottom:10px;">
+            Across the tournament, <strong>${s.name}</strong> averaged <strong>${entry.avgPerRound.toFixed(2)} gold/day</strong>.
+            Their most lucrative partnership was with <strong>${bestMatch.oppName}</strong> (${bestMatch.myAvg.toFixed(2)} gold/day), while their toughest clash was against <strong>${worstMatch.oppName}</strong> (${worstMatch.myAvg.toFixed(2)} gold/day).
+          </p>
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap:6px; font-size:0.78rem;">
+            ${breakdown.map((b) => `
+              <div style="background:var(--bg-elevated); padding:6px 8px; border-radius:6px; border:1px solid var(--border);">
+                <div style="font-weight:700;">vs ${b.oppName}</div>
+                <div style="color:var(--text-muted);">${b.myAvg.toFixed(2)} vs ${b.oppAvg.toFixed(2)} gold/d</div>
+              </div>
+            `).join("")}
+          </div>
+        `;
+      }
+
+      function generateTournamentTakeaway(sorted, rounds, noisePct) {
+        const winner = sorted[0];
+        const runnerUp = sorted[1];
+        const traits = [];
+        if (winner.strat.traits.nice) traits.push("nice (never snatches first)");
+        if (winner.strat.traits.retaliating) traits.push("retaliating (pushes back against bandits)");
+        if (winner.strat.traits.forgiving) traits.push("forgiving (calms down after a skirmish)");
+
+        let text = `<strong>${winner.strat.name} (${winner.strat.stratTitle})</strong> claimed the Guild Cup with <strong>${winner.avgPerRound.toFixed(2)} gold per day</strong>, edging out ${runnerUp.strat.name} (${runnerUp.avgPerRound.toFixed(2)}). `;
+
+        if (winner.strat.traits.nice) {
+          text += `They triumphed because their code is ${traits.join(" and ")}. By trading honestly with fellow peaceful guild members, they earned 3 gold a day while refusing to let Baron Vex rob them for free.`;
+        } else {
+          text += `Because this season was brief (${rounds} days) or had gullible targets, ${winner.strat.name} grabbed quick 5-gold heists before their reputation caught up with them.`;
+        }
+
+        if (noisePct > 0) {
+          text += ` In ${noisePct}% foggy weather where couriers accidentally dropped crates, forgiving traders avoided endless blood feuds.`;
+        }
+        return text;
+      }
+
+      function renderTournamentHistory() {
+        const hist = safeGetStorage("gtp_tourn_history", []);
+        if (hist.length === 0) {
+          elTournHistory.innerHTML = `<span>No past champions recorded yet.</span>`;
+          return;
+        }
+        elTournHistory.innerHTML = hist.map((item) => `
+          <div style="display:flex; justify-content:space-between; background:var(--bg-subtle); padding:6px 10px; border-radius:6px;">
+            <span><strong>${item.winner}</strong> (${item.avg} gold/d)</span>
+            <span>${item.rounds}d, ${item.noise}% fog</span>
+          </div>
+        `).join("");
+      }
+
+      function runTournament() {
+        setSeed(seedInput.value);
+        const rounds = parseInt(elTournRounds.value, 10) || 50;
+        const noisePct = parseInt(elTournNoise.value, 10) || 0;
+        const noiseProb = noisePct / 100;
+
+        const roster = BUILTIN_STRATEGIES.slice();
+        if (document.getElementById("custom-enabled").checked) {
+          roster.push(buildCustomStrategy());
+        }
+
+        const totals = {};
+        const matchesPlayed = {};
+        const pairDetails = {};
+        roster.forEach((s) => {
+          totals[s.id] = 0;
+          matchesPlayed[s.id] = 0;
+          pairDetails[s.id] = [];
+        });
+
+        for (let i = 0; i < roster.length; i++) {
+          for (let j = i; j < roster.length; j++) {
+            const sA = roster[i];
+            const sB = roster[j];
+            const res = playHeadToHead(sA, sB, rounds, noiseProb);
+            if (i === j) {
+              totals[sA.id] += res.scoreA;
+              matchesPlayed[sA.id] += 1;
+              pairDetails[sA.id].push({
+                oppName: "Twin " + sA.name,
+                myAvg: res.scoreA / rounds,
+                oppAvg: res.scoreB / rounds
+              });
+            } else {
+              totals[sA.id] += res.scoreA;
+              totals[sB.id] += res.scoreB;
+              matchesPlayed[sA.id] += 1;
+              matchesPlayed[sB.id] += 1;
+              pairDetails[sA.id].push({
+                oppName: sB.name,
+                myAvg: res.scoreA / rounds,
+                oppAvg: res.scoreB / rounds
+              });
+              pairDetails[sB.id].push({
+                oppName: sA.name,
+                myAvg: res.scoreB / rounds,
+                oppAvg: res.scoreA / rounds
+              });
+            }
+          }
+        }
+
+        const results = roster.map((s) => {
+          const avgPerRound = totals[s.id] / (matchesPlayed[s.id] * rounds);
+          return {
+            strat: s,
+            totalPoints: totals[s.id],
+            avgPerRound: avgPerRound
+          };
+        });
+
+        results.sort((a, b) => b.avgPerRound - a.avgPerRound);
+        lastTournamentData = { results, pairDetails };
+
+        elTournBadge.textContent = `${roster.length} Guilds, ${rounds} Days`;
+
+        const maxScore = Math.max(3.2, results[0].avgPerRound);
+        elTournLeaderboard.innerHTML = results.map((r, idx) => {
+          const pct = Math.max(4, Math.min(100, (r.avgPerRound / maxScore) * 100));
+          const mood = idx === 0 ? "happy" : idx === results.length - 1 ? "angry" : "idle";
+          return `
+            <button type="button" class="leader-row" data-charid="${r.strat.id}">
+              <div class="leader-top">
+                <div style="display:flex; align-items:center; gap:10px;">
+                  <span style="color:var(--text-muted); width:22px; font-weight:800;">#${idx + 1}</span>
+                  <span class="char-avatar sm" style="border-color:${r.strat.color}">${getCharacterAvatarSVG(r.strat.id, mood)}</span>
+                  <div>
+                    <div style="font-weight:800;">${r.strat.name}</div>
+                    <div style="font-size:0.74rem; color:var(--text-muted);">${r.strat.stratTitle}</div>
+                  </div>
+                </div>
+                <span style="font-weight:800;">${r.avgPerRound.toFixed(2)} gold/day</span>
+              </div>
+              <div class="leader-bar-track">
+                <div class="leader-bar-fill" style="width:0%; background:${r.strat.color};" data-target="${pct.toFixed(1)}%"></div>
+              </div>
+            </button>
+          `;
+        }).join("");
+
+        elTournLeaderboard.querySelectorAll(".leader-row").forEach((row) => {
+          row.addEventListener("click", () => {
+            renderSpotlight(row.getAttribute("data-charid"));
+          });
+        });
+
+        requestAnimationFrame(() => {
+          elTournLeaderboard.querySelectorAll(".leader-bar-fill").forEach((bar) => {
+            bar.style.width = bar.getAttribute("data-target");
+          });
+        });
+
+        renderSpotlight(results[0].strat.id);
+        elTournTakeaway.innerHTML = generateTournamentTakeaway(results, rounds, noisePct);
+
+        const hist = safeGetStorage("gtp_tourn_history", []);
+        hist.unshift({
+          winner: results[0].strat.name,
+          avg: results[0].avgPerRound.toFixed(2),
+          rounds: rounds,
+          noise: noisePct
+        });
+        safeSetStorage("gtp_tourn_history", hist.slice(0, 5));
+        renderTournamentHistory();
+      }
+
+      document.getElementById("btn-run-tournament").addEventListener("click", runTournament);
+
+      /* ==========================================================
+         7. MODE 3: EVOLUTION ("THE LIVING VALLEY")
+         ========================================================== */
+      const evoState = {
+        weights: { tft: 20, tf2t: 20, grudge: 20, allc: 20, alld: 20, rand: 0 },
+        sharesHistory: [],
+        pairwiseMatrix: null,
+        running: false,
+        timer: null,
+        hoverGen: null
+      };
+
+      const evoCanvas = document.getElementById("evo-canvas");
+      const evoReadout = document.getElementById("evo-readout");
+      const evoTakeaway = document.getElementById("evo-takeaway");
+      const evoGenBadge = document.getElementById("evo-gen-badge");
+      const evoTownSquare = document.getElementById("evo-town-square");
+      const btnEvoPlay = document.getElementById("btn-evo-play");
+
+      function renderEvoSliders() {
+        const wrap = document.getElementById("evo-sliders-wrap");
+        const normalized = getNormalizedStartingShares();
+        wrap.innerHTML = BUILTIN_STRATEGIES.map((s) => {
+          const pct = (normalized[s.id] * 100).toFixed(1);
+          return `
+            <div class="control-group" style="margin-bottom:10px;">
+              <div class="control-label">
+                <span style="display:inline-flex; align-items:center; gap:6px;">
+                  <span class="char-avatar sm" style="width:22px;height:22px;border-color:${s.color}">${getCharacterAvatarSVG(s.id, "idle")}</span>
+                  <span>${s.name} <span style="font-weight:500;color:var(--text-muted);font-size:0.75rem;">(${s.stratTitle})</span></span>
+                </span>
+                <span id="evo-lbl-${s.id}">${pct}%</span>
+              </div>
+              <input type="range" class="evo-mix-slider" data-strat="${s.id}" min="0" max="100" value="${evoState.weights[s.id]}" aria-label="${s.name} starting share" />
+            </div>
+          `;
+        }).join("");
+
+        wrap.querySelectorAll(".evo-mix-slider").forEach((sl) => {
+          sl.addEventListener("input", () => {
+            const id = sl.getAttribute("data-strat");
+            evoState.weights[id] = parseFloat(sl.value) || 0;
+            updateEvoSliderLabels();
+            resetEvolution();
+          });
+        });
+      }
+
+      function getNormalizedStartingShares() {
+        let sum = 0;
+        BUILTIN_STRATEGIES.forEach((s) => {
+          sum += evoState.weights[s.id];
+        });
+        const shares = {};
+        if (sum <= 0) {
+          BUILTIN_STRATEGIES.forEach((s) => {
+            shares[s.id] = 1 / BUILTIN_STRATEGIES.length;
+          });
+        } else {
+          BUILTIN_STRATEGIES.forEach((s) => {
+            shares[s.id] = evoState.weights[s.id] / sum;
+          });
+        }
+        return shares;
+      }
+
+      function updateEvoSliderLabels() {
+        const norm = getNormalizedStartingShares();
+        BUILTIN_STRATEGIES.forEach((s) => {
+          const lbl = document.getElementById("evo-lbl-" + s.id);
+          if (lbl) lbl.textContent = (norm[s.id] * 100).toFixed(1) + "%";
+        });
+      }
+
+      function computeEvoPairwiseMatrix() {
+        setSeed(seedInput.value);
+        const noiseProb = (parseInt(document.getElementById("evo-noise").value, 10) || 0) / 100;
+        const rounds = 30;
+        const matrix = {};
+        BUILTIN_STRATEGIES.forEach((sA) => {
+          matrix[sA.id] = {};
+        });
+
+        for (let i = 0; i < BUILTIN_STRATEGIES.length; i++) {
+          for (let j = i; j < BUILTIN_STRATEGIES.length; j++) {
+            const sA = BUILTIN_STRATEGIES[i];
+            const sB = BUILTIN_STRATEGIES[j];
+            const res = playHeadToHead(sA, sB, rounds, noiseProb);
+            matrix[sA.id][sB.id] = res.scoreA / rounds;
+            matrix[sB.id][sA.id] = res.scoreB / rounds;
+          }
+        }
+        evoState.pairwiseMatrix = matrix;
+      }
+
+      function resetEvolution() {
+        stopEvolution();
+        computeEvoPairwiseMatrix();
+        const initialShares = getNormalizedStartingShares();
+        evoState.sharesHistory = [initialShares];
+        evoState.hoverGen = null;
+        evoGenBadge.textContent = "Gen 0";
+        drawEvolutionChart();
+        updateEvoReadout(0);
+        updateEvoTakeaway();
+      }
+
+      function stepEvolution() {
+        if (!evoState.pairwiseMatrix) computeEvoPairwiseMatrix();
+        const current = evoState.sharesHistory[evoState.sharesHistory.length - 1];
+        const fitness = {};
+        let popAvg = 0;
+
+        BUILTIN_STRATEGIES.forEach((sA) => {
+          let fit = 0;
+          BUILTIN_STRATEGIES.forEach((sB) => {
+            fit += current[sB.id] * evoState.pairwiseMatrix[sA.id][sB.id];
+          });
+          fitness[sA.id] = fit;
+          popAvg += current[sA.id] * fit;
+        });
+
+        const nextShares = {};
+        let sumNext = 0;
+        BUILTIN_STRATEGIES.forEach((s) => {
+          let raw = popAvg > 0 ? current[s.id] * (fitness[s.id] / popAvg) : current[s.id];
+          if (raw < 0.001) raw = 0;
+          nextShares[s.id] = raw;
+          sumNext += raw;
+        });
+
+        BUILTIN_STRATEGIES.forEach((s) => {
+          nextShares[s.id] = sumNext > 0 ? nextShares[s.id] / sumNext : 0;
+        });
+
+        evoState.sharesHistory.push(nextShares);
+        const genIndex = evoState.sharesHistory.length - 1;
+        evoGenBadge.textContent = "Gen " + genIndex;
+        drawEvolutionChart();
+        updateEvoReadout(genIndex);
+        updateEvoTakeaway();
+
+        if (genIndex >= 80) {
+          stopEvolution();
+        }
+      }
+
+      function startEvolution() {
+        if (evoState.running) {
+          stopEvolution();
+          return;
+        }
+        if (evoState.sharesHistory.length >= 80) {
+          resetEvolution();
+        }
+        evoState.running = true;
+        btnEvoPlay.textContent = "Pause";
+        const speedVal = parseInt(document.getElementById("evo-speed").value, 10) || 2;
+        const intervalMs = speedVal === 1 ? 260 : speedVal === 3 ? 55 : 130;
+        evoState.timer = setInterval(stepEvolution, intervalMs);
+      }
+
+      function stopEvolution() {
+        evoState.running = false;
+        btnEvoPlay.textContent = "Play";
+        if (evoState.timer) {
+          clearInterval(evoState.timer);
+          evoState.timer = null;
+        }
+      }
+
+      function updateEvoReadout(genIndex) {
+        const idx = Math.max(0, Math.min(evoState.sharesHistory.length - 1, genIndex));
+        const snap = evoState.sharesHistory[idx];
+        evoReadout.innerHTML = `<strong style="align-self:center;">Gen ${idx}:</strong> ` +
+          BUILTIN_STRATEGIES.map((s) => {
+            const pct = (snap[s.id] * 100).toFixed(1);
+            const faded = snap[s.id] === 0 ? "opacity:0.38;" : "";
+            return `<span class="strat-pill" style="${faded} border-color:${s.color}">
+              ${s.name}: <strong>${pct}%</strong>
+            </span>`;
+          }).join("");
+      }
+
+      function updateEvoTakeaway() {
+        const gen = evoState.sharesHistory.length - 1;
+        const last = evoState.sharesHistory[gen];
+        let leader = BUILTIN_STRATEGIES[0];
+        BUILTIN_STRATEGIES.forEach((s) => {
+          if (last[s.id] > last[leader.id]) leader = s;
+        });
+        const pct = (last[leader.id] * 100).toFixed(1);
+
+        evoTownSquare.innerHTML = `
+          <span class="char-avatar" style="border-color:${leader.color}">${getCharacterAvatarSVG(leader.id, "happy")}</span>
+          <div>
+            <div style="font-size:0.75rem; font-weight:800; text-transform:uppercase; color:var(--text-muted);">Valley Town Square Leader (Gen ${gen})</div>
+            <div style="font-size:1rem; font-weight:800;">${leader.name} (${leader.stratTitle}) holds ${pct}% of the valley</div>
+            <div style="font-size:0.8rem; color:var(--text-muted);">"${leader.catchphrase}"</div>
+          </div>
+        `;
+
+        if (gen === 0) {
+          evoTakeaway.innerHTML = `Press <strong>Play</strong> or <strong>Next Gen</strong> to watch guild philosophies rise and fall across generations.`;
+        } else {
+          const extinct = BUILTIN_STRATEGIES.filter((s) => last[s.id] === 0).map((s) => s.name);
+          const extinctNote = extinct.length > 0 ? ` Meanwhile, ${extinct.join(", ")} faded from the valley.` : "";
+          evoTakeaway.innerHTML = `<strong>Valley Chronicle (Gen ${gen}):</strong> <strong>${leader.name}</strong> inspires the most apprentices at <strong>${pct}%</strong> share.${extinctNote}`;
+        }
+      }
+
+      function drawEvolutionChart() {
+        const rect = evoCanvas.parentElement.getBoundingClientRect();
+        if (rect.width === 0 || rect.height === 0) return;
+
+        const dpr = window.devicePixelRatio || 1;
+        evoCanvas.width = Math.floor(rect.width * dpr);
+        evoCanvas.height = Math.floor(rect.height * dpr);
+
+        const ctx = evoCanvas.getContext("2d");
+        ctx.scale(dpr, dpr);
+
+        const w = rect.width;
+        const h = rect.height;
+        const padLeft = 42;
+        const padRight = 14;
+        const padTop = 14;
+        const padBottom = 28;
+        const plotW = w - padLeft - padRight;
+        const plotH = h - padTop - padBottom;
+
+        const styles = getComputedStyle(document.documentElement);
+        const textColor = styles.getPropertyValue("--text-muted").trim() || "#666";
+        const borderColor = styles.getPropertyValue("--border").trim() || "#ccc";
+
+        ctx.clearRect(0, 0, w, h);
+
+        const history = evoState.sharesHistory;
+        const numGens = history.length;
+
+        if (numGens === 1) {
+          let yCursor = padTop;
+          BUILTIN_STRATEGIES.forEach((s) => {
+            const share = history[0][s.id];
+            const barH = share * plotH;
+            if (barH > 0) {
+              ctx.fillStyle = styles.getPropertyValue(`--strat-${s.id}`).trim() || s.hex;
+              ctx.fillRect(padLeft, yCursor, plotW, barH);
+              yCursor += barH;
+            }
+          });
+        } else {
+          const cumulative = history.map((snap) => {
+            let acc = 0;
+            const map = {};
+            BUILTIN_STRATEGIES.forEach((s) => {
+              const y0 = acc;
+              acc += snap[s.id];
+              map[s.id] = [y0, Math.min(1, acc)];
+            });
+            return map;
+          });
+
+          BUILTIN_STRATEGIES.forEach((s) => {
+            ctx.beginPath();
+            for (let g = 0; g < numGens; g++) {
+              const x = padLeft + (g / (numGens - 1)) * plotW;
+              const yTop = padTop + (1 - cumulative[g][s.id][1]) * plotH;
+              if (g === 0) ctx.moveTo(x, yTop);
+              else ctx.lineTo(x, yTop);
+            }
+            for (let g = numGens - 1; g >= 0; g--) {
+              const x = padLeft + (g / (numGens - 1)) * plotW;
+              const yBot = padTop + (1 - cumulative[g][s.id][0]) * plotH;
+              ctx.lineTo(x, yBot);
+            }
+            ctx.closePath();
+            ctx.fillStyle = styles.getPropertyValue(`--strat-${s.id}`).trim() || s.hex;
+            ctx.fill();
+          });
+        }
+
+        ctx.strokeStyle = borderColor;
+        ctx.fillStyle = textColor;
+        ctx.font = "600 11px sans-serif";
+        ctx.textAlign = "right";
+        ctx.lineWidth = 1;
+
+        [0, 0.5, 1].forEach((val) => {
+          const y = padTop + (1 - val) * plotH;
+          ctx.beginPath();
+          ctx.moveTo(padLeft, y);
+          ctx.lineTo(padLeft + plotW, y);
+          ctx.stroke();
+          ctx.fillText(Math.round(val * 100) + "%", padLeft - 6, y + 4);
+        });
+
+        ctx.textAlign = "center";
+        ctx.fillText("Gen 0", padLeft + 16, h - 8);
+        if (numGens > 1) {
+          ctx.fillText("Gen " + (numGens - 1), padLeft + plotW - 22, h - 8);
+        }
+
+        if (evoState.hoverGen !== null && numGens > 1) {
+          const gx = padLeft + (evoState.hoverGen / (numGens - 1)) * plotW;
+          ctx.strokeStyle = "#ffffff";
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.moveTo(gx, padTop);
+          ctx.lineTo(gx, padTop + plotH);
+          ctx.stroke();
+        }
+      }
+
+      function handleEvoPointer(clientX) {
+        const rect = evoCanvas.getBoundingClientRect();
+        const padLeft = 42;
+        const padRight = 14;
+        const plotW = rect.width - padLeft - padRight;
+        const relX = Math.max(0, Math.min(plotW, clientX - rect.left - padLeft));
+        const numGens = evoState.sharesHistory.length;
+        if (numGens <= 1) return;
+        const gen = Math.round((relX / plotW) * (numGens - 1));
+        evoState.hoverGen = gen;
+        drawEvolutionChart();
+        updateEvoReadout(gen);
+      }
+
+      evoCanvas.addEventListener("mousemove", (e) => handleEvoPointer(e.clientX));
+      evoCanvas.addEventListener("touchstart", (e) => {
+        if (e.touches[0]) handleEvoPointer(e.touches[0].clientX);
+      }, { passive: true });
+      evoCanvas.addEventListener("mouseleave", () => {
+        evoState.hoverGen = null;
+        drawEvolutionChart();
+        updateEvoReadout(evoState.sharesHistory.length - 1);
+      });
+
+      window.addEventListener("resize", drawEvolutionChart);
+
+      btnEvoPlay.addEventListener("click", startEvolution);
+      document.getElementById("btn-evo-step").addEventListener("click", () => {
+        stopEvolution();
+        stepEvolution();
+      });
+      document.getElementById("btn-evo-reset").addEventListener("click", resetEvolution);
+
+      document.getElementById("evo-noise").addEventListener("input", (e) => {
+        document.getElementById("evo-noise-val").textContent = e.target.value + "%";
+        resetEvolution();
+      });
+
+      document.getElementById("evo-speed").addEventListener("input", (e) => {
+        const v = parseInt(e.target.value, 10);
+        document.getElementById("evo-speed-val").textContent = v === 1 ? "Slow" : v === 3 ? "Fast" : "Normal";
+        if (evoState.running) {
+          stopEvolution();
+          startEvolution();
+        }
+      });
+
+      document.querySelectorAll(".preset-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const p = btn.getAttribute("data-preset");
+          if (p === "defectors") {
+            evoState.weights = { allc: 75, alld: 20, rand: 5, tft: 0, tf2t: 0, grudge: 0 };
+            document.getElementById("evo-noise").value = "0";
+            document.getElementById("evo-noise-val").textContent = "0%";
+          } else if (p === "nicewins") {
+            evoState.weights = { alld: 55, tft: 20, tf2t: 15, grudge: 10, allc: 0, rand: 0 };
+            document.getElementById("evo-noise").value = "0";
+            document.getElementById("evo-noise-val").textContent = "0%";
+          } else if (p === "noisy") {
+            evoState.weights = { tf2t: 30, tft: 30, grudge: 30, alld: 10, allc: 0, rand: 0 };
+            document.getElementById("evo-noise").value = "10";
+            document.getElementById("evo-noise-val").textContent = "10%";
+          }
+          renderEvoSliders();
+          resetEvolution();
+          startEvolution();
+        });
+      });
+
+      /* ==========================================================
+         8. MODE 4: ULTIMATUM GAME ("THE TAVERN TREASURE SPLIT")
+         ========================================================== */
+      const ultState = {
+        round: 1,
+        maxRounds: 5,
+        userCoins: 0,
+        aiCoins: 0,
+        aiThreshold: 30,
+        currentAiOffer: 40,
+        log: [],
+        finished: false
+      };
+
+      const elUltOfferSlider = document.getElementById("ult-offer-slider");
+      const elUltOfferLabel = document.getElementById("ult-offer-label");
+      const elUltBarYou = document.getElementById("ult-bar-you");
+      const elUltBarAi = document.getElementById("ult-bar-ai");
+      const elUltUserAvatar = document.getElementById("ult-user-avatar");
+      const elUltMaraAvatar = document.getElementById("ult-mara-avatar");
+      const elUltSpeech = document.getElementById("ult-speech-bubble");
+
+      function initUltimatum() {
+        ultState.round = 1;
+        ultState.userCoins = 0;
+        ultState.aiCoins = 0;
+        ultState.aiThreshold = 20 + Math.floor(nextRandom() * 26);
+        ultState.log = [];
+        ultState.finished = false;
+
+        document.getElementById("ult-user-coins").textContent = "0";
+        document.getElementById("ult-ai-coins").textContent = "0";
+        document.getElementById("ult-summary-box").style.display = "none";
+        elUltUserAvatar.innerHTML = getCharacterAvatarSVG("user", "idle");
+        elUltMaraAvatar.innerHTML = getCharacterAvatarSVG("mara", "idle");
+        elUltSpeech.textContent = '"Another chest of 100 gold on the tavern table! Make me a fair offer, mate, or into the harbor it goes."';
+        setupUltRoundUI();
+        renderUltLog();
+      }
+
+      function updateUltSliderDisplay() {
+        const offer = parseInt(elUltOfferSlider.value, 10) || 0;
+        const keep = 100 - offer;
+        elUltOfferLabel.textContent = `${offer} coins (You keep ${keep})`;
+        elUltBarYou.style.width = `${keep}%`;
+        elUltBarYou.textContent = keep >= 15 ? `You: ${keep}` : "";
+        elUltBarAi.style.width = `${offer}%`;
+        elUltBarAi.textContent = offer >= 15 ? `Mara: ${offer}` : "";
+      }
+
+      elUltOfferSlider.addEventListener("input", updateUltSliderDisplay);
+
+      function setupUltRoundUI() {
+        document.getElementById("ult-round-pill").textContent = `Expedition ${ultState.round} / ${ultState.maxRounds}`;
+        const isUserProposer = ultState.round % 2 === 1;
+        const roleBadge = document.getElementById("ult-role-badge");
+        const proposeUI = document.getElementById("ult-propose-ui");
+        const respondUI = document.getElementById("ult-respond-ui");
+
+        if (isUserProposer) {
+          roleBadge.textContent = "You Propose";
+          proposeUI.style.display = "block";
+          respondUI.style.display = "none";
+          updateUltSliderDisplay();
+        } else {
+          roleBadge.textContent = "Mara Proposes";
+          proposeUI.style.display = "none";
+          respondUI.style.display = "block";
+          const possibleOffers = [15, 25, 35, 45, 50];
+          ultState.currentAiOffer = possibleOffers[Math.floor(nextRandom() * possibleOffers.length)];
+          const aiKeep = 100 - ultState.currentAiOffer;
+          document.getElementById("ult-ai-offer-text").textContent = `Captain Mara offers you ${ultState.currentAiOffer} gold and keeps ${aiKeep} gold.`;
+          elUltSpeech.textContent = `"Here is my proposal: ${ultState.currentAiOffer} coins for you, ${aiKeep} for me. Take it or leave it!"`;
+          const rYou = document.getElementById("ult-resp-bar-you");
+          const rAi = document.getElementById("ult-resp-bar-ai");
+          rYou.style.width = `${ultState.currentAiOffer}%`;
+          rYou.textContent = `You: ${ultState.currentAiOffer}`;
+          rAi.style.width = `${aiKeep}%`;
+          rAi.textContent = `Mara: ${aiKeep}`;
+        }
+      }
+
+      function advanceUltRound(entry) {
+        ultState.log.push(entry);
+        document.getElementById("ult-user-coins").textContent = ultState.userCoins;
+        document.getElementById("ult-ai-coins").textContent = ultState.aiCoins;
+        renderUltLog();
+
+        if (ultState.round >= ultState.maxRounds) {
+          finishUltimatum();
+        } else {
+          ultState.round += 1;
+          setupUltRoundUI();
+        }
+      }
+
+      document.getElementById("btn-ult-propose").addEventListener("click", () => {
+        if (ultState.finished) return;
+        const offer = parseInt(elUltOfferSlider.value, 10) || 0;
+        const keep = 100 - offer;
+        const accepted = offer >= ultState.aiThreshold;
+
+        if (accepted) {
+          ultState.userCoins += keep;
+          ultState.aiCoins += offer;
+          elUltMaraAvatar.innerHTML = getCharacterAvatarSVG("mara", "happy");
+          elUltUserAvatar.innerHTML = getCharacterAvatarSVG("user", "happy");
+          elUltSpeech.textContent = `"Aye, ${offer} coins respects my crew! Deal accepted. You pocket ${keep} gold."`;
+        } else {
+          elUltMaraAvatar.innerHTML = getCharacterAvatarSVG("mara", "angry");
+          elUltUserAvatar.innerHTML = getCharacterAvatarSVG("user", "angry");
+          elUltSpeech.textContent = `"Only ${offer} coins?! Insulting! *SPLASH* I kicked the chest into the harbor! Both of us get zero!"`;
+        }
+
+        advanceUltRound({
+          round: ultState.round,
+          role: "You Proposed",
+          offer: offer,
+          accepted: accepted,
+          userGain: accepted ? keep : 0
+        });
+      });
+
+      function handleUserResponse(accepted) {
+        if (ultState.finished) return;
+        const offer = ultState.currentAiOffer;
+        const aiKeep = 100 - offer;
+
+        if (accepted) {
+          ultState.userCoins += offer;
+          ultState.aiCoins += aiKeep;
+          elUltMaraAvatar.innerHTML = getCharacterAvatarSVG("mara", "happy");
+          elUltUserAvatar.innerHTML = getCharacterAvatarSVG("user", "happy");
+          elUltSpeech.textContent = `"Smart choice accepting my ${offer}-coin split! Gold in our pockets beats gold at the bottom of the sea."`;
+        } else {
+          elUltMaraAvatar.innerHTML = getCharacterAvatarSVG("mara", "angry");
+          elUltUserAvatar.innerHTML = getCharacterAvatarSVG("user", "angry");
+          elUltSpeech.textContent = `"Blimey! You tossed my ${offer}-coin offer into the sea just to spite me! Now neither of us gets a copper."`;
+        }
+
+        advanceUltRound({
+          round: ultState.round,
+          role: "Mara Proposed",
+          offer: offer,
+          accepted: accepted,
+          userGain: accepted ? offer : 0
+        });
+      }
+
+      document.getElementById("btn-ult-accept").addEventListener("click", () => handleUserResponse(true));
+      document.getElementById("btn-ult-reject").addEventListener("click", () => handleUserResponse(false));
+      document.getElementById("btn-ult-restart").addEventListener("click", initUltimatum);
+
+      function renderUltLog() {
+        const wrap = document.getElementById("ult-history-log");
+        if (ultState.log.length === 0) {
+          wrap.innerHTML = `<span style="color:var(--text-muted);">Complete expeditions to see how your bargains compare with cold robot theory.</span>`;
+          return;
+        }
+        wrap.innerHTML = ultState.log.map((item) => `
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 10px; background:var(--bg-subtle); border-radius:6px;">
+            <span><strong>Exp ${item.round} (${item.role}):</strong> Offer ${item.offer} gold</span>
+            <span style="font-weight:800; color:${item.accepted ? 'var(--coop)' : 'var(--defect)'}">
+              ${item.accepted ? `Accepted (+${item.userGain})` : "Sunk in Harbor (+0)"}
+            </span>
+          </div>
+        `).join("");
+      }
+
+      function finishUltimatum() {
+        ultState.finished = true;
+        document.getElementById("ult-propose-ui").style.display = "none";
+        document.getElementById("ult-respond-ui").style.display = "none";
+        document.getElementById("ult-role-badge").textContent = "Voyage Over";
+
+        const box = document.getElementById("ult-summary-box");
+        box.style.display = "block";
+        box.innerHTML = `
+          <div class="reveal-banner">
+            <div style="font-weight:800; font-size:1.05rem; margin-bottom:6px;">
+              Captain Mara's Hidden Pride Threshold: <span style="color:var(--accent);">${ultState.aiThreshold} Gold</span>
+            </div>
+            <p style="font-size:0.9rem; margin-bottom:8px;">
+              <strong>Robot Theory vs Human Pride:</strong> A cold calculator predicts proposers should offer 1 coin and responders should accept anything above zero. Across these 5 chests, you walked away with <strong>${ultState.userCoins} gold</strong> and Mara took <strong>${ultState.aiCoins} gold</strong>.
+            </p>
+            <p style="font-size:0.9rem; margin-bottom:12px;">
+              <strong>Why people sink unfair chests:</strong> In real human communities, accepting a greedy split invites future bullying, so people willingly sacrifice coins to punish unfairness and defend their dignity.
+            </p>
+            <button type="button" class="btn btn-primary" id="btn-ult-again">Sail on a New 5-Chest Voyage</button>
+          </div>
+        `;
+        document.getElementById("btn-ult-again").addEventListener("click", initUltimatum);
+      }
+
+      /* ==========================================================
+         9. MODE 5: AUCTION HOUSE ("THE ROYAL CURIO BAZAAR")
+         ========================================================== */
+      const RIVAL_COLLECTORS = [
+        { id: "tft", name: "Lady Sterling", role: "Shrewd Noble", quoteWin: "Calculated to the exact coin!", quoteLose: "Too rich for my ledger today." },
+        { id: "grudge", name: "Duke Pennywise", role: "Thrifty Antiquarian", quoteWin: "A fine bargain for my manor.", quoteLose: "I refuse to overpay by a single copper." },
+        { id: "rand", name: "Bold Barnaby", role: "Eager Privateer", quoteWin: "Haha! Outbid you all!Wait, how much did I pay?", quoteLose: "Bah! Next lot is mine for sure!" }
+      ];
+
+      const CURIOS = [
+        "Clockwork Owl",
+        "Starlight Astrolabe",
+        "Emerald Teapot",
+        "Gilded Spyglass",
+        "Dragonbone Flute"
+      ];
+
+      const aucState = {
+        mode: "first",
+        userValue: 80,
+        trueJarValue: 75,
+        totalProfit: 0,
+        curioIndex: 0,
+        roundDone: false
+      };
+
+      const elAucSlider = document.getElementById("auc-bid-slider");
+      const elAucBidDisplay = document.getElementById("auc-bid-display");
+      const elAucGrid = document.getElementById("auc-bidders-grid");
+      const elAucOutcome = document.getElementById("auc-outcome-box");
+      const elAucSpeech = document.getElementById("auc-speech-bubble");
+
+      function setupAuctionItem() {
+        aucState.roundDone = false;
+        elAucOutcome.style.display = "none";
+        document.getElementById("btn-auc-submit").disabled = false;
+        const curioName = CURIOS[aucState.curioIndex % CURIOS.length];
+        aucState.curioIndex += 1;
+
+        if (aucState.mode === "common") {
+          aucState.trueJarValue = 50 + Math.floor(nextRandom() * 45);
+          const noise = Math.floor((nextRandom() - 0.5) * 36);
+          aucState.userValue = Math.max(15, Math.min(120, aucState.trueJarValue + noise));
+          document.getElementById("auc-val-label").textContent = "LOT: SUNKEN PIRATE JAR (YOUR NOISY ESTIMATE)";
+          document.getElementById("auc-user-value").textContent = `~${aucState.userValue} Gold`;
+          const safeBid = Math.max(10, aucState.userValue - 16);
+          document.getElementById("auc-optimal-hint").textContent = `Shade down (~${safeBid} Gold) to avoid curse`;
+          elAucSlider.value = aucState.userValue;
+          elAucSpeech.textContent = '"The Sunken Pirate Jar! Everyone sees a different coin count through the murky glass. Beware the Winner\'s Curse!"';
+        } else {
+          aucState.userValue = 40 + Math.floor(nextRandom() * 61);
+          document.getElementById("auc-val-label").textContent = `LOT: ${curioName.toUpperCase()} (YOUR PRIVATE VALUE)`;
+          document.getElementById("auc-user-value").textContent = `${aucState.userValue} Gold`;
+
+          if (aucState.mode === "first") {
+            const opt = Math.round(aucState.userValue * 0.75);
+            document.getElementById("auc-optimal-hint").textContent = `Bid ${opt} Gold (3/4 of value)`;
+            elAucSlider.value = opt;
+            elAucSpeech.textContent = `"First-Price Seal for the ${curioName}! Winner pays their own bid, so shade below your ${aucState.userValue} gold value."`;
+          } else {
+            document.getElementById("auc-optimal-hint").textContent = `Bid ${aucState.userValue} Gold (100% true value)`;
+            elAucSlider.value = aucState.userValue;
+            elAucSpeech.textContent = `"Second-Price Rules for the ${curioName}! Winner pays only the runner-up's bid, so bidding your full ${aucState.userValue} gold value is best."`;
+          }
+        }
+
+        elAucBidDisplay.textContent = elAucSlider.value + " Gold";
+
+        const cards = [
+          { id: "user", name: "You", role: "Guild Collector" },
+          ...RIVAL_COLLECTORS
+        ];
+
+        elAucGrid.innerHTML = cards.map((c) => `
+          <div class="bidder-card">
+            <span class="char-avatar sm">${getCharacterAvatarSVG(c.id, "idle")}</span>
+            <div style="font-size:0.8rem; font-weight:800;">${c.name}</div>
+            <div style="font-size:0.7rem; color:var(--text-muted);">${c.role}</div>
+            <div style="font-size:0.95rem; font-weight:800; margin-top:2px; color:var(--accent);">Envelope Sealed</div>
+          </div>
+        `).join("");
+      }
+
+      elAucSlider.addEventListener("input", () => {
+        elAucBidDisplay.textContent = elAucSlider.value + " Gold";
+      });
+
+      document.querySelectorAll(".seg-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".seg-btn").forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          aucState.mode = btn.getAttribute("data-aucmode");
+          setupAuctionItem();
+        });
+      });
+
+      document.getElementById("btn-auc-next").addEventListener("click", setupAuctionItem);
+
+      document.getElementById("btn-auc-submit").addEventListener("click", () => {
+        if (aucState.roundDone) return;
+        aucState.roundDone = true;
+        document.getElementById("btn-auc-submit").disabled = true;
+
+        const userBid = parseInt(elAucSlider.value, 10) || 0;
+        const bidders = [
+          { id: "user", avatarId: "user", name: "You", val: aucState.userValue, bid: userBid, quoteWin: "A fine addition to my collection!" }
+        ];
+
+        RIVAL_COLLECTORS.forEach((rc, idx) => {
+          if (aucState.mode === "common") {
+            const spread = idx === 2 ? 22 : Math.floor((nextRandom() - 0.35) * 38);
+            const aiEst = Math.max(20, Math.min(120, aucState.trueJarValue + spread));
+            const aiBid = idx === 2 ? aiEst : Math.round(aiEst * 0.92);
+            bidders.push({ id: "ai" + idx, avatarId: rc.id, name: rc.name, val: aiEst, bid: aiBid, quoteWin: rc.quoteWin });
+          } else {
+            const aiVal = 30 + Math.floor(nextRandom() * 71);
+            const aiBid = aucState.mode === "first" ? Math.round(aiVal * 0.75) : aiVal;
+            bidders.push({ id: "ai" + idx, avatarId: rc.id, name: rc.name, val: aiVal, bid: aiBid, quoteWin: rc.quoteWin });
+          }
+        });
+
+        const sorted = bidders.slice().sort((a, b) => b.bid - a.bid);
+        const winner = sorted[0];
+        const runnerUp = sorted[1];
+
+        const pricePaid = aucState.mode === "second" ? runnerUp.bid : winner.bid;
+        const actualItemWorth = aucState.mode === "common" ? aucState.trueJarValue : winner.val;
+        const winnerProfit = actualItemWorth - pricePaid;
+
+        if (winner.id === "user") {
+          aucState.totalProfit += winnerProfit;
+          document.getElementById("auc-total-profit").textContent = aucState.totalProfit;
+        }
+
+        elAucGrid.innerHTML = bidders.map((b) => {
+          const isWin = b.id === winner.id;
+          const valLabel = aucState.mode === "common" ? "Guess" : "Value";
+          const mood = isWin ? (winnerProfit >= 0 ? "happy" : "angry") : "idle";
+          return `
+            <div class="bidder-card ${isWin ? 'winner' : ''}">
+              <span class="char-avatar sm">${getCharacterAvatarSVG(b.avatarId, mood)}</span>
+              <div style="font-size:0.8rem; font-weight:800;">${b.name} ${isWin ? "(Winner)" : ""}</div>
+              <div style="font-size:1.05rem; font-weight:800;">Bid: ${b.bid} Gold</div>
+              <div style="font-size:0.74rem; color:var(--text-muted);">${valLabel}: ${b.val} Gold</div>
+            </div>
+          `;
+        }).join("");
+
+        elAucSpeech.textContent = `${winner.name}: "${winner.quoteWin}"`;
+
+        elAucOutcome.style.display = "block";
+        if (aucState.mode === "common") {
+          elAucOutcome.innerHTML = `
+            <div style="font-weight:800; margin-bottom:4px;">
+              True Pirate Jar Count: <span style="color:var(--accent);">${aucState.trueJarValue} Gold</span> |
+              Winner (${winner.name}) Paid: ${pricePaid} Gold |
+              Winner Net: <span style="color:${winnerProfit >= 0 ? 'var(--coop)' : 'var(--defect)'}">${winnerProfit >= 0 ? '+' : ''}${winnerProfit} Gold</span>
+            </div>
+            <p style="font-size:0.9rem;">
+              <strong>The Winner's Curse:</strong> When everyone guesses the coins inside a mystery jar, the highest bidder usually had the most inflated estimate and ends up losing gold.
+            </p>
+          `;
+        } else {
+          const userMsg = winner.id === "user"
+            ? `You won the lot! You paid <strong>${pricePaid} gold</strong> for a curio worth <strong>${aucState.userValue} gold</strong> to you, netting <strong>${winnerProfit >= 0 ? '+' : ''}${winnerProfit} gold</strong>.`
+            : `<strong>${winner.name}</strong> won the lot with a bid of ${winner.bid} gold and paid ${pricePaid} gold. Your profit this round is 0 gold.`;
+          elAucOutcome.innerHTML = `<p>${userMsg}</p>`;
+        }
+      });
+
+      /* ==========================================================
+         10. INITIALIZATION
+         ========================================================== */
+      setSeed(seedInput.value);
+      populateGlossaryAndSuspects();
+      initPdMatch();
+      renderTournamentHistory();
+      runTournament();
+      renderEvoSliders();
+      resetEvolution();
+      initUltimatum();
+      setupAuctionItem();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "files": 77,
+  "total_bytes": 36901157,
+  "local_links_checked": 131,
+  "broken_local_links": [],
+  "links_outside_pack": [],
+  "arithmetic_checks": "Process ratios, evaluation row counts, input row counts and base-case recomputation passed",
+  "external_urls": "Retained references; not revalidated during packaging",
+  "media": "Copied current outputs and existing QA; no re-encoding"
+}

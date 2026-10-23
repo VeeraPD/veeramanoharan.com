@@ -1,0 +1,43 @@
+1
+00:00:00,353 --> 00:00:03,670
+Stop sending one problem on a tour of support queues.
+
+2
+00:00:06,353 --> 00:00:10,538
+Maya, a sales employee, reports her blocked dashboard once.
+
+3
+00:00:14,353 --> 00:00:17,723
+TicketPilot classifies the issue: Applications.
+
+4
+00:00:18,511 --> 00:00:21,749
+Daniel, the support engineer, approves the route.
+
+5
+00:00:24,353 --> 00:00:27,670
+He opens a matching case and checks what worked before.
+
+6
+00:00:31,353 --> 00:00:34,091
+TicketPilot suggests a fix with a source.
+
+7
+00:00:34,879 --> 00:00:37,315
+Daniel reviews it and records the work.
+
+8
+00:00:39,353 --> 00:00:42,709
+Maya gets an update and confirms her dashboard works.
+
+9
+00:00:46,353 --> 00:00:50,946
+Elena, the IT service manager, reviews outcomes and handoffs.
+
+10
+00:00:53,353 --> 00:00:54,696
+Try TicketPilot.
+
+11
+00:00:55,484 --> 00:00:57,723
+Follow a request in the guided demo.

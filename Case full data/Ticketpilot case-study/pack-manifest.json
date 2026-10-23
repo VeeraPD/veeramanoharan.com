@@ -1,0 +1,468 @@
+{
+  "prepared_utc": "2026-10-23T04:21:59.012242+00:00",
+  "purpose": "Case-study source material; observed, synthetic, scenario and proposed claims remain distinct",
+  "files": [
+    {
+      "path": "01-product-brief.md",
+      "bytes": 5017,
+      "sha256": "8c4255fe031899a60b5541ef5bdbc21b68d45e7a907a50d731536075b786374c",
+      "source": "Curated/generated pack document or user-provided original brief"
+    },
+    {
+      "path": "02-pm-process.md",
+      "bytes": 6299,
+      "sha256": "4d1ffd54141cce4e09df5d8b98d352dc8a40979c80bbaa1576ac7f6f50def392",
+      "source": "Curated/generated pack document or user-provided original brief"
+    },
+    {
+      "path": "03-key-decisions.md",
+      "bytes": 6108,
+      "sha256": "99b1fb106704b1098d4858ec1e935e7c54f7a0c5d2913f47a604faeb53c7d604",
+      "source": "Curated/generated pack document or user-provided original brief"
+    },
+    {
+      "path": "04-nsm-and-metrics.md",
+      "bytes": 10775,
+      "sha256": "230f6b1b089183a9a42ac28d5b61371677215008348b932dd88809a7501d0f34",
+      "source": "Curated/generated pack document or user-provided original brief"
+    },
+    {
+      "path": "05-research-and-validation.md",
+      "bytes": 6208,
+      "sha256": "4e9a0e4c4fbbc0f47814ffb6adcd6524e3636aee3d4ec0f3e60d45e3ea013241",
+      "source": "Curated/generated pack document or user-provided original brief"
+    },
+    {
+      "path": "06-ai-and-implementation.md",
+      "bytes": 6296,
+      "sha256": "d8c09166a5e329a166d9a9cdd1d7cb54f501e83a0ff6490d10e1446c1d373f7f",
+      "source": "Curated/generated pack document or user-provided original brief"
+    },
+    {
+      "path": "07-value-case-and-rollout.md",
+      "bytes": 7018,
+      "sha256": "99fd406f5f489737d9c41f738a9ecb46ebffe6959549d8d0922b578b32cb6a52",
+      "source": "Curated/generated pack document or user-provided original brief"
+    },
+    {
+      "path": "08-experience-and-demo-evolution.md",
+      "bytes": 5919,
+      "sha256": "ba4901f3bba5ddaea07a37906b56a9fa666d809d55c6b2e5cab69fe81f1130a5",
+      "source": "Curated/generated pack document or user-provided original brief"
+    },
+    {
+      "path": "09-case-study-writing-brief.md",
+      "bytes": 6231,
+      "sha256": "917bd2d2f11725415042128464327026b9432688d14df440384192d52c7681a2",
+      "source": "Curated/generated pack document or user-provided original brief"
+    },
+    {
+      "path": "evidence/business-case.json",
+      "bytes": 804,
+      "sha256": "f9b86c3c05ad39bf1382dffceaa127927ecaa1dab6148b17d024e4c9757cb417",
+      "source": "output/business-case.json"
+    },
+    {
+      "path": "evidence/capture-warnings.json",
+      "bytes": 396,
+      "sha256": "331867f8995d3aa28ab0622e06242e4df6f4b550eb9747fdb9f332c0b98bf063",
+      "source": "output/video/capture-warnings.json"
+    },
+    {
+      "path": "evidence/evaluation-lexical.json",
+      "bytes": 12797,
+      "sha256": "4b50dd1458ad4a72d7f3977cba1e9916abeb3f51fefa55bf7a0cc585362c18b5",
+      "source": "docs/evaluation-lexical.json"
+    },
+    {
+      "path": "evidence/original-catalogue.json",
+      "bytes": 19642,
+      "sha256": "d0a8ab9b580e7f16c93456d1ab7760eadc6ddeacbb7390fd86f0bafc77a3d63e",
+      "source": "data/raw/catalogue.json"
+    },
+    {
+      "path": "evidence/process-cases.csv",
+      "bytes": 431044,
+      "sha256": "f7bcd6a62b62d12e29fc098e9defa84eac901438a79f7cd2b4df60ea261e322c",
+      "source": "data/process-cases.csv"
+    },
+    {
+      "path": "evidence/process-data-provenance.md",
+      "bytes": 2612,
+      "sha256": "fd187168eb792d9ab7ada58d13d2e0fd320ea9e77b9d688e0dd38d53f482e5eb",
+      "source": "data/DATA_SOURCES.md"
+    },
+    {
+      "path": "evidence/process-summary.json",
+      "bytes": 547608,
+      "sha256": "b76e093d1c2e1b064743994051b0d6647ef7b100e88b496b4229c1c70f7e8ed2",
+      "source": "data/process-summary.json"
+    },
+    {
+      "path": "evidence/README.md",
+      "bytes": 4241,
+      "sha256": "9f3b7c93ab68dfadea3974d9cc1e49f686193e289e6c2a52680d1d8fb1a727ae",
+      "source": "Curated/generated pack document or user-provided original brief"
+    },
+    {
+      "path": "evidence/synthetic-articles.csv",
+      "bytes": 5618,
+      "sha256": "0f120fc285c24edb5bdcf33348da46b13532a19e396321a608fb161708b8e651",
+      "source": "data/articles.csv"
+    },
+    {
+      "path": "evidence/synthetic-history.csv",
+      "bytes": 119489,
+      "sha256": "25c6e0a9b5fcbac747f149dbb05c933eb530ac0a3b6ba7891ea145e4435e7a63",
+      "source": "data/history.csv"
+    },
+    {
+      "path": "evidence/synthetic-test.csv",
+      "bytes": 9851,
+      "sha256": "bd68bd5eb046c190f0adb052d3934af2fd5faf85be958b2e035c071b2ab6c45a",
+      "source": "data/test.csv"
+    },
+    {
+      "path": "evidence/trailer-media-qa.json",
+      "bytes": 1087,
+      "sha256": "626ac889d402b71593f72ce6e24f0e88b8731a87a1e3310e5b94c74a0dc86677",
+      "source": "output/video/trailer/qa-report.json"
+    },
+    {
+      "path": "evidence/trailer-player-qa.json",
+      "bytes": 245,
+      "sha256": "9cccb5bc2d203b4159162c5cf4e9290463763ae6165259dcdd4e66511d6f6810",
+      "source": "output/video/trailer/player-qa.json"
+    },
+    {
+      "path": "evidence/value-sensitivities.json",
+      "bytes": 4569,
+      "sha256": "df0708cc72a626cf74bdc993fc191e2c23af9dcfd37fbaed758f968c7a7a32d9",
+      "source": "Curated/generated pack document or user-provided original brief"
+    },
+    {
+      "path": "evidence/verified-facts.json",
+      "bytes": 1865,
+      "sha256": "587d867e4a8d8cb3d7d770f347135547a17fe9a00687d2f609f3fc33971f7a10",
+      "source": "Curated/generated pack document or user-provided original brief"
+    },
+    {
+      "path": "evidence/walkthrough-media-qa.json",
+      "bytes": 1394,
+      "sha256": "f44c3a04d7f67ff8bf3d3cd14517a0100811ba4f7d46464e0332fcd1b8ae494d",
+      "source": "output/video/v3/qa-report.json"
+    },
+    {
+      "path": "evidence/walkthrough-player-qa.json",
+      "bytes": 249,
+      "sha256": "f6bd9a2d5640b3e71203a74fa80c3d8e6e2165c8106e5c7708bc6e6e7566f116",
+      "source": "output/video/v3/player-qa.json"
+    },
+    {
+      "path": "executive/90-day-rollout.pdf",
+      "bytes": 3758,
+      "sha256": "52dc6bc24688ff10c412ebb55ab01db2959ba74a24a54ee07955438b3a0a69ec",
+      "source": "output/pdf/90-day-rollout.pdf"
+    },
+    {
+      "path": "executive/cfo-one-pager.pdf",
+      "bytes": 3788,
+      "sha256": "5b51b9360afbfa7ab604973c5838e5fa2bc5f7551bf8bcf881792bbcec07e0aa",
+      "source": "output/pdf/cfo-one-pager.pdf"
+    },
+    {
+      "path": "executive/README.md",
+      "bytes": 1124,
+      "sha256": "bf63dc234d5b939f6b00a5d2b97fefd91c41cfa4bc77c38dc60bf03272b50e9e",
+      "source": "Curated/generated pack document or user-provided original brief"
+    },
+    {
+      "path": "executive/value-scorecard.pdf",
+      "bytes": 3621,
+      "sha256": "40773b48bb87da3eb9357f709ebf64ab09bd7226f05c84d520cbc8f26362daf9",
+      "source": "output/pdf/value-scorecard.pdf"
+    },
+    {
+      "path": "media/archive/README.md",
+      "bytes": 647,
+      "sha256": "f8cf08ae80f5ff65d186bab511baa8f7aa62b875ea95c10db9af238cbeaa0988",
+      "source": "Curated/generated pack document or user-provided original brief"
+    },
+    {
+      "path": "media/archive/trailer-before-role-clarity.mp4",
+      "bytes": 2245133,
+      "sha256": "d9ad7f0419d5a49ad1a5e18722418ff20e583f076bd8fbf66e49e3059603978e",
+      "source": "output/video/trailer/before-classification-and-music.mp4"
+    },
+    {
+      "path": "media/archive/walkthrough-v1.mp4",
+      "bytes": 6754907,
+      "sha256": "c37cab1cc90dee018d6508a5de0b71a41c817e9bdaf37ef956d0b6840af2d137",
+      "source": "output/video/ticketpilot-product-demo-v1.mp4"
+    },
+    {
+      "path": "media/archive/walkthrough-v2.mp4",
+      "bytes": 5683229,
+      "sha256": "60ab04d5920b2047a772ff55c80fd761991a4d13af0be6d44377ca3b5e386906",
+      "source": "output/video/ticketpilot-product-demo-v2.mp4"
+    },
+    {
+      "path": "media/asset-provenance/daniel.png",
+      "bytes": 2110635,
+      "sha256": "82aff8d34ca524e6eff7712fef8914b63be0cbcff726b9e72a593e77c9dc76dd",
+      "source": "output/video/v2/daniel.png"
+    },
+    {
+      "path": "media/asset-provenance/elena.png",
+      "bytes": 2128640,
+      "sha256": "2d88dd7cb3eb5cea7292cb478154afe4811b2c2c8d0135c7cf6bf6d06f8f1574",
+      "source": "output/video/v2/elena.png"
+    },
+    {
+      "path": "media/asset-provenance/maya.png",
+      "bytes": 2197766,
+      "sha256": "438f96b6dc6289b35ac70eb0c467c887731ab4acdf2b64e5e9ab26e58272781f",
+      "source": "output/video/v2/maya.png"
+    },
+    {
+      "path": "media/asset-provenance/music-provenance.json",
+      "bytes": 519,
+      "sha256": "9cc1c8d83aa7eb178ee1a8af6a45876f9da1270e29819edd1390da6c7fec3380",
+      "source": "output/video/music/provenance.json"
+    },
+    {
+      "path": "media/asset-provenance/portrait-prompts.json",
+      "bytes": 1876,
+      "sha256": "1c62cb1a2355689e79facec90ee59542d3815320451002f86233ba1e016c3244",
+      "source": "output/video/v2/portrait-prompts.json"
+    },
+    {
+      "path": "media/asset-provenance/README.md",
+      "bytes": 924,
+      "sha256": "2fb0e66e2accb5c9cc34ce8a0451a1e644597aec6aff62ef4cc28f40098af960",
+      "source": "Curated/generated pack document or user-provided original brief"
+    },
+    {
+      "path": "media/poster.jpg",
+      "bytes": 62258,
+      "sha256": "501fb4dc1ea53b76132b5cc7d462e0c4bcd2c53591a5bd9135fd25ad5340633f",
+      "source": "output/video/poster.jpg"
+    },
+    {
+      "path": "media/README.md",
+      "bytes": 1696,
+      "sha256": "8f88dedb51d7ec64a0344db58645af0852f3cff78af5321995432bfcaba86336",
+      "source": "Curated/generated pack document or user-provided original brief"
+    },
+    {
+      "path": "media/screenshots/closing-invitation.jpg",
+      "bytes": 54906,
+      "sha256": "f665fe1d9e301319696513d08b606d4548c0c70bb2e226c56df3723aaca2338b",
+      "source": "output/video/trailer/updated-56.jpg"
+    },
+    {
+      "path": "media/screenshots/employee-confirmation.png",
+      "bytes": 108524,
+      "sha256": "913534577f0d3c489a182668f12c83615b103af08abe0ab25957ade46d7a32eb",
+      "source": "output/video/06-confirm.png"
+    },
+    {
+      "path": "media/screenshots/employee-portal.png",
+      "bytes": 105627,
+      "sha256": "60198ae9062c17d6f8576a96786b2b128460a2c6b683b76a6f6de7d7130b2e3f",
+      "source": "output/video/02-employee.png"
+    },
+    {
+      "path": "media/screenshots/it-service-manager.jpg",
+      "bytes": 112596,
+      "sha256": "3a906ef6c4bf6c7cbfd7a81482a980930300222573327cc4476348dc60cdfa67",
+      "source": "output/video/trailer/updated-49.jpg"
+    },
+    {
+      "path": "media/screenshots/README.md",
+      "bytes": 1123,
+      "sha256": "d4d3f585c549c70be6012d03cb103e48f258995db8e934945e5c7261e61a105a",
+      "source": "Curated/generated pack document or user-provided original brief"
+    },
+    {
+      "path": "media/screenshots/routing-approval.jpg",
+      "bytes": 109560,
+      "sha256": "727cbe245525eb9be7ff258c5ccf5964010769858ecd5e98eda3ab4cb84db18d",
+      "source": "output/video/v3/updated-98.jpg"
+    },
+    {
+      "path": "media/screenshots/source-case.png",
+      "bytes": 139927,
+      "sha256": "aa968bcfd18dd7408b35524621ac7d5247edd9298145c7058d75929972ae9ae1",
+      "source": "output/video/04-evidence.png"
+    },
+    {
+      "path": "media/screenshots/suggested-fix.png",
+      "bytes": 147064,
+      "sha256": "5139a17131b6d616e9397a7b936f046cb0644df42dd3a9d9f0c54cba458fa9e3",
+      "source": "output/video/05-fix.png"
+    },
+    {
+      "path": "media/screenshots/ticketpilot-classification.jpg",
+      "bytes": 108212,
+      "sha256": "086d150f1ab69759dbf7b9a8f16b37100843085fdd3a3e56b5f07e164d63a39c",
+      "source": "output/video/trailer/updated-17.jpg"
+    },
+    {
+      "path": "media/screenshots/title-and-value.jpg",
+      "bytes": 61498,
+      "sha256": "20a842bbe60ec8f2895c7bd47c8a9cf1c5c8af8573ef9e99044dc4cff21566b5",
+      "source": "output/video/trailer/updated-2.jpg"
+    },
+    {
+      "path": "media/ticketpilot-demo.srt",
+      "bytes": 4101,
+      "sha256": "a107b9d03341c25fb7a734e39b31c2f91efe07e156c3879732d2c2ab79623e1e",
+      "source": "output/video/ticketpilot-demo.srt"
+    },
+    {
+      "path": "media/ticketpilot-product-demo.mp4",
+      "bytes": 10234564,
+      "sha256": "40bed04c362ff2fc4e2c7f08544d26fbb26454ba888e4333758d9967fb009033",
+      "source": "output/video/ticketpilot-product-demo.mp4"
+    },
+    {
+      "path": "media/ticketpilot-trailer-60s.mp4",
+      "bytes": 3130052,
+      "sha256": "9d0291c1aa5f2fb7a7f4cfd1af2d6f5cf55125937861966047c5a308a8e50506",
+      "source": "output/video/ticketpilot-trailer-60s.mp4"
+    },
+    {
+      "path": "media/ticketpilot-trailer-60s.srt",
+      "bytes": 927,
+      "sha256": "c32561dd64ab3918a75c5a091e4c02cbd6302f03666c04393d38cbf61d36c601",
+      "source": "output/video/ticketpilot-trailer-60s.srt"
+    },
+    {
+      "path": "media/trailer-poster.jpg",
+      "bytes": 61498,
+      "sha256": "20a842bbe60ec8f2895c7bd47c8a9cf1c5c8af8573ef9e99044dc4cff21566b5",
+      "source": "output/video/trailer-poster.jpg"
+    },
+    {
+      "path": "media/transcripts/README.md",
+      "bytes": 487,
+      "sha256": "83701c5cea538140e0e36bdea0e3ab3d0b0ea31e2d43fe418a72c06700506014",
+      "source": "Curated/generated pack document or user-provided original brief"
+    },
+    {
+      "path": "media/transcripts/trailer-manifest.json",
+      "bytes": 4210,
+      "sha256": "b041908e38745d54e839e3471a74ff887c3ac5de69bf2cd18012c7586647928d",
+      "source": "output/video/trailer/manifest.json"
+    },
+    {
+      "path": "media/transcripts/trailer.md",
+      "bytes": 1074,
+      "sha256": "7d3d313cdfd62f9b4a07e08ec251925b3085432ec6ba6e3284f377928980fc2c",
+      "source": "Curated/generated pack document or user-provided original brief"
+    },
+    {
+      "path": "media/transcripts/walkthrough-manifest.json",
+      "bytes": 7441,
+      "sha256": "eff5f680edbdc73dde244514ae4109b6ef4d12af11ace66017371ac2b9fe7445",
+      "source": "output/video/v3/manifest.json"
+    },
+    {
+      "path": "media/transcripts/walkthrough.md",
+      "bytes": 3191,
+      "sha256": "c7b2878123c72cee5bb85ca982fa3b05074783bed349fd19ca2178d6cb0c05f8",
+      "source": "Curated/generated pack document or user-provided original brief"
+    },
+    {
+      "path": "media/watch-demo.html",
+      "bytes": 3053,
+      "sha256": "030f350b6053eebcbebedaad27018cf60473147dce2e4b1ea194bb6d1a62f6b8",
+      "source": "output/video/watch-demo.html"
+    },
+    {
+      "path": "media/watch-trailer.html",
+      "bytes": 2152,
+      "sha256": "391293fa4c33c5fa36c9ab3ac481131f0f03c2147de111b4291ea4b6de6cf02a",
+      "source": "output/video/watch-trailer.html"
+    },
+    {
+      "path": "README.md",
+      "bytes": 4940,
+      "sha256": "92e284934c727f72c153c2220bac9ea2617fc2633d3da28f7fc3ecc9400abcfe",
+      "source": "Curated/generated pack document or user-provided original brief"
+    },
+    {
+      "path": "references/code/api.py",
+      "bytes": 3671,
+      "sha256": "e3ee5a862cfca11511c69b679dd3db8d9f20266fa616fba10964aa249126c94b",
+      "source": "ticketpilot/api.py"
+    },
+    {
+      "path": "references/code/core.py",
+      "bytes": 6527,
+      "sha256": "005d9fe82e5af42264547020d38b9a2fc592756198b055b06f819a93881d10e9",
+      "source": "ticketpilot/core.py"
+    },
+    {
+      "path": "references/code/evaluate.py",
+      "bytes": 2681,
+      "sha256": "c47ce4eb98d980b2d60fd95a6669b425e54fa088bac5b0acbad60a213e714449",
+      "source": "ticketpilot/evaluate.py"
+    },
+    {
+      "path": "references/code/music-generator.py",
+      "bytes": 4645,
+      "sha256": "ed9237f39dc27a56708c1be7e5a21cf2cdc0e7faaa4ce7d77f13d67232d90303",
+      "source": "scripts/demo_music.py"
+    },
+    {
+      "path": "references/code/process.py",
+      "bytes": 6483,
+      "sha256": "c406f27a0cca20b596c00cf6b40e1951e1429dbc1859c797b01f9bb0032c1c76",
+      "source": "ticketpilot/process.py"
+    },
+    {
+      "path": "references/code/README.md",
+      "bytes": 1316,
+      "sha256": "1bd6e1ec6603bbb3416258a86552758956aa9e1ff7008282ee95ec9442611011",
+      "source": "Curated/generated pack document or user-provided original brief"
+    },
+    {
+      "path": "references/code/ui-backend.ts",
+      "bytes": 566,
+      "sha256": "ff17bab8aca245f32560b9bf2cce906427d00ec69f39db2f666594eafd06c3f4",
+      "source": "UI/src/lib/demo/backend.ts"
+    },
+    {
+      "path": "references/code/ui-decision-card.tsx",
+      "bytes": 3551,
+      "sha256": "eb602e94bfb2889708d20c275dd76dd4ad1b4959439b45bc5e84cc297ea5c301",
+      "source": "UI/src/components/demo/DecisionCard.tsx"
+    },
+    {
+      "path": "references/code/value.py",
+      "bytes": 2001,
+      "sha256": "e9fe3e12e8b0bae8b1976d704316402d056cde5849d1047e6111275fd39bb62d",
+      "source": "ticketpilot/value.py"
+    },
+    {
+      "path": "references/deployment.md",
+      "bytes": 4865,
+      "sha256": "4fdc3346a5f12cf773d609e295a3aac6baaebb1db1cdced912d6cff82e9b10ff",
+      "source": "docs/deployment.md"
+    },
+    {
+      "path": "references/existing-case-study-draft.md",
+      "bytes": 21404,
+      "sha256": "fe6ba5054e92c5ceed0e336d3b747e16bb88207c1c6d1f196e3cc4279ca998ed",
+      "source": "docs/ai-pm-case-study.md"
+    },
+    {
+      "path": "references/original-product-spec.txt",
+      "bytes": 12817,
+      "sha256": "fd393dc764d63c7a46ad95706d7b449ad232eaa2535da2e5c6bd138203a78055",
+      "source": "Curated/generated pack document or user-provided original brief"
+    }
+  ]
+}

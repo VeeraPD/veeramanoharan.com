@@ -14,7 +14,7 @@
 })();
 </script>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="R. Veera Manoharan, product manager for consumer AI. Six years at HCLTech, now at IIM Lucknow. Case studies: Atélier, Alpine Skies and a voice-capture discovery study.">
+<meta name="description" content="R. Veera Manoharan, AI product manager with a strategy lens. MBA candidate at IIM Lucknow, ex-HCLTech. Case studies: Atélier, TicketPilot, Ensemble and a voice-capture study.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&display=swap">
@@ -259,8 +259,19 @@ html[data-mode="cream"] .orb i{opacity:.95;filter:blur(4px) saturate(1.25)}
 .cell:hover .n{translate:6px 0;color:var(--ink)}
 .cell:hover h3{background-size:100% .3em}
 
+/* drawn thumbnails move: workers light up in turn; the waveform breathes */
+@media (prefers-reduced-motion:no-preference){
+  html:not([data-paused="true"]) #a05 rect{animation:wk 2.4s ease-in-out infinite}
+  html:not([data-paused="true"]) #a05 rect:nth-of-type(2){animation-delay:.4s}
+  html:not([data-paused="true"]) #a05 rect:nth-of-type(3){animation-delay:.8s}
+  html:not([data-paused="true"]) #a03 rect{transform-box:fill-box;transform-origin:center;animation:wv 1.6s ease-in-out infinite}
+  html:not([data-paused="true"]) #a03 rect:nth-of-type(2n){animation-delay:.25s}
+  html:not([data-paused="true"]) #a03 rect:nth-of-type(3n){animation-delay:.6s}
+}
+@keyframes wk{0%,100%{opacity:.25}40%{opacity:.9}}
+@keyframes wv{0%,100%{transform:scaleY(.55)}50%{transform:scaleY(1.2)}}
 /* labs */
-.labs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.labs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px 22px}
 .lab{display:grid;gap:12px;align-content:start}
 .lab .th{position:relative;aspect-ratio:3/2;border-radius:16px;overflow:hidden;box-shadow:var(--shadow);transition:translate var(--d-hover) var(--ease-hover),box-shadow var(--d-hover) var(--ease-hover)}
 .lab .th svg{position:absolute;inset:18%;width:64%;height:64%;color:var(--pencil)}
@@ -304,14 +315,6 @@ footer.end{position:relative;padding-block:120px 36px;border-top:1px solid var(-
 .toast.on{opacity:1;translate:-50% 0}
 
 
-/* cursor ring (fine pointers only) */
-.cur{position:fixed;left:0;top:0;z-index:300;pointer-events:none;width:28px;height:28px;margin:-14px 0 0 -14px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--ink);display:none;place-items:center;
-  transition:width .35s var(--ease-hover),height .35s var(--ease-hover),margin .35s var(--ease-hover),background-color .35s var(--ease-hover)}
-@media (hover:hover) and (pointer:fine){.cur.on{display:grid}}
-.cur span{opacity:0;font:600 9.5px var(--f-sans);letter-spacing:.1em;text-transform:uppercase;text-align:center;transition:opacity .2s var(--ease-hover)}
-.cur.big{width:92px;height:92px;margin:-46px 0 0 -46px;background-color:var(--glass);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
-.cur.big span{opacity:1}
-.cur.small{width:8px;height:8px;margin:-4px 0 0 -4px;background-color:var(--ink)}
 
 /* ==========================================================================
    LOAD SEQUENCE (CSS) and the simple fallback. Scroll animation lives in JS.
@@ -370,6 +373,9 @@ html[data-paused="true"] *,html[data-paused="true"] *::before,html[data-paused="
   <symbol id="a04" viewBox="0 0 200 150"><g transform="translate(100 75) scale(.95)" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><rect x="-74" y="-62" width="148" height="28" rx="14"/><circle cx="-54" cy="-48" r="6"/><rect x="-74" y="-20" width="68" height="38" rx="6" fill="currentColor" opacity=".28" stroke="none"/><rect x="6" y="-20" width="68" height="38" rx="6" fill="currentColor" opacity=".28" stroke="none"/><rect x="-74" y="26" width="68" height="38" rx="6" fill="currentColor" opacity=".28" stroke="none"/><rect x="6" y="26" width="68" height="38" rx="6" fill="currentColor" opacity=".28" stroke="none"/></g></symbol>
   <symbol id="a05" viewBox="0 0 200 150"><g transform="translate(100 75) scale(.95)" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M-52 0H-6M-6 0L40 -44M-6 0H40M-6 0L40 44"/><circle cx="-58" cy="0" r="13" fill="currentColor" stroke="none"/><circle cx="-6" cy="0" r="8"/><rect x="40" y="-60" width="34" height="32" rx="7" fill="currentColor" opacity=".45" stroke="none"/><rect x="40" y="-16" width="34" height="32" rx="7" fill="currentColor" opacity=".45" stroke="none"/><rect x="40" y="28" width="34" height="32" rx="7" fill="currentColor" opacity=".45" stroke="none"/></g></symbol>
   <symbol id="a06" viewBox="0 0 200 150"><g transform="translate(100 75) scale(.95)" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><rect x="-76" y="-58" width="68" height="116" rx="8"/><rect x="8" y="-58" width="68" height="116" rx="8"/><rect x="-66" y="-42" width="40" height="14" rx="7" fill="currentColor" opacity=".4" stroke="none"/><rect x="-58" y="-18" width="40" height="14" rx="7" fill="currentColor" opacity=".4" stroke="none"/><rect x="18" y="-42" width="40" height="14" rx="7" fill="currentColor" opacity=".4" stroke="none"/><rect x="26" y="-18" width="40" height="14" rx="7" fill="currentColor" opacity=".4" stroke="none"/></g></symbol>
+  <symbol id="f1" viewBox="0 0 150 100"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="38" y="20" width="74" height="60" rx="8"/><path d="M75 20V80M38 50H112"/><circle cx="56" cy="35" r="5" fill="currentColor"/><circle cx="94" cy="65" r="5" fill="currentColor"/></g></symbol>
+  <symbol id="f2" viewBox="0 0 150 100"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M52 66V32l40-8v34"/><circle cx="46" cy="68" r="7" fill="currentColor"/><circle cx="86" cy="60" r="7" fill="currentColor"/><path d="M108 40a22 22 0 0 1 0 28M116 34a32 32 0 0 1 0 40" opacity=".6"/></g></symbol>
+  <symbol id="f3" viewBox="0 0 150 100"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 40c10-12 18-12 28 0s18 12 28 0 18-12 28 0 12 8 22 0"/><path d="M22 58c10-12 18-12 28 0s18 12 28 0 18-12 28 0 12 8 22 0" opacity=".6"/><path d="M22 76c10-12 18-12 28 0s18 12 28 0 18-12 28 0 12 8 22 0" opacity=".3"/></g></symbol>
   <symbol id="l1" viewBox="0 0 150 100"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M30 70C45 30 70 25 80 50S105 75 120 35"/><circle cx="30" cy="70" r="5" fill="currentColor"/><circle cx="120" cy="35" r="5" fill="currentColor"/></g></symbol>
   <symbol id="l2" viewBox="0 0 150 100"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="38" y="22" width="74" height="56" rx="8"/><path d="M50 40H100M50 52H88M50 64H70"/></g></symbol>
   <symbol id="l3" viewBox="0 0 150 100"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="75" cy="50" r="10"/><circle cx="75" cy="50" r="26"/><circle cx="75" cy="50" r="42" stroke-dasharray="2 8"/></g></symbol>
@@ -388,14 +394,14 @@ html[data-paused="true"] *,html[data-paused="true"] *::before,html[data-paused="
       <nav class="main" aria-label="Main">
         <a href="#work" data-sec="work">Work<svg class="loop" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M6 22C4 8 40 2 70 6S98 20 88 30 40 40 12 33 8 16 40 9"/></svg></a>
         <a href="#about" data-sec="about">About<svg class="loop" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M6 22C4 8 40 2 70 6S98 20 88 30 40 40 12 33 8 16 40 9"/></svg></a>
-        <a href="#labs" data-sec="labs">AI Labs<svg class="loop" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M6 22C4 8 40 2 70 6S98 20 88 30 40 40 12 33 8 16 40 9"/></svg></a>
+        <a href="#fun" data-sec="fun">Fun projects<svg class="loop" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M6 22C4 8 40 2 70 6S98 20 88 30 40 40 12 33 8 16 40 9"/></svg></a>
       </nav>
       <button class="iconbtn" id="mode" type="button" aria-label="Switch to light theme">
         <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
         <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 14.6A8 8 0 0 1 9.4 4.5a8 8 0 1 0 10.1 10.1Z"/></svg>
       </button>
       <a class="pill sm hcta" href="#contact">Get in touch</a>
-      <details class="menu"><summary>Menu</summary><div class="pop"><a href="#work">Work</a><a href="#about">About</a><a href="#labs">AI Labs</a><a href="#contact">Get in touch</a></div></details>
+      <details class="menu"><summary>Menu</summary><div class="pop"><a href="#work">Work</a><a href="#about">About</a><a href="#fun">Fun projects</a><a href="#contact">Get in touch</a></div></details>
     </div>
   </header>
 
@@ -405,10 +411,10 @@ html[data-paused="true"] *,html[data-paused="true"] *::before,html[data-paused="
       <div class="hcopy">
         <p class="label ld" style="--d:.1s">R. Veera Manoharan · MBA candidate, IIM Lucknow</p>
         <h1 class="statement" id="h1">
-          <span class="w" style="--i:0"><span class="wi">Product</span></span> <span class="w" style="--i:1"><span class="wi">manager</span></span> <span class="w" style="--i:2"><span class="wi">for</span></span>
-          <em class="w" style="--i:3"><span class="wi">consumer AI.</span><svg viewBox="0 0 300 30" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M4 18C40 8 80 24 130 14S210 6 250 16 288 12 296 8"/></svg></em>
+          <span class="w" style="--i:0"><span class="wi">AI</span></span> <span class="w" style="--i:1"><span class="wi">product</span></span> <span class="w" style="--i:2"><span class="wi">manager,</span></span>
+          <em class="w" style="--i:3"><span class="wi">with a strategy lens.</span><svg viewBox="0 0 300 30" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M4 18C40 8 80 24 130 14S210 6 250 16 288 12 296 8"/></svg></em>
         </h1>
-        <p class="sub ld" style="--d:.9s">After six years in XR product design and enterprise delivery at HCLTech, I'm moving into product management. I designed and built <b>Atélier</b>, a handwriting-first notes app for iPad, and shipped <b>Alpine Skies</b>, a browser flight sim that is live. Each case shows the bet, the trade-offs, and what has been measured so far.</p>
+        <p class="sub ld" style="--d:.9s">I build and test AI products end to end: find the problem by talking to users, set the metric, ship a prototype, and say plainly what the numbers show. Strategy and consulting are my second path. Six years at HCLTech, now an MBA at IIM Lucknow. Four cases below, each with the bet, the trade-offs and what has been measured so far.</p>
         <div class="ld" style="--d:1.2s"><div class="cta-row">
           <a class="pill go" href="#work" data-track="hero-cta">See the work</a>
           <a class="pill ghost" href="https://www.linkedin.com/in/veeramanoharan/" rel="noopener" data-track="linkedin">LinkedIn</a>
@@ -430,10 +436,10 @@ html[data-paused="true"] *,html[data-paused="true"] *::before,html[data-paused="
         </div>
       </div>
       <dl class="facts ld" style="--d:1.55s">
-        <div><dt class="label">Based</dt><dd>Lucknow, India</dd></div>
-        <div><dt class="label">Focus</dt><dd>Consumer AI products</dd></div>
+        <div><dt class="label">Based</dt><dd>Bangalore, India</dd></div>
+        <div><dt class="label">Focus</dt><dd>AI product management</dd></div>
         <div><dt class="label">Background</dt><dd>IISc, NID, 6 years at HCLTech</dd></div>
-        <div><dt class="label">Open to</dt><dd>PM roles, India and the Middle East</dd></div>
+        <div><dt class="label">Open to</dt><dd>AI PM and product roles; strategy and consulting second</dd></div>
       </dl>
       <div class="below ld" style="--d:1.7s">
         <span></span>
@@ -443,28 +449,34 @@ html[data-paused="true"] *,html[data-paused="true"] *::before,html[data-paused="
 
     <!-- SELECTED WORK -->
     <section class="blk" id="work" aria-labelledby="hw">
-      <div class="sh"><h2 id="hw"><span class="hl" aria-hidden="true"></span>Selected work</h2><span class="label rv">Three cases, each with its status</span></div>
+      <div class="sh"><h2 id="hw"><span class="hl" aria-hidden="true"></span>Selected work</h2><span class="label rv">Four cases, each with its status</span></div>
       <div class="work">
         <div class="col">
-          <article class="card rv live" data-cur="Read case">
+          <article class="card rv live">
             <div class="img"><div class="inner"><img class="shot hov" src="images/atelier-cover.webp" width="1600" height="1200" alt="Atélier on two iPads: the note library with handwriting search, and a page of handwritten ink" loading="lazy" decoding="async"></div></div>
             <div class="meta"><span class="chip lav">B2C · AI · Built</span><span class="year">2026 · 6 min read</span></div>
             <h3><a class="stretch" href="case-atelier.html" data-track="case-open" data-track-label="01">Atélier: an AI notes app for iPad</a></h3>
             <p class="line">Search handwritten notes by meaning, summarise them in one tap. Feature-complete and demoed; the search eval is next.</p>
           </article>
-          <article class="card rv live" data-cur="Read case">
-            <div class="img" style="--ar:5/4"><div class="inner grain mesh g-rose"><svg class="hov" aria-hidden="true"><use href="#a03"/></svg></div></div>
-            <div class="meta"><span class="chip rose">Discovery · In progress</span><span class="year">2026 · 5 min read</span></div>
-            <h3><a class="stretch" href="case-voice-capture.html" data-track="case-open" data-track-label="03">Voice capture for Hinglish: testing whether to build</a></h3>
-            <p class="line">Do any engines beat built-in recognition on Hinglish by enough to matter, and would anyone pay? Thresholds set before testing.</p>
+          <article class="card rv live">
+            <div class="img" style="--ar:5/4"><div class="inner grain mesh g-sky"><svg class="hov" aria-hidden="true"><use href="#a05"/></svg></div></div>
+            <div class="meta"><span class="chip sky">Dev tool · AI · Open source</span><span class="year">2026 · 7 min read</span></div>
+            <h3><a class="stretch" href="case-ensemble.html" data-track="case-open" data-track-label="03">Ensemble: an AI lead directing cheaper AI workers</a></h3>
+            <p class="line">A strong model plans and reviews, cheaper ones build in parallel. A small cost study found no clear saving at this size.</p>
           </article>
         </div>
         <div class="col offset">
-          <article class="card rv live" data-cur="Read case">
-            <div class="img" style="--ar:16/10"><div class="inner"><img class="shot hov" src="images/alpine-cover.webp" width="1600" height="900" alt="Alpine Skies key art: a jet flying down a green Swiss valley toward a ring" loading="lazy" decoding="async"></div></div>
-            <div class="meta"><span class="chip lime">B2C · Live</span><span class="year">2026 · 6 min read</span></div>
-            <h3><a class="stretch" href="case-alpine-skies.html" data-track="case-open" data-track-label="02">Alpine Skies: a browser flight sim, shipped and live</a></h3>
-            <p class="line">A free flight sim anyone can play in seconds, no sign-up wall. Cold load cut from 8.4 s to about 4.6 s.</p>
+          <article class="card rv live">
+            <div class="img" style="--ar:16/9"><div class="inner"><img class="shot hov" src="images/ticketpilot-thumb.webp" width="760" height="428" alt="TicketPilot title card: less ticket bouncing, a clearer path to resolution" loading="lazy" decoding="async"></div></div>
+            <div class="meta"><span class="chip peach">B2B · AI · Prototype</span><span class="year">2026 · 7 min read</span></div>
+            <h3><a class="stretch" href="case-ticketpilot.html" data-track="case-open" data-track-label="02">TicketPilot: an AI router that failed its own test</a></h3>
+            <p class="line">Built from 7,554 real incidents. It scored 10% against a keyword rule's 90%, so the recommendation is to hold.</p>
+          </article>
+          <article class="card rv live">
+            <div class="img" style="--ar:5/4"><div class="inner grain mesh g-rose"><svg class="hov" aria-hidden="true"><use href="#a03"/></svg></div></div>
+            <div class="meta"><span class="chip rose">Discovery · In progress</span><span class="year">2026 · 6 min read</span></div>
+            <h3><a class="stretch" href="case-voice-capture.html" data-track="case-open" data-track-label="04">Voice capture for Hinglish: testing whether to build</a></h3>
+            <p class="line">Do any engines beat built-in recognition on Hinglish by enough to matter, and would anyone pay? Thresholds set before testing.</p>
           </article>
         </div>
       </div>
@@ -481,38 +493,41 @@ html[data-paused="true"] *,html[data-paused="true"] *::before,html[data-paused="
             <span class="ocenter">product</span>
           </div>
           <div class="about-copy">
-            <p class="lead rv">Product sits where user, business and technology overlap. I came to it from design: IISc and NID, then six years at HCLTech in XR product design and enterprise delivery for regulated industries. At IIM Lucknow I'm moving into product management.</p>
+            <p class="lead rv">Product sits where user, business and technology overlap. My core is AI product management: talk to users, set the metric, ship, measure. Strategy and consulting are my second path. Background in design (IISc, NID) and six years at HCLTech; now doing my MBA at IIM Lucknow.</p>
             <dl class="rv">
               <div><dt class="label">Recognition</dt><dd>Red Dot Design Award · US design patent, granted · Intel × IIM Lucknow, 3rd runner-up</dd></div>
-              <div><dt class="label">Building now</dt><dd>Atélier, a handwriting-first notes app for iPad · Alpine Skies, a browser flight sim</dd></div>
+              <div><dt class="label">Building now</dt><dd>Atélier, a handwriting-first notes app for iPad · TicketPilot, an AI ticket router · Ensemble, a tool for directing AI coding agents</dd></div>
             </dl>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- AI LABS -->
-    <section class="blk" id="labs" aria-labelledby="hl">
-      <div class="sh"><h2 id="hl">AI Labs</h2><span class="label rv">Small things built to learn</span></div>
+    <!-- FUN PROJECTS -->
+    <section class="blk" id="fun" aria-labelledby="hl">
+      <div class="sh"><h2 id="hl">Fun projects</h2><span class="label rv">Built to play and to learn</span></div>
       <div class="labs">
-        <div class="lab rv"><div class="th grain mesh g-lav"><svg aria-hidden="true"><use href="#l2"/></svg></div><b>Papertrail</b><span>Ask a stack of PDFs a question; every answer cites the file and page. Learned: never mix embeddings from two models in one index.</span></div>
-        <a class="lab rv" href="case-router.html" data-cur="Open" data-track="lab-open" data-track-label="router"><div class="th grain mesh g-sky"><svg aria-hidden="true"><use href="#a05"/></svg></div><b>Multi-agent router</b><span>A frontier model plans and reviews; low-cost models do the work. Testing whether it cuts cost per task by 40% for no more than 5 points of quality. Benchmark running.</span></a>
+        <a class="lab rv" href="case-alpine-skies.html" data-track="fun-open" data-track-label="alpine"><div class="th"><img src="images/alpine-cover.webp" width="1600" height="900" alt="Alpine Skies key art: a jet flying down a green Swiss valley toward a ring" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div><b>Alpine Skies</b><span>A free flight sim over the Swiss Alps that runs in a browser tab, no sign-up. Live, with a short write-up of the product calls.</span></a>
+        <a class="lab rv" href="fun/game-theory-playground.html" data-track="fun-open" data-track-label="game-theory"><div class="th grain mesh g-butter"><svg aria-hidden="true"><use href="#f1"/></svg></div><b>Game Theory Playground</b><span>The Crossroads Guild: play the prisoner's dilemma, a tournament, an evolving valley, an ultimatum game and an auction.</span></a>
+        <a class="lab rv" href="fun/nuit-loop-studio.html" data-track="fun-open" data-track-label="nuit-loop"><div class="th grain mesh g-lav"><svg aria-hidden="true"><use href="#f2"/></svg></div><b>Nuit Loop Studio</b><span>A small loop studio: chords, a melody and tab, with slowed, reverb and delay effects.</span></a>
+        <a class="lab rv" href="fun/ocean-waves-simulator.html" data-track="fun-open" data-track-label="ocean"><div class="th grain mesh g-mint"><svg aria-hidden="true"><use href="#f3"/></svg></div><b>Aegis HydroSim</b><span>A 3D ocean wave simulator with a boat and several camera views, built on three.js.</span></a>
+        <div class="lab rv"><div class="th grain mesh g-sky"><svg aria-hidden="true"><use href="#l2"/></svg></div><b>Papertrail</b><span>Ask a stack of PDFs a question; every answer cites the file and page. Learned: never mix embeddings from two models in one index.</span></div>
       </div>
     </section>
   </main>
 
   <footer class="end" id="contact">
-    <p class="close rv">Hiring for consumer or AI product? Let's talk.</p>
+    <p class="close rv">Hiring for AI product or strategy? Let's talk.</p>
     <div class="mailwrap">
-      <span class="mailmask"><button class="mail" id="mail" type="button" data-cur="Copy" aria-label="Copy email address veeradwork@gmail.com">veeradwork@gmail.com</button></span>
+      <span class="mailmask"><button class="mail" id="mail" type="button" aria-label="Copy email address veeradwork@gmail.com">veeradwork@gmail.com</button></span>
       <span class="copychip" aria-hidden="true">Copy</span>
       <svg class="plane" viewBox="0 0 74 60" aria-hidden="true"><path d="M4 30L70 6 52 54 36 36Z"/><path d="M36 36L70 6M36 36l-4 16 10-10"/><path d="M2 46c6 2 12 2 18-2" stroke-dasharray="2 5"/></svg>
     </div>
     <div class="fmeta rv">
-      <p class="clock"><i aria-hidden="true"></i><span>Lucknow, India · <time id="clock">--:--</time> IST</span></p>
+      <p class="clock"><i aria-hidden="true"></i><span>Bangalore, India · <time id="clock">--:--</time> IST</span></p>
       <div class="socials"><a class="pill ghost sm" href="https://www.linkedin.com/in/veeramanoharan/" rel="noopener" data-track="linkedin">LinkedIn</a></div>
     </div>
-    <div class="legal"><span>© R. Veera Manoharan</span><span>Lucknow, India</span></div>
+    <div class="legal"><span>© R. Veera Manoharan</span><span>Bangalore, India</span></div>
   </footer>
 </div>
 
@@ -633,16 +648,6 @@ html[data-paused="true"] *,html[data-paused="true"] *::before,html[data-paused="
     else els.forEach(function(el){el.classList.add('in')});
   }
   if(MOTION)choreo();else simple();
-
-  /* cursor ring: grows into a label over cards, shrinks to a dot over links */
-  if(fine&&!reduce){
-    var cur=document.createElement('div');cur.className='cur';cur.setAttribute('aria-hidden','true');cur.innerHTML='<span></span>';document.body.appendChild(cur);
-    var lbl=cur.firstChild,tx=-99,ty=-99,x=-99,y=-99,LAG=off?1:.2;
-    addEventListener('mousemove',function(e){tx=e.clientX;ty=e.clientY;cur.classList.add('on')});
-    document.addEventListener('mouseleave',function(){cur.classList.remove('on')});
-    (function mv(){x+=(tx-x)*LAG;y+=(ty-y)*LAG;cur.style.transform='translate('+x.toFixed(1)+'px,'+y.toFixed(1)+'px)';requestAnimationFrame(mv)})();
-    document.addEventListener('mouseover',function(e){var t=e.target.closest('[data-cur],a,button,summary');cur.classList.remove('big','small');if(!t)return;if(t.dataset.cur){lbl.textContent=t.dataset.cur;cur.classList.add('big')}else cur.classList.add('small')});
-  }
 
   /* email copy */
   var mail=document.getElementById('mail'),toast=document.getElementById('toast'),tt;

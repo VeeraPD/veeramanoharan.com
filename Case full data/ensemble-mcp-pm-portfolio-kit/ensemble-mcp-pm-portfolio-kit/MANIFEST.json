@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-23",
+  "scope": "PM writing kit; no source code or raw execution data",
+  "copied_documents": [
+    {
+      "file": "02-evidence/sonnet-study-report.md",
+      "source": "<PROJECTS_ROOT>/ensemble-validation/runs/cost-20261023T032855Z/REPORT.md"
+    },
+    {
+      "file": "02-evidence/opus-pilot-report.md",
+      "source": "<PROJECTS_ROOT>/ensemble-validation/runs/opus-pilot-20261023T034713Z/REPORT.md"
+    },
+    {
+      "file": "02-evidence/shared-acceptance-report.md",
+      "source": "<PROJECTS_ROOT>/ensemble-validation/acceptance/results/REPORT.md"
+    },
+    {
+      "file": "02-evidence/consolidated-study-report.md",
+      "source": "<PROJECTS_ROOT>/Atelier/reports/ensemble-mcp-study-report.md"
+    },
+    {
+      "file": "03-publishing/linkedin-post.md",
+      "source": "<PROJECTS_ROOT>/ensemble-case-study/linkedin-post.md"
+    },
+    {
+      "file": "03-publishing/carousel.html",
+      "source": "<PROJECTS_ROOT>/ensemble-case-study/carousel.html"
+    },
+    {
+      "file": "03-publishing/ensemble-mcp-carousel.pdf",
+      "source": "<PROJECTS_ROOT>/ensemble-case-study/ensemble-mcp-carousel.pdf"
+    },
+    {
+      "file": "03-publishing/carousel-images/page-01.png",
+      "source": "<PROJECTS_ROOT>/ensemble-case-study/carousel-images/page-01.png"
+    },
+    {
+      "file": "03-publishing/carousel-images/page-02.png",
+      "source": "<PROJECTS_ROOT>/ensemble-case-study/carousel-images/page-02.png"
+    },
+    {
+      "file": "03-publishing/carousel-images/page-03.png",
+      "source": "<PROJECTS_ROOT>/ensemble-case-study/carousel-images/page-03.png"
+    },
+    {
+      "file": "03-publishing/carousel-images/page-04.png",
+      "source": "<PROJECTS_ROOT>/ensemble-case-study/carousel-images/page-04.png"
+    }
+  ],
+  "generated_documents": "PM briefs, claim index, outline, source index and CSV extracted from final run results",
+  "exclusions": "Credentials, source files, generated implementations, harnesses, raw API logs, caches, git history and obsolete versions"
+}

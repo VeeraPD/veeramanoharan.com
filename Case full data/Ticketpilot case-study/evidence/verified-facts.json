@@ -1,0 +1,56 @@
+{
+  "status": "Source-derived checks; not a new model evaluation",
+  "process": {
+    "analyzed_cases": 7554,
+    "handoffs": 9454,
+    "mean_handoffs": 1.251522372253111,
+    "multi_team_case_rate": 0.5056923484246757,
+    "pingpong_case_rate": 0.1558114906010061,
+    "revisit_case_rate": 0.16653428647074398,
+    "mean_pre_transfer_elapsed_hours": 64.88580991584973
+  },
+  "events": 65533,
+  "offline_counts": {
+    "test_cases": 50,
+    "keyword_correct": 45,
+    "lexical_assigned_correct": 5,
+    "recommendations_correct": 44,
+    "review": 45,
+    "non_abstained": 5
+  },
+  "synthetic_input_sizes": {
+    "history": 500,
+    "test": 50,
+    "articles": 30,
+    "process_cases": 7554
+  },
+  "zero_of_five_one_sided_95_error_upper_bound": 0.4507197283469412,
+  "independent_zero_error_cases_needed_for_5pct_bound": 59,
+  "business_case": {
+    "currency": "USD",
+    "annual_tickets": 20000,
+    "observed_handoffs_per_case": 1.251522372253111,
+    "assumed_reduction": 0.25,
+    "active_minutes": 10.0,
+    "hourly_cost": 45.0,
+    "assumed_review_rate": 0.2,
+    "review_minutes": 5.0,
+    "build_cost": 12000.0,
+    "monthly_platform": 150.0,
+    "monthly_model": 100.0,
+    "monthly_operations": 300.0,
+    "modeled_current_annual_handoff_labor_cost": 187728.35583796666,
+    "annual_avoided_handoffs": 6257.6118612655555,
+    "gross_labor_hours_saved": 1042.935310210926,
+    "annual_review_hours": 333.3333333333333,
+    "net_labor_hours_saved": 709.6019768775927,
+    "annual_run_cost": 6600.0,
+    "year_one_tco": 18600.0,
+    "annual_net_value": 25332.088959491673,
+    "year_one_net_value": 13332.088959491673,
+    "payback_months": 5.6844897485663015
+  },
+  "nsm_value": null,
+  "nsm_status": "Proposed; not instrumented or observed",
+  "deployment_decision": "HOLD current lexical router"
+}

@@ -1,0 +1,31 @@
+article_id,title,text,steps,updated_at,status
+KB-001,Connectivity runbook 1,VPN disconnects while connected to office wifi,Reconnect the VPN after updating the client and checking the gateway health.,2026-09-15,current
+KB-002,Reporting runbook 1,Sales dashboard access denied after release v2.3,Restore the reporting application role mapping introduced in v2.3; verify dashboard access.,2026-09-15,current
+KB-003,Endpoint runbook 1,Suspicious attachment opened and endpoint malware alert,Isolate the endpoint and ask Security to investigate the attachment and endpoint alert.,2026-09-15,current
+KB-004,Devices runbook 1,Laptop screen flickering with display artifacts,"Test an external display, update the approved display driver, then arrange panel replacement if needed.",2026-09-15,current
+KB-005,Identity runbook 1,Account locked and MFA recovery code rejected,"Verify identity using the approved recovery process, unlock the account, and re-enroll MFA.",2026-09-15,current
+KB-006,Messaging runbook 1,Outlook mailbox not receiving messages quota full,"Check mailbox quota, archive approved messages, and verify incoming mail delivery.",2026-09-15,current
+KB-007,Payroll runbook 1,Payroll portal login fails after employee record transfer,Synchronize the employee payroll record and restore the payroll portal entitlement.,2026-09-15,current
+KB-008,Printing runbook 1,Printer not working on third floor paper jam,Clear the paper path using the device guide and ask Facilities to service the feed roller.,2026-09-15,current
+KB-009,Reporting runbook 1,Reporting export hangs and sales report is blank,Restart the reporting export worker and retry the job after confirming queue health.,2026-09-15,current
+KB-010,Connectivity runbook 1,Conference room wifi drops packets during meetings,Check the access point health and move affected clients to the healthy office network.,2026-09-15,current
+KB-011,Connectivity runbook 2,VPN disconnects while connected to office wifi,Reconnect the VPN after updating the client and checking the gateway health.,2026-09-15,current
+KB-012,Reporting runbook 2,Sales dashboard access denied after release v2.3,Restore the reporting application role mapping introduced in v2.3; verify dashboard access.,2026-09-15,current
+KB-013,Endpoint runbook 2,Suspicious attachment opened and endpoint malware alert,Isolate the endpoint and ask Security to investigate the attachment and endpoint alert.,2026-09-15,current
+KB-014,Devices runbook 2,Laptop screen flickering with display artifacts,"Test an external display, update the approved display driver, then arrange panel replacement if needed.",2026-09-15,current
+KB-015,Identity runbook 2,Account locked and MFA recovery code rejected,"Verify identity using the approved recovery process, unlock the account, and re-enroll MFA.",2026-09-15,current
+KB-016,Messaging runbook 2,Outlook mailbox not receiving messages quota full,"Check mailbox quota, archive approved messages, and verify incoming mail delivery.",2026-09-15,current
+KB-017,Payroll runbook 2,Payroll portal login fails after employee record transfer,Synchronize the employee payroll record and restore the payroll portal entitlement.,2026-09-15,current
+KB-018,Printing runbook 2,Printer not working on third floor paper jam,Clear the paper path using the device guide and ask Facilities to service the feed roller.,2026-09-15,current
+KB-019,Reporting runbook 2,Reporting export hangs and sales report is blank,Restart the reporting export worker and retry the job after confirming queue health.,2026-09-15,current
+KB-020,Connectivity runbook 2,Conference room wifi drops packets during meetings,Check the access point health and move affected clients to the healthy office network.,2026-09-15,current
+KB-021,Connectivity runbook 3,VPN disconnects while connected to office wifi,Reconnect the VPN after updating the client and checking the gateway health.,2024-01-01,retired
+KB-022,Reporting runbook 3,Sales dashboard access denied after release v2.3,Restore the reporting application role mapping introduced in v2.3; verify dashboard access.,2024-01-01,retired
+KB-023,Endpoint runbook 3,Suspicious attachment opened and endpoint malware alert,Isolate the endpoint and ask Security to investigate the attachment and endpoint alert.,2024-01-01,retired
+KB-024,Devices runbook 3,Laptop screen flickering with display artifacts,"Test an external display, update the approved display driver, then arrange panel replacement if needed.",2024-01-01,retired
+KB-025,Identity runbook 3,Account locked and MFA recovery code rejected,"Verify identity using the approved recovery process, unlock the account, and re-enroll MFA.",2024-01-01,retired
+KB-026,Messaging runbook 3,Outlook mailbox not receiving messages quota full,"Check mailbox quota, archive approved messages, and verify incoming mail delivery.",2024-01-01,retired
+KB-027,Payroll runbook 3,Payroll portal login fails after employee record transfer,Synchronize the employee payroll record and restore the payroll portal entitlement.,2024-01-01,retired
+KB-028,Printing runbook 3,Printer not working on third floor paper jam,Clear the paper path using the device guide and ask Facilities to service the feed roller.,2024-01-01,retired
+KB-029,Reporting runbook 3,Reporting export hangs and sales report is blank,Restart the reporting export worker and retry the job after confirming queue health.,2024-01-01,retired
+KB-030,Connectivity runbook 3,Conference room wifi drops packets during meetings,Check the access point health and move affected clients to the healthy office network.,2024-01-01,retired

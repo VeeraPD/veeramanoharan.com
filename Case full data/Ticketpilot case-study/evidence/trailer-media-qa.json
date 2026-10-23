@@ -1,0 +1,28 @@
+{
+  "duration_seconds": 60.0,
+  "resolution": "1920x1080",
+  "fps": 30,
+  "frames": 1800,
+  "codecs": "H.264/AAC",
+  "bytes": 3130052,
+  "full_decode": "passed",
+  "audio": {
+    "mix": {
+      "mean_volume": -23.1,
+      "max_volume": -1.8
+    },
+    "music_in_pause": {
+      "mean_volume": -30.9,
+      "max_volume": -20.9
+    }
+  },
+  "caption_cues": 11,
+  "caption_overlap": false,
+  "source": "Previously approved real-app recording: output/video/raw.webm",
+  "visual_review": "Updated title, automatic-classification label, routing-approval explanation and IT service manager role inspected from final export. Captions clear of app and callouts.",
+  "full_walkthrough": "Preserved",
+  "runtime_note": "60.000-second container; 1,800 video frames; silent audio tail padded to the exact one-minute boundary.",
+  "classification": "TicketPilot classifies; Daniel approves or overrides routing",
+  "roles": "Maya: sales employee; Daniel: support engineer; Elena: IT service manager",
+  "music": "Original procedural instrumental; sidechain ducking; fades"
+}

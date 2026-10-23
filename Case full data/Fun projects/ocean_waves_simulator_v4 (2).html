@@ -1,0 +1,1757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Aegis HydroSim v4</title>
+  <style>/* Tailwind v3.4 compiled subset */
+*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/*! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.container{width:100%}@media (min-width:640px){.container{max-width:640px}}@media (min-width:768px){.container{max-width:768px}}@media (min-width:1024px){.container{max-width:1024px}}@media (min-width:1280px){.container{max-width:1280px}}@media (min-width:1536px){.container{max-width:1536px}}.pointer-events-none{pointer-events:none}.pointer-events-auto{pointer-events:auto}.visible{visibility:visible}.absolute{position:absolute}.relative{position:relative}.inset-0{inset:0}.-bottom-0\.5{bottom:-.125rem}.-right-0\.5{right:-.125rem}.bottom-0{bottom:0}.bottom-4{bottom:1rem}.left-4{left:1rem}.right-4{right:1rem}.top-0{top:0}.top-24{top:6rem}.top-4{top:1rem}.z-0{z-index:0}.z-10{z-index:10}.z-20{z-index:20}.z-50{z-index:50}.col-span-2{grid-column:span 2/span 2}.mb-2{margin-bottom:.5rem}.mr-2{margin-right:.5rem}.mt-1{margin-top:.25rem}.mt-4{margin-top:1rem}.block{display:block}.flex{display:flex}.grid{display:grid}.hidden{display:none}.h-10{height:2.5rem}.h-11{height:2.75rem}.h-2{height:.5rem}.h-2\.5{height:.625rem}.h-4{height:1rem}.h-5{height:1.25rem}.h-8{height:2rem}.h-9{height:2.25rem}.h-full{height:100%}.max-h-\[calc\(100vh-200px\)\]{max-height:calc(100vh - 200px)}.w-1\.5{width:.375rem}.w-10{width:2.5rem}.w-11{width:2.75rem}.w-2\.5{width:.625rem}.w-4{width:1rem}.w-5{width:1.25rem}.w-80{width:20rem}.w-9{width:2.25rem}.w-full{width:100%}.w-px{width:1px}.-translate-x-\[115\%\]{--tw-translate-x:-115%}.-translate-x-\[115\%\],.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@keyframes pulse{50%{opacity:.5}}.animate-pulse{animation:pulse 2s cubic-bezier(.4,0,.6,1) infinite}.resize{resize:both}.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-center{align-items:center}.items-baseline{align-items:baseline}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:.25rem}.gap-1\.5{gap:.375rem}.gap-2{gap:.5rem}.gap-3{gap:.75rem}.gap-3\.5{gap:.875rem}.gap-4{gap:1rem}.gap-5{gap:1.25rem}.space-y-1>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.25rem*var(--tw-space-y-reverse))}.space-y-2\.5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.625rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.625rem*var(--tw-space-y-reverse))}.space-y-3>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.75rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.75rem*var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.overflow-y-auto{overflow-y:auto}.whitespace-nowrap{white-space:nowrap}.rounded{border-radius:.25rem}.rounded-2xl{border-radius:1rem}.rounded-3xl{border-radius:1.5rem}.rounded-full{border-radius:9999px}.rounded-md{border-radius:.375rem}.rounded-xl{border-radius:.75rem}.border{border-width:1px}.border-2{border-width:2px}.border-t{border-top-width:1px}.border-emerald-500\/30{border-color:rgba(16,185,129,.3)}.border-sky-500\/30{border-color:rgba(14,165,233,.3)}.border-sky-500\/40{border-color:rgba(14,165,233,.4)}.border-slate-900{--tw-border-opacity:1;border-color:rgb(15 23 42/var(--tw-border-opacity,1))}.border-white\/10{border-color:hsla(0,0%,100%,.1)}.border-white\/20{border-color:hsla(0,0%,100%,.2)}.border-white\/5{border-color:hsla(0,0%,100%,.05)}.border-t-sky-400{--tw-border-opacity:1;border-top-color:rgb(56 189 248/var(--tw-border-opacity,1))}.bg-\[\#010814\]{--tw-bg-opacity:1;background-color:rgb(1 8 20/var(--tw-bg-opacity,1))}.bg-amber-400{--tw-bg-opacity:1;background-color:rgb(251 191 36/var(--tw-bg-opacity,1))}.bg-emerald-400{--tw-bg-opacity:1;background-color:rgb(52 211 153/var(--tw-bg-opacity,1))}.bg-emerald-500\/20{background-color:rgba(16,185,129,.2)}.bg-sky-500\/20{background-color:rgba(14,165,233,.2)}.bg-slate-800{--tw-bg-opacity:1;background-color:rgb(30 41 59/var(--tw-bg-opacity,1))}.bg-slate-900\/60{background-color:rgba(15,23,42,.6)}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255/var(--tw-bg-opacity,1))}.bg-white\/10{background-color:hsla(0,0%,100%,.1)}.bg-gradient-to-r{background-image:linear-gradient(to right,var(--tw-gradient-stops))}.bg-gradient-to-tr{background-image:linear-gradient(to top right,var(--tw-gradient-stops))}.from-emerald-500{--tw-gradient-from:#10b981 var(--tw-gradient-from-position);--tw-gradient-to:rgba(16,185,129,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.from-sky-600{--tw-gradient-from:#0284c7 var(--tw-gradient-from-position);--tw-gradient-to:rgba(2,132,199,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.via-cyan-500{--tw-gradient-to:rgba(6,182,212,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),#06b6d4 var(--tw-gradient-via-position),var(--tw-gradient-to)}.to-sky-400{--tw-gradient-to:#38bdf8 var(--tw-gradient-to-position)}.to-teal-400{--tw-gradient-to:#2dd4bf var(--tw-gradient-to-position)}.p-1\.5{padding:.375rem}.p-2{padding:.5rem}.p-4{padding:1rem}.px-1{padding-left:.25rem;padding-right:.25rem}.px-2{padding-left:.5rem;padding-right:.5rem}.px-3{padding-left:.75rem;padding-right:.75rem}.px-3\.5{padding-left:.875rem;padding-right:.875rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.py-0\.5{padding-top:.125rem;padding-bottom:.125rem}.py-1\.5{padding-top:.375rem;padding-bottom:.375rem}.py-2\.5{padding-top:.625rem;padding-bottom:.625rem}.py-3{padding-top:.75rem;padding-bottom:.75rem}.pt-2{padding-top:.5rem}.font-mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-\[9px\]{font-size:9px}.text-base{font-size:1rem;line-height:1.5rem}.text-sm{font-size:.875rem;line-height:1.25rem}.text-xs{font-size:.75rem;line-height:1rem}.font-bold{font-weight:700}.font-medium{font-weight:500}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.leading-none{line-height:1}.leading-tight{line-height:1.25}.tracking-wider{letter-spacing:.05em}.text-amber-300{--tw-text-opacity:1;color:rgb(252 211 77/var(--tw-text-opacity,1))}.text-emerald-300{--tw-text-opacity:1;color:rgb(110 231 183/var(--tw-text-opacity,1))}.text-emerald-400{--tw-text-opacity:1;color:rgb(52 211 153/var(--tw-text-opacity,1))}.text-purple-400{--tw-text-opacity:1;color:rgb(192 132 252/var(--tw-text-opacity,1))}.text-sky-300{--tw-text-opacity:1;color:rgb(125 211 252/var(--tw-text-opacity,1))}.text-sky-400{--tw-text-opacity:1;color:rgb(56 189 248/var(--tw-text-opacity,1))}.text-slate-200{--tw-text-opacity:1;color:rgb(226 232 240/var(--tw-text-opacity,1))}.text-slate-300{--tw-text-opacity:1;color:rgb(203 213 225/var(--tw-text-opacity,1))}.text-slate-400{--tw-text-opacity:1;color:rgb(148 163 184/var(--tw-text-opacity,1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255/var(--tw-text-opacity,1))}.underline{text-decoration-line:underline}.opacity-0{opacity:0}.shadow{--tw-shadow:0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px -1px rgba(0,0,0,.1);--tw-shadow-colored:0 1px 3px 0 var(--tw-shadow-color),0 1px 2px -1px var(--tw-shadow-color)}.shadow,.shadow-lg{box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.shadow-lg{--tw-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color),0 4px 6px -4px var(--tw-shadow-color)}.shadow-sky-500\/40{--tw-shadow-color:rgba(14,165,233,.4);--tw-shadow:var(--tw-shadow-colored)}.outline{outline-style:solid}.blur{--tw-blur:blur(8px)}.blur,.invert{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.invert{--tw-invert:invert(100%)}.filter{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.backdrop-filter{-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.duration-300{transition-duration:.3s}.hover\:text-sky-300:hover{--tw-text-opacity:1;color:rgb(125 211 252/var(--tw-text-opacity,1))}@media (min-width:640px){.sm\:block{display:block}}@media (min-width:768px){.md\:left-auto{left:auto}.md\:right-4{right:1rem}.md\:justify-end{justify-content:flex-end}}
+</style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    body, html {
+      margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden;
+      background-color: #010814; font-family: 'Inter', sans-serif; color: #e2e8f0;
+      user-select: none; -webkit-user-select: none;
+    }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+    #webgl-container canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    .nautical-glass {
+      background: rgba(8, 18, 37, 0.62);
+      backdrop-filter: blur(18px) saturate(140%);
+      -webkit-backdrop-filter: blur(18px) saturate(140%);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+    .btn-nautical {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-nautical:hover { background: rgba(255, 255, 255, 0.14); border-color: rgba(255, 255, 255, 0.28); transform: translateY(-1px); }
+    .btn-nautical:active { transform: translateY(1px); }
+    .btn-nautical.active {
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.35), rgba(2, 132, 199, 0.25));
+      border-color: rgba(56, 189, 248, 0.7); color: #38bdf8; box-shadow: 0 0 18px rgba(56, 189, 248, 0.35);
+    }
+    input[type=range] { -webkit-appearance: none; width: 100%; height: 4px; background: rgba(255,255,255,0.12); border-radius: 4px; outline: none; }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%; background: #38bdf8; cursor: pointer;
+      box-shadow: 0 0 10px rgba(56,189,248,0.8); border: 2px solid #fff; transition: transform 0.15s ease;
+    }
+    input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.3); }
+    input[type=range]::-moz-range-thumb { width: 12px; height: 12px; border-radius: 50%; background: #38bdf8; border: 2px solid #fff; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 2px; }
+    #attitude-gauge, #compass-gauge { border-radius: 50%; box-shadow: inset 0 0 12px rgba(0,0,0,0.8), 0 0 8px rgba(56,189,248,0.25); }
+    #loader { transition: opacity 0.8s ease; }
+    .spin { animation: spin 1s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body class="w-full h-full relative overflow-hidden">
+
+  <div id="webgl-container" class="absolute inset-0 w-full h-full z-0"></div>
+  <div id="lightning-flash" class="absolute inset-0 bg-white pointer-events-none opacity-0 z-10"></div>
+
+  <!-- Loader -->
+  <div id="loader" class="absolute inset-0 z-50 flex flex-col items-center justify-center bg-[#010814]">
+    <div class="w-10 h-10 rounded-full border-2 border-sky-500/30 border-t-sky-400 spin"></div>
+    <div id="loader-text" class="mt-4 text-xs font-mono text-slate-400 tracking-wider">BUILDING OCEAN...</div>
+  </div>
+
+  <!-- Top bar -->
+  <header class="absolute top-4 left-4 right-4 z-20 flex flex-wrap items-center justify-between gap-3 pointer-events-none">
+    <div class="nautical-glass px-4 py-2.5 rounded-2xl flex items-center gap-3.5 pointer-events-auto">
+      <div class="relative w-9 h-9 rounded-xl bg-gradient-to-tr from-sky-600 via-cyan-500 to-teal-400 flex items-center justify-center shadow-lg shadow-sky-500/40">
+        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        <span class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-slate-900 animate-pulse"></span>
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="text-sm font-bold tracking-wider text-white uppercase">Aegis HydroSim</span>
+          <span class="text-[10px] px-2 py-0.5 rounded-md bg-sky-500/20 text-sky-300 border border-sky-500/40 font-mono font-semibold">v4.0</span>
+        </div>
+        <div class="text-[11px] text-slate-400 leading-none">Gerstner ocean · planar reflections · HDR bloom</div>
+      </div>
+    </div>
+
+    <div class="nautical-glass p-1.5 rounded-2xl flex flex-wrap items-center gap-1.5 pointer-events-auto">
+      <button id="preset-tropical" class="btn-nautical active px-3.5 py-1.5 rounded-xl text-xs font-medium flex items-center gap-2 text-slate-200"><span>☀️</span> Tropical Noon</button>
+      <button id="preset-sunset" class="btn-nautical px-3.5 py-1.5 rounded-xl text-xs font-medium flex items-center gap-2 text-slate-200"><span>🌅</span> Golden Sunset</button>
+      <button id="preset-storm" class="btn-nautical px-3.5 py-1.5 rounded-xl text-xs font-medium flex items-center gap-2 text-slate-200"><span>⛈️</span> North Atlantic Gale</button>
+      <button id="preset-biolum" class="btn-nautical px-3.5 py-1.5 rounded-xl text-xs font-medium flex items-center gap-2 text-slate-200"><span>🌌</span> Bioluminescent</button>
+    </div>
+
+    <div class="nautical-glass px-3 py-1.5 rounded-2xl flex items-center gap-2 pointer-events-auto">
+      <button id="btn-audio-toggle" class="btn-nautical p-2 rounded-xl text-slate-300 flex items-center gap-1.5 text-xs" title="Toggle sound">
+        <svg id="audio-icon-on" class="w-4 h-4 hidden text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>
+        <svg id="audio-icon-off" class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" /></svg>
+        <span id="audio-text" class="text-[11px] font-mono font-medium">AUDIO OFF</span>
+      </button>
+      <button id="btn-panel-toggle" class="btn-nautical p-2 rounded-xl text-slate-300" title="Toggle panel">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" /></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Control panel -->
+  <aside id="marine-panel" class="absolute top-24 left-4 z-20 w-80 max-h-[calc(100vh-200px)] overflow-y-auto nautical-glass p-4 rounded-3xl flex flex-col gap-4 transition-transform duration-300 pointer-events-auto">
+    <div>
+      <div class="flex items-center justify-between mb-2">
+        <label class="text-[11px] font-semibold text-slate-400 tracking-wider uppercase">Camera</label>
+        <span class="text-[10px] text-sky-400 font-mono">[Keys 1-5]</span>
+      </div>
+      <div class="grid grid-cols-2 gap-1.5">
+        <button id="cam-chase" class="btn-nautical active py-1.5 px-2 rounded-xl text-xs font-medium">🚁 Chase Drone</button>
+        <button id="cam-helm" class="btn-nautical py-1.5 px-2 rounded-xl text-xs font-medium">🧭 Helm</button>
+        <button id="cam-bow" class="btn-nautical py-1.5 px-2 rounded-xl text-xs font-medium">⚓ Bow</button>
+        <button id="cam-buoy" class="btn-nautical py-1.5 px-2 rounded-xl text-xs font-medium">🔔 Buoy</button>
+        <button id="cam-orbit" class="btn-nautical col-span-2 py-1.5 px-2 rounded-xl text-xs font-medium">🌐 Free Orbit</button>
+      </div>
+    </div>
+
+    <div class="space-y-3 pt-2 border-t border-white/10">
+      <div class="flex items-center justify-between">
+        <span class="text-[11px] font-semibold text-slate-400 tracking-wider uppercase">Sea State</span>
+        <button id="btn-reset-waves" class="text-[10px] text-sky-400 hover:text-sky-300 underline font-mono">Reset to preset</button>
+      </div>
+      <div class="space-y-1">
+        <div class="flex justify-between text-xs"><span class="text-slate-300">Significant Height (Hs)</span><span id="val-wave-height" class="font-mono text-sky-400 font-semibold">1.8 m</span></div>
+        <input id="slider-wave-height" type="range" min="0.2" max="6.0" step="0.1" value="1.8">
+      </div>
+      <div class="space-y-1">
+        <div class="flex justify-between text-xs"><span class="text-slate-300">Crest Steepness</span><span id="val-choppiness" class="font-mono text-sky-400 font-semibold">0.52</span></div>
+        <input id="slider-choppiness" type="range" min="0.1" max="0.9" step="0.02" value="0.52">
+      </div>
+      <div class="space-y-1">
+        <div class="flex justify-between text-xs"><span class="text-slate-300">Wind (whitecaps, ripples)</span><span id="val-wind-speed" class="font-mono text-sky-400 font-semibold">22 kts</span></div>
+        <input id="slider-wind-speed" type="range" min="3" max="60" step="1" value="22">
+      </div>
+      <div class="space-y-1">
+        <div class="flex justify-between text-xs"><span class="text-slate-300">Dominant Wavelength</span><span id="val-wavelength" class="font-mono text-sky-400 font-semibold">50 m</span></div>
+        <input id="slider-wavelength" type="range" min="20" max="120" step="2" value="50">
+      </div>
+    </div>
+
+    <div class="pt-2 border-t border-white/10 space-y-2.5">
+      <div class="flex items-center justify-between">
+        <span class="text-[11px] font-semibold text-slate-400 tracking-wider uppercase">Twin Outboards</span>
+        <span id="helm-mode-badge" class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-mono">AUTOPILOT</span>
+      </div>
+      <div class="grid grid-cols-2 gap-2 text-xs">
+        <div class="bg-slate-900/60 p-2 rounded-xl border border-white/5">
+          <div class="text-[10px] text-slate-400">THROTTLE</div>
+          <div class="flex items-center justify-between mt-1">
+            <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden mr-2"><div id="throttle-bar" class="bg-gradient-to-r from-emerald-500 to-sky-400 h-full" style="width:58%"></div></div>
+            <span id="throttle-val" class="font-mono text-white text-[11px]">58%</span>
+          </div>
+        </div>
+        <div class="bg-slate-900/60 p-2 rounded-xl border border-white/5">
+          <div class="text-[10px] text-slate-400">HELM</div>
+          <div class="flex items-center justify-between mt-1">
+            <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden mr-2 relative"><div id="rudder-indicator" class="absolute top-0 bottom-0 bg-amber-400 w-1.5" style="left:50%"></div></div>
+            <span id="rudder-val" class="font-mono text-amber-300 text-[11px] whitespace-nowrap">0°</span>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-2">
+        <button id="btn-toggle-manual" class="btn-nautical py-1.5 rounded-xl text-xs font-medium text-slate-200">Manual Helm</button>
+        <button id="btn-recenter-boat" class="btn-nautical py-1.5 rounded-xl text-xs font-medium text-slate-200">Reset Boat</button>
+      </div>
+      <p class="text-[10px] text-slate-400 leading-tight">
+        <kbd class="px-1 py-0.5 bg-white/10 rounded font-mono text-slate-200">W</kbd>/<kbd class="px-1 py-0.5 bg-white/10 rounded font-mono text-slate-200">S</kbd> throttle,
+        <kbd class="px-1 py-0.5 bg-white/10 rounded font-mono text-slate-200">A</kbd>/<kbd class="px-1 py-0.5 bg-white/10 rounded font-mono text-slate-200">D</kbd> steer. Hit big waves fast to get air.
+      </p>
+    </div>
+  </aside>
+
+  <!-- Telemetry -->
+  <aside class="absolute bottom-4 left-4 right-4 md:left-auto md:right-4 z-20 nautical-glass px-5 py-3 rounded-2xl pointer-events-auto flex flex-wrap items-center justify-between md:justify-end gap-5 text-xs font-mono">
+    <div class="flex items-center gap-3">
+      <canvas id="attitude-gauge" width="88" height="88" class="w-11 h-11 border border-white/20"></canvas>
+      <div><div class="text-[9px] text-slate-400 tracking-wider">ATTITUDE</div><div id="tele-pitch-roll" class="text-xs font-semibold text-sky-400">P:+0.0° R:+0.0°</div></div>
+    </div>
+    <div class="hidden sm:block w-px h-8 bg-white/10"></div>
+    <div class="flex items-center gap-3">
+      <canvas id="compass-gauge" width="88" height="88" class="w-11 h-11 border border-white/20"></canvas>
+      <div><div class="text-[9px] text-slate-400 tracking-wider">HEADING</div><div id="tele-heading" class="text-xs font-semibold text-emerald-400">045° NE</div></div>
+    </div>
+    <div class="hidden sm:block w-px h-8 bg-white/10"></div>
+    <div><div class="text-[9px] text-slate-400 tracking-wider">SPEED (SOG)</div><div class="flex items-baseline gap-1"><span id="tele-speed" class="text-base font-bold text-emerald-400">0.0</span><span class="text-[10px] text-slate-400">kts</span></div></div>
+    <div class="hidden sm:block w-px h-8 bg-white/10"></div>
+    <div><div class="text-[9px] text-slate-400 tracking-wider">SEA LEVEL AT HULL</div><div id="tele-wave-alt" class="text-xs font-semibold text-sky-400">+0.00 m</div></div>
+    <div class="hidden sm:block w-px h-8 bg-white/10"></div>
+    <div><div class="text-[9px] text-slate-400 tracking-wider">FPS</div><div id="tele-fps" class="text-xs font-semibold text-purple-400">--</div></div>
+  </aside>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { Sky } from 'three/addons/objects/Sky.js';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+
+/* =========================================================================
+   Constants and helpers
+   ========================================================================= */
+const LOW = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) || Math.min(innerWidth, innerHeight) < 600;
+const NW = 10;            // displacement waves (GPU + CPU, exactly matched)
+const ND = 8;             // per-pixel detail waves (normals only)
+const TRAIL_N = 48;       // wake trail points
+const G = 9.81;
+const EARTH_R = 6371000;
+const GRID = { rings: LOW ? 170 : 260, segs: LOW ? 320 : 560, a: 20, rmax: 15000 };
+GRID.b = Math.log(GRID.rmax / GRID.a + 1) / GRID.rings;
+
+const sst = (e0, e1, x) => { const t = Math.min(Math.max((x - e0) / (e1 - e0), 0), 1); return t * t * (3 - 2 * t); };
+const clamp = (x, a, b) => Math.min(Math.max(x, a), b);
+const v3 = (a) => new THREE.Vector3(a[0], a[1], a[2]);
+const dirFromElevAzim = (elev, azim, out = new THREE.Vector3()) =>
+  out.setFromSphericalCoords(1, THREE.MathUtils.degToRad(90 - elev), THREE.MathUtils.degToRad(azim));
+
+/* =========================================================================
+   Simulation state and weather presets (all colors in linear space)
+   ========================================================================= */
+const S = {
+  waveHeight: 1.8, choppiness: 0.52, windSpeed: 22, wavelength: 50,
+  windAngle: Math.atan2(0.52, 0.85),
+  preset: 'tropical', cam: 'chase', audio: false, manual: false,
+  throttle: 0.58, rudder: 0
+};
+
+const PRESETS = {
+  tropical: {
+    skyElev: 52, skyAzim: 135, moonElev: 40, moonAzim: 110,
+    turbidity: 2.4, rayleigh: 1.2, mie: 0.005, mieG: 0.8, exposure: 0.5,
+    sunColor: [1.0, 0.96, 0.9], sunI: 3.6, ambient: [0.30, 0.42, 0.58], hemiI: 0.0,
+    deep: [0.0012, 0.010, 0.022], scatter: [0.0, 0.30, 0.26],
+    cloudCov: 0.42, cloudLight: [1.25, 1.22, 1.18], cloudShadow: [0.40, 0.46, 0.55],
+    haze: 0.00007, fog: [0.42, 0.55, 0.72], fogDensity: 0.0002,
+    night: 0, bio: 0, rain: 0, bloom: 0.32,
+    sea: [1.8, 0.52, 22, 50], audio: [0.4, 0.15, 0.0]
+  },
+  sunset: {
+    skyElev: 3.5, skyAzim: 245, moonElev: 40, moonAzim: 110,
+    turbidity: 7, rayleigh: 3.0, mie: 0.008, mieG: 0.92, exposure: 0.62,
+    sunColor: [1.0, 0.5, 0.22], sunI: 3.2, ambient: [0.16, 0.12, 0.16], hemiI: 0.0,
+    deep: [0.0015, 0.004, 0.012], scatter: [0.05, 0.22, 0.20],
+    cloudCov: 0.5, cloudLight: [1.6, 0.75, 0.4], cloudShadow: [0.18, 0.12, 0.18],
+    haze: 0.0001, fog: [0.55, 0.32, 0.22], fogDensity: 0.0003,
+    night: 0, bio: 0, rain: 0, bloom: 0.45,
+    sea: [1.2, 0.42, 14, 60], audio: [0.45, 0.25, 0.0]
+  },
+  storm: {
+    skyElev: 14, skyAzim: 200, moonElev: 40, moonAzim: 110,
+    turbidity: 16, rayleigh: 0.8, mie: 0.02, mieG: 0.6, exposure: 0.85,
+    sunColor: [0.62, 0.68, 0.75], sunI: 0.9, ambient: [0.10, 0.115, 0.13], hemiI: 0.05,
+    deep: [0.001, 0.003, 0.005], scatter: [0.01, 0.06, 0.06],
+    cloudCov: 0.96, cloudLight: [0.30, 0.33, 0.37], cloudShadow: [0.055, 0.065, 0.08],
+    haze: 0.00045, fog: [0.12, 0.14, 0.16], fogDensity: 0.0035,
+    night: 0, bio: 0, rain: 1, bloom: 0.3,
+    sea: [4.2, 0.78, 46, 78], audio: [0.85, 0.75, 0.8]
+  },
+  biolum: {
+    skyElev: -14, skyAzim: 200, moonElev: 38, moonAzim: 110,
+    turbidity: 1.5, rayleigh: 0.4, mie: 0.003, mieG: 0.8, exposure: 1.1,
+    sunColor: [0.55, 0.65, 0.9], sunI: 0.25, ambient: [0.012, 0.018, 0.035], hemiI: 0.2,
+    deep: [0.0003, 0.001, 0.003], scatter: [0.0, 0.02, 0.03],
+    cloudCov: 0.28, cloudLight: [0.05, 0.06, 0.09], cloudShadow: [0.006, 0.008, 0.014],
+    haze: 0.0001, fog: [0.004, 0.008, 0.016], fogDensity: 0.0008,
+    night: 1, bio: 1, rain: 0, bloom: 0.6,
+    sea: [0.9, 0.36, 10, 44], audio: [0.35, 0.1, 0.0]
+  }
+};
+const BLEND_KEYS = Object.keys(PRESETS.tropical).filter(k => k !== 'sea' && k !== 'audio');
+const P = JSON.parse(JSON.stringify(PRESETS.tropical));   // live, blended parameters
+let PT = PRESETS.tropical;                                 // target preset
+
+/* =========================================================================
+   Renderer, scene, camera, post-processing
+   ========================================================================= */
+const container = document.getElementById('webgl-container');
+const renderer = new THREE.WebGLRenderer({ antialias: false, powerPreference: 'high-performance' });
+const PR = Math.min(devicePixelRatio, LOW ? 1.25 : 1.75);
+renderer.setPixelRatio(PR);
+renderer.setSize(innerWidth, innerHeight);
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = P.exposure;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.shadowMap.autoUpdate = false;
+container.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2(0xffffff, 0.0002);
+const camera = new THREE.PerspectiveCamera(55, innerWidth / innerHeight, 0.2, 40000);
+camera.position.set(6, 6, -18);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.06;
+controls.minDistance = 4;
+controls.maxDistance = 400;
+controls.maxPolarAngle = Math.PI / 2 + 0.2;
+controls.enabled = false;
+
+const msaaTarget = new THREE.WebGLRenderTarget(innerWidth * PR, innerHeight * PR, { type: THREE.HalfFloatType, samples: LOW ? 2 : 4 });
+const composer = new EffectComposer(renderer, msaaTarget);
+composer.setPixelRatio(PR);
+composer.setSize(innerWidth, innerHeight);
+composer.addPass(new RenderPass(scene, camera));
+const bloomPass = new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), 0.35, 0.55, 1.8);
+composer.addPass(bloomPass);
+composer.addPass(new OutputPass());
+
+/* =========================================================================
+   Physical sky + procedural cloud dome (stars and moon at night)
+   ========================================================================= */
+const sky = new Sky();
+sky.scale.setScalar(20000);
+sky.renderOrder = -10;
+scene.add(sky);
+const skyU = sky.material.uniforms;
+
+const cloudMat = new THREE.ShaderMaterial({
+  uniforms: {
+    uTime: { value: 0 }, uCoverage: { value: 0.4 }, uNight: { value: 0 }, uFlash: { value: 0 },
+    uLight: { value: new THREE.Vector3(1, 1, 1) }, uShadow: { value: new THREE.Vector3(0.4, 0.45, 0.5) },
+    uSunDir: { value: new THREE.Vector3(0, 1, 0) }, uMoonDir: { value: new THREE.Vector3(0, 1, 0) },
+    uWind: { value: new THREE.Vector2(1, 0.3) }
+  },
+  vertexShader: /* glsl */`
+    varying vec3 vDir;
+    void main() {
+      vDir = position;
+      vec4 p = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      gl_Position = p.xyww;
+    }`,
+  fragmentShader: /* glsl */`
+    uniform float uTime, uCoverage, uNight, uFlash;
+    uniform vec3 uLight, uShadow, uSunDir, uMoonDir;
+    uniform vec2 uWind;
+    varying vec3 vDir;
+    float hash(vec2 p) { p = fract(p * vec2(123.34, 456.21)); p += dot(p, p + 45.32); return fract(p.x * p.y); }
+    float noise(vec2 p) {
+      vec2 i = floor(p), f = fract(p); f = f * f * (3.0 - 2.0 * f);
+      return mix(mix(hash(i), hash(i + vec2(1, 0)), f.x), mix(hash(i + vec2(0, 1)), hash(i + vec2(1, 1)), f.x), f.y);
+    }
+    float fbm(vec2 p, int oct) {
+      float v = 0.0, a = 0.5; mat2 m = mat2(1.6, 1.2, -1.2, 1.6);
+      for (int i = 0; i < 6; i++) { if (i >= oct) break; v += a * noise(p); p = m * p; a *= 0.5; }
+      return v;
+    }
+    void main() {
+      vec3 d = normalize(vDir);
+      float hor = smoothstep(-0.04, 0.10, d.y);
+      vec2 uv = d.xz / (max(d.y, 0.0) * 0.9 + 0.12);
+      vec2 w = uv * 0.55 + uWind * uTime * 0.004;
+      float n = fbm(w, 6);
+      float lo = 0.76 - uCoverage * 0.56;
+      float dens = smoothstep(lo, lo + 0.22, n);
+      vec2 sOff = normalize(uSunDir.xz + 1e-4) * 0.07;
+      float nS = fbm(w + sOff, 4);
+      float shade = clamp(0.55 + (n - nS) * 6.0, 0.0, 1.0);
+      vec3 col = mix(uShadow, uLight, shade * 0.75 + 0.25 * (1.0 - dens));
+      float edge = dens * (1.0 - dens) * 4.0;
+      col += uLight * pow(max(dot(d, uSunDir), 0.0), 6.0) * edge * 1.4;
+      col += vec3(0.8, 0.85, 1.0) * uFlash * 3.0 * dens;
+      float a = dens * hor * 0.97;
+
+      vec3 behind = vec3(0.0);
+      if (uNight > 0.01) {
+        vec2 sp = vec2(atan(d.z, d.x), asin(clamp(d.y, -1.0, 1.0))) * 160.0;
+        vec2 cell = floor(sp);
+        float h = hash(cell);
+        vec2 jit = vec2(hash(cell + 3.1), hash(cell + 7.7)) - 0.5;
+        float s = step(0.9965, h) * smoothstep(0.35, 0.0, length(fract(sp) - 0.5 - jit * 0.5));
+        s *= 0.75 + 0.25 * sin(uTime * 2.3 + h * 90.0);
+        vec3 stars = vec3(0.9, 0.95, 1.0) * s * 2.5 * smoothstep(0.0, 0.25, d.y);
+        float md = dot(d, normalize(uMoonDir));
+        vec3 moon = smoothstep(0.99955, 0.9997, md) * vec3(3.0, 3.1, 3.3) + pow(max(md, 0.0), 180.0) * vec3(0.06, 0.08, 0.12);
+        vec3 tint = mix(vec3(0.006, 0.012, 0.028), vec3(0.0008, 0.0015, 0.005), clamp(d.y * 1.5, 0.0, 1.0));
+        behind = (stars + moon + tint) * uNight;
+      }
+      // Premultiplied output: clouds over sky, stars and moon behind clouds.
+      gl_FragColor = vec4(col * a + behind * (1.0 - a), a);
+    }`,
+  side: THREE.BackSide, transparent: true, depthWrite: false,
+  blending: THREE.CustomBlending, blendSrc: THREE.OneFactor, blendDst: THREE.OneMinusSrcAlphaFactor
+});
+const clouds = new THREE.Mesh(new THREE.SphereGeometry(5000, 64, 32), cloudMat);
+clouds.renderOrder = -9;
+clouds.frustumCulled = false;
+scene.add(clouds);
+
+// Environment scene for image-based lighting on the boat (shares sky/cloud materials)
+const envScene = new THREE.Scene();
+const envSky = new THREE.Mesh(sky.geometry, sky.material); envSky.scale.setScalar(20000); envScene.add(envSky);
+const envClouds = new THREE.Mesh(clouds.geometry, cloudMat); envScene.add(envClouds);
+const pmrem = new THREE.PMREMGenerator(renderer);
+let envRT = null;
+function regenEnvironment() {
+  const next = pmrem.fromScene(envScene, 0, 0.1, 100);
+  scene.environment = next.texture;
+  if (envRT) envRT.dispose();
+  envRT = next;
+}
+
+/* =========================================================================
+   Lights
+   ========================================================================= */
+const sunLight = new THREE.DirectionalLight(0xffffff, 3.6);
+sunLight.castShadow = true;
+sunLight.shadow.mapSize.set(LOW ? 1024 : 2048, LOW ? 1024 : 2048);
+Object.assign(sunLight.shadow.camera, { left: -9, right: 9, top: 9, bottom: -9, near: 1, far: 100 });
+sunLight.shadow.camera.updateProjectionMatrix();
+sunLight.shadow.bias = -0.0004;
+sunLight.shadow.normalBias = 0.03;
+scene.add(sunLight, sunLight.target);
+const hemiLight = new THREE.HemisphereLight(0x6a8cc8, 0x020810, 0);
+scene.add(hemiLight);
+
+/* =========================================================================
+   Ocean: dense polar LOD grid that follows the camera to the horizon
+   ========================================================================= */
+function buildPolarGrid() {
+  const { rings, segs, a, b } = GRID;
+  const pos = new Float32Array((1 + rings * segs) * 3);
+  let o = 3;
+  for (let i = 1; i <= rings; i++) {
+    const r = a * (Math.exp(b * i) - 1);
+    for (let j = 0; j < segs; j++) {
+      const th = (j / segs) * Math.PI * 2;
+      pos[o++] = Math.cos(th) * r; pos[o++] = 0; pos[o++] = Math.sin(th) * r;
+    }
+  }
+  const idx = [];
+  for (let j = 0; j < segs; j++) idx.push(0, 1 + (j + 1) % segs, 1 + j);
+  for (let i = 1; i < rings; i++) {
+    for (let j = 0; j < segs; j++) {
+      const p0 = 1 + (i - 1) * segs + j, p1 = 1 + (i - 1) * segs + (j + 1) % segs;
+      const p2 = p0 + segs, p3 = p1 + segs;
+      idx.push(p0, p1, p2, p1, p3, p2);
+    }
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  g.setIndex(idx);
+  return g;
+}
+
+// Tileable, irregular capillary normal map (random integer wave vectors, no visible pattern)
+function makeCapillaryNormalMap(size = 256) {
+  let seed = 1337;
+  const rnd = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296);
+  const ws = [];
+  for (let i = 0; i < 48; i++) {
+    let kx, ky, m;
+    do { kx = Math.round((rnd() * 2 - 1) * 28); ky = Math.round((rnd() * 2 - 1) * 28); m = Math.hypot(kx, ky); } while (m < 3 || m > 28);
+    ws.push({ kx, ky, a: 1 / Math.pow(m, 1.1), p: rnd() * Math.PI * 2 });
+  }
+  const data = new Uint8Array(size * size * 4);
+  for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
+    const u = x / size, v = y / size;
+    let dx = 0, dy = 0;
+    for (const w of ws) {
+      const c = Math.cos(2 * Math.PI * (w.kx * u + w.ky * v) + w.p) * w.a * 2 * Math.PI;
+      dx += c * w.kx; dy += c * w.ky;
+    }
+    const nx = -dx * 0.02, ny = -dy * 0.02, l = Math.hypot(nx, ny, 1);
+    const i = (y * size + x) * 4;
+    data[i] = (nx / l * 0.5 + 0.5) * 255; data[i + 1] = (ny / l * 0.5 + 0.5) * 255;
+    data[i + 2] = (1 / l * 0.5 + 0.5) * 255; data[i + 3] = 255;
+  }
+  const t = new THREE.DataTexture(data, size, size, THREE.RGBAFormat);
+  t.wrapS = t.wrapT = THREE.RepeatWrapping;
+  t.minFilter = THREE.LinearMipmapLinearFilter; t.magFilter = THREE.LinearFilter;
+  t.generateMipmaps = true; t.anisotropy = 8; t.needsUpdate = true;
+  return t;
+}
+
+const reflRT = new THREE.WebGLRenderTarget(Math.floor(innerWidth * PR * 0.5), Math.floor(innerHeight * PR * 0.5), { type: THREE.HalfFloatType });
+
+const oceanU = {
+  uTime: { value: 0 },
+  uWDir: { value: Array.from({ length: NW }, () => new THREE.Vector2(1, 0)) },
+  uWAmp: { value: new Float32Array(NW) }, uWK: { value: new Float32Array(NW).fill(1) },
+  uWS: { value: new Float32Array(NW) }, uWOmega: { value: new Float32Array(NW) },
+  uDDir: { value: Array.from({ length: ND }, () => new THREE.Vector2(1, 0)) },
+  uDA: { value: new Float32Array(ND) }, uDK: { value: new Float32Array(ND).fill(1) }, uDOmega: { value: new Float32Array(ND) },
+  uSunDir: { value: new THREE.Vector3(0, 1, 0) }, uSunColor: { value: new THREE.Vector3(1, 1, 1) },
+  uSkyAmbient: { value: new THREE.Vector3(0.3, 0.4, 0.5) },
+  uDeepColor: { value: new THREE.Vector3() }, uScatterColor: { value: new THREE.Vector3() },
+  uFoamThresh: { value: 0.8 }, uBio: { value: 0 }, uHaze: { value: 0.0001 }, uFlash: { value: 0 }, uWindF: { value: 0.3 },
+  uNormalMap: { value: makeCapillaryNormalMap(LOW ? 128 : 256) },
+  uReflTex: { value: reflRT.texture }, uReflMatrix: { value: new THREE.Matrix4() },
+  uCamRight: { value: new THREE.Vector2(1, 0) }, uCamFwd: { value: new THREE.Vector2(0, 1) },
+  uBoatPos: { value: new THREE.Vector3() }, uBoatFwd: { value: new THREE.Vector2(0, 1) },
+  uBoatPitch: { value: 0 }, uBoatRoll: { value: 0 }, uBoatSpeed: { value: 0 }, uBoatDist: { value: 0 },
+  uTrail: { value: Array.from({ length: TRAIL_N }, () => new THREE.Vector4()) }
+};
+
+const OCEAN_COMMON = /* glsl */`
+  #define NW ${NW}
+  #define ND ${ND}
+  #define PI 3.14159265
+  uniform float uTime;
+  uniform vec2 uWDir[NW]; uniform float uWAmp[NW]; uniform float uWK[NW]; uniform float uWS[NW]; uniform float uWOmega[NW];
+  float sst(float a, float b, float x) { float t = clamp((x - a) / (b - a), 0.0, 1.0); return t * t * (3.0 - 2.0 * t); }
+`;
+
+const oceanMat = new THREE.ShaderMaterial({
+  uniforms: oceanU,
+  side: THREE.DoubleSide,
+  vertexShader: OCEAN_COMMON + /* glsl */`
+    varying vec3 vWorld;
+    varying vec2 vUnd;
+    float lodFade(float L, float r) {
+      float sp = max(${GRID.b.toFixed(8)} * (r + ${GRID.a.toFixed(1)}), 6.2831853 * r / ${GRID.segs.toFixed(1)});
+      return sst(2.0, 5.0, L / sp);
+    }
+    void main() {
+      vec3 wp = (modelMatrix * vec4(position, 1.0)).xyz;
+      float r = length(position.xz);
+      vec3 disp = vec3(0.0);
+      for (int i = 0; i < NW; i++) {
+        float k = uWK[i];
+        float f = k * dot(uWDir[i], wp.xz) - uWOmega[i] * uTime;
+        float fade = lodFade(6.2831853 / k, r);
+        float a = uWAmp[i] * fade, s = uWS[i] * fade;
+        disp += vec3(uWDir[i].x * (s / k) * cos(f), a * sin(f), uWDir[i].y * (s / k) * cos(f));
+      }
+      vUnd = wp.xz;
+      wp += disp;
+      wp.y -= (r * r) / (2.0 * ${EARTH_R.toFixed(1)});
+      vWorld = wp;
+      gl_Position = projectionMatrix * viewMatrix * vec4(wp, 1.0);
+    }`,
+  fragmentShader: OCEAN_COMMON + /* glsl */`
+    uniform vec2 uDDir[ND]; uniform float uDA[ND]; uniform float uDK[ND]; uniform float uDOmega[ND];
+    uniform vec3 uSunDir, uSunColor, uSkyAmbient, uDeepColor, uScatterColor;
+    uniform float uFoamThresh, uBio, uHaze, uFlash, uWindF;
+    uniform sampler2D uNormalMap, uReflTex;
+    uniform mat4 uReflMatrix;
+    uniform vec2 uCamRight, uCamFwd;
+    uniform vec3 uBoatPos; uniform vec2 uBoatFwd;
+    uniform float uBoatPitch, uBoatRoll, uBoatSpeed, uBoatDist;
+    uniform vec4 uTrail[${TRAIL_N}];
+    varying vec3 vWorld;
+    varying vec2 vUnd;
+
+    float hash(vec2 p) { p = fract(p * vec2(123.34, 456.21)); p += dot(p, p + 45.32); return fract(p.x * p.y); }
+    float noise(vec2 p) {
+      vec2 i = floor(p), f = fract(p); f = f * f * (3.0 - 2.0 * f);
+      return mix(mix(hash(i), hash(i + vec2(1, 0)), f.x), mix(hash(i + vec2(0, 1)), hash(i + vec2(1, 1)), f.x), f.y);
+    }
+    // Hull half-width at boat-local (z, y); matches the JS hull loft
+    float hullHalfWidth(float z, float y) {
+      float t = (z + 4.9) / 9.8;
+      if (t < 0.0 || t > 1.0) return -1.0;
+      float bt = sst(0.48, 1.0, t);
+      float beam = 1.42 * (1.0 - pow(bt, 1.7) * 0.985);
+      float sheer = 0.98 + 0.52 * pow(t, 2.6);
+      float keel = -0.40 + 1.08 * pow(bt, 2.1);
+      float cx = beam * (0.87 - 0.3 * bt);
+      float dr = 0.40 + 0.45 * bt;
+      float cy = keel + cx * dr;
+      if (y < keel || y > sheer) return -1.0;
+      if (y < cy) return (y - keel) / dr;
+      return mix(cx, beam, (y - cy) / max(sheer - cy, 1e-3));
+    }
+    float planBeam(float z) {
+      float t = (z + 4.9) / 9.8;
+      if (t < 0.0 || t > 1.0) return -1.0;
+      float bt = sst(0.48, 1.0, t);
+      return 1.42 * (1.0 - pow(bt, 1.7) * 0.985) * (0.87 - 0.3 * bt);
+    }
+
+    void main() {
+      vec3 toEye = cameraPosition - vWorld;
+      float dist = length(toEye);
+      vec3 V = toEye / dist;
+
+      // Keep water out of the hull
+      vec2 rel = vWorld.xz - uBoatPos.xz;
+      vec2 bl = vec2(dot(rel, vec2(uBoatFwd.y, -uBoatFwd.x)), dot(rel, uBoatFwd));
+      float ly = vWorld.y - uBoatPos.y - bl.y * sin(uBoatPitch) - bl.x * sin(uBoatRoll);
+      float hw = hullHalfWidth(bl.y, ly);
+      if (hw > 0.0 && abs(bl.x) < hw * 0.98) discard;
+
+      // Per-pixel analytic Gerstner normals with footprint-based anti-aliasing
+      vec2 fw = fwidth(vUnd);
+      float fp = max(max(fw.x, fw.y), 1e-3);
+      vec3 T = vec3(1.0, 0.0, 0.0), B = vec3(0.0, 0.0, 1.0);
+      float lost = 0.0;
+      for (int i = 0; i < NW; i++) {
+        float k = uWK[i]; vec2 d = uWDir[i];
+        float f = k * dot(d, vUnd) - uWOmega[i] * uTime;
+        float fade = clamp((6.2831853 / k / fp - 3.0) / 4.0, 0.0, 1.0);
+        float a = uWAmp[i] * fade, s = uWS[i] * fade;
+        float c = cos(f), sn = sin(f);
+        T += vec3(-s * d.x * d.x * sn, a * k * d.x * c, -s * d.x * d.y * sn);
+        B += vec3(-s * d.x * d.y * sn, a * k * d.y * c, -s * d.y * d.y * sn);
+        float sl = uWAmp[i] * k; lost += (1.0 - fade) * sl * sl;
+      }
+      float jac = T.x * B.z - T.z * B.x;
+      vec3 N = normalize(cross(B, T));
+      vec2 slope = vec2(0.0);
+      for (int i = 0; i < ND; i++) {
+        float k = uDK[i]; vec2 d = uDDir[i];
+        float f = k * dot(d, vUnd) - uDOmega[i] * uTime;
+        float fade = clamp((6.2831853 / k / fp - 3.0) / 4.0, 0.0, 1.0);
+        float sl = uDA[i] * k;
+        slope += d * sl * fade * cos(f);
+        lost += (1.0 - fade) * sl * sl;
+      }
+      vec2 uv1 = vUnd * 0.11 + uWDir[0] * uTime * 0.03;
+      vec2 uv2 = vUnd * 0.37 - uWDir[1] * uTime * 0.05;
+      float cf1 = clamp((9.0 / fp - 3.0) / 4.0, 0.0, 1.0);
+      float cf2 = clamp((2.7 / fp - 3.0) / 4.0, 0.0, 1.0);
+      vec2 cap = (texture2D(uNormalMap, uv1).xy * 2.0 - 1.0) * 0.12 * cf1
+               + (texture2D(uNormalMap, uv2).xy * 2.0 - 1.0) * 0.08 * cf2;
+      cap *= 0.45 + uWindF;
+      lost += (1.0 - cf1) * 0.004 + (1.0 - cf2) * 0.003;
+      N = normalize(N / max(N.y, 0.05) + vec3(-slope.x - cap.x, 0.0, -slope.y - cap.y));
+      float rough = clamp(0.07 + sqrt(lost) * 0.7, 0.07, 0.45);
+
+      // Planar reflection (sky, clouds, boat) with normal-driven distortion
+      vec4 rp = uReflMatrix * vec4(vWorld.x, 0.0, vWorld.z, 1.0);
+      vec2 ruv0 = rp.xy / rp.w;
+      vec2 dv = vec2(dot(N.xz, uCamRight), dot(N.xz, uCamFwd));
+      vec3 refl = texture2D(uReflTex, clamp(ruv0 + dv * vec2(0.22, 0.4), 0.002, 0.998)).rgb;
+      vec3 reflFar = texture2D(uReflTex, clamp(ruv0, 0.002, 0.998)).rgb;
+
+      vec3 L = normalize(uSunDir);
+      float NdV = max(dot(N, V), 1e-3);
+      float NdL = max(dot(N, L), 0.0);
+      float F = 0.02 + 0.98 * pow(1.0 - NdV, 5.0);
+      F *= 1.0 - rough * 0.35;
+
+      // Water body: absorption + subsurface scattering through backlit crests
+      float h = vWorld.y;
+      vec2 vh = normalize(-V.xz + 1e-5), lh = normalize(L.xz + 1e-5);
+      float sss = pow(max(dot(vh, lh), 0.0), 4.0) * clamp(h * 0.5 + 0.3, 0.0, 1.5) * (0.5 + 0.5 * (1.0 - NdV));
+      vec3 body = uDeepColor * uSkyAmbient * 2.0
+                + uScatterColor * uSunColor * sss * 0.08
+                + uScatterColor * uSkyAmbient * 0.25 * (0.4 + 0.6 * clamp(h * 0.4 + 0.5, 0.0, 1.0));
+
+      // GGX sun/moon specular
+      vec3 H = normalize(L + V);
+      float NdH = max(dot(N, H), 0.0);
+      float a = rough * rough, a2 = a * a;
+      float dn = NdH * NdH * (a2 - 1.0) + 1.0;
+      float D = a2 / (PI * dn * dn);
+      float kv = a * 0.5;
+      float vis = 0.25 / ((NdL * (1.0 - kv) + kv) * (NdV * (1.0 - kv) + kv));
+      float Fs = 0.02 + 0.98 * pow(1.0 - max(dot(V, H), 0.0), 5.0);
+      vec3 spec = uSunColor * min(D * vis * Fs * NdL, 50.0) * step(0.0, L.y);
+
+      vec3 col = mix(body, refl, F) + spec;
+
+      // Whitecaps from surface compression (Jacobian)
+      vec2 fuv = vUnd * 0.35 + vec2(uTime * 0.05, 0.0);
+      float fn = noise(fuv) * 0.55 + noise(fuv * 2.7 + 3.1) * 0.3 + noise(fuv * 7.3) * 0.15;
+      float capM = 1.0 - smoothstep(uFoamThresh - 0.25, uFoamThresh, jac);
+      float foam = capM * smoothstep(0.35, 0.7, fn + capM * 0.25);
+      vec2 wd = uWDir[0];
+      float streak = smoothstep(0.62, 0.92, noise(vec2(dot(vUnd, wd) * 0.06, dot(vUnd, vec2(-wd.y, wd.x)) * 0.7) + uTime * 0.02));
+      foam += streak * uWindF * uWindF * 0.5 * smoothstep(0.3, 0.8, fn);
+
+      // Wake: turbulent wash + Kelvin arms along the boat's actual path
+      float wake = 0.0;
+      if (length(rel) < 200.0) {
+        float bestD = 1e4, bestA = 0.0, bestAge = 0.0, bestStr = 0.0;
+        for (int i = 0; i < ${TRAIL_N - 1}; i++) {
+          vec4 A = uTrail[i], Bv = uTrail[i + 1];
+          if (Bv.w < 0.5) break;
+          vec2 ab = Bv.xy - A.xy;
+          float t = clamp(dot(vWorld.xz - A.xy, ab) / max(dot(ab, ab), 1e-4), 0.0, 1.0);
+          float d = length(vWorld.xz - A.xy - ab * t);
+          if (d < bestD) {
+            bestD = d;
+            bestA = mix(A.z, Bv.z, t);
+            bestAge = uTime - (mix(A.w, Bv.w, t) - 1.0);
+            bestStr = clamp(length(ab) / max(A.w - Bv.w, 0.02) / 9.0, 0.0, 1.0);
+          }
+        }
+        if (bestD < 70.0) {
+          float along = max(uBoatDist - bestA, 0.0);
+          float life = (1.0 - sst(50.0, 150.0, along)) * (1.0 - sst(14.0, 40.0, bestAge));
+          float wn = noise(vWorld.xz * 1.6 + vec2(uTime * 0.3, 0.0)) * 0.6 + noise(vWorld.xz * 4.1) * 0.4;
+          float width = 0.9 + along * 0.09;
+          float wash = exp(-pow(bestD / width, 2.0)) * life * smoothstep(0.25, 0.65, wn + 0.3 * exp(-along * 0.08));
+          float armOff = 1.2 + along * 0.36;
+          float arms = exp(-pow((bestD - armOff) / (0.45 + along * 0.035), 2.0))
+                     * (1.0 - sst(10.0, 70.0, along)) * (1.0 - sst(10.0, 30.0, bestAge)) * smoothstep(0.35, 0.7, wn);
+          wake = (wash + arms * 0.7) * bestStr;
+        }
+      }
+      // Hull contact and bow wave foam
+      float pb = planBeam(bl.y);
+      if (pb > 0.0 && uBoatSpeed > 0.3) {
+        float sp = clamp(uBoatSpeed / 16.0, 0.0, 1.0);
+        float dd = abs(bl.x) - pb;
+        float contact = exp(-pow(max(dd, 0.0) / (0.3 + 0.5 * sp), 2.0)) * step(-0.3, dd);
+        contact *= (0.3 + 0.7 * sst(-3.0, 3.5, bl.y)) * sp * smoothstep(0.2, 0.6, noise(vWorld.xz * 3.0 + uTime));
+        wake += contact;
+      }
+      foam = clamp(foam + wake, 0.0, 1.0);
+      foam *= mix(1.0, 0.55, clamp(fp * 0.05, 0.0, 1.0));
+      vec3 foamCol = vec3(0.85, 0.9, 0.92) * (uSunColor * (NdL * 0.3 + 0.05) + uSkyAmbient * 0.95);
+      col = mix(col, foamCol, foam * 0.92);
+
+      // Bioluminescent plankton
+      if (uBio > 0.01) {
+        float spark = step(0.985, noise(vWorld.xz * 2.2 + floor(uTime * 3.0) * 7.3)) * (1.0 - smoothstep(20.0, 90.0, length(rel)));
+        float glow = foam * 2.4 + capM * 0.25 + spark * 1.5;
+        col += vec3(0.0, 0.85, 1.0) * glow * uBio * (0.85 + 0.15 * sin(uTime * 3.0 + vWorld.x * 0.3));
+      }
+      col += vec3(0.6, 0.65, 0.8) * uFlash * F * 3.0;
+
+      // Aerial perspective: fade into the reflected horizon (seamless sea-sky line)
+      float hz = 1.0 - exp(-dist * uHaze);
+      col = mix(col, reflFar, hz);
+
+      gl_FragColor = vec4(col, 1.0);
+      #include <tonemapping_fragment>
+      #include <colorspace_fragment>
+    }`
+});
+const ocean = new THREE.Mesh(buildPolarGrid(), oceanMat);
+ocean.frustumCulled = false;
+scene.add(ocean);
+const gridCenter = new THREE.Vector2();
+
+/* =========================================================================
+   Wave spectrum (one source of truth for GPU and CPU)
+   ========================================================================= */
+const DIR_OFF = [0.0, 0.42, -0.55, 0.95, -1.15, 0.22, -0.8, 1.45, -1.7, 0.65];
+const STEEP_W = [4, 2.6, 1.8, 1.2, 0.8, 0.55, 0.4, 0.3, 0.22, 0.15];
+const STEEP_SUM = STEEP_W.reduce((a, b) => a + b, 0);
+const D_OFF = [0.3, -0.6, 1.1, -1.3, 0.1, 0.8, -0.2, -1.0];
+const waves = Array.from({ length: NW }, () => ({ dx: 1, dz: 0, a: 0, k: 1, w: 1, s: 0 }));
+
+function rebuildSpectrum() {
+  const raw = []; let sum2 = 0;
+  for (let i = 0; i < NW; i++) {
+    const L = S.wavelength / Math.pow(1.42, i);
+    const r = Math.pow(L, 0.92);
+    raw.push([L, r]); sum2 += r * r;
+  }
+  const scale = (S.waveHeight / 4) * Math.sqrt(2 / sum2);   // Hs = 4 x std dev
+  for (let i = 0; i < NW; i++) {
+    const [L, r] = raw[i], w = waves[i], ang = S.windAngle + DIR_OFF[i];
+    w.dx = Math.cos(ang); w.dz = Math.sin(ang);
+    w.k = 2 * Math.PI / L;
+    w.a = Math.min(r * scale, 0.32 / w.k);                   // below breaking limit
+    w.w = Math.sqrt(G * w.k);                                // deep-water dispersion
+    w.s = S.choppiness * STEEP_W[i] / STEEP_SUM;             // total steepness <= 0.9, no loops
+    oceanU.uWDir.value[i].set(w.dx, w.dz);
+    oceanU.uWAmp.value[i] = w.a; oceanU.uWK.value[i] = w.k;
+    oceanU.uWS.value[i] = w.s; oceanU.uWOmega.value[i] = w.w;
+  }
+  const windF = clamp((S.windSpeed - 5) / 50, 0, 1);
+  for (let j = 0; j < ND; j++) {
+    const L = 3.2 / Math.pow(1.45, j), k = 2 * Math.PI / L, ang = S.windAngle + D_OFF[j];
+    oceanU.uDDir.value[j].set(Math.cos(ang), Math.sin(ang));
+    oceanU.uDK.value[j] = k; oceanU.uDA.value[j] = (0.03 + 0.06 * windF) / k; oceanU.uDOmega.value[j] = Math.sqrt(G * k);
+  }
+  oceanU.uWindF.value = windF;
+  oceanU.uFoamThresh.value = 0.72 + 0.2 * windF;
+}
+
+const _d = new THREE.Vector3();
+function lodFadeJS(L, r) {
+  const sp = Math.max(GRID.b * (r + GRID.a), 2 * Math.PI * r / GRID.segs);
+  return sst(2, 5, L / sp);
+}
+function dispAt(px, pz, t, out) {
+  const r = Math.hypot(px - gridCenter.x, pz - gridCenter.y);
+  let dx = 0, dy = 0, dz = 0;
+  for (let i = 0; i < NW; i++) {
+    const w = waves[i];
+    const f = w.k * (w.dx * px + w.dz * pz) - w.w * t;
+    const fade = lodFadeJS(2 * Math.PI / w.k, r);
+    const a = w.a * fade, s = w.s * fade, c = Math.cos(f);
+    dx += w.dx * (s / w.k) * c; dy += a * Math.sin(f); dz += w.dz * (s / w.k) * c;
+  }
+  return out.set(dx, dy - (r * r) / (2 * EARTH_R), dz);
+}
+// Exact surface height at a world point (inverts the horizontal Gerstner shift)
+function heightAt(x, z, t) {
+  let px = x, pz = z;
+  for (let i = 0; i < 3; i++) { dispAt(px, pz, t, _d); px = x - _d.x; pz = z - _d.z; }
+  return dispAt(px, pz, t, _d).y;
+}
+function normalAt(x, z, t, out) {
+  const e = 0.6;
+  const hx = heightAt(x + e, z, t) - heightAt(x - e, z, t);
+  const hz = heightAt(x, z + e, t) - heightAt(x, z - e, t);
+  return out.set(-hx, 2 * e, -hz).normalize();
+}
+
+/* =========================================================================
+   32 ft center-console: lofted deep-V hull and detailed fit-out
+   ========================================================================= */
+const HL = 9.8, ZS = -4.9;
+function station(t) {
+  const bt = sst(0.48, 1.0, t);
+  const beam = 1.42 * (1 - Math.pow(bt, 1.7) * 0.985);
+  const sheerY = 0.98 + 0.52 * Math.pow(t, 2.6);
+  const keelY = -0.40 + 1.08 * Math.pow(bt, 2.1);
+  const chineX = beam * (0.87 - 0.3 * bt);
+  const dr = 0.40 + 0.45 * bt;
+  const chineY = keelY + chineX * dr;
+  return { beam, sheerY, keelY, chineX, chineY, dr };
+}
+const deckY = (t, st) => { const c = sst(0.66, 0.78, t); return st.sheerY - 0.45 * (1 - c) - 0.07 * c; };
+
+function makeTexture(w, h, draw, srgb = true) {
+  const c = document.createElement('canvas'); c.width = w; c.height = h;
+  draw(c.getContext('2d'), w, h);
+  const t = new THREE.CanvasTexture(c);
+  if (srgb) t.colorSpace = THREE.SRGBColorSpace;
+  t.anisotropy = 8;
+  return t;
+}
+
+function createYacht() {
+  const yacht = new THREE.Group();
+  const NS = 64;
+
+  // Materials
+  const hullMat = new THREE.MeshPhysicalMaterial({ color: 0xffffff, roughness: 0.16, clearcoat: 1, clearcoatRoughness: 0.04, side: THREE.DoubleSide });
+  hullMat.onBeforeCompile = (sh) => {
+    sh.vertexShader = sh.vertexShader
+      .replace('#include <common>', '#include <common>\nvarying float vHullY;')
+      .replace('#include <begin_vertex>', '#include <begin_vertex>\nvHullY = position.y;');
+    sh.fragmentShader = sh.fragmentShader
+      .replace('#include <common>', '#include <common>\nvarying float vHullY;')
+      .replace('#include <color_fragment>', `#include <color_fragment>
+        float e = fwidth(vHullY) * 1.2 + 0.002;
+        float m1 = smoothstep(0.24 - e, 0.24 + e, vHullY);
+        float m2 = smoothstep(0.34 - e, 0.34 + e, vHullY);
+        float m3 = smoothstep(0.86 - e, 0.86 + e, vHullY) * (1.0 - smoothstep(0.885 - e, 0.885 + e, vHullY));
+        diffuseColor.rgb = mix(mix(vec3(0.012, 0.012, 0.016), vec3(0.0, 0.32, 0.62), m1), vec3(0.008, 0.024, 0.066), m2);
+        diffuseColor.rgb = mix(diffuseColor.rgb, vec3(0.75, 0.77, 0.8), m3);`);
+  };
+  const gelcoat = new THREE.MeshPhysicalMaterial({ color: 0xf2f4f6, roughness: 0.24, clearcoat: 1, clearcoatRoughness: 0.08 });
+  const nonskid = new THREE.MeshStandardMaterial({ color: 0xe8eaec, roughness: 0.62 });
+  const stainless = new THREE.MeshStandardMaterial({ color: 0xdfe4ea, metalness: 1, roughness: 0.16 });
+  const cushion = new THREE.MeshStandardMaterial({ color: 0x2b3440, roughness: 0.78 });
+  const darkTrim = new THREE.MeshStandardMaterial({ color: 0x0b0e12, roughness: 0.35 });
+  const glass = new THREE.MeshPhysicalMaterial({ color: 0x1c2a36, roughness: 0.02, metalness: 0, transparent: true, opacity: 0.42, envMapIntensity: 1.6, side: THREE.DoubleSide });
+  const cowlMat = new THREE.MeshPhysicalMaterial({ color: 0x0c1016, roughness: 0.2, clearcoat: 1, clearcoatRoughness: 0.05 });
+
+  const teakTex = makeTexture(512, 512, (g) => {
+    for (let x = 0; x < 512; x += 32) {
+      g.fillStyle = `hsl(${27 + Math.random() * 6}, ${50 + Math.random() * 10}%, ${28 + Math.random() * 9}%)`;
+      g.fillRect(x, 0, 32, 512);
+      for (let i = 0; i < 36; i++) {
+        g.strokeStyle = `rgba(45,22,6,${0.08 + Math.random() * 0.14})`;
+        g.lineWidth = 0.5 + Math.random();
+        g.beginPath();
+        const xx = x + Math.random() * 32;
+        g.moveTo(xx, 0);
+        for (let yy = 0; yy <= 512; yy += 32) g.lineTo(xx + Math.sin(yy * 0.02 + i) * 1.5, yy);
+        g.stroke();
+      }
+      g.fillStyle = '#16110c'; g.fillRect(x, 0, 3, 512);
+      const j = Math.random() * 512; g.fillRect(x, j, 32, 2);
+    }
+  });
+  teakTex.wrapS = teakTex.wrapT = THREE.RepeatWrapping;
+  const teakMat = new THREE.MeshStandardMaterial({ map: teakTex, roughness: 0.7 });
+
+  const add = (geo, mat, x = 0, y = 0, z = 0, parent = yacht) => {
+    const m = new THREE.Mesh(geo, mat); m.position.set(x, y, z);
+    m.castShadow = true; m.receiveShadow = true; parent.add(m); return m;
+  };
+
+  // Hull strips (bottom, spray rail, topsides) kept separate for crisp chines
+  function strip(profile) {
+    const pos = [], idx = []; let np = 0;
+    for (const side of [1, -1]) {
+      const base = pos.length / 3;
+      for (let j = 0; j <= NS; j++) {
+        const t = j / NS, z = ZS + t * HL, st = station(t), pts = profile(st, t);
+        np = pts.length;
+        for (const [x, y] of pts) pos.push(side * x, y, z);
+      }
+      for (let j = 0; j < NS; j++) for (let i = 0; i < np - 1; i++) {
+        const a = base + j * np + i, b = a + 1, c = a + np, d = c + 1;
+        idx.push(a, c, b, b, c, d);
+      }
+    }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+    g.setIndex(idx); g.computeVertexNormals();
+    return g;
+  }
+  const railW = (st) => 0.07 * (st.beam / 1.42);
+  add(strip((st) => {
+    const c = st.chineX, pts = [];
+    for (let i = 0; i <= 4; i++) { const u = i / 4; pts.push([c * u, st.keelY + c * u * st.dr * (0.9 + 0.1 * u)]); }
+    return pts;
+  }), hullMat);
+  add(strip((st) => [[st.chineX, st.chineY], [st.chineX + railW(st), st.chineY + 0.015]]), hullMat);
+  add(strip((st) => {
+    const x0 = st.chineX + railW(st), y0 = st.chineY + 0.015, pts = [];
+    for (let i = 0; i <= 4; i++) { const u = i / 4; pts.push([x0 + (st.beam - x0) * u + Math.sin(u * Math.PI) * 0.03, y0 + (st.sheerY - y0) * u]); }
+    return pts;
+  }), hullMat);
+
+  // Transom
+  {
+    const st = station(0), sh = new THREE.Shape(), x0 = st.chineX + railW(st);
+    sh.moveTo(st.beam, st.sheerY); sh.lineTo(x0, st.chineY + 0.015); sh.lineTo(st.chineX, st.chineY); sh.lineTo(0, st.keelY);
+    sh.lineTo(-st.chineX, st.chineY); sh.lineTo(-x0, st.chineY + 0.015); sh.lineTo(-st.beam, st.sheerY); sh.closePath();
+    add(new THREE.ShapeGeometry(sh), hullMat, 0, 0, ZS);
+  }
+
+  // Deck, liner and teak sole
+  function deckGrid(t0, t1, wf, yOff, uvScale) {
+    const nx = 10, ns = 48, pos = [], uv = [], idx = [];
+    for (let j = 0; j <= ns; j++) {
+      const t = t0 + (t1 - t0) * j / ns, st = station(t), z = ZS + t * HL, y = deckY(t, st) + yOff;
+      for (let i = 0; i <= nx; i++) {
+        const x = (-1 + 2 * i / nx) * st.beam * wf;
+        pos.push(x, y, z); uv.push(x * uvScale[0], z * uvScale[1]);
+      }
+    }
+    for (let j = 0; j < ns; j++) for (let i = 0; i < nx; i++) {
+      const a = j * (nx + 1) + i, b = a + 1, c = a + nx + 1, d = c + 1;
+      idx.push(a, b, c, b, d, c);
+    }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+    g.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2));
+    g.setIndex(idx); g.computeVertexNormals();
+    return g;
+  }
+  add(deckGrid(0, 0.995, 0.985, 0, [1, 1]), nonskid);
+  add(deckGrid(0.03, 0.62, 0.84, 0.012, [0.62, 0.22]), teakMat);
+  {
+    const pos = [], idx = [];
+    for (const side of [1, -1]) {
+      const base = pos.length / 3;
+      for (let j = 0; j <= NS; j++) {
+        const t = j / NS * 0.995, st = station(t), z = ZS + t * HL;
+        pos.push(side * st.beam * 0.975, deckY(t, st), z, side * st.beam * 0.975, st.sheerY - 0.01, z);
+      }
+      for (let j = 0; j < NS; j++) { const a = base + j * 2; idx.push(a, a + 2, a + 1, a + 1, a + 2, a + 3); }
+    }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3)); g.setIndex(idx); g.computeVertexNormals();
+    const liner = add(g, gelcoat); liner.material = gelcoat.clone(); liner.material.side = THREE.DoubleSide;
+    const st0 = station(0.0);
+    add(new THREE.BoxGeometry(st0.beam * 1.94, st0.sheerY - deckY(0, st0), 0.06), gelcoat, 0, (st0.sheerY + deckY(0, st0)) / 2, ZS + 0.04);
+  }
+
+  // Gunwale cap and rub rail
+  function sheerCurve(dx, dy) {
+    const pts = [];
+    for (let i = 0; i <= 14; i++) { const t = i / 14, st = station(t); pts.push(new THREE.Vector3(st.beam + dx, st.sheerY + dy, ZS + t * HL)); }
+    for (let i = 13; i >= 0; i--) { const t = i / 14, st = station(t); pts.push(new THREE.Vector3(-(st.beam + dx), st.sheerY + dy, ZS + t * HL)); }
+    return new THREE.CatmullRomCurve3(pts, false, 'centripetal');
+  }
+  add(new THREE.TubeGeometry(sheerCurve(-0.02, 0.02), 220, 0.055, 10, false), gelcoat);
+  add(new THREE.TubeGeometry(sheerCurve(0.035, -0.06), 220, 0.03, 8, false), stainless);
+  {
+    const st = station(0);
+    const cap = add(new THREE.CylinderGeometry(0.055, 0.055, st.beam * 2, 10), gelcoat, 0, st.sheerY + 0.02, ZS + 0.02);
+    cap.rotation.z = Math.PI / 2;
+  }
+
+  // Bow rail with stanchions
+  {
+    const pts = [];
+    for (let i = 0; i <= 10; i++) { const t = 0.5 + 0.5 * i / 10, st = station(t); pts.push(new THREE.Vector3(st.beam * 0.86, st.sheerY + 0.6, ZS + t * HL - 0.12 * (i / 10))); }
+    for (let i = 9; i >= 0; i--) { const t = 0.5 + 0.5 * i / 10, st = station(t); pts.push(new THREE.Vector3(-st.beam * 0.86, st.sheerY + 0.6, ZS + t * HL - 0.12 * (i / 10))); }
+    add(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 120, 0.022, 8, false), stainless);
+    const stanGeo = new THREE.CylinderGeometry(0.016, 0.016, 0.6, 8);
+    for (const t of [0.52, 0.64, 0.76, 0.88]) for (const s of [1, -1]) {
+      const st = station(t); add(stanGeo, stainless, s * st.beam * 0.86, st.sheerY + 0.3, ZS + t * HL);
+    }
+  }
+
+  // Center console
+  const tC = 0.53, stC = station(tC), dC = deckY(tC, stC), zC = ZS + tC * HL;
+  add(new RoundedBoxGeometry(1.2, 1.15, 1.3, 4, 0.12), gelcoat, 0, dC + 0.575, zC);
+  const consoleTop = dC + 1.15;
+  // Dash with glowing MFDs
+  const mfdTex = makeTexture(512, 256, (g, w, h) => {
+    g.fillStyle = '#05070a'; g.fillRect(0, 0, w, h);
+    g.fillStyle = '#062a44'; g.fillRect(12, 12, 236, 232);
+    g.strokeStyle = '#0f5b86'; g.lineWidth = 1.2;
+    for (let i = 0; i < 9; i++) { g.beginPath(); for (let x = 12; x <= 248; x += 8) g.lineTo(x, 30 + i * 26 + Math.sin(x * 0.04 + i) * 9); g.stroke(); }
+    g.fillStyle = '#c9b47d'; g.beginPath(); g.moveTo(170, 12); g.quadraticCurveTo(210, 80, 248, 70); g.lineTo(248, 12); g.fill();
+    g.strokeStyle = '#ff3df2'; g.lineWidth = 2; g.beginPath(); g.moveTo(130, 200); g.lineTo(190, 60); g.stroke();
+    g.fillStyle = '#ffffff'; g.beginPath(); g.moveTo(130, 186); g.lineTo(122, 206); g.lineTo(138, 206); g.fill();
+    g.fillStyle = '#000'; g.fillRect(264, 12, 236, 232);
+    g.strokeStyle = '#1bdc6c'; g.lineWidth = 1;
+    for (let r = 25; r <= 110; r += 28) { g.beginPath(); g.arc(382, 128, r, 0, Math.PI * 2); g.stroke(); }
+    const grad = g.createLinearGradient(382, 128, 482, 60); grad.addColorStop(0, 'rgba(27,220,108,0.7)'); grad.addColorStop(1, 'rgba(27,220,108,0)');
+    g.fillStyle = grad; g.beginPath(); g.moveTo(382, 128); g.arc(382, 128, 110, -0.9, -0.3); g.fill();
+    g.fillStyle = '#7dffb2'; for (let i = 0; i < 9; i++) g.fillRect(300 + Math.random() * 160, 40 + Math.random() * 170, 3, 3);
+    g.font = 'bold 18px monospace'; g.fillStyle = '#e8f6ff'; g.fillText('SOG 34.6', 22, 236);
+  });
+  const dash = add(new THREE.PlaneGeometry(1.02, 0.42), new THREE.MeshStandardMaterial({ color: 0x000000, emissive: 0xffffff, emissiveMap: mfdTex, emissiveIntensity: 1.3, roughness: 0.12 }), 0, consoleTop - 0.02, zC - 0.52);
+  dash.lookAt(0, consoleTop + 0.9, zC - 1.3);
+  const bezel = add(new THREE.BoxGeometry(1.1, 0.5, 0.04), darkTrim, 0, consoleTop - 0.03, zC - 0.5);
+  bezel.lookAt(0, consoleTop + 0.9, zC - 1.3);
+  // Windshield + grab rail
+  const ws = add(new THREE.CylinderGeometry(0.72, 0.76, 0.52, 32, 1, true, -Math.PI / 2, Math.PI), glass, 0, consoleTop + 0.24, zC - 0.08);
+  ws.scale.set(1, 1, 0.75); ws.rotation.x = -0.22; ws.castShadow = false;
+  {
+    const pts = []; for (let i = 0; i <= 16; i++) { const a = -Math.PI / 2 + Math.PI * i / 16; pts.push(new THREE.Vector3(Math.sin(a) * 0.75, consoleTop + 0.5, zC - 0.2 + Math.cos(a) * 0.52)); }
+    add(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 40, 0.018, 8, false), stainless);
+  }
+  // Wheel, throttles
+  const wheel = new THREE.Group();
+  add(new THREE.TorusGeometry(0.19, 0.017, 10, 36), stainless, 0, 0, 0, wheel);
+  add(new THREE.CylinderGeometry(0.035, 0.035, 0.06, 12).rotateX(Math.PI / 2), stainless, 0, 0, 0, wheel);
+  for (let i = 0; i < 3; i++) { const sp = add(new THREE.BoxGeometry(0.19, 0.012, 0.012), stainless, 0, 0, 0, wheel); sp.rotation.z = i * Math.PI * 2 / 3; sp.position.set(Math.cos(i * Math.PI * 2 / 3) * 0.095, Math.sin(i * Math.PI * 2 / 3) * 0.095, 0); }
+  wheel.position.set(-0.26, consoleTop - 0.12, zC - 0.72);
+  wheel.lookAt(-0.26, consoleTop + 0.5, zC - 1.6);
+  yacht.add(wheel);
+  add(new RoundedBoxGeometry(0.16, 0.12, 0.2, 2, 0.03), darkTrim, 0.32, consoleTop - 0.15, zC - 0.68);
+  for (const x of [0.28, 0.36]) { const lv = add(new THREE.CylinderGeometry(0.011, 0.011, 0.2, 8), stainless, x, consoleTop - 0.02, zC - 0.7); lv.rotation.x = -0.4; }
+
+  // Leaning post, cooler seat, aft bench, bow cushions
+  add(new RoundedBoxGeometry(1.0, 0.95, 0.55, 4, 0.08), gelcoat, 0, dC + 0.475, zC - 1.55);
+  add(new RoundedBoxGeometry(1.06, 0.26, 0.36, 4, 0.1), cushion, 0, dC + 1.05, zC - 1.62);
+  for (const x of [-0.36, -0.12, 0.12, 0.36]) { const r = add(new THREE.CylinderGeometry(0.03, 0.03, 0.45, 10, 1, true), stainless, x, dC + 1.15, zC - 1.85); r.rotation.x = 0.35; }
+  add(new RoundedBoxGeometry(1.0, 0.5, 0.6, 4, 0.08), gelcoat, 0, dC + 0.25, zC + 1.05);
+  add(new RoundedBoxGeometry(1.02, 0.1, 0.62, 3, 0.04), cushion, 0, dC + 0.55, zC + 1.05);
+  { const st = station(0.05); add(new RoundedBoxGeometry(st.beam * 1.6, 0.14, 0.42, 3, 0.05), cushion, 0, deckY(0.05, st) + 0.42, ZS + 0.5); }
+  for (const s of [1, -1]) {
+    const st = station(0.84), cz = ZS + 0.84 * HL;
+    const c = add(new RoundedBoxGeometry(0.34, 0.12, 1.2, 3, 0.05), cushion, s * st.beam * 0.62, deckY(0.84, st) + 0.08, cz);
+    c.rotation.y = s * 0.22;
+  }
+
+  // T-top
+  const tTopY = dC + 2.3;
+  const legGeo = (x, z) => new THREE.TubeGeometry(new THREE.CatmullRomCurve3([
+    new THREE.Vector3(x * 1.1, dC, z), new THREE.Vector3(x * 1.04, dC + 1.2, z), new THREE.Vector3(x, tTopY - 0.06, z)]), 24, 0.03, 10, false);
+  for (const x of [0.64, -0.64]) for (const z of [zC + 0.72, zC - 1.25]) add(legGeo(x, z), stainless);
+  add(new RoundedBoxGeometry(1.96, 0.1, 2.4, 4, 0.05), gelcoat, 0, tTopY, zC - 0.25);
+  add(new THREE.CylinderGeometry(0.31, 0.34, 0.2, 32), gelcoat, 0, tTopY + 0.15, zC - 0.1);
+  add(new THREE.SphereGeometry(0.31, 32, 12, 0, Math.PI * 2, 0, Math.PI / 2).scale(1, 0.25, 1), gelcoat, 0, tTopY + 0.25, zC - 0.1);
+  for (const x of [0.88, -0.88]) { const a = add(new THREE.CylinderGeometry(0.008, 0.014, 2.4, 6), gelcoat, x, tTopY + 1.1, zC - 1.25); a.rotation.x = -0.28; }
+  add(new THREE.CylinderGeometry(0.012, 0.012, 0.5, 6), stainless, 0, tTopY + 0.3, zC - 1.35);
+  const allRound = add(new THREE.SphereGeometry(0.04, 12, 8), new THREE.MeshStandardMaterial({ color: 0x000000, emissive: 0xffffff, emissiveIntensity: 6 }), 0, tTopY + 0.57, zC - 1.35);
+
+  // Navigation lights: port (left, +x) red, starboard (right, -x) green
+  {
+    const t = 0.88, st = station(t), z = ZS + t * HL;
+    add(new THREE.BoxGeometry(0.05, 0.05, 0.1), new THREE.MeshStandardMaterial({ color: 0x000000, emissive: 0xff1a1a, emissiveIntensity: 7 }), st.beam + 0.02, st.sheerY - 0.05, z);
+    add(new THREE.BoxGeometry(0.05, 0.05, 0.1), new THREE.MeshStandardMaterial({ color: 0x000000, emissive: 0x1aff5a, emissiveIntensity: 7 }), -st.beam - 0.02, st.sheerY - 0.05, z);
+  }
+
+  // Twin outboards on the transom
+  const outboards = new THREE.Group();
+  const props = [];
+  function outboard(x) {
+    const eng = new THREE.Group();
+    eng.position.set(x, station(0).sheerY - 0.1, ZS - 0.04);
+    add(new RoundedBoxGeometry(0.5, 0.72, 0.78, 4, 0.16), cowlMat, 0, 0.3, -0.38, eng);
+    add(new THREE.BoxGeometry(0.505, 0.035, 0.6), new THREE.MeshStandardMaterial({ color: 0xdfe4ea, metalness: 0.9, roughness: 0.2 }), 0, 0.16, -0.4, eng);
+    add(new RoundedBoxGeometry(0.34, 0.55, 0.42, 3, 0.08), cowlMat, 0, -0.26, -0.3, eng);
+    add(new RoundedBoxGeometry(0.16, 0.8, 0.36, 3, 0.06), cowlMat, 0, -0.88, -0.3, eng);
+    add(new THREE.BoxGeometry(0.38, 0.03, 0.52), cowlMat, 0, -0.62, -0.33, eng);
+    add(new THREE.CapsuleGeometry(0.075, 0.36, 6, 16).rotateX(Math.PI / 2), cowlMat, 0, -1.22, -0.3, eng);
+    add(new THREE.BoxGeometry(0.03, 0.26, 0.2), cowlMat, 0, -1.38, -0.34, eng);
+    const prop = new THREE.Group();
+    prop.position.set(0, -1.22, -0.6);
+    add(new THREE.CylinderGeometry(0.045, 0.065, 0.16, 16).rotateX(Math.PI / 2), stainless, 0, 0, 0, prop);
+    for (let b = 0; b < 3; b++) {
+      const arm = new THREE.Group(); arm.rotation.z = b * Math.PI * 2 / 3; prop.add(arm);
+      const blade = add(new THREE.SphereGeometry(1, 16, 8).scale(0.012, 0.16, 0.1), stainless, 0, 0.14, 0, arm);
+      blade.rotation.y = 0.55;
+    }
+    eng.add(prop); props.push(prop);
+    outboards.add(eng);
+  }
+  outboard(0.52); outboard(-0.52);
+  yacht.add(outboards);
+
+  // Underwater transom LEDs
+  const ledMat = new THREE.MeshStandardMaterial({ color: 0x000000, emissive: 0x00e5ff, emissiveIntensity: 0 });
+  for (const x of [0.95, -0.95]) { const l = add(new THREE.CircleGeometry(0.06, 16), ledMat, x, -0.1, ZS - 0.01); l.rotation.y = Math.PI; }
+  const ledLight = new THREE.PointLight(0x00e5ff, 0, 14, 2);
+  ledLight.position.set(0, -0.3, ZS - 0.8);
+  yacht.add(ledLight);
+
+  yacht.traverse(o => { if (o.isMesh && o.material === glass) o.castShadow = false; });
+  return { group: yacht, outboards, props, ledMat, ledLight, allRound };
+}
+
+/* =========================================================================
+   Channel marker buoy
+   ========================================================================= */
+function createBuoy() {
+  const g = new THREE.Group();
+  const red = new THREE.MeshPhysicalMaterial({ color: 0xb4161b, roughness: 0.35, clearcoat: 0.6 });
+  const dark = new THREE.MeshStandardMaterial({ color: 0x1b222b, roughness: 0.5, metalness: 0.4 });
+  const pts = [[0, -1.2], [0.5, -1.15], [1.15, -0.4], [1.2, 0.3], [0.9, 0.55], [0.35, 0.65], [0, 0.66]].map(([x, y]) => new THREE.Vector2(x, y));
+  const body = new THREE.Mesh(new THREE.LatheGeometry(pts, 40), red); g.add(body);
+  const tower = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.55, 2.6, 4, 1, true), red); tower.position.y = 1.9; tower.rotation.y = Math.PI / 4; g.add(tower);
+  const band = new THREE.Mesh(new THREE.TorusGeometry(1.18, 0.07, 10, 40), dark); band.rotation.x = Math.PI / 2; band.position.y = 0.3; g.add(band);
+  const lampMat = new THREE.MeshStandardMaterial({ color: 0x000000, emissive: 0xff2a1a, emissiveIntensity: 0 });
+  const lamp = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.14, 0.26, 16), lampMat); lamp.position.y = 3.35; g.add(lamp);
+  const cap = new THREE.Mesh(new THREE.ConeGeometry(0.2, 0.2, 16), dark); cap.position.y = 3.58; g.add(cap);
+  g.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
+  g.position.set(-45, 0, 35);
+  return { group: g, lampMat };
+}
+
+/* =========================================================================
+   Spray particles (soft, lit, fading)
+   ========================================================================= */
+function createSpray() {
+  const N = LOW ? 900 : 1800;
+  const pos = new Float32Array(N * 3), vel = new Float32Array(N * 3), life = new Float32Array(N), size = new Float32Array(N), decay = new Float32Array(N);
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  geo.setAttribute('aLife', new THREE.BufferAttribute(life, 1));
+  geo.setAttribute('aSize', new THREE.BufferAttribute(size, 1));
+  const mat = new THREE.ShaderMaterial({
+    uniforms: { uScale: { value: 800 }, uColor: { value: new THREE.Vector3(1, 1, 1) } },
+    vertexShader: /* glsl */`
+      attribute float aLife; attribute float aSize; uniform float uScale; varying float vLife;
+      void main() {
+        vLife = aLife;
+        vec4 mv = modelViewMatrix * vec4(position, 1.0);
+        gl_PointSize = aLife > 0.0 ? min(aSize * (1.0 + (1.0 - aLife) * 1.8) * uScale / max(-mv.z, 0.1), 180.0) : 0.0;
+        gl_Position = projectionMatrix * mv;
+      }`,
+    fragmentShader: /* glsl */`
+      uniform vec3 uColor; varying float vLife;
+      void main() {
+        float r = length(gl_PointCoord - 0.5);
+        float a = smoothstep(0.5, 0.05, r) * vLife * 0.55;
+        if (a < 0.01) discard;
+        gl_FragColor = vec4(uColor, a);
+      }`,
+    transparent: true, depthWrite: false
+  });
+  const points = new THREE.Points(geo, mat);
+  points.frustumCulled = false;
+  let head = 0;
+  return {
+    points, mat,
+    emit(o, v, spread, sz, count, dec = 1.2) {
+      for (let k = 0; k < count; k++) {
+        const i = head; head = (head + 1) % N;
+        pos[i * 3] = o.x + (Math.random() - 0.5) * 0.3; pos[i * 3 + 1] = o.y + (Math.random() - 0.5) * 0.15; pos[i * 3 + 2] = o.z + (Math.random() - 0.5) * 0.3;
+        vel[i * 3] = v.x + (Math.random() - 0.5) * spread; vel[i * 3 + 1] = v.y + Math.random() * spread * 0.6; vel[i * 3 + 2] = v.z + (Math.random() - 0.5) * spread;
+        life[i] = 1; size[i] = sz * (0.6 + Math.random() * 0.8); decay[i] = dec * (0.7 + Math.random() * 0.6);
+      }
+    },
+    update(dt) {
+      const drag = Math.exp(-dt * 0.9);
+      for (let i = 0; i < N; i++) {
+        if (life[i] <= 0) continue;
+        life[i] -= dt * decay[i];
+        vel[i * 3] *= drag; vel[i * 3 + 2] *= drag; vel[i * 3 + 1] -= G * dt;
+        pos[i * 3] += vel[i * 3] * dt; pos[i * 3 + 1] += vel[i * 3 + 1] * dt; pos[i * 3 + 2] += vel[i * 3 + 2] * dt;
+        if (life[i] < 0) life[i] = 0;
+      }
+      geo.attributes.position.needsUpdate = true; geo.attributes.aLife.needsUpdate = true; geo.attributes.aSize.needsUpdate = true;
+    }
+  };
+}
+
+/* =========================================================================
+   Rain streaks
+   ========================================================================= */
+const RAIN_N = LOW ? 3000 : 6000;
+const rainGeo = new THREE.BufferGeometry();
+{
+  const rp = new Float32Array(RAIN_N * 6);
+  for (let i = 0; i < RAIN_N; i++) {
+    const x = (Math.random() - 0.5) * 160, y = Math.random() * 70, z = (Math.random() - 0.5) * 160, o = i * 6;
+    rp[o] = x; rp[o + 1] = y; rp[o + 2] = z; rp[o + 3] = x - 0.5; rp[o + 4] = y - 2.2; rp[o + 5] = z - 0.25;
+  }
+  rainGeo.setAttribute('position', new THREE.BufferAttribute(rp, 3));
+}
+const rainMat = new THREE.LineBasicMaterial({ color: new THREE.Color().setRGB(0.4, 0.43, 0.48), transparent: true, opacity: 0, depthWrite: false, fog: false });
+const rain = new THREE.LineSegments(rainGeo, rainMat);
+rain.frustumCulled = false;
+scene.add(rain);
+
+/* =========================================================================
+   Build world
+   ========================================================================= */
+const yacht = createYacht();
+scene.add(yacht.group);
+const buoy = createBuoy();
+scene.add(buoy.group);
+const spray = createSpray();
+scene.add(spray.points);
+
+/* =========================================================================
+   Planar reflection camera (oblique near-plane clipping at sea level)
+   ========================================================================= */
+const mirrorCam = new THREE.PerspectiveCamera();
+const _dir = new THREE.Vector3(), _tgt = new THREE.Vector3(), _up = new THREE.Vector3();
+const _plane = new THREE.Plane(), _clip = new THREE.Vector4(), _q = new THREE.Vector4();
+const BIAS = new THREE.Matrix4().set(0.5, 0, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0, 0.5, 0.5, 0, 0, 0, 1);
+function renderReflection() {
+  const cp = camera.position;
+  if (cp.y < 0.05) return;
+  camera.getWorldDirection(_dir);
+  mirrorCam.position.set(cp.x, -cp.y, cp.z);
+  _tgt.copy(cp).add(_dir); _tgt.y = -_tgt.y;
+  _up.set(0, 1, 0).applyQuaternion(camera.quaternion); _up.y = -_up.y;
+  mirrorCam.up.copy(_up);
+  mirrorCam.lookAt(_tgt);
+  mirrorCam.updateMatrixWorld(true);
+  mirrorCam.projectionMatrix.copy(camera.projectionMatrix);
+  oceanU.uReflMatrix.value.copy(BIAS).multiply(camera.projectionMatrix).multiply(mirrorCam.matrixWorldInverse);
+  _plane.set(new THREE.Vector3(0, 1, 0), 0).applyMatrix4(mirrorCam.matrixWorldInverse);
+  _clip.set(_plane.normal.x, _plane.normal.y, _plane.normal.z, _plane.constant);
+  const pm = mirrorCam.projectionMatrix.elements;
+  _q.set((Math.sign(_clip.x) + pm[8]) / pm[0], (Math.sign(_clip.y) + pm[9]) / pm[5], -1, (1 + pm[10]) / pm[14]);
+  _clip.multiplyScalar(2 / _clip.dot(_q));
+  pm[2] = _clip.x; pm[6] = _clip.y; pm[10] = _clip.z + 1 - 0.003; pm[14] = _clip.w;
+  mirrorCam.projectionMatrixInverse.copy(mirrorCam.projectionMatrix).invert();
+
+  ocean.visible = false; spray.points.visible = false; rain.visible = false;
+  renderer.setRenderTarget(reflRT);
+  renderer.clear();
+  renderer.render(scene, mirrorCam);
+  renderer.setRenderTarget(null);
+  ocean.visible = true; spray.points.visible = true; rain.visible = P.rain > 0.02;
+}
+
+/* =========================================================================
+   Boat dynamics: 10-probe buoyancy, heave/pitch/roll springs, planing, air time
+   ========================================================================= */
+const MAX_SPEED = 21.5;                         // m/s (about 42 kn)
+const K_PROBE = 5.0, C_HEAVE = 5.6, C_PITCH = 4.5, C_ROLL = 2.5;
+const probes = [[0, 3.5], [0.55, 2.4], [-0.55, 2.4], [0.95, 0.6], [-0.95, 0.6], [1.05, -1.8], [-1.05, -1.8], [1.05, -4.4], [-1.05, -4.4], [0, -1.0]]
+  .map(([x, z]) => { const st = station((z - ZS) / HL); return new THREE.Vector3(x, st.keelY + Math.min(Math.abs(x), st.chineX) * st.dr, z); });
+const I_PITCH = probes.reduce((s, p) => s + p.z * p.z, 0) * 0.25;
+const I_ROLL = probes.reduce((s, p) => s + p.x * p.x, 0) * 0.25;
+const B = {
+  pos: new THREE.Vector3(0, -0.2, 0), vy: 0, pitch: 0, pitchV: 0, roll: 0, rollV: 0,
+  heading: 0.785, speed: 12, dist: 0, quat: new THREE.Quaternion(), lastDepth: new Float32Array(probes.length), slamCool: 0, waterY: 0
+};
+const trail = [];
+const _euler = new THREE.Euler(), _pw = new THREE.Vector3(), _tmp = new THREE.Vector3(), _tmp2 = new THREE.Vector3();
+const keys = {};
+
+function localToWorld(x, y, z, out) { return out.set(x, y, z).applyQuaternion(B.quat).add(B.pos); }
+
+function updateBoat(dt, t) {
+  if (S.manual) {
+    if (keys.KeyW || keys.ArrowUp) S.throttle = Math.min(S.throttle + dt * 0.45, 1);
+    if (keys.KeyS || keys.ArrowDown) S.throttle = Math.max(S.throttle - dt * 0.55, -0.25);
+    if (keys.KeyA || keys.ArrowLeft) S.rudder = Math.min(S.rudder + dt * 1.6, 0.6);
+    else if (keys.KeyD || keys.ArrowRight) S.rudder = Math.max(S.rudder - dt * 1.6, -0.6);
+    else S.rudder *= Math.max(0, 1 - dt * 3.5);
+  } else {
+    S.throttle = 0.58;
+    S.rudder = Math.sin(t * 0.13) * 0.16;
+  }
+  const targetSpeed = S.throttle * MAX_SPEED;
+  B.speed += (targetSpeed - B.speed) * (1 - Math.exp(-dt * 0.55));
+  const sr = B.speed / MAX_SPEED;
+  B.heading += S.rudder * dt * (sr * 0.9 + Math.sign(sr) * 0.05);
+  const fx = Math.sin(B.heading), fz = Math.cos(B.heading);
+  B.pos.x += fx * B.speed * dt; B.pos.z += fz * B.speed * dt;
+  B.dist += Math.abs(B.speed) * dt;
+  if (Math.abs(B.pos.x) > 6000 || Math.abs(B.pos.z) > 6000) { B.pos.set(0, B.pos.y, 0); trail.length = 0; }
+
+  const asr = Math.abs(sr);
+  const hump = Math.sin(Math.PI * clamp(asr * 1.6, 0, 1));
+  const n = 3, h = dt / n;
+  let wetAny = false;
+  for (let s = 0; s < n; s++) {
+    B.quat.setFromEuler(_euler.set(-B.pitch, B.heading, B.roll, 'YXZ'));
+    let F = 0, Tp = 0, Tr = 0, wet = 0;
+    for (let i = 0; i < probes.length; i++) {
+      const p = probes[i];
+      _pw.copy(p).applyQuaternion(B.quat).add(B.pos);
+      const depth = clamp(heightAt(_pw.x, _pw.z, t) - _pw.y, 0, 1.2);
+      if (depth > 0) wet++;
+      const f = K_PROBE * depth;
+      F += f; Tp += f * p.z; Tr += f * p.x;
+      if (s === n - 1) {
+        if (i < 3 && (depth - B.lastDepth[i]) / dt > 2.2 && asr > 0.25 && B.slamCool <= 0) {
+          _tmp.copy(_pw); _tmp2.set(fx * B.speed * 0.3, 2.5 + asr * 3, fz * B.speed * 0.3);
+          spray.emit(_tmp, _tmp2, 6, 0.7, 60, 0.8);
+          B.slamCool = 0.35;
+        }
+        B.lastDepth[i] = depth;
+      }
+    }
+    const wetF = wet / probes.length;
+    wetAny = wetAny || wet > 0;
+    const lift = wet > 0 ? G * 0.45 * asr * asr * Math.min(1, wetF * 2) : 0;
+    B.vy += (F + lift - G - B.vy * C_HEAVE * (wet > 0 ? 1 : 0.05)) * h;
+    B.pos.y += B.vy * h;
+    const trim = wet > 0 ? 20 * (0.04 * asr + 0.05 * hump) : 0;
+    const bank = -20 * S.rudder * asr * 0.3;
+    B.pitchV += (Tp / I_PITCH - (wet > 0 ? 0 : 0.3 * B.pitch) + trim - B.pitchV * (wet > 0 ? C_PITCH : 0.4)) * h;
+    B.pitch += B.pitchV * h;
+    B.rollV += (Tr / I_ROLL + bank - B.rollV * (wet > 0 ? C_ROLL : 0.4)) * h;
+    B.roll += B.rollV * h;
+  }
+  B.pitch = clamp(B.pitch, -0.6, 0.7); B.roll = clamp(B.roll, -0.7, 0.7);
+  B.slamCool -= dt;
+  B.quat.setFromEuler(_euler.set(-B.pitch, B.heading, B.roll, 'YXZ'));
+  yacht.group.position.copy(B.pos);
+  yacht.group.quaternion.copy(B.quat);
+  B.waterY = heightAt(B.pos.x, B.pos.z, t);
+
+  // Outboards steer and props spin
+  yacht.outboards.children.forEach(e => { e.rotation.y = -S.rudder * 0.55; });
+  yacht.props.forEach(p => { p.rotation.z += S.throttle * 70 * dt; });
+
+  // Spray
+  if (wetAny && asr > 0.2) {
+    for (const s of [1, -1]) {
+      localToWorld(s * 0.95, 0.05, 1.4, _tmp);
+      _tmp2.set(fz * s * (2.5 + asr * 3), 1.2 + asr * 2.5, -fx * s * (2.5 + asr * 3));
+      _tmp2.x += s * 0; _tmp2.addScaledVector(new THREE.Vector3(fx, 0, fz), B.speed * 0.25);
+      spray.emit(_tmp, _tmp2, 1.6, 0.35, Math.ceil(asr * 4), 1.4);
+    }
+  }
+  if (S.throttle > 0.05 && wetAny) {
+    for (const s of [0.52, -0.52]) {
+      localToWorld(s, -0.1, ZS - 0.7, _tmp);
+      _tmp2.set(-fx * 3, 1.0 + S.throttle * 1.5, -fz * 3);
+      spray.emit(_tmp, _tmp2, 1.4, 0.4, 2, 1.3);
+    }
+  }
+
+  // Wake trail (every 3 m of travel)
+  localToWorld(0, 0, ZS, _tmp);
+  if (!trail.length || B.dist - trail[0].d > 3) {
+    trail.unshift({ x: _tmp.x, z: _tmp.z, d: B.dist, t });
+    if (trail.length > TRAIL_N - 1) trail.pop();
+  }
+  const tu = oceanU.uTrail.value;
+  tu[0].set(_tmp.x, _tmp.z, B.dist, t + 1);
+  for (let i = 1; i < TRAIL_N; i++) {
+    const e = trail[i - 1];
+    if (e) tu[i].set(e.x, e.z, e.d, e.t + 1); else tu[i].set(0, 0, 0, 0);
+  }
+  oceanU.uBoatPos.value.copy(B.pos);
+  oceanU.uBoatFwd.value.set(fx, fz);
+  oceanU.uBoatPitch.value = B.pitch; oceanU.uBoatRoll.value = B.roll;
+  oceanU.uBoatSpeed.value = Math.abs(B.speed); oceanU.uBoatDist.value = B.dist;
+
+  OceanAudio.updateEngine(Math.max(0, S.throttle));
+}
+
+const _bn = new THREE.Vector3(), _bq = new THREE.Quaternion(), UP = new THREE.Vector3(0, 1, 0);
+function updateBuoy(dt, t) {
+  const g = buoy.group;
+  const y = heightAt(g.position.x, g.position.z, t);
+  g.position.y += (y - 0.15 - g.position.y) * Math.min(dt * 6, 1);
+  normalAt(g.position.x, g.position.z, t, _bn);
+  _bq.setFromUnitVectors(UP, _bn);
+  g.quaternion.slerp(_bq, Math.min(dt * 3, 1));
+  buoy.lampMat.emissiveIntensity = (Math.sin(t * 2.2) > 0.75 ? 9 : 0.2) * (0.3 + P.night * 0.7 + (1 - P.exposure * 0.5));
+}
+
+/* =========================================================================
+   Cameras
+   ========================================================================= */
+const camLook = new THREE.Vector3();
+const lastBoatPos = new THREE.Vector3();
+function setCameraMode(mode) {
+  S.cam = mode;
+  ['chase', 'helm', 'bow', 'buoy', 'orbit'].forEach(m => document.getElementById(`cam-${m}`).classList.toggle('active', m === mode));
+  controls.enabled = mode === 'orbit';
+  camera.up.set(0, 1, 0);
+  if (mode === 'orbit') { controls.target.copy(B.pos).add(new THREE.Vector3(0, 1.2, 0)); lastBoatPos.copy(B.pos); }
+  if (mode === 'chase') camLook.copy(B.pos);
+}
+function updateCamera(dt, t) {
+  const fwd = _tmp.set(Math.sin(B.heading), 0, Math.cos(B.heading));
+  const left = _tmp2.set(Math.cos(B.heading), 0, -Math.sin(B.heading));
+  let clampWater = true;
+  if (S.cam === 'chase') {
+    const desired = new THREE.Vector3().copy(B.pos).addScaledVector(fwd, -16).addScaledVector(left, 4).add(new THREE.Vector3(0, 5.2, 0));
+    camera.position.lerp(desired, 1 - Math.exp(-dt * 2.5));
+    camLook.lerp(new THREE.Vector3().copy(B.pos).addScaledVector(fwd, 5).add(new THREE.Vector3(0, 1.3, 0)), 1 - Math.exp(-dt * 8));
+    camera.up.set(0, 1, 0);
+    camera.lookAt(camLook);
+  } else if (S.cam === 'helm' || S.cam === 'bow') {
+    clampWater = false;
+    const tC = 0.53, dC = deckY(tC, station(tC));
+    const eye = S.cam === 'helm' ? [0, dC + 1.72, ZS + tC * HL - 1.25] : [0, station(0.95).sheerY + 0.35, 4.2];
+    localToWorld(eye[0], eye[1], eye[2], camera.position);
+    const look = localToWorld(0, eye[1] - 0.4, eye[2] + 30, new THREE.Vector3());
+    camera.up.set(0, 1, 0).applyQuaternion(B.quat);
+    camera.lookAt(look);
+  } else if (S.cam === 'buoy') {
+    camera.position.copy(buoy.group.position).add(new THREE.Vector3(0, 3.9, 0));
+    camera.up.set(0, 1, 0);
+    camera.lookAt(B.pos.x, B.pos.y + 1.2, B.pos.z);
+  } else {
+    camera.position.add(new THREE.Vector3().subVectors(B.pos, lastBoatPos));
+    controls.target.copy(B.pos).add(new THREE.Vector3(0, 1.2, 0));
+    controls.update();
+  }
+  lastBoatPos.copy(B.pos);
+  if (clampWater) {
+    const wy = heightAt(camera.position.x, camera.position.z, t) + 0.8;
+    if (camera.position.y < wy) camera.position.y = wy;
+  }
+}
+
+/* =========================================================================
+   Weather: smooth blending between presets
+   ========================================================================= */
+const _sunDir = new THREE.Vector3(), _moonDir = new THREE.Vector3(), _lightDir = new THREE.Vector3();
+let envTimer = 0, envDirty = true, flash = 0, lightningT = 99, lightningNext = 6;
+
+function setWeatherPreset(name, instant = false) {
+  S.preset = name;
+  PT = PRESETS[name];
+  ['tropical', 'sunset', 'storm', 'biolum'].forEach(p => document.getElementById(`preset-${p}`).classList.toggle('active', p === name));
+  setSea(...PT.sea);
+  if (instant) for (const k of BLEND_KEYS) P[k] = Array.isArray(PT[k]) ? [...PT[k]] : PT[k];
+  envDirty = true;
+  OceanAudio.setVolumes(...PT.audio);
+}
+
+function blendWeather(dt) {
+  const k = 1 - Math.exp(-dt * 1.4);
+  let diff = 0;
+  for (const key of BLEND_KEYS) {
+    const tv = PT[key];
+    if (Array.isArray(tv)) for (let i = 0; i < tv.length; i++) { const d = tv[i] - P[key][i]; P[key][i] += d * k; diff = Math.max(diff, Math.abs(d)); }
+    else { const d = tv - P[key]; P[key] += d * k; diff = Math.max(diff, Math.abs(d) / (Math.abs(tv) + 1)); }
+  }
+  return diff;
+}
+
+function applyWeather(dt, t) {
+  const diff = blendWeather(dt);
+  dirFromElevAzim(P.skyElev, P.skyAzim, _sunDir);
+  dirFromElevAzim(P.moonElev, P.moonAzim, _moonDir);
+  const sunAbove = _sunDir.clone(); sunAbove.y = Math.max(sunAbove.y, 0.05); sunAbove.normalize();
+  _lightDir.copy(sunAbove).lerp(_moonDir, P.night).normalize();
+
+  skyU.sunPosition.value.copy(_sunDir);
+  skyU.turbidity.value = P.turbidity; skyU.rayleigh.value = P.rayleigh;
+  skyU.mieCoefficient.value = P.mie; skyU.mieDirectionalG.value = P.mieG;
+  renderer.toneMappingExposure = P.exposure;
+
+  const sunCol = v3(P.sunColor).multiplyScalar(P.sunI);
+  sunLight.color.setRGB(P.sunColor[0], P.sunColor[1], P.sunColor[2]);
+  sunLight.intensity = P.sunI * (1 + flash * 4);
+  hemiLight.intensity = P.hemiI;
+
+  oceanU.uSunDir.value.copy(_lightDir);
+  oceanU.uSunColor.value.copy(sunCol);
+  oceanU.uSkyAmbient.value.copy(v3(P.ambient)).multiplyScalar(1 + flash * 2);
+  oceanU.uDeepColor.value.copy(v3(P.deep));
+  oceanU.uScatterColor.value.copy(v3(P.scatter));
+  oceanU.uBio.value = P.bio;
+  oceanU.uHaze.value = P.haze;
+  oceanU.uFlash.value = flash;
+
+  cloudMat.uniforms.uCoverage.value = P.cloudCov;
+  cloudMat.uniforms.uLight.value.copy(v3(P.cloudLight));
+  cloudMat.uniforms.uShadow.value.copy(v3(P.cloudShadow));
+  cloudMat.uniforms.uSunDir.value.copy(_sunDir.y > -0.1 ? _sunDir : _moonDir);
+  cloudMat.uniforms.uMoonDir.value.copy(_moonDir);
+  cloudMat.uniforms.uNight.value = P.night;
+  cloudMat.uniforms.uFlash.value = flash;
+  cloudMat.uniforms.uTime.value = t;
+  cloudMat.uniforms.uWind.value.set(Math.cos(S.windAngle), Math.sin(S.windAngle)).multiplyScalar(0.4 + S.windSpeed / 25);
+
+  scene.fog.color.setRGB(P.fog[0], P.fog[1], P.fog[2]);
+  scene.fog.density = P.fogDensity;
+  rainMat.opacity = P.rain * 0.35;
+  rain.visible = P.rain > 0.02;
+  bloomPass.strength = P.bloom;
+  yacht.ledMat.emissiveIntensity = P.night * 8;
+  yacht.ledLight.intensity = P.night * 10;
+  yacht.allRound.material.emissiveIntensity = 1 + P.night * 7;
+
+  spray.mat.uniforms.uColor.value.copy(sunCol).multiplyScalar(0.22).add(v3(P.ambient).multiplyScalar(0.9)).add(new THREE.Vector3(0, 0.9, 1.1).multiplyScalar(P.bio));
+  spray.mat.uniforms.uScale.value = renderer.domElement.height / (2 * Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2));
+
+  // Refresh image-based lighting during transitions
+  envTimer -= dt;
+  if (diff > 0.004 && envTimer <= 0) { regenEnvironment(); envTimer = 0.35; envDirty = true; }
+  else if (diff <= 0.004 && envDirty) { regenEnvironment(); envDirty = false; }
+
+  // Shadow frustum follows the boat
+  sunLight.position.copy(B.pos).addScaledVector(_lightDir, 50);
+  sunLight.target.position.copy(B.pos);
+}
+
+function updateStorm(dt) {
+  if (P.rain > 0.02) {
+    const rp = rainGeo.attributes.position.array;
+    const fall = 38 * dt, slant = (4 + S.windSpeed * 0.25) * dt;
+    for (let i = 0; i < rp.length; i += 6) {
+      rp[i + 1] -= fall; rp[i + 4] -= fall; rp[i] -= slant; rp[i + 3] -= slant;
+      if (rp[i + 1] < -2) {
+        const x = (Math.random() - 0.5) * 160, y = 60 + Math.random() * 10, z = (Math.random() - 0.5) * 160;
+        rp[i] = x; rp[i + 1] = y; rp[i + 2] = z; rp[i + 3] = x - 0.5; rp[i + 4] = y - 2.2; rp[i + 5] = z - 0.25;
+      }
+    }
+    rainGeo.attributes.position.needsUpdate = true;
+    rain.position.set(camera.position.x, camera.position.y - 20, camera.position.z);
+  }
+  if (S.preset === 'storm') {
+    lightningNext -= dt;
+    if (lightningNext <= 0) {
+      lightningT = 0; lightningNext = 7 + Math.random() * 12;
+      setTimeout(() => OceanAudio.thunder(), 400 + Math.random() * 1200);
+    }
+  }
+  lightningT += dt;
+  const lt = lightningT;
+  flash = lt < 0.06 ? 1 : lt < 0.12 ? 0.25 : lt < 0.35 ? 0.85 * Math.exp(-(lt - 0.12) * 9) : 0.08 * Math.exp(-(lt - 0.35) * 6);
+  if (lt > 2) flash = 0;
+  flash *= P.rain;
+  document.getElementById('lightning-flash').style.opacity = (flash * 0.22).toFixed(3);
+}
+
+/* =========================================================================
+   Procedural audio
+   ========================================================================= */
+const OceanAudio = {
+  ctx: null, surf: null, wind: null, rain: null, eng: null, o1: null, o2: null, ready: false,
+  init() {
+    if (this.ready) return;
+    const AC = window.AudioContext || window.webkitAudioContext;
+    this.ctx = new AC();
+    const len = this.ctx.sampleRate * 2.5, buf = this.ctx.createBuffer(1, len, this.ctx.sampleRate), d = buf.getChannelData(0);
+    for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+    const chain = (type, freq, q) => {
+      const src = this.ctx.createBufferSource(); src.buffer = buf; src.loop = true;
+      const f = this.ctx.createBiquadFilter(); f.type = type; f.frequency.value = freq; if (q) f.Q.value = q;
+      const g = this.ctx.createGain(); g.gain.value = 0;
+      src.connect(f); f.connect(g); g.connect(this.ctx.destination); src.start(0);
+      return g;
+    };
+    this.surf = chain('lowpass', 480); this.wind = chain('bandpass', 620, 3); this.rain = chain('highpass', 1600);
+    this.o1 = this.ctx.createOscillator(); this.o2 = this.ctx.createOscillator();
+    this.o1.type = 'sawtooth'; this.o2.type = 'triangle';
+    const ef = this.ctx.createBiquadFilter(); ef.type = 'lowpass'; ef.frequency.value = 240;
+    this.eng = this.ctx.createGain(); this.eng.gain.value = 0;
+    this.o1.connect(ef); this.o2.connect(ef); ef.connect(this.eng); this.eng.connect(this.ctx.destination);
+    this.o1.start(0); this.o2.start(0);
+    this.ready = true;
+  },
+  setVolumes(s, w, r) {
+    if (!this.ready || !S.audio) return;
+    const t = this.ctx.currentTime;
+    this.surf.gain.linearRampToValueAtTime(s, t + 0.5);
+    this.wind.gain.linearRampToValueAtTime(w, t + 0.5);
+    this.rain.gain.linearRampToValueAtTime(r, t + 0.5);
+  },
+  updateEngine(th) {
+    if (!this.ready || !S.audio) return;
+    const t = this.ctx.currentTime, f = 48 + th * 110;
+    this.o1.frequency.linearRampToValueAtTime(f, t + 0.1);
+    this.o2.frequency.linearRampToValueAtTime(f * 2, t + 0.1);
+    this.eng.gain.linearRampToValueAtTime(0.12 + th * 0.18, t + 0.1);
+  },
+  mute() {
+    if (!this.ready) return;
+    const t = this.ctx.currentTime;
+    [this.surf, this.wind, this.rain, this.eng].forEach(g => { g.gain.cancelScheduledValues(t); g.gain.setValueAtTime(0, t); });
+  },
+  thunder() {
+    if (!this.ready || !S.audio) return;
+    const now = this.ctx.currentTime, o = this.ctx.createOscillator(), g = this.ctx.createGain(), f = this.ctx.createBiquadFilter();
+    o.type = 'sawtooth'; o.frequency.setValueAtTime(95, now); o.frequency.exponentialRampToValueAtTime(28, now + 1.9);
+    f.type = 'lowpass'; f.frequency.setValueAtTime(320, now); f.frequency.exponentialRampToValueAtTime(50, now + 2.2);
+    g.gain.setValueAtTime(0.7, now); g.gain.exponentialRampToValueAtTime(0.001, now + 2.8);
+    o.connect(f); f.connect(g); g.connect(this.ctx.destination); o.start(now); o.stop(now + 2.9);
+  }
+};
+
+/* =========================================================================
+   HUD instruments
+   ========================================================================= */
+const attCtx = document.getElementById('attitude-gauge').getContext('2d');
+const compCtx = document.getElementById('compass-gauge').getContext('2d');
+function drawAttitude(pitchDeg, rollDeg) {
+  const c = attCtx; c.clearRect(0, 0, 88, 88); c.save();
+  c.beginPath(); c.arc(44, 44, 42, 0, Math.PI * 2); c.clip();
+  c.translate(44, 44); c.rotate(-rollDeg * Math.PI / 180); c.translate(0, (pitchDeg / 30) * 32);
+  c.fillStyle = '#0284c7'; c.fillRect(-70, -90, 140, 90);
+  c.fillStyle = '#0b3a57'; c.fillRect(-70, 0, 140, 90);
+  c.strokeStyle = '#fff'; c.lineWidth = 2; c.beginPath(); c.moveTo(-70, 0); c.lineTo(70, 0); c.stroke();
+  c.restore();
+  c.strokeStyle = '#fbbf24'; c.lineWidth = 3; c.beginPath();
+  c.moveTo(28, 44); c.lineTo(38, 44); c.moveTo(50, 44); c.lineTo(60, 44); c.moveTo(44, 40); c.lineTo(44, 48); c.stroke();
+}
+function drawCompass(hdg) {
+  const c = compCtx; c.clearRect(0, 0, 88, 88); c.save();
+  c.beginPath(); c.arc(44, 44, 42, 0, Math.PI * 2); c.fillStyle = '#09152b'; c.fill(); c.clip();
+  c.translate(44, 44); c.rotate(-hdg * Math.PI / 180);
+  c.fillStyle = '#ef4444'; c.beginPath(); c.moveTo(0, -36); c.lineTo(8, 0); c.lineTo(-8, 0); c.fill();
+  c.fillStyle = '#64748b'; c.beginPath(); c.moveTo(0, 36); c.lineTo(8, 0); c.lineTo(-8, 0); c.fill();
+  c.fillStyle = '#fff'; c.font = 'bold 16px monospace'; c.textAlign = 'center'; c.fillText('N', 0, -14);
+  c.restore();
+}
+const el = (id) => document.getElementById(id);
+function updateHUD() {
+  const pd = B.pitch * 57.2958, rd = B.roll * 57.2958;
+  let hdg = (B.heading * 57.2958) % 360; if (hdg < 0) hdg += 360;
+  drawAttitude(pd, rd); drawCompass(hdg);
+  el('tele-pitch-roll').textContent = `P:${pd >= 0 ? '+' : ''}${pd.toFixed(1)}° R:${rd >= 0 ? '+' : ''}${rd.toFixed(1)}°`;
+  const card = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'][Math.round(hdg / 45) % 8];
+  el('tele-heading').textContent = `${Math.floor(hdg).toString().padStart(3, '0')}° ${card}`;
+  el('tele-speed').textContent = (Math.abs(B.speed) / 0.5144).toFixed(1);
+  el('tele-wave-alt').textContent = `${B.waterY >= 0 ? '+' : ''}${B.waterY.toFixed(2)} m`;
+  const tp = Math.round(S.throttle * 100);
+  el('throttle-val').textContent = `${tp}%`;
+  el('throttle-bar').style.width = `${Math.max(0, tp)}%`;
+  const rdeg = Math.abs(S.rudder * 57.2958);
+  el('rudder-val').textContent = rdeg < 0.5 ? '0°' : `${rdeg.toFixed(0)}° ${S.rudder > 0 ? 'L' : 'R'}`;
+  el('rudder-indicator').style.left = `${50 - (S.rudder / 0.6) * 45}%`;
+}
+
+/* =========================================================================
+   UI wiring
+   ========================================================================= */
+const BEAUFORT = [1, 4, 7, 11, 17, 22, 28, 34, 41, 48, 56, 64];
+function setSea(hs, chop, wind, wl) {
+  S.waveHeight = hs; S.choppiness = chop; S.windSpeed = wind; S.wavelength = wl;
+  el('slider-wave-height').value = hs; el('slider-choppiness').value = chop;
+  el('slider-wind-speed').value = wind; el('slider-wavelength').value = wl;
+  refreshSeaLabels(); rebuildSpectrum();
+}
+function refreshSeaLabels() {
+  el('val-wave-height').textContent = `${S.waveHeight.toFixed(1)} m`;
+  el('val-choppiness').textContent = S.choppiness.toFixed(2);
+  const bf = BEAUFORT.findIndex(v => S.windSpeed < v);
+  el('val-wind-speed').textContent = `${S.windSpeed.toFixed(0)} kts · F${bf < 0 ? 12 : bf}`;
+  el('val-wavelength').textContent = `${S.wavelength.toFixed(0)} m`;
+}
+function setManual(on) {
+  S.manual = on;
+  const b = el('helm-mode-badge');
+  b.textContent = on ? 'MANUAL HELM' : 'AUTOPILOT';
+  b.className = on ? 'text-[10px] px-2 py-0.5 rounded-full bg-sky-500/20 text-sky-300 border border-sky-500/40 font-mono'
+                   : 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-mono';
+}
+['tropical', 'sunset', 'storm', 'biolum'].forEach(p => el(`preset-${p}`).onclick = () => setWeatherPreset(p));
+['chase', 'helm', 'bow', 'buoy', 'orbit'].forEach(m => el(`cam-${m}`).onclick = () => setCameraMode(m));
+const bindSlider = (id, key) => el(id).addEventListener('input', (e) => { S[key] = parseFloat(e.target.value); refreshSeaLabels(); rebuildSpectrum(); });
+bindSlider('slider-wave-height', 'waveHeight'); bindSlider('slider-choppiness', 'choppiness');
+bindSlider('slider-wind-speed', 'windSpeed'); bindSlider('slider-wavelength', 'wavelength');
+el('btn-reset-waves').onclick = () => setSea(...PRESETS[S.preset].sea);
+el('btn-toggle-manual').onclick = () => setManual(!S.manual);
+el('btn-recenter-boat').onclick = () => {
+  Object.assign(B, { vy: 0, pitch: 0, pitchV: 0, roll: 0, rollV: 0, heading: 0.785, speed: 0 });
+  B.pos.set(0, 0, 0); trail.length = 0; S.throttle = 0.58; S.rudder = 0;
+  if (S.cam === 'orbit') camera.position.set(8, 6, -16);
+};
+el('btn-audio-toggle').onclick = () => {
+  OceanAudio.init();
+  S.audio = !S.audio;
+  el('audio-icon-on').classList.toggle('hidden', !S.audio);
+  el('audio-icon-off').classList.toggle('hidden', S.audio);
+  el('audio-text').textContent = S.audio ? 'AUDIO ON' : 'AUDIO OFF';
+  el('audio-text').className = S.audio ? 'text-[11px] font-mono font-medium text-emerald-400' : 'text-[11px] font-mono font-medium';
+  if (S.audio) { OceanAudio.ctx.resume(); OceanAudio.setVolumes(...PRESETS[S.preset].audio); } else OceanAudio.mute();
+};
+el('btn-panel-toggle').onclick = () => el('marine-panel').classList.toggle('-translate-x-[115%]');
+if (innerWidth < 768) el('marine-panel').classList.add('-translate-x-[115%]');
+
+addEventListener('keydown', (e) => {
+  keys[e.code] = true;
+  if (['KeyW', 'KeyS', 'KeyA', 'KeyD', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.code) && !S.manual) setManual(true);
+  const map = { Digit1: 'chase', Digit2: 'helm', Digit3: 'bow', Digit4: 'buoy', Digit5: 'orbit' };
+  if (map[e.code]) setCameraMode(map[e.code]);
+});
+addEventListener('keyup', (e) => { keys[e.code] = false; });
+addEventListener('resize', () => {
+  const w = innerWidth, h = innerHeight;
+  camera.aspect = w / h; camera.updateProjectionMatrix();
+  renderer.setSize(w, h);
+  composer.setSize(w, h);
+  bloomPass.setSize(w, h);
+  reflRT.setSize(Math.floor(w * PR * 0.5), Math.floor(h * PR * 0.5));
+});
+
+/* =========================================================================
+   Main loop
+   ========================================================================= */
+setWeatherPreset('tropical', true);
+rebuildSpectrum();
+const clock = new THREE.Clock();
+let time = 0, frames = 0, fpsT = performance.now(), firstFrame = true;
+
+function frame() {
+  requestAnimationFrame(frame);
+  const dt = Math.min(clock.getDelta(), 1 / 20);
+  time += dt;
+  oceanU.uTime.value = time;
+
+  updateBoat(dt, time);
+  updateBuoy(dt, time);
+  updateCamera(dt, time);
+  updateStorm(dt);
+  applyWeather(dt, time);
+  spray.update(dt);
+
+  gridCenter.set(Math.round(camera.position.x * 2) / 2, Math.round(camera.position.z * 2) / 2);
+  ocean.position.set(gridCenter.x, 0, gridCenter.y);
+  sky.position.copy(camera.position);
+  clouds.position.copy(camera.position);
+  camera.getWorldDirection(_dir);
+  const fl = Math.hypot(_dir.x, _dir.z) || 1;
+  oceanU.uCamFwd.value.set(_dir.x / fl, _dir.z / fl);
+  oceanU.uCamRight.value.set(-_dir.z / fl, _dir.x / fl);
+
+  renderReflection();
+  renderer.shadowMap.needsUpdate = true;
+  composer.render();
+
+  updateHUD();
+  frames++;
+  const now = performance.now();
+  if (now - fpsT >= 1000) { el('tele-fps').textContent = frames; frames = 0; fpsT = now; }
+  if (firstFrame) {
+    firstFrame = false;
+    const ld = el('loader'); ld.style.opacity = '0'; setTimeout(() => ld.remove(), 900);
+  }
+}
+setCameraMode('chase');
+camera.position.set(B.pos.x - 16 * Math.sin(B.heading), 6, B.pos.z - 16 * Math.cos(B.heading));
+frame();
+</script>
+<script>
+  // Surface load failures (offline CDN, no WebGL2) instead of a silent black screen
+  window.addEventListener('error', (e) => {
+    const t = document.getElementById('loader-text');
+    if (t) t.textContent = 'FAILED TO START: ' + (e.message || 'check internet connection and WebGL2 support');
+  });
+</script>
+</body>
+</html>

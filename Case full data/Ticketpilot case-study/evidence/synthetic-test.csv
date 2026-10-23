@@ -1,0 +1,51 @@
+ticket_id,text,resolving_team,resolution_notes,product_area
+E-001,VPN connection keeps dropping from my work wireless network.,Network,Reconnect the VPN after updating the client and checking the gateway health.,Connectivity
+E-002,Since v2.3 I cannot open the sales dashboard because permission is denied.,Applications,Restore the reporting application role mapping introduced in v2.3; verify dashboard access.,Reporting
+E-003,I clicked a strange email attachment and now antivirus reports malware.,Security,Isolate the endpoint and ask Security to investigate the attachment and endpoint alert.,Endpoint
+E-004,My notebook display keeps flashing and showing strange lines.,Hardware,"Test an external display, update the approved display driver, then arrange panel replacement if needed.",Devices
+E-005,Cannot sign in: locked account and the second factor backup code fails.,Access Management,"Verify identity using the approved recovery process, unlock the account, and re-enroll MFA.",Identity
+E-006,Mail has stopped arriving in Outlook and storage is exhausted.,Email,"Check mailbox quota, archive approved messages, and verify incoming mail delivery.",Messaging
+E-007,After moving departments I cannot sign into the salary portal.,HR Systems,Synchronize the employee payroll record and restore the payroll portal entitlement.,Payroll
+E-008,The level three printer has stuck paper and will not print.,Facilities,Clear the paper path using the device guide and ask Facilities to service the feed roller.,Printing
+E-009,Sales reporting export freezes and produces an empty report.,Applications,Restart the reporting export worker and retry the job after confirming queue health.,Reporting
+E-010,Wireless internet in the meeting room loses packets.,Network,Check the access point health and move affected clients to the healthy office network.,Connectivity
+E-011,VPN connection keeps dropping from my work wireless network Please help.,Network,Reconnect the VPN after updating the client and checking the gateway health.,Connectivity
+E-012,Since v2.3 I cannot open the sales dashboard because permission is denied Please help.,Applications,Restore the reporting application role mapping introduced in v2.3; verify dashboard access.,Reporting
+E-013,I clicked a strange email attachment and now antivirus reports malware Please help.,Security,Isolate the endpoint and ask Security to investigate the attachment and endpoint alert.,Endpoint
+E-014,My notebook display keeps flashing and showing strange lines Please help.,Hardware,"Test an external display, update the approved display driver, then arrange panel replacement if needed.",Devices
+E-015,Cannot sign in: locked account and the second factor backup code fails Please help.,Access Management,"Verify identity using the approved recovery process, unlock the account, and re-enroll MFA.",Identity
+E-016,Mail has stopped arriving in Outlook and storage is exhausted Please help.,Email,"Check mailbox quota, archive approved messages, and verify incoming mail delivery.",Messaging
+E-017,After moving departments I cannot sign into the salary portal Please help.,HR Systems,Synchronize the employee payroll record and restore the payroll portal entitlement.,Payroll
+E-018,The level three printer has stuck paper and will not print Please help.,Facilities,Clear the paper path using the device guide and ask Facilities to service the feed roller.,Printing
+E-019,Sales reporting export freezes and produces an empty report Please help.,Applications,Restart the reporting export worker and retry the job after confirming queue health.,Reporting
+E-020,Wireless internet in the meeting room loses packets Please help.,Network,Check the access point health and move affected clients to the healthy office network.,Connectivity
+E-021,VPN connection keeps dropping from my work wireless network It is blocking work.,Network,Reconnect the VPN after updating the client and checking the gateway health.,Connectivity
+E-022,Since v2.3 I cannot open the sales dashboard because permission is denied It is blocking work.,Applications,Restore the reporting application role mapping introduced in v2.3; verify dashboard access.,Reporting
+E-023,I clicked a strange email attachment and now antivirus reports malware It is blocking work.,Security,Isolate the endpoint and ask Security to investigate the attachment and endpoint alert.,Endpoint
+E-024,My notebook display keeps flashing and showing strange lines It is blocking work.,Hardware,"Test an external display, update the approved display driver, then arrange panel replacement if needed.",Devices
+E-025,Cannot sign in: locked account and the second factor backup code fails It is blocking work.,Access Management,"Verify identity using the approved recovery process, unlock the account, and re-enroll MFA.",Identity
+E-026,Mail has stopped arriving in Outlook and storage is exhausted It is blocking work.,Email,"Check mailbox quota, archive approved messages, and verify incoming mail delivery.",Messaging
+E-027,After moving departments I cannot sign into the salary portal It is blocking work.,HR Systems,Synchronize the employee payroll record and restore the payroll portal entitlement.,Payroll
+E-028,The level three printer has stuck paper and will not print It is blocking work.,Facilities,Clear the paper path using the device guide and ask Facilities to service the feed roller.,Printing
+E-029,Sales reporting export freezes and produces an empty report It is blocking work.,Applications,Restart the reporting export worker and retry the job after confirming queue health.,Reporting
+E-030,Wireless internet in the meeting room loses packets It is blocking work.,Network,Check the access point health and move affected clients to the healthy office network.,Connectivity
+E-031,VPN connection keeps dropping from my work wireless network Need this today.,Network,Reconnect the VPN after updating the client and checking the gateway health.,Connectivity
+E-032,Since v2.3 I cannot open the sales dashboard because permission is denied Need this today.,Applications,Restore the reporting application role mapping introduced in v2.3; verify dashboard access.,Reporting
+E-033,I clicked a strange email attachment and now antivirus reports malware Need this today.,Security,Isolate the endpoint and ask Security to investigate the attachment and endpoint alert.,Endpoint
+E-034,My notebook display keeps flashing and showing strange lines Need this today.,Hardware,"Test an external display, update the approved display driver, then arrange panel replacement if needed.",Devices
+E-035,Cannot sign in: locked account and the second factor backup code fails Need this today.,Access Management,"Verify identity using the approved recovery process, unlock the account, and re-enroll MFA.",Identity
+E-036,Mail has stopped arriving in Outlook and storage is exhausted Need this today.,Email,"Check mailbox quota, archive approved messages, and verify incoming mail delivery.",Messaging
+E-037,After moving departments I cannot sign into the salary portal Need this today.,HR Systems,Synchronize the employee payroll record and restore the payroll portal entitlement.,Payroll
+E-038,The level three printer has stuck paper and will not print Need this today.,Facilities,Clear the paper path using the device guide and ask Facilities to service the feed roller.,Printing
+E-039,Sales reporting export freezes and produces an empty report Need this today.,Applications,Restart the reporting export worker and retry the job after confirming queue health.,Reporting
+E-040,Wireless internet in the meeting room loses packets Need this today.,Network,Check the access point health and move affected clients to the healthy office network.,Connectivity
+E-041,VPN connection keeps dropping from my work wireless network Several colleagues affected.,Network,Reconnect the VPN after updating the client and checking the gateway health.,Connectivity
+E-042,Since v2.3 I cannot open the sales dashboard because permission is denied Several colleagues affected.,Applications,Restore the reporting application role mapping introduced in v2.3; verify dashboard access.,Reporting
+E-043,I clicked a strange email attachment and now antivirus reports malware Several colleagues affected.,Security,Isolate the endpoint and ask Security to investigate the attachment and endpoint alert.,Endpoint
+E-044,My notebook display keeps flashing and showing strange lines Several colleagues affected.,Hardware,"Test an external display, update the approved display driver, then arrange panel replacement if needed.",Devices
+E-045,Cannot sign in: locked account and the second factor backup code fails Several colleagues affected.,Access Management,"Verify identity using the approved recovery process, unlock the account, and re-enroll MFA.",Identity
+E-046,Mail has stopped arriving in Outlook and storage is exhausted Several colleagues affected.,Email,"Check mailbox quota, archive approved messages, and verify incoming mail delivery.",Messaging
+E-047,After moving departments I cannot sign into the salary portal Several colleagues affected.,HR Systems,Synchronize the employee payroll record and restore the payroll portal entitlement.,Payroll
+E-048,The level three printer has stuck paper and will not print Several colleagues affected.,Facilities,Clear the paper path using the device guide and ask Facilities to service the feed roller.,Printing
+E-049,Sales reporting export freezes and produces an empty report Several colleagues affected.,Applications,Restart the reporting export worker and retry the job after confirming queue health.,Reporting
+E-050,Wireless internet in the meeting room loses packets Several colleagues affected.,Network,Check the access point health and move affected clients to the healthy office network.,Connectivity

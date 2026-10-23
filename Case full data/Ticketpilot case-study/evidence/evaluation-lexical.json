@@ -1,0 +1,513 @@
+{
+  "mode": "lexical",
+  "sample_size": 50,
+  "baseline_accuracy": 0.9,
+  "first_time_right": 0.1,
+  "recommendation_accuracy": 0.88,
+  "escalation_rate": 0.9,
+  "wrong_auto_assignment_rate": 0.0,
+  "baseline_modeled_handoffs": 0.09999999999999998,
+  "pilot_modeled_handoffs": 0.0,
+  "seeded_spikes_caught_on_first_day": 2,
+  "alerts": [
+    {
+      "issue": "Reporting",
+      "start_date": "2026-10-12",
+      "impact": "10 tickets today",
+      "baseline": 1.86,
+      "likely_cause": "Unverified: investigate recent changes. Sales dashboard access denied after release v2.3. Please investigate.",
+      "owner": "Applications",
+      "priority": "High"
+    },
+    {
+      "issue": "Reporting",
+      "start_date": "2026-10-13",
+      "impact": "10 tickets today",
+      "baseline": 3.0,
+      "likely_cause": "Unverified: investigate recent changes. Sales dashboard access denied after release v2.3. Please investigate.",
+      "owner": "Applications",
+      "priority": "High"
+    },
+    {
+      "issue": "Payroll",
+      "start_date": "2026-10-12",
+      "impact": "10 tickets today",
+      "baseline": 1.0,
+      "likely_cause": "Unverified: investigate recent changes. Payroll portal login fails after employee record transfer. Please investigate.",
+      "owner": "HR Systems",
+      "priority": "High"
+    },
+    {
+      "issue": "Payroll",
+      "start_date": "2026-10-13",
+      "impact": "10 tickets today",
+      "baseline": 2.29,
+      "likely_cause": "Unverified: investigate recent changes. Payroll portal login fails after employee record transfer. Please investigate.",
+      "owner": "HR Systems",
+      "priority": "High"
+    }
+  ],
+  "kill_criteria": {
+    "gain_below_10_points": true,
+    "wrong_auto_above_5_percent": false,
+    "escalation_above_40_percent": true
+  },
+  "limitations": [
+    "Synthetic templates repeat across test variants; not independent real-world evidence.",
+    "Handoffs modeled as one per wrong assignment; human review effort must be costed separately.",
+    "Confidence is heuristic, not calibrated.",
+    "Fix relevance and five voice clips not evaluated."
+  ],
+  "rows": [
+    {
+      "id": "E-001",
+      "expected": "Network",
+      "baseline": "Network",
+      "predicted": "Network",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.324
+    },
+    {
+      "id": "E-002",
+      "expected": "Applications",
+      "baseline": "Security",
+      "predicted": "Applications",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.675
+    },
+    {
+      "id": "E-003",
+      "expected": "Security",
+      "baseline": "Security",
+      "predicted": "Security",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.464
+    },
+    {
+      "id": "E-004",
+      "expected": "Hardware",
+      "baseline": "Hardware",
+      "predicted": "Hardware",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.342
+    },
+    {
+      "id": "E-005",
+      "expected": "Access Management",
+      "baseline": "Access Management",
+      "predicted": "Access Management",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.592
+    },
+    {
+      "id": "E-006",
+      "expected": "Email",
+      "baseline": "Email",
+      "predicted": "Applications",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.308
+    },
+    {
+      "id": "E-007",
+      "expected": "HR Systems",
+      "baseline": "HR Systems",
+      "predicted": "HR Systems",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.308
+    },
+    {
+      "id": "E-008",
+      "expected": "Facilities",
+      "baseline": "Facilities",
+      "predicted": "Facilities",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.44
+    },
+    {
+      "id": "E-009",
+      "expected": "Applications",
+      "baseline": "Applications",
+      "predicted": "Applications",
+      "assigned": "Applications",
+      "review": false,
+      "confidence": 0.811
+    },
+    {
+      "id": "E-010",
+      "expected": "Network",
+      "baseline": "Network",
+      "predicted": "Network",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.363
+    },
+    {
+      "id": "E-011",
+      "expected": "Network",
+      "baseline": "Network",
+      "predicted": "Network",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.309
+    },
+    {
+      "id": "E-012",
+      "expected": "Applications",
+      "baseline": "Security",
+      "predicted": "Applications",
+      "assigned": "Applications",
+      "review": false,
+      "confidence": 0.754
+    },
+    {
+      "id": "E-013",
+      "expected": "Security",
+      "baseline": "Security",
+      "predicted": "Security",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.569
+    },
+    {
+      "id": "E-014",
+      "expected": "Hardware",
+      "baseline": "Hardware",
+      "predicted": "Hardware",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.328
+    },
+    {
+      "id": "E-015",
+      "expected": "Access Management",
+      "baseline": "Access Management",
+      "predicted": "Access Management",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.685
+    },
+    {
+      "id": "E-016",
+      "expected": "Email",
+      "baseline": "Email",
+      "predicted": "Applications",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.421
+    },
+    {
+      "id": "E-017",
+      "expected": "HR Systems",
+      "baseline": "HR Systems",
+      "predicted": "HR Systems",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.421
+    },
+    {
+      "id": "E-018",
+      "expected": "Facilities",
+      "baseline": "Facilities",
+      "predicted": "Facilities",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.54
+    },
+    {
+      "id": "E-019",
+      "expected": "Applications",
+      "baseline": "Applications",
+      "predicted": "Applications",
+      "assigned": "Applications",
+      "review": false,
+      "confidence": 0.88
+    },
+    {
+      "id": "E-020",
+      "expected": "Network",
+      "baseline": "Network",
+      "predicted": "Network",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.487
+    },
+    {
+      "id": "E-021",
+      "expected": "Network",
+      "baseline": "Network",
+      "predicted": "Network",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.251
+    },
+    {
+      "id": "E-022",
+      "expected": "Applications",
+      "baseline": "Security",
+      "predicted": "Applications",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.558
+    },
+    {
+      "id": "E-023",
+      "expected": "Security",
+      "baseline": "Security",
+      "predicted": "Security",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.397
+    },
+    {
+      "id": "E-024",
+      "expected": "Hardware",
+      "baseline": "Hardware",
+      "predicted": "Applications",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.386
+    },
+    {
+      "id": "E-025",
+      "expected": "Access Management",
+      "baseline": "Access Management",
+      "predicted": "Access Management",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.513
+    },
+    {
+      "id": "E-026",
+      "expected": "Email",
+      "baseline": "Email",
+      "predicted": "Applications",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.365
+    },
+    {
+      "id": "E-027",
+      "expected": "HR Systems",
+      "baseline": "HR Systems",
+      "predicted": "HR Systems",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.26
+    },
+    {
+      "id": "E-028",
+      "expected": "Facilities",
+      "baseline": "Facilities",
+      "predicted": "Facilities",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.377
+    },
+    {
+      "id": "E-029",
+      "expected": "Applications",
+      "baseline": "Applications",
+      "predicted": "Applications",
+      "assigned": "Applications",
+      "review": false,
+      "confidence": 0.81
+    },
+    {
+      "id": "E-030",
+      "expected": "Network",
+      "baseline": "Network",
+      "predicted": "Network",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.296
+    },
+    {
+      "id": "E-031",
+      "expected": "Network",
+      "baseline": "Network",
+      "predicted": "Network",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.281
+    },
+    {
+      "id": "E-032",
+      "expected": "Applications",
+      "baseline": "Security",
+      "predicted": "Applications",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.696
+    },
+    {
+      "id": "E-033",
+      "expected": "Security",
+      "baseline": "Security",
+      "predicted": "Security",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.52
+    },
+    {
+      "id": "E-034",
+      "expected": "Hardware",
+      "baseline": "Hardware",
+      "predicted": "Hardware",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.296
+    },
+    {
+      "id": "E-035",
+      "expected": "Access Management",
+      "baseline": "Access Management",
+      "predicted": "Access Management",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.628
+    },
+    {
+      "id": "E-036",
+      "expected": "Email",
+      "baseline": "Email",
+      "predicted": "Applications",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.386
+    },
+    {
+      "id": "E-037",
+      "expected": "HR Systems",
+      "baseline": "HR Systems",
+      "predicted": "HR Systems",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.386
+    },
+    {
+      "id": "E-038",
+      "expected": "Facilities",
+      "baseline": "Facilities",
+      "predicted": "Facilities",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.496
+    },
+    {
+      "id": "E-039",
+      "expected": "Applications",
+      "baseline": "Applications",
+      "predicted": "Applications",
+      "assigned": "Applications",
+      "review": false,
+      "confidence": 0.803
+    },
+    {
+      "id": "E-040",
+      "expected": "Network",
+      "baseline": "Network",
+      "predicted": "Network",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.44
+    },
+    {
+      "id": "E-041",
+      "expected": "Network",
+      "baseline": "Network",
+      "predicted": "Network",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.281
+    },
+    {
+      "id": "E-042",
+      "expected": "Applications",
+      "baseline": "Security",
+      "predicted": "Applications",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.608
+    },
+    {
+      "id": "E-043",
+      "expected": "Security",
+      "baseline": "Security",
+      "predicted": "Security",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.411
+    },
+    {
+      "id": "E-044",
+      "expected": "Hardware",
+      "baseline": "Hardware",
+      "predicted": "Hardware",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.296
+    },
+    {
+      "id": "E-045",
+      "expected": "Access Management",
+      "baseline": "Access Management",
+      "predicted": "Access Management",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.53
+    },
+    {
+      "id": "E-046",
+      "expected": "Email",
+      "baseline": "Email",
+      "predicted": "Applications",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.27
+    },
+    {
+      "id": "E-047",
+      "expected": "HR Systems",
+      "baseline": "HR Systems",
+      "predicted": "HR Systems",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.27
+    },
+    {
+      "id": "E-048",
+      "expected": "Facilities",
+      "baseline": "Facilities",
+      "predicted": "Facilities",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.39
+    },
+    {
+      "id": "E-049",
+      "expected": "Applications",
+      "baseline": "Applications",
+      "predicted": "Applications",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.702
+    },
+    {
+      "id": "E-050",
+      "expected": "Network",
+      "baseline": "Network",
+      "predicted": "Network",
+      "assigned": null,
+      "review": true,
+      "confidence": 0.309
+    }
+  ]
+}

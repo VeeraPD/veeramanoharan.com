@@ -1,0 +1,38 @@
+{
+  "revision": "v3",
+  "duration_seconds": 222.67000000000002,
+  "bytes": 10234564,
+  "resolution": "1920x1080",
+  "codecs": "H.264 / AAC",
+  "full_decode": "passed",
+  "audio": {
+    "mix": {
+      "mean_volume": -22.0,
+      "max_volume": -2.1
+    },
+    "music_in_pause": {
+      "mean_volume": -29.1,
+      "max_volume": -19.2
+    }
+  },
+  "caption_cues": 43,
+  "captions": "Non-overlapping, maximum two lines; word timing from narration service",
+  "planned_duration_seconds": 222.61,
+  "source_footage_sha256": "1ad8444f28895ebe2e92fe1171db9c8199ed710a37d4cb8f5398ffb033ab4b7c",
+  "narration": "Original script; Microsoft Aria synthetic voice at -10%; 650ms intro and at least 1.75s final reading pause per scene",
+  "visual_review": "Updated automatic classification, routing approval, persona roles, title and manager view inspected; captions clear of app and callouts.",
+  "player_checks": {
+    "media": {
+      "duration": 222.668667,
+      "width": 1920,
+      "height": 1080
+    },
+    "chapter_buttons": 8,
+    "chapter_seeking": "passed",
+    "mobile_overflow": false,
+    "page_errors": []
+  },
+  "classification": "TicketPilot classifies; Daniel approves or overrides routing",
+  "roles": "Maya: sales employee; Daniel: support engineer; Elena: IT service manager",
+  "music": "Original procedural instrumental; sidechain ducking; fades"
+}

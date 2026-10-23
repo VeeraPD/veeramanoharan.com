@@ -1,0 +1,15 @@
+﻿{
+  "mode": "Built-in image_gen (not CLI)",
+  "maya": {
+    "path": "maya.png",
+    "prompt": "Photorealistic natural professional headshot of a fictional Indian woman aged around 32, friendly confident sales manager, shoulder length dark hair, business casual teal blouse, warm natural studio lighting, pale warm neutral seamless background, centered face and upper shoulders, face fully visible with generous margin above hair and to sides suitable for a circular avatar crop. Square portrait, approachable realistic texture. No text, no logos, no watermark. This is Maya, a fictional sales employee for a software product demo."
+  },
+  "daniel": {
+    "path": "daniel.png",
+    "prompt": "Photorealistic natural professional headshot of a fictional East Asian man aged around 35, friendly thoughtful support engineer, neat short dark hair, clean shaven, navy casual button-down shirt, warm natural studio lighting, pale cool blue neutral seamless background, centered face and upper shoulders, face fully visible with generous margin above hair and to sides suitable for a circular avatar crop. Square portrait, approachable realistic texture. No text, no logos, no watermark. This is Daniel, a fictional support engineer for a software product demo."
+  },
+  "elena": {
+    "path": "elena.png",
+    "prompt": "Photorealistic natural professional headshot of a fictional East Asian woman aged around 44, friendly confident IT service leader, shoulder length dark hair, charcoal blazer over ivory top, warm natural studio lighting, pale lavender neutral seamless background, centered face and upper shoulders, face fully visible with generous margin above hair and to sides suitable for a circular avatar crop. Square portrait, approachable realistic texture. No text, no logos, no watermark. This is Elena, a fictional service leader for a software product demo."
+  }
+}

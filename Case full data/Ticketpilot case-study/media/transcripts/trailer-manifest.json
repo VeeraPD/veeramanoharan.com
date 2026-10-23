@@ -1,0 +1,169 @@
+[
+  {
+    "key": "01-promise",
+    "seconds": 6,
+    "card": "title",
+    "title": "Less ticket bouncing.\nA clearer path to resolution.",
+    "narration": "Stop sending one problem on a tour of support queues.",
+    "timeline_start": 0,
+    "audio_seconds": 4.18
+  },
+  {
+    "key": "02-maya",
+    "seconds": 8,
+    "stage": 0,
+    "persona": "maya",
+    "title": "Report it once.",
+    "label": "EMPLOYEE PORTAL",
+    "point": "No team to guess",
+    "detail": "Describe the issue. Track the request.",
+    "takeaway": "One issue. One conversation.",
+    "start": 9.1,
+    "end": 14.2,
+    "hold": 1,
+    "crop": null,
+    "narration": "Maya, a sales employee, reports her blocked dashboard once.",
+    "timeline_start": 6,
+    "audio_seconds": 5.04
+  },
+  {
+    "key": "03-daniel",
+    "seconds": 10,
+    "stage": 1,
+    "persona": "daniel",
+    "title": "TicketPilot classifies it.",
+    "label": "AUTOMATIC CLASSIFICATION",
+    "point": "TicketPilot: Applications",
+    "detail": "The team is identified from past resolutions.",
+    "takeaway": "Daniel approves the route.",
+    "start": 26.8,
+    "end": 29.3,
+    "hold": 0,
+    "crop": [
+      240,
+      90,
+      1200,
+      675
+    ],
+    "highlight": [
+      272,
+      390,
+      760,
+      70
+    ],
+    "highlight_after": 1,
+    "narration": "TicketPilot classifies the issue: Applications. Daniel, the support engineer, approves the route.",
+    "timeline_start": 14,
+    "audio_seconds": 8.26
+  },
+  {
+    "key": "04-evidence",
+    "seconds": 7,
+    "stage": 1,
+    "persona": "daniel",
+    "title": "See the evidence.",
+    "label": "MATCHING CASE",
+    "point": "Open the source",
+    "detail": "See who resolved it and what worked.",
+    "takeaway": "Inspect before acting.",
+    "start": 32.2,
+    "end": 36.3,
+    "hold": 0,
+    "crop": [
+      480,
+      0,
+      960,
+      540
+    ],
+    "highlight": [
+      1020,
+      275,
+      400,
+      85
+    ],
+    "highlight_after": 2,
+    "narration": "He opens a matching case and checks what worked before.",
+    "timeline_start": 24,
+    "audio_seconds": 4.18
+  },
+  {
+    "key": "05-fix",
+    "seconds": 8,
+    "stage": 2,
+    "persona": "daniel",
+    "title": "Bring the fix along.",
+    "label": "SUGGESTED FIX + SOURCE",
+    "point": "Relevant steps, in context",
+    "detail": "Daniel reviews, records and replies.",
+    "takeaway": "A person verifies the work.",
+    "start": 39.4,
+    "end": 46.0,
+    "hold": 0.4,
+    "crop": [
+      240,
+      135,
+      1200,
+      675
+    ],
+    "highlight": [
+      270,
+      267,
+      780,
+      110
+    ],
+    "highlight_after": 0,
+    "narration": "TicketPilot suggests a fix with a source. Daniel reviews it and records the work.",
+    "timeline_start": 31,
+    "audio_seconds": 6.82
+  },
+  {
+    "key": "06-outcome",
+    "seconds": 7,
+    "stage": 3,
+    "persona": "maya",
+    "title": "Confirm the outcome.",
+    "label": "BACK WITH MAYA",
+    "point": "Confirm it works",
+    "detail": "Still broken? Ask for more help.",
+    "takeaway": "Close the loop with the employee.",
+    "start": 57.5,
+    "end": 64.0,
+    "hold": 0,
+    "crop": [
+      300,
+      100,
+      1140,
+      641
+    ],
+    "narration": "Maya gets an update and confirms her dashboard works.",
+    "timeline_start": 39,
+    "audio_seconds": 4.2
+  },
+  {
+    "key": "07-elena",
+    "seconds": 7,
+    "stage": 4,
+    "persona": "elena",
+    "title": "See service health.",
+    "label": "LEADER VIEW",
+    "point": "Outcomes and handoffs",
+    "detail": "Sample dashboard. Validate impact in a pilot.",
+    "takeaway": "Goal: fewer avoidable transfers.",
+    "start": 75.8,
+    "end": 78.2,
+    "hold": 1,
+    "crop": null,
+    "narration": "Elena, the IT service manager, reviews outcomes and handoffs.",
+    "timeline_start": 46,
+    "audio_seconds": 5.45
+  },
+  {
+    "key": "08-invitation",
+    "seconds": 7,
+    "card": "next",
+    "title": "Try TicketPilot.",
+    "narration": "Try TicketPilot. Follow a request in the guided demo.",
+    "timeline_start": 53,
+    "audio_seconds": 5.21
+  }
+]

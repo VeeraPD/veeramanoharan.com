@@ -137,33 +137,29 @@ export const voiceShape = () => svg(800, 250,
     + [['Summaries', 40], ['Action items', 100], ['Exports', 160]].map(([t, y]) => arr(`M596 ${y + 22}H624`, 'hot') + box(626, y, 160, 44, t, [], 'hot')).join('')
     + txt(706, 240, 'for one user group', 'al hot', 'middle'));
 
-/* ======================= ROUTER (multi-layer, multi-agent org) ======================= */
-export const routerOrg = () => svg(800, 446,
-  'The router as an org with three layers and dedicated roles. Layer 1: a Director (Claude) plans and signs off. Layer 2: Engineering, Content and Research leads break work down and review their stream. Layer 3: low-cost worker models act as coder, tester, writer, editor, researcher and summariser. Staff roles serve every layer: Dispatcher, QA reviewer, Budget keeper and Escalation.',
+/* ======================= TICKETPILOT ======================= */
+export const ticketpilotFlow = () => svg(800, 262,
+  'One request through TicketPilot. Maya, a sales employee, reports an issue without choosing a team. TicketPilot classifies it and proposes a team, or abstains when evidence is weak. Daniel, a support engineer, approves or overrides the route. A resolver does the work, which is simulated in this prototype. Maya confirms the outcome or asks for more help. Elena, the IT service manager, watches handoffs, outcomes and review load on sample data.',
   () => {
-    const lead = [30, 310, 590], lc = lead.map((x) => x + 90);
-    const workers = [['Coder', 'Tester'], ['Writer', 'Editor'], ['Researcher', 'Summariser']];
-    return lab(0, 22, 'LAYER 1 · FRONTIER MODEL') + box(310, 32, 180, 62, 'Director', ['Claude · plans, signs off'], 'hot')
-      + arr(`M400 94V118H${lc[0]}V142`) + arr('M400 118V142', '') + arr(`M400 118H${lc[2]}V142`)
-      + lab(0, 134, 'LAYER 2 · LEADS') + lead.map((x, i) => box(x, 144, 180, 60, ['Engineering lead', 'Content lead', 'Research lead'][i], ['breaks down, reviews'])).join('')
-      + lab(0, 338, 'LAYER 3 · WORKERS')
-      + lc.map((c, i) => arr(`M${c} 204V230H${c - 60}V262`) + arr(`M${c} 230H${c + 60}V262`)
-        + box(c - 115, 264, 110, 54, workers[i][0], ['low-cost model']) + box(c + 5, 264, 110, 54, workers[i][1], ['low-cost model'])).join('')
-      + lab(0, 378, 'STAFF ROLES · SERVE EVERY LAYER', 'start', 'lb hot')
-      + row([0, 205, 410, 615], 386, 185, 56, [['Dispatcher', ['cheapest capable model']], ['QA reviewer', ['checks every output'], 'hot'], ['Budget keeper', ['cost cap per task']], ['Escalation', ['one retry, then up']]]);
+    const xs = [0, 165, 330, 495, 660], w = 140;
+    return [['REQUESTER', 0], ['AI', 1], ['SUPPORT ENGINEER', 2], ['RESOLVER', 3], ['REQUESTER', 4]].map(([t, i]) => lab(xs[i] + 70, 46, t, 'middle', i === 1 ? 'lb hot' : 'lb')).join('')
+      + row(xs, 56, w, 76, [['Maya reports', ['describes the issue,', 'picks no team']], ['TicketPilot', ['proposes a team,', 'or abstains'], 'hot'], ['Daniel decides', ['approves or', 'overrides the route']], ['Work is done', ['simulated in', 'this prototype'], 'ghost'], ['Maya confirms', ['solved, or still', 'needs help']]])
+      + chain(xs, w, 94)
+      + arr('M235 132V178', 'hot dash') + txt(245, 160, 'weak evidence: a person decides', 'al hot')
+      + box(165, 182, 470, 62, 'Elena, IT service manager', ['watches handoffs, outcomes and review load (sample data)'], 'soft')
+      + arr('M730 132V212H637', 'dash');
   });
 
-export const routerLifecycle = () => svg(800, 268,
-  'Lifecycle of a task. The task arrives, the Director plans streams, a Lead breaks each stream into steps, the Dispatcher assigns each step to the cheapest capable model, workers run in parallel, QA reviews every output. On pass, the Lead merges and the Director signs off. On fail, the worker retries once; if it fails again the step escalates up a layer.',
+/* ======================= ENSEMBLE ======================= */
+export const ensembleFlow = () => svg(800, 290,
+  'How Ensemble splits a coding task. The lead, a strong model, sets shared rules and divides the work. Three cheaper workers each receive a focused brief and may change only their assigned files, which the tool checks in code. In the benchmark the three parts were the data model, the command-line interface and the tests. The lead then reviews, combines and verifies the result, fixing small issues or delegating again.',
   () => {
-    const xs = [0, 213, 427, 640], w = 160;
-    return row(xs, 28, w, 62, [['Task arrives', ['a goal, not steps']], ['Director plans', ['splits into streams'], 'hot'], ['Lead breaks down', ['steps per stream']], ['Dispatcher', ['cheapest capable model']]])
-      + chain(xs, w, 59)
-      + `<rect class="bx" x="652" y="140" width="148" height="62" rx="10"/><rect class="bx" x="646" y="144" width="154" height="62" rx="10"/>` + box(640, 148, w, 62, 'Workers run', ['in parallel'])
-      + arr('M700 90V137')
-      + box(427, 148, w, 62, 'QA review', ['against the task'], 'hot') + box(213, 148, w, 62, 'Lead merges', ['stream complete']) + box(0, 148, w, 62, 'Director signs off', ['final check'], 'hot')
-      + arr('M640 179H589') + arr('M427 179H375', 'hot') + arr('M213 179H162', 'hot')
-      + txt(401, 170, 'pass', 'al hot', 'middle')
-      + arr('M480 210V244H720V212') + txt(600, 262, 'fail · retry once', 'al', 'middle')
-      + arr('M540 148V92', 'dash') + txt(548, 124, 'fails again · escalate', 'al');
+    const ys = [28, 108, 188];
+    return box(0, 100, 180, 76, 'Lead', ['strong model: plans,', 'sets shared rules'], 'hot')
+      + `<rect class="zone" x="300" y="6" width="220" height="266" rx="14"/>` + lab(316, 24, 'WRITES CHECKED IN CODE', 'start', 'lb hot')
+      + ys.map((y, i) => arr(`M180 138H212V${y + 32}H298`, i === 1 ? 'hot' : '') + box(312, y + 6, 196, 52, ['Worker: data model', 'Worker: command line', 'Worker: tests'][i], ['cheaper model, own files only'])).join('')
+      + txt(90, 196, 'hands out shared rules', 'al', 'middle') + txt(90, 211, 'and focused briefs', 'al', 'middle')
+      + ys.map((y) => arr(`M508 ${y + 32}H540V138H588`)).join('')
+      + box(590, 100, 210, 76, 'Lead reviews', ['combines, runs checks,', 'fixes or re-delegates'], 'hot')
+      + txt(400, 284, 'in the benchmark: data model, CLI, tests', 'al', 'middle');
   });

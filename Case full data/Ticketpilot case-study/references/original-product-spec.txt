@@ -1,0 +1,233 @@
+TicketPilot: Product Spec
+
+Portfolio project for the Celonis Senior Applied Value Engineer role · One-day build · Oct 2026
+
+1. Summary
+
+TicketPilot is an AI service desk assistant. It does three things:
+
+Routes tickets to the team that will actually fix them, based on how similar tickets were really resolved.
+Gives resolvers a suggested fix, with sources, from past tickets and help articles.
+Alerts product teams to rising issues before they become crises, with a ready-to-act brief.
+
+It accepts typed tickets and short voice notes in English, Hindi, or Tamil.
+
+Headline claim to prove: Higher first-time-right routing than keyword rules, with measured hours saved.
+
+2. The Problem
+Ticket ping-pong. Tickets often go to the wrong team first. Each handoff adds delay, and staff waste time triaging work that isn’t theirs.
+Slow fixes. Resolvers solve the same problems repeatedly because past fixes are buried in old tickets.
+Product teams hear late. A broken release can generate dozens of tickets before anyone tells the team that shipped it.
+Language barriers. Users who aren’t comfortable writing English file vague tickets, or don’t file at all.
+
+Cost of doing nothing: Longer outages, wasted support hours, frustrated employees, and repeat issues that never get fixed at the source.
+
+3. Goals and Non-Goals
+
+Goals (targets for the demo dataset)
+
+Goal	Target
+Route tickets correctly the first time	80%+ (vs. keyword baseline)
+Cut handoffs per ticket	50% fewer than baseline
+Fix suggestions resolvers find useful	70%+ rated relevant in evaluation
+Detect seeded issue spikes	100% of planted spikes caught within 1 day
+Correctly route voice tickets	4 of 5 test clips
+
+Non-Goals
+
+Out of scope	Why
+Connecting to a real helpdesk (ServiceNow, Jira)	Not needed to prove the concept; adds setup risk
+Fine-tuning a model	Retrieval learns faster and costs less
+Live phone calls	Recorded voice notes prove the point
+Auto-closing tickets	A human should stay in control at this stage
+Training simulator for staff	Separate product; distracts from the ROI story
+4. Users and User Stories
+
+Employee (ticket raiser)
+
+As an employee, I want to describe my problem in my own words or language so I don’t have to guess the right category.
+As an employee, I want to send a voice note in Hindi or Tamil so I can report issues quickly.
+
+Resolver (support engineer)
+
+As a resolver, I want only tickets my team can fix, so I stop wasting time passing work on.
+As a resolver, I want a suggested fix with sources, so I can solve known problems faster and check the advice.
+
+Support manager
+
+As a manager, I want low-confidence tickets sent to a human, so the AI never guesses on hard cases.
+As a manager, I want to see routing accuracy over time, so I know the system is improving.
+
+Product manager
+
+As a PM, I want an alert when tickets about my product spike, so I can fix the cause before more users are hit.
+As a PM, I want issues ranked by impact, so I know what to prioritize.
+5. How It Works
+
+The two loops are what make it more than a router. Every closed ticket teaches the memory, and every cluster of closed tickets can trigger a product alert.
+
+6. Requirements
+P0: Must have (the demo fails without these)
+#	Requirement	Acceptance criteria
+P0-1	Ticket intake	Accepts free-text tickets. Extracts issue, urgency, and any deadline mentioned.
+P0-2	Smart routing	Finds the 5 most similar past tickets, checks who closed them, and recommends a team with a confidence score and a one-line reason.
+P0-3	Human fallback	Below the confidence threshold, the ticket goes to human review. The agent never auto-assigns a low-confidence ticket.
+P0-4	Fix suggestions (RAG)	Shows suggested fix steps with links to the source tickets or help articles. If nothing relevant is found, it says so instead of inventing a fix.
+P0-5	Continuous learning	Closed tickets are added to memory automatically. Reassignments are logged as corrections and used as examples for future routing.
+P0-6	Product alerts	Groups tickets by meaning, flags any group that grows 3x above its normal rate, and generates a brief: issue, start date, impact, likely cause, suggested owner, priority.
+P0-7	Baseline comparison	Keyword-rules router runs on the same test set. Results shown side by side.
+P0-8	Voice tickets	Accepts short audio clips in English, Hindi, and Tamil. Transcribes, translates to English, and routes like a text ticket.
+P1: Nice to have (if time allows)
+#	Requirement	Acceptance criteria
+P1-1	Knowledge gap drafts	When tickets are resolved with no matching help article, a draft article is created for human approval.
+P1-2	Urgency correction	Flags tickets marked “low” that mention deadlines, outages, or many affected users.
+P1-3	Accuracy trend chart	Weekly first-time-right routing rate, showing improvement as memory grows.
+P1-4	Stress-test set	An agent generates 20 tricky tickets (vague, angry, two issues in one, mixed language) for evaluation.
+P2: Future (documented, not built)
+Screenshot reading for error messages
+Duplicate ticket merging during outages
+Spoken replies in the user’s language
+Live integration with ServiceNow or Jira
+Self-service fix suggestions before a ticket is filed
+7. Voice Demo Spec
+
+Model: faster-whisper, “small” size, running locally on CPU.
+
+Why this model:
+
+Lightweight. Runs on a normal laptop, no GPU, no paid API.
+Wide language coverage. Whisper supports multilingual speech recognition across 99 languages, plus language identification, so the app detects the language automatically. 
+uva
+Simple to integrate. A few lines of Python. Built-in translate-to-English mode.
+
+How the voice flow works:
+
+User uploads a 10–30 second clip.
+faster-whisper detects the language and produces a transcript.
+Claude cleans up the transcript, translates it to English, and extracts the issue.
+The ticket enters the normal routing flow.
+The original transcript and detected language are stored with the ticket.
+
+Demo clips (record yourself or ask friends):
+
+Clip	Language	Content
+1	English	VPN keeps disconnecting
+2	Hindi	Can’t log into the payroll portal
+3	Tamil	Laptop screen flickering
+4	Hindi-English mix	Sales dashboard showing access denied
+5	English, noisy background	Printer not working on 3rd floor
+
+Known limits (state these openly in the README):
+
+Mixed Hindi-English speech is the weakest case for the small model. Technical terms like “VPN” may get mangled.
+Upgrade path: Indic-focused models do better here. For example, Indic-Transcribe-Flex covers 27 Indian languages and transcribes Hinglish as it’s actually spoken rather than forcing it into one language. It’s heavier, so it’s a next step, not a day-one choice. 
+huggingface
+Future spoken replies: Kokoro 82M is a lightweight open-weight text-to-speech model that supports 8 languages including Hindi. A good fit for P2. 
+openrouter
+8. Tech Stack
+Layer	Choice	Why
+Language	Python 3.11+	Matches the JD; best AI library support
+LLM	Claude API	Reasoning, extraction, translation, brief writing
+Agent workflow	LangGraph	Handles branching and the human-approval pause cleanly
+RAG plumbing	LangChain retrievers	Loaders, text splitting, retrieval out of the box
+Vector store	Chroma	Free, local, zero setup
+Embeddings	A small open-source sentence-embedding model	Free, runs locally, good enough for similarity search
+Structured outputs	pydantic	Forces clean fields: team, confidence, reason
+Voice	faster-whisper (small)	Lightweight, local, multilingual
+Topic grouping	Embeddings + HDBSCAN clustering	Groups tickets by meaning without setting the number of groups upfront
+Spike detection	pandas rolling averages	Simple statistics. No AI needed here, and saying so shows judgment
+Tracing + evals	LangSmith	Step-by-step traces; supports your results section
+Front end	Streamlit	A working UI in an hour
+Data generation	Claude	Synthetic tickets with realistic patterns
+
+Pin all package versions. LangChain changes often.
+
+9. Data
+
+All synthetic, generated by Claude. Fully shareable on GitHub.
+
+Tickets table (500 historical + 50 test)
+
+Field	Example
+ticket_id	T-1042
+created_at	2026-10-19 09:14
+text	“Sales dashboard says access denied since this morning”
+user_priority	Low
+first_team	Network
+handoff_history	Network → Applications → Security
+resolving_team	Security
+resolution_notes	“Reset reporting role after v2.3 permission change”
+time_to_resolve_hrs	46
+product_area	Reporting
+
+Other data
+
+8 teams: Network, Applications, Security, Hardware, Access Management, Email, HR Systems, Facilities
+30 help articles: Some deliberately outdated, to test stale-content handling
+2 planted spikes: For example, a burst of dashboard access errors starting the day after “release v2.3”
+Realistic ping-pong patterns: Tickets with words that point to the wrong team (e.g., “access denied” usually isn’t a Security issue here)
+10. Evaluation and Success Metrics
+
+Headline comparison (the core of your README):
+
+Metric	Keyword baseline	TicketPilot
+First-time-right routing	measure	measure
+Average handoffs per ticket	measure	measure
+Estimated hours saved per year	—	calculate
+
+Other measures:
+
+Fix suggestion relevance: Claude-as-judge scores each suggestion against the actual resolution notes. Spot-check 10 by hand to confirm the judge is fair.
+Spike detection: Both planted spikes caught? How many days earlier than a human would notice?
+Voice accuracy: Clips routed correctly out of 5.
+Escalation rate: Percentage of tickets sent to human review. Too high means the system isn’t useful; too low means it’s overconfident.
+
+Kill criteria (what would make you recommend stopping):
+
+Routing accuracy beats the baseline by less than 10 points
+Wrong auto-assignments exceed 5% of high-confidence tickets
+Escalation rate exceeds 40%
+
+Simple ROI formula for the CFO one-pager:
+
+Hours saved = tickets per year × handoffs avoided per ticket × average delay per handoff
+Add resolver time saved from fix suggestions. Subtract API and hosting costs.
+
+11. Why This Beats Other Solutions
+Alternative	Its weakness	What TicketPilot does differently
+Keyword rules	Matches words, not meaning. “Access denied” goes to Security every time.	Understands the problem and checks what actually fixed similar tickets.
+Category dropdowns	Users pick wrong or choose “Other.”	No categories needed. Users describe the problem in their own words or voice.
+Classic ML classifiers	Learn from the first team assigned, which is often wrong. Need retraining to improve.	Learns from who resolved the ticket. Improves instantly as tickets close.
+Generic chatbot / LLM alone	Knows nothing about how this company works. Gives generic answers.	Grounded in the company’s own ticket history and help articles, with sources.
+Typical helpdesk AI add-ons	Usually focus on one job (routing or suggestions) and stay inside the support team.	Connects support to product teams. Turns ticket noise into prioritized fixes.
+English-only systems	Exclude users who prefer their own language.	Accepts voice in Hindi, Tamil, and English.
+
+The one-line pitch: Other tools guess based on what a ticket says. TicketPilot decides based on what actually happened, which is the same idea behind Celonis’s “AI needs process context” message.
+
+12. One-Day Build Plan
+Time	Task	Output
+Hour 1	Generate synthetic tickets, teams, help articles, planted spikes	CSV files + KB folder
+Hour 2	Load into Chroma; build keyword baseline	Working memory + baseline scores
+Hours 3–4	LangGraph agent: intake, similar-ticket search, routing, confidence check, human fallback	Core router working
+Hour 5	RAG fix suggestions with sources; learning loop on ticket close	P0-4, P0-5 done
+Hour 6	Clustering, spike detection, product brief generation	P0-6 done
+Hour 7	Voice: faster-whisper + translation into the routing flow; run evaluations	P0-8 done + results table
+Hour 8	Streamlit UI, README with results and ROI, 3-minute Loom	Portfolio-ready
+
+If you fall behind: Cut voice first (move it to a Loom-only mention), then the product brief formatting. Never cut the baseline comparison. It’s your proof.
+
+13. Risks and Open Questions
+
+Risks
+
+Risk	Mitigation
+Synthetic data feels too easy	Plant misleading keywords and tricky cases; use the stress-test agent (P1-4)
+Voice transcription is poor on mixed language	Show it honestly; name the upgrade path
+LangChain version issues eat time	Pin versions; fall back to direct Claude API calls if blocked for 30+ minutes
+Results look too good to be true	Show failures in the README and explain them
+
+Open questions (for you to decide)
+
+Which confidence threshold feels right? Start at 0.75 and tune on the test set.
+Do you want to frame the dataset as IT support (closest to the JD’s ITSM mention) or customer support (broader appeal)?
+Should the Loom be pitched to a CFO (value) or a CIO (operations)? For the Senior role, I’d pick CFO.
