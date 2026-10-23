@@ -1,56 +1,56 @@
 {
   "generated": "2026-10-23",
   "method": "AI-generated concept illustrations based on project descriptions; not product screenshots",
-  "style": "Charcoal, cream, lavender and peach editorial 3D illustrations",
+  "style": "Colored editorial notebook illustrations: warm ivory paper, loose plum ink lines, colored-pencil texture, lavender, coral, sage and butter-yellow fills",
   "assets": [
     {
       "source": "case-ticketpilot.html",
-      "asset": "thumb-ticketpilot-v2.webp",
+      "asset": "thumb-ticketpilot-v3.webp",
       "alt": "Illustration of service requests routed to support teams with a human review checkpoint"
     },
     {
       "source": "case-atelier.html",
-      "asset": "thumb-atelier-v2.webp",
+      "asset": "thumb-atelier-v3.webp",
       "alt": "Illustration of handwritten tablet notes connected to matching ideas through semantic search"
     },
     {
       "source": "case-voice-capture.html",
-      "asset": "thumb-voice-v2.webp",
+      "asset": "thumb-voice-v3.webp",
       "alt": "Illustration of Hindi-English voice waves becoming a transcript"
     },
     {
       "source": "case-medtech-genai.html",
-      "asset": "thumb-medtech-v2.webp",
+      "asset": "thumb-medtech-v3.webp",
       "alt": "Illustration of medical-device engineering analyses combined into a reviewed document"
     },
     {
       "source": "case-ensemble.html",
-      "asset": "thumb-ensemble-v2.webp",
+      "asset": "thumb-ensemble-v3.webp",
       "alt": "Illustration of one AI lead coordinating three parallel coding workstreams"
     },
     {
       "source": "case-alpine-skies.html",
-      "asset": "thumb-alpine-v2.webp",
+      "asset": "thumb-alpine-v3.webp",
       "alt": "Illustration of a glider flying through an Alpine mission ring"
     },
     {
       "source": "fun/game-theory-playground.html",
-      "asset": "thumb-game-theory-v2.webp",
+      "asset": "thumb-game-theory-v3.webp",
       "alt": "Illustration of two players making choices at a strategic crossroads"
     },
     {
       "source": "fun/nuit-loop-studio.html",
-      "asset": "thumb-nuit-v2.webp",
+      "asset": "thumb-nuit-v3.webp",
       "alt": "Illustration of a circular music sequencer, keys and loop waveforms"
     },
     {
       "source": "fun/ocean-waves-simulator.html",
-      "asset": "thumb-ocean-v2.webp",
+      "asset": "thumb-ocean-v3.webp",
       "alt": "Illustration of a small boat riding simulated ocean waves"
     },
     {
       "source": "case-resume-copilot.html",
-      "asset": "thumb-resume-v2.webp",
+      "asset": "thumb-resume-v3.webp",
       "alt": "Illustration of resume claims linked to supporting evidence"
     }
   ]
