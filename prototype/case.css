@@ -280,3 +280,43 @@ html[data-mode="cream"] .dg .mk.hot,html[data-mode="cream"] .dg .pt.hot{fill:#7d
 .story li::before{content:counter(st,decimal-leading-zero);font:500 12px var(--f-sans);color:var(--accent-ink);padding-top:4px}
 .story a{color:var(--ink);text-decoration:none}
 .story a:hover{text-decoration:underline}
+/* Compact summaries and navigation across every case page. */
+.tldr{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:20px}
+.tldr div{padding:18px 20px}
+.tldr p:last-child{font:400 1rem/1.55 var(--f-sans);max-width:38ch}
+.story{padding:18px 20px;margin-top:24px}
+.story ol{display:flex;flex-wrap:wrap;gap:8px 16px}
+.story li{display:block;font:500 .85rem/1.5 var(--f-sans)}
+.story li::before{content:none}
+.story a{display:block;padding:4px 0;color:var(--muted)}
+.story a:hover{color:var(--ink)}
+.supporting{border-top:1px solid var(--line);padding-top:12px}
+.supporting summary,.figure-guide summary{cursor:pointer;font:500 .9rem/1.5 var(--f-sans);color:var(--accent-ink)}
+.supporting-body{padding-top:20px}
+.figure-guide{margin-top:10px}
+.sec{padding-block:56px;scroll-margin-top:80px}
+.summary dd{font:400 .92rem/1.5 var(--f-sans)}
+@media(max-width:600px){.tldr{grid-template-columns:1fr}.sec{padding-block:40px}}
+
+/* The opening explains the product before the reader reaches the case details. */
+.open .tldr{grid-template-columns:1fr 1fr 1.35fr;gap:18px;margin-top:12px}
+.open .tldr>div{padding:28px;gap:16px;min-width:0}
+.open .tldr h2{font:400 clamp(1.4rem,2.3vw,1.85rem)/1.15 var(--f-serif);letter-spacing:-.02em;text-wrap:balance}
+.open .tldr p:last-child{font:400 1.075rem/1.6 var(--f-sans);max-width:42ch;color:var(--muted)}
+.open .tldr>div:last-child{background:var(--chosen);box-shadow:inset 0 0 0 1.5px var(--accent)}
+.open .tldr>div:last-child p:last-child{color:var(--ink)}
+.preview-status{font:400 .9rem/1.5 var(--f-sans);color:var(--muted)}
+.preview-status .label{margin-right:10px}
+@media(max-width:1000px){.open .tldr{grid-template-columns:repeat(2,minmax(0,1fr))}.open .tldr>div:last-child{grid-column:1/-1}.open .tldr>div:last-child p:last-child{max-width:75ch}}
+@media(max-width:600px){.open .tldr{grid-template-columns:1fr}.open .tldr>div{padding:24px}.open .tldr>div:last-child{grid-column:auto}}
+/* Visible product decisions: choice, rationale and trade-off in one card. */
+.decs{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.dec{padding:24px;border:1px solid var(--line);border-radius:16px;background:var(--paper);gap:14px;align-content:start}
+.dec h3{font:500 1.15rem/1.35 var(--f-sans)}
+.decision-choice{font:500 1.05rem/1.5 var(--f-sans);color:var(--ink)}
+.dec .why{font-size:.95rem;line-height:1.6;color:var(--muted)}
+.decision-trade{font-size:.86rem;line-height:1.55;color:var(--muted);padding-top:12px;border-top:1px solid var(--line)}
+.product-screens{display:grid;gap:24px;margin-top:28px}
+.product-screens img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:12px}
+.product-screens figcaption{margin-top:10px;font-size:.85rem;line-height:1.5;color:var(--muted)}
+@media(max-width:700px){.decs{grid-template-columns:1fr}.dec{padding:20px}}

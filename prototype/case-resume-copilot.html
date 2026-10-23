@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en" data-mode="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Resume Fit Copilot · AI Lab · R. Veera Manoharan</title>
+<script>(function(){var r=document.documentElement,m=null,mo=null;try{m=localStorage.getItem('mode');mo=localStorage.getItem('motion')}catch(e){}r.setAttribute('data-mode',m==='cream'?'cream':'dark');if(mo==='off')r.setAttribute('data-paused','true')})();</script>
+<meta name="description" content="Resume Fit Copilot: evidence-backed resume checks. Check whether your experience supports each resume claim.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&display=swap">
+<link rel="stylesheet" href="case.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="a07" viewBox="0 0 200 150"><g transform="translate(100 75) scale(.95)" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="-52" y="-62" width="104" height="124" rx="10" opacity=".6"/><path d="M-34 -36l6 6 12 -12"/><path d="M-8 -34H34"/><path d="M-34 -6l6 6 12 -12"/><path d="M-8 -4H26"/><path d="M-32 22l12 12M-20 22l-12 12"/><path d="M-8 28H30" opacity=".5"/></g></symbol></svg>
+<a class="skip" href="#main">Skip to content</a>
+<div class="page">
+  <header class="top">
+    <a class="logo" href="index.html" aria-label="Veera, home">
+      <svg viewBox="0 0 30 30" aria-hidden="true"><path class="dot" d="M15 2.5C22 2 28 7 27.5 15 27 23 21 28 14 27.5 7 27 2.5 21 3 14 3.5 7.5 9 3 15 2.5Z"/><path class="mk" d="M9 11l6 10 6-10" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Veera</a>
+    <div class="hright">
+      <a class="back" href="index.html#fun">← <span>Fun projects</span></a>
+      <button class="iconbtn" id="mode" type="button" aria-label="Switch to light theme">
+        <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 14.6A8 8 0 0 1 9.4 4.5a8 8 0 1 0 10.1 10.1Z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <header class="open">
+      <p class="label">AI Lab · AI product · Usability pilot · 2026 · 7 min read</p>
+      <h1>Resume Fit Copilot: evidence-backed resume checks</h1>
+      <p class="label ps">Problem statement</p>
+      <p class="stand">Check whether your experience supports each resume claim.</p>
+      
+      <div class="tldr" aria-label="Problem, issue and solution"><div><p class="label">Problem</p><h2>Resume claims need real evidence</h2><p>Job seekers want clear, relevant resume bullets that represent their experience accurately and remain defensible when an interviewer asks how the work was done.</p></div><div><p class="label">Issue</p><h2>Polished wording can overstate the work</h2><p>AI rewrites can introduce unsupported responsibilities or numbers. A passing technical test also does not establish that users can complete the resume workflow successfully.</p></div><div><p class="label">Solution</p><h2>Check each claim against experience</h2><p>Resume Fit Copilot connects an evidence bank to a line-by-line claim checker. A pilot with six AI test users identified four blockers and pointed the product toward a checker-first workflow.</p></div></div><p class="preview-status"><span class="label">Progress</span> Six AI test users identified four blockers and favored the checker.</p>
+      <div class="lead-img art grain mesh g-mint" role="img" aria-label="Abstract resume page with ticked and unticked lines"><svg aria-hidden="true"><use href="#a07"/></svg></div>
+    </header>
+
+
+    <dl class="summary" style="--cols:5">
+      <div><dt class="label">Role</dt><dd>Product owner and builder, with AI development tools: framing, architecture, evaluation, pilot</dd></div>
+      <div><dt class="label">Type</dt><dd>AI product, portfolio MVP (Release 2)</dd></div>
+      <div><dt class="label">Stack</dt><dd>Python, LangChain and LangGraph, local embeddings, Streamlit; AWS serverless demo built, not deployed</dd></div>
+      <div><dt class="label">Status</dt><dd>Reset to checker-first after the pilot (Oct 2026)</dd></div>
+      <div><dt class="label">Skills</dt><dd>Discovery, AI evaluation, usability research, architecture, decision logs</dd></div>
+    </dl>
+
+    <section class="sec" aria-labelledby="s0">
+      <p class="label">Problem</p>
+      <div>
+        <h2 id="s0">Job seekers need resume claims they can defend in an interview</h2>
+        <p class="intro">The need comes from desk research, not interviews. No real user has been interviewed yet.</p><ul class="blist"><li>Job seekers need to know which resume claims their experience supports.</li><li>A polished AI rewrite can introduce unsupported scope or numbers.</li><li>The checker ties each claim to evidence before it is used.</li></ul>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s1">
+      <p class="label">Users</p>
+      <div>
+        <h2 id="s1">Three job-seeker personas share the need for credible evidence</h2>
+        <p class="intro">The personas are proto-personas built from sources, checked against research. They are not research participants.</p><div class="tblwrap"><table class="tbl"><thead><tr><th scope="col">Persona</th><th scope="col">Job to be done</th><th scope="col">What makes them leave</th></tr></thead><tbody><tr><td data-label="Persona"><b>Ravi</b>, 34, laid off after 8 years in IT services (primary)</td><td data-label="Job to be done">"Get me bullets I can send tonight and defend in the interview."</td><td data-label="What makes them leave">15 to 20 minutes spent with nothing to send</td></tr><tr><td data-label="Persona"><b>Meghna</b>, 29, business analyst doing an MBA (primary)</td><td data-label="Job to be done">"Make my bullets read like a decision maker's, without lying."</td><td data-label="What makes them leave">It looks amateur, loses her work, or contradicts her own resume</td></tr><tr><td data-label="Persona"><b>Farhan</b>, 38, applying to jobs in Dubai (backup)</td><td data-label="Job to be done">"Tell me if my CV matches this job, and give me one I can send."</td><td data-label="What makes them leave">It feels built for IT people, or like a trick</td></tr></tbody></table></div>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s2">
+      <p class="label">Product</p>
+      <div>
+        <h2 id="s2">The checker ties each resume claim to the user’s actual experience</h2>
+        <div class="tblwrap"><table class="tbl"><thead><tr><th scope="col">Feature</th><th scope="col">What it does</th></tr></thead><tbody><tr><td data-label="Feature"><b>Evidence bank</b></td><td data-label="What it does">One fact per line with a stable ID. Client names tagged once and always hidden</td></tr><tr><td data-label="Feature"><b>Requirement map</b></td><td data-label="What it does">Each job requirement is Covered, Likely (confirm), Weak, Missing or Check yourself, judged one evidence line at a time</td></tr><tr><td data-label="Feature"><b>Gap coach</b></td><td data-label="What it does">For each gap, your nearest experience and three questions. The app refuses to use a fill-in line until you complete it</td></tr><tr><td data-label="Feature"><b>Cited bullets</b></td><td data-label="What it does">One bullet per evidence line, checked by rules, retried if it fails, reviewed by you</td></tr><tr><td data-label="Feature"><b>Check AI text</b></td><td data-label="What it does">Paste bullets from any AI. Each is matched to your evidence and cited or flagged, with a safer version</td></tr></tbody></table></div><p class="outro">Built on Python, LangChain retrievers (word and local-embedding meaning search, fused) and a rule-based verifier, with a Streamlit interface. Offline results looked strong: the verifier accepted 0 of 30 unsupported bullets, and the checker flagged 11 of 11 invented bullets. But those cases are synthetic and labelled by the AI that wrote the code, so they are not real-world accuracy.</p>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s3">
+      <p class="label">Pilot method</p>
+      <div>
+        <h2 id="s3">Six AI personas tested the app without access to its code</h2>
+        <figure class="fig"><div class="dgwrap"><svg class="dg " viewBox="0 0 800 262" role="img" aria-label="The usability pilot. Three personas from desk research are played by six AI agents, two each. The agents drive the real app in a real browser, seeing only the screen. Each writes a report: a five-second test, a journey log, task outcomes and pain points. The builder re-runs every defect by hand. The result feeds product decisions."><defs><marker id="d12a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk" d="M0,0L10,5L0,10z"/></marker><marker id="d12h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk hot" d="M0,0L10,5L0,10z"/></marker></defs><rect class="bx " x="0" y="24" width="140" height="92" rx="10"/><text class="t" x="70" y="51" text-anchor="middle">3 personas</text><text class="s" x="70" y="68" text-anchor="middle">Ravi, Meghna,</text><text class="s" x="70" y="83" text-anchor="middle">Farhan, from</text><text class="s" x="70" y="98" text-anchor="middle">desk research</text><rect class="bx hot" x="165" y="24" width="140" height="92" rx="10"/><text class="t" x="235" y="51" text-anchor="middle">6 AI agents</text><text class="s" x="235" y="68" text-anchor="middle">2 per persona,</text><text class="s" x="235" y="83" text-anchor="middle">blind to the code,</text><text class="s" x="235" y="98" text-anchor="middle">screen only</text><rect class="bx " x="330" y="24" width="140" height="92" rx="10"/><text class="t" x="400" y="51" text-anchor="middle">The real app</text><text class="s" x="400" y="68" text-anchor="middle">real browser,</text><text class="s" x="400" y="83" text-anchor="middle">laptops and</text><text class="s" x="400" y="98" text-anchor="middle">phones</text><rect class="bx " x="495" y="24" width="140" height="92" rx="10"/><text class="t" x="565" y="51" text-anchor="middle">A report each</text><text class="s" x="565" y="68" text-anchor="middle">5-second test,</text><text class="s" x="565" y="83" text-anchor="middle">journey log,</text><text class="s" x="565" y="98" text-anchor="middle">pain points</text><rect class="bx " x="660" y="24" width="140" height="92" rx="10"/><text class="t" x="730" y="58.5" text-anchor="middle">I re-run it</text><text class="s" x="730" y="75.5" text-anchor="middle">every defect,</text><text class="s" x="730" y="90.5" text-anchor="middle">by hand</text><path class="ln " d="M140 70H163" marker-end="url(#d12a)"/><path class="ln " d="M305 70H328" marker-end="url(#d12a)"/><path class="ln " d="M470 70H493" marker-end="url(#d12a)"/><path class="ln " d="M635 70H658" marker-end="url(#d12a)"/><path class="ln hot" d="M730 116V168H500" marker-end="url(#d12h)"/><rect class="bx hot" x="330" y="170" width="310" height="66" rx="10"/><text class="t" x="485" y="199" text-anchor="middle">Product decisions</text><text class="s" x="485" y="216" text-anchor="middle">checker first, an LLM judges, rules can veto</text><text class="al" x="0" y="160" text-anchor="start">Cannot show: demand,</text><text class="al" x="0" y="176" text-anchor="start">or what anyone would pay.</text><text class="al" x="0" y="192" text-anchor="start">Same model family as</text><text class="al" x="0" y="208" text-anchor="start">the builder: shared blind spots.</text></svg></div><p class="swipe" aria-hidden="true">Scroll sideways for the full diagram →</p><figcaption>How the LLM-based usability pilot worked. <details class="figure-guide"><summary>Diagram guide</summary><span class="how">Read left to right. Three personas are each played by two AI agents, who drive the real app in a real browser and see only what is on screen. Each writes a report. I then re-ran every defect by hand. The bottom box is what the findings changed. The note at left is what this method cannot show.</span></details></figcaption></figure><div class="prose"><p>I passed a 14-case scripted test run, so I wanted to see what happens when someone who does not know the app uses it. Six AI agents, two per persona, each played a person who had just arrived from a friend's link. They could not read the code or docs, only look at the screen, and had to act with the persona's patience, reading speed and device. Each ran a 5-second test on the landing page, then tried five tasks, from loading a resume to checking AI-written bullets.</p><p>The inputs were messy on purpose: a resume pasted as people copy it from a PDF, job posts written like real postings, and AI bullets with known overclaims planted. Limits: the agents share a model family with the builder, they knew they were in a study, and minutes are estimates. The pilot finds usability problems and defects. It cannot prove demand.</p></div>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s4">
+      <p class="label">Results</p>
+      <div>
+        <h2 id="s4">All six favored the checker, but none left with ready-to-send bullets</h2>
+        <div class="tblwrap"><table class="tbl"><thead><tr><th scope="col">Measure</th><th scope="col">Result</th></tr></thead><tbody><tr><td data-label="Measure">Left with bullets they would send</td><td data-label="Result"><b>0 of 6</b></td></tr><tr><td data-label="Measure">Planted overclaims caught by "Check AI text"</td><td data-label="Result"><b>All of them, in all 6 sessions</b></td></tr><tr><td data-label="Measure">Named the checker the best part</td><td data-label="Result">6 of 6</td></tr><tr><td data-label="Measure">Would pay Rs 499 for the app as it was</td><td data-label="Result"><b>0 of 6</b>. Five would come back, for the checker only</td></tr><tr><td data-label="Measure">Blocker defects in the core path</td><td data-label="Result">4, all reproduced by hand</td></tr></tbody></table></div><p class="outro">This is why the scripted run missed them: it used a clean demo bank and approved every bullet in one pass. Real resumes are not clean.</p>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s5">
+      <p class="label">Findings</p>
+      <div>
+        <h2 id="s5">Four blockers explained why a passing build was not enough</h2>
+        <ul class="blist"><li><b>One or two bullets from a whole resume.</b> The import kept the skills list as evidence and dropped real facts, so the first bullet was often the skills list copied word for word.</li><li><b>A crash on the second save</b> that wiped the user's work on reload.</li><li><b>The job parser skipped "Key Responsibilities"</b>, so it lost 7 of 16 requirements on one post and 6 of 14 on another.</li><li><b>The export was not a CV.</b> A heading and a few bullets, which the overseas persona could not send.</li></ul><p class="outro">The checker itself had one flaw that cost trust: it flagged a user's own true sentence because the import had split cause and result into two lines.</p>
+      </div>
+    </section>
+
+    <section class="sec" id="decisions" aria-labelledby="s6">
+      <p class="label">Decisions and trade-offs</p>
+      <div>
+        <h2 id="s6">I shifted to checker-first, with rules able to veto AI judgments</h2>
+        <div class="decs">
+          <article class="dec">
+            <h3><span>01</span>What the product is</h3>
+            <p class="decision-choice">A checker first, an organiser second, the writer frozen</p>
+            <p class="why"><b>Why:</b> The pilot proved the checker was the one thing people valued, and it works alongside ChatGPT instead of competing with it.</p>
+            <p class="decision-trade"><b>Trade-off:</b> Fixing the writer in a Release 2.1 nobody had asked for</p>
+          </article>
+          <article class="dec">
+            <h3><span>02</span>Who judges a claim</h3>
+            <p class="decision-choice">An LLM judges with a quoted reason; hard rules can only make the verdict stricter</p>
+            <p class="why"><b>Why:</b> An LLM can be talked into "close enough". For numbers, named tools, ownership verbs and client names, the answer must be provable.</p>
+            <p class="decision-trade"><b>Trade-off:</b> Rules alone, which missed nuance in every session</p>
+          </article>
+          <article class="dec">
+            <h3><span>03</span>How to score</h3>
+            <p class="decision-choice">Two scores shown apart: Defensibility and Job fit</p>
+            <p class="why"><b>Why:</b> A high job fit built on claims you cannot defend is exactly the harm this product exists to prevent, so the two are never combined.</p>
+            <p class="decision-trade"><b>Trade-off:</b> One number, or no score</p>
+          </article>
+          <article class="dec">
+            <h3><span>04</span>Proof of work</h3>
+            <p class="decision-choice">Compare the resume against an older resume or one-tap answers ("Did you lead the team of 5?")</p>
+            <p class="why"><b>Why:</b> A resume cannot prove itself, and a blank evidence bank is where users gave up.</p>
+            <p class="decision-trade"><b>Trade-off:</b> Requiring an evidence bank up front</p>
+          </article></div>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s7">
+      <p class="label">Business case</p>
+      <div>
+        <h2 id="s7">A paid demand test comes before more feature development</h2>
+        <p class="intro">Zero of six would pay for the product as it was. That is a statement about visible value, not willingness to pay, because the testers were AI agents.</p><ul class="blist"><li><b>Proxy signals say checking is a habit:</b> third-party trackers put India at roughly a third of Resume Worded's visits, around 600,000 a month, and about 20% of Jobscan's. Medium confidence, and none of it shows people pay for defensibility.</li><li><b>The gate:</b> a fake-door page and a Rs 499 one-job probe, then five real users in acceptance testing, before any new feature work. Neither has been run.</li></ul>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s8">
+      <p class="label">Feedback loop</p>
+      <div>
+        <h2 id="s8">Reported problems flow through bounded AI triage into Jira</h2>
+        <ul class="blist"><li><b>Architecture:</b> a serverless AWS design (S3 and CloudFront for the page, one Lambda, one DynamoDB table, SSM for secrets and a kill switch) with a Jira Cloud project for reported problems.</li><li><b>Safety by design:</b> the LLM only fills a fixed-choice schema and treats the user's report as untrusted text. Code applies every rule. The Jira client has no close, transition or delete method. Daily and per-call spend caps stop LLM triage.</li><li><b>Status:</b> built and tested on my machine. Not deployed, so there is no live link. The keyword triage scored 30 of 30 on samples its own author wrote, which is not a meaningful result; the LLM triage is not measured.</li></ul>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s9">
+      <p class="label">What I learned</p>
+      <div>
+        <h2 id="s9">Validate the complete user task before expanding the product</h2>
+        <ul class="blist"><li>Test the real user journey, beyond a passing build.</li><li>Use AI personas to find usability issues, then validate demand with people.</li><li>Retest the checker-first flow before testing willingness to pay.</li></ul>
+      </div>
+    </section>
+
+    <nav class="pn" aria-label="More cases">
+      <a href="index.html#fun"><span class="label">← Fun projects</span><b>Back to the index</b></a>
+      <a href="index.html#fun"><span class="label">Fun projects →</span><b>Back to the index</b></a>
+    </nav>
+  </main>
+  <footer class="legal"><span>© R. Veera Manoharan</span><span>AI Lab</span></footer>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="case.js"></script>
+</body>
+</html>

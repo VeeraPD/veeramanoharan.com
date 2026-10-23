@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Ensemble · Case 03 · R. Veera Manoharan</title>
+<title>Ensemble · Case 04 · R. Veera Manoharan</title>
 <script>(function(){var r=document.documentElement,m=null,mo=null;try{m=localStorage.getItem('mode');mo=localStorage.getItem('motion')}catch(e){}r.setAttribute('data-mode',m==='cream'?'cream':'dark');if(mo==='off')r.setAttribute('data-paused','true')})();</script>
-<meta name="description" content="Ensemble, an open-source tool where a lead AI delegates coding to cheaper workers: why I built it, the cost ratio I use as the North Star, and a small study that found no clear saving at this size.">
+<meta name="description" content="Ensemble: an AI lead that directs cheaper AI workers. A lead model plans and reviews. Lower-cost models build in parallel.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&display=swap">
@@ -29,16 +29,16 @@
 
   <main id="main">
     <header class="open">
-      <p class="label">Case 03 · Developer tool · AI · Open source · 2026 · 7 min read</p>
+      <p class="label">Case 04 · Developer tool · AI · Open source · 2026 · 6 min read</p>
       <h1>Ensemble: an AI lead that directs cheaper AI workers</h1>
       <p class="label ps">Problem statement</p>
-      <p class="stand">Developers pay a strong AI model's price for routine coding, and independent pieces of work wait in line behind each other.</p>
-      <p class="links"><a class="pill" href="https://github.com/VeeraPD/ensemble-mcp" rel="noopener">GitHub repo ↗</a><a class="pill ghost" href="#decisions">Skip to the decisions</a></p>
+      <p class="stand">A lead model plans and reviews. Lower-cost models build in parallel.</p>
+      <p class="links"><a class="pill" href="https://github.com/VeeraPD/ensemble-mcp" rel="noopener">GitHub repo ↗</a></p>
+      <div class="tldr" aria-label="Problem, issue and solution"><div><p class="label">Problem</p><h2>Routine coding uses expensive reasoning</h2><p>Developers use strong AI models for both difficult decisions and routine implementation. Independent tasks often wait for one model to finish the previous task.</p></div><div><p class="label">Issue</p><h2>Delegation has its own overhead</h2><p>Parallel workers can save money, but repeated context, unclear ownership and coordination add cost. The comparison must include planning, review and the same acceptance criteria.</p></div><div><p class="label">Solution</p><h2>One lead, focused parallel workers</h2><p>Ensemble gives a lead model responsibility for planning and review, while lower-cost workers implement bounded tasks in parallel. Shared rules and file ownership keep the work coordinated.</p></div></div><p class="preview-status"><span class="label">Progress</span> Small benchmark: 13.9% lower cost, 18.1% longer runtime.</p>
       <div class="lead-img art grain mesh g-sky" role="img" aria-label="Abstract diagram of one lead routed to three workers"><svg aria-hidden="true"><use href="#a05"/></svg></div>
-      <div class="tldr" aria-label="TL;DR"><div><p class="label">Problem</p><p>A strong model is used for routine implementation as well as hard decisions, and every helper pays for a long conversation it does not need.</p></div><div><p class="label">Product</p><p>An open-source tool: a lead model in Claude Code sets shared rules and splits the work; cheaper workers build in parallel and may only change their assigned files.</p></div><div><p class="label">North Star</p><p>Cost ratio per accepted task: team cost divided by solo cost, on work that passes the same frozen tests. Below 0.8 means a saving of at least 20%.</p></div><div><p class="label">Result</p><p>Small test: team 13.9% cheaper but 18.1% slower, so no clear saving at that size. A larger test with a frozen acceptance suite is next.</p></div></div>
     </header>
 
-    <nav class="story" aria-label="The case in headlines"><p class="label">The case in headlines</p><ol><li><a href="#s0">It started with my iOS app, where API costs fell by more than half</a></li><li><a href="#s1">Strong models do the hard thinking and the routine typing, at the same price</a></li><li><a href="#s2">The idea: a strong lead plans and reviews, cheaper workers build in parallel</a></li><li><a href="#s3">Every decision is about where delegation earns back its coordination cost</a></li><li><a href="#s4">North Star: what a task costs with the team, divided by what it costs solo, at the same quality</a></li><li><a href="#s5">How I track it: one usage record per model call, plus a frozen test suite</a></li><li><a href="#s6">The first test: a small app, three runs each, and no clear saving</a></li><li><a href="#s7">Not every number means the same thing: observation, measurement or hypothesis</a></li><li><a href="#s8">Three lessons: exact handoffs, a frozen finish line, and count the lead</a></li><li><a href="#s9">Next: a larger task, a frozen test and three matched pairs, with the repo open to try</a></li></ol></nav>
+
     <dl class="summary" style="--cols:5">
       <div><dt class="label">Role</dt><dd>Product owner and builder; directed AI coding agents and reviewed the work</dd></div>
       <div><dt class="label">Type</dt><dd>Open-source developer tool (MIT, version 0.1.0)</dd></div>
@@ -50,7 +50,7 @@
     <section class="sec" aria-labelledby="s0">
       <p class="label">Origin</p>
       <div>
-        <h2 id="s0">It started with my iOS app, where API costs fell by more than half</h2>
+        <h2 id="s0">My app-building experience prompted a test of model delegation</h2>
         <div class="prose"><p>While building an iOS app with AI coding agents, I let a strong model plan and review and handed routine pieces to a cheaper model. My API costs fell by more than 50%, and the parallel work finished faster than my solo runs.</p><p>That is my own observation, not an audited result: I have no invoices or matched baseline. But it raised a question worth testing. When does splitting the work among models pay for the coordination it costs?</p></div>
       </div>
     </section>
@@ -58,71 +58,63 @@
     <section class="sec" aria-labelledby="s1">
       <p class="label">Problem</p>
       <div>
-        <h2 id="s1">Strong models do the hard thinking and the routine typing, at the same price</h2>
-        <ul class="blist"><li>Planning and review need a strong model. Writing routine code does not.</li><li>Independent pieces of work run one after another, not together.</li><li>Every helper that sees the whole long conversation pays for context it does not need.</li></ul><p class="outro">My audience hypothesis: solo builders and small teams on an API budget, who may later want cost attribution and limits on what an agent can change. There are no customers or revenue to report.</p>
+        <h2 id="s1">Routine implementation consumes expensive reasoning and repeated context</h2>
+        <ul class="blist"><li>Routine implementation uses the same expensive model as planning.</li><li>Long conversation histories add cost to narrow tasks.</li><li>Independent tasks wait instead of running in parallel.</li></ul><p class="outro">My audience hypothesis: solo builders and small teams on an API budget, who may later want cost attribution and limits on what an agent can change. There are no customers or revenue to report.</p>
       </div>
     </section>
 
     <section class="sec" aria-labelledby="s2">
       <p class="label">The idea</p>
       <div>
-        <h2 id="s2">The idea: a strong lead plans and reviews, cheaper workers build in parallel</h2>
-        <figure class="fig"><div class="dgwrap"><svg class="dg " viewBox="0 0 800 290" role="img" aria-label="How Ensemble splits a coding task. The lead, a strong model, sets shared rules and divides the work. Three cheaper workers each receive a focused brief and may change only their assigned files, which the tool checks in code. In the benchmark the three parts were the data model, the command-line interface and the tests. The lead then reviews, combines and verifies the result, fixing small issues or delegating again."><defs><marker id="d4a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk" d="M0,0L10,5L0,10z"/></marker><marker id="d4h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk hot" d="M0,0L10,5L0,10z"/></marker></defs><rect class="bx hot" x="0" y="100" width="180" height="76" rx="10"/><text class="t" x="90" y="126.5" text-anchor="middle">Lead</text><text class="s" x="90" y="143.5" text-anchor="middle">strong model: plans,</text><text class="s" x="90" y="158.5" text-anchor="middle">sets shared rules</text><rect class="zone" x="300" y="6" width="220" height="266" rx="14"/><text class="lb hot" x="316" y="24" text-anchor="start">WRITES CHECKED IN CODE</text><path class="ln " d="M180 138H212V60H298" marker-end="url(#d4a)"/><rect class="bx " x="312" y="34" width="196" height="52" rx="10"/><text class="t" x="410" y="56" text-anchor="middle">Worker: data model</text><text class="s" x="410" y="73" text-anchor="middle">cheaper model, own files only</text><path class="ln hot" d="M180 138H212V140H298" marker-end="url(#d4h)"/><rect class="bx " x="312" y="114" width="196" height="52" rx="10"/><text class="t" x="410" y="136" text-anchor="middle">Worker: command line</text><text class="s" x="410" y="153" text-anchor="middle">cheaper model, own files only</text><path class="ln " d="M180 138H212V220H298" marker-end="url(#d4a)"/><rect class="bx " x="312" y="194" width="196" height="52" rx="10"/><text class="t" x="410" y="216" text-anchor="middle">Worker: tests</text><text class="s" x="410" y="233" text-anchor="middle">cheaper model, own files only</text><text class="al" x="90" y="196" text-anchor="middle">hands out shared rules</text><text class="al" x="90" y="211" text-anchor="middle">and focused briefs</text><path class="ln " d="M508 60H540V138H588" marker-end="url(#d4a)"/><path class="ln " d="M508 140H540V138H588" marker-end="url(#d4a)"/><path class="ln " d="M508 220H540V138H588" marker-end="url(#d4a)"/><rect class="bx hot" x="590" y="100" width="210" height="76" rx="10"/><text class="t" x="695" y="126.5" text-anchor="middle">Lead reviews</text><text class="s" x="695" y="143.5" text-anchor="middle">combines, runs checks,</text><text class="s" x="695" y="158.5" text-anchor="middle">fixes or re-delegates</text><text class="al" x="400" y="284" text-anchor="middle">in the benchmark: data model, CLI, tests</text></svg></div><p class="swipe" aria-hidden="true">Scroll sideways for the full diagram →</p><figcaption>How Ensemble splits a coding task. <span class="how"><b>How to read it.</b> Read left to right. The lead on the left sets the rules and hands each worker a focused brief. The three workers in the dashed box build in parallel, and the tool refuses any write outside a worker's own files. The lead on the right reviews and combines the result. In the benchmark the three parts were the data model, the command line and the tests.</span></figcaption></figure><div class="prose"><p>In Ensemble the lead sets shared rules, such as interfaces and exact import paths, and divides the work. Each worker gets a short brief and only the files it needs. The tool checks that a worker writes only to its assigned files. The lead then reviews, combines and verifies, fixing small issues or delegating again.</p><p>MCP is the connection that makes this delegation available inside the coding assistant people already use.</p></div>
+        <h2 id="s2">A strong lead plans while lower-cost workers build in parallel</h2>
+        <figure class="fig"><div class="dgwrap"><svg class="dg " viewBox="0 0 800 290" role="img" aria-label="How Ensemble splits a coding task. The lead, a strong model, sets shared rules and divides the work. Three cheaper workers each receive a focused brief and may change only their assigned files, which the tool checks in code. In the benchmark the three parts were the data model, the command-line interface and the tests. The lead then reviews, combines and verifies the result, fixing small issues or delegating again."><defs><marker id="d6a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk" d="M0,0L10,5L0,10z"/></marker><marker id="d6h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk hot" d="M0,0L10,5L0,10z"/></marker></defs><rect class="bx hot" x="0" y="100" width="180" height="76" rx="10"/><text class="t" x="90" y="126.5" text-anchor="middle">Lead</text><text class="s" x="90" y="143.5" text-anchor="middle">strong model: plans,</text><text class="s" x="90" y="158.5" text-anchor="middle">sets shared rules</text><rect class="zone" x="300" y="6" width="220" height="266" rx="14"/><text class="lb hot" x="316" y="24" text-anchor="start">WRITES CHECKED IN CODE</text><path class="ln " d="M180 138H212V60H298" marker-end="url(#d6a)"/><rect class="bx " x="312" y="34" width="196" height="52" rx="10"/><text class="t" x="410" y="56" text-anchor="middle">Worker: data model</text><text class="s" x="410" y="73" text-anchor="middle">cheaper model, own files only</text><path class="ln hot" d="M180 138H212V140H298" marker-end="url(#d6h)"/><rect class="bx " x="312" y="114" width="196" height="52" rx="10"/><text class="t" x="410" y="136" text-anchor="middle">Worker: command line</text><text class="s" x="410" y="153" text-anchor="middle">cheaper model, own files only</text><path class="ln " d="M180 138H212V220H298" marker-end="url(#d6a)"/><rect class="bx " x="312" y="194" width="196" height="52" rx="10"/><text class="t" x="410" y="216" text-anchor="middle">Worker: tests</text><text class="s" x="410" y="233" text-anchor="middle">cheaper model, own files only</text><text class="al" x="90" y="196" text-anchor="middle">hands out shared rules</text><text class="al" x="90" y="211" text-anchor="middle">and focused briefs</text><path class="ln " d="M508 60H540V138H588" marker-end="url(#d6a)"/><path class="ln " d="M508 140H540V138H588" marker-end="url(#d6a)"/><path class="ln " d="M508 220H540V138H588" marker-end="url(#d6a)"/><rect class="bx hot" x="590" y="100" width="210" height="76" rx="10"/><text class="t" x="695" y="126.5" text-anchor="middle">Lead reviews</text><text class="s" x="695" y="143.5" text-anchor="middle">combines, runs checks,</text><text class="s" x="695" y="158.5" text-anchor="middle">fixes or re-delegates</text><text class="al" x="400" y="284" text-anchor="middle">in the benchmark: data model, CLI, tests</text></svg></div><p class="swipe" aria-hidden="true">Scroll sideways for the full diagram →</p><figcaption>How Ensemble splits a coding task. <details class="figure-guide"><summary>Diagram guide</summary><span class="how">Read left to right. The lead on the left sets the rules and hands each worker a focused brief. The three workers in the dashed box build in parallel, and the tool refuses any write outside a worker's own files. The lead on the right reviews and combines the result. In the benchmark the three parts were the data model, the command line and the tests.</span></details></figcaption></figure><div class="prose"><p>A strong lead plans and reviews. Lower-cost workers handle bounded tasks in parallel, using shared rules and explicit file ownership.</p></div>
       </div>
     </section>
 
-    <section class="sec" id="decisions" aria-labelledby="s3">
+    <section class="sec" aria-labelledby="s3">
+      <p class="label">Goals and metrics</p>
+      <div>
+        <h2 id="s3">Compare total cost only when both approaches pass the same tests</h2>
+        <div class="tree"><div class="ns"><span class="label">North Star</span><b>Cost ratio per accepted task</b><span>Team all-in cost (lead, workers and repairs) divided by solo all-in cost, both on work that passes the same frozen acceptance tests. Below 0.8 means at least a 20% saving.</span></div><div class="ls" style="--n:3"><div class="l1"><b>Time ratio</b><span>Team wall time divided by solo, verification included</span></div><div class="l1"><b>First-pass acceptance</b><span>Worker outputs the lead accepts unchanged</span></div><div class="l1"><b>Rejected-write rate</b><span>Writes refused by the ownership check</span></div></div><p class="guard"><b>Why this number:</b> cheap output that fails review is not a saving, and a saving on code that fails the tests is not a saving either. Fixing the tests first makes the ratio comparable. <b>Rule:</b> claim a saving only if the ratio is 0.8 or lower across at least three matched pairs.</p></div>
+      </div>
+    </section>
+
+    <section class="sec" id="decisions" aria-labelledby="s4">
       <p class="label">Decisions and trade-offs</p>
       <div>
-        <h2 id="s3">Every decision is about where delegation earns back its coordination cost</h2>
+        <h2 id="s4">Explicit task boundaries keep parallel work coordinated</h2>
         <div class="decs">
           <article class="dec">
             <h3><span>01</span>One lead, cheaper workers</h3>
-            <div class="opts">
-              <div class="opt chosen"><p class="label">What I chose <span class="tick">Chosen</span></p><p>A strong model plans and reviews; cheaper models implement</p></div>
-              <div class="opt"><p class="label">What I gave up</p><p>The simplicity of one model</p></div>
-            </div>
-            <p class="why"><b>Why.</b> It matches capability and cost to the job. The lead's context, review and repairs can dominate spend, as the results show.</p>
+            <p class="decision-choice">A strong model plans and reviews; cheaper models implement</p>
+            <p class="why"><b>Why:</b> It matches capability and cost to the job. The lead's context, review and repairs can dominate spend, as the results show.</p>
+            <p class="decision-trade"><b>Trade-off:</b> The simplicity of one model</p>
           </article>
           <article class="dec">
             <h3><span>02</span>File ownership enforced in code</h3>
-            <div class="opts">
-              <div class="opt chosen"><p class="label">What I chose <span class="tick">Chosen</span></p><p>Each worker may write only its assigned files, and the tool checks</p></div>
-              <div class="opt"><p class="label">What I gave up</p><p>Letting workers roam</p></div>
-            </div>
-            <p class="why"><b>Why.</b> A boundary I can inspect beats a model's promise. It controls where writes go, not whether the code inside is right.</p>
+            <p class="decision-choice">Each worker may write only its assigned files, and the tool checks</p>
+            <p class="why"><b>Why:</b> A boundary I can inspect beats a model's promise. It controls where writes go, not whether the code inside is right.</p>
+            <p class="decision-trade"><b>Trade-off:</b> Letting workers roam</p>
           </article>
           <article class="dec">
             <h3><span>03</span>The lead owns the shared rules</h3>
-            <div class="opts">
-              <div class="opt chosen"><p class="label">What I chose <span class="tick">Chosen</span></p><p>Exact interfaces and import paths before any work starts</p></div>
-              <div class="opt"><p class="label">What I gave up</p><p>Less preparation</p></div>
-            </div>
-            <p class="why"><b>Why.</b> An early experiment failed when a worker guessed an import path the brief had not named.</p>
+            <p class="decision-choice">Exact interfaces and import paths before any work starts</p>
+            <p class="why"><b>Why:</b> An early experiment failed when a worker guessed an import path the brief had not named.</p>
+            <p class="decision-trade"><b>Trade-off:</b> Less preparation</p>
           </article>
           <article class="dec">
             <h3><span>04</span>A small surface</h3>
-            <div class="opts">
-              <div class="opt chosen"><p class="label">What I chose <span class="tick">Chosen</span></p><p>Delegation, ownership, review and audit logs only</p></div>
-              <div class="opt"><p class="label">What I gave up</p><p>Multi-model debate and voting, extra channels</p></div>
-            </div>
-            <p class="why"><b>Why.</b> Keeping the tool narrow keeps it reviewable. It never runs model-returned code: the lead runs the checks.</p>
+            <p class="decision-choice">Delegation, ownership, review and audit logs only</p>
+            <p class="why"><b>Why:</b> Keeping the tool narrow keeps it reviewable. It never runs model-returned code: the lead runs the checks.</p>
+            <p class="decision-trade"><b>Trade-off:</b> Multi-model debate and voting, extra channels</p>
           </article></div>
-      </div>
-    </section>
-
-    <section class="sec" aria-labelledby="s4">
-      <p class="label">Goals and metrics</p>
-      <div>
-        <h2 id="s4">North Star: what a task costs with the team, divided by what it costs solo, at the same quality</h2>
-        <div class="tree"><div class="ns"><span class="label">North Star</span><b>Cost ratio per accepted task</b><span>Team all-in cost (lead, workers and repairs) divided by solo all-in cost, both on work that passes the same frozen acceptance tests. Below 0.8 means at least a 20% saving.</span></div><div class="ls" style="--n:3"><div class="l1"><b>Time ratio</b><span>Team wall time divided by solo, verification included</span></div><div class="l1"><b>First-pass acceptance</b><span>Worker outputs the lead accepts unchanged</span></div><div class="l1"><b>Rejected-write rate</b><span>Writes refused by the ownership check</span></div></div><p class="guard"><b>Why this number:</b> cheap output that fails review is not a saving, and a saving on code that fails the tests is not a saving either. Fixing the tests first makes the ratio comparable. <b>Rule:</b> claim a saving only if the ratio is 0.8 or lower across at least three matched pairs.</p></div>
       </div>
     </section>
 
     <section class="sec" aria-labelledby="s5">
       <p class="label">Tracking</p>
       <div>
-        <h2 id="s5">How I track it: one usage record per model call, plus a frozen test suite</h2>
+        <h2 id="s5">Per-call usage records include the cost of planning and review</h2>
         <div class="tblwrap"><table class="tbl"><thead><tr><th scope="col">Metric</th><th scope="col">Definition</th><th scope="col">Data source</th><th scope="col">Status</th></tr></thead><tbody><tr><td data-label="Metric"><b>Cost ratio (North Star)</b></td><td data-label="Definition">Team all-in cost / solo all-in cost on the same accepted task</td><td data-label="Data source">Per-request usage records and the acceptance result</td><td data-label="Status">Cost recorded in the small study; ratio on a frozen suite is next</td></tr><tr><td data-label="Metric">Time ratio</td><td data-label="Definition">Team wall time / solo wall time</td><td data-label="Data source">Harness timer</td><td data-label="Status">Measured in the small study</td></tr><tr><td data-label="Metric">Lead share of spend</td><td data-label="Definition">Lead cost / team cost</td><td data-label="Data source">Usage records by model</td><td data-label="Status">Measured: about 88%</td></tr><tr><td data-label="Metric">First-pass acceptance</td><td data-label="Definition">Worker outputs accepted unchanged / all outputs</td><td data-label="Data source">Lead review log</td><td data-label="Status">To instrument</td></tr><tr><td data-label="Metric">Rejected-write rate</td><td data-label="Definition">Refused writes / write attempts</td><td data-label="Data source">Tool audit log</td><td data-label="Status">To instrument</td></tr><tr><td data-label="Metric">Repair share</td><td data-label="Definition">Repair cost / total cost</td><td data-label="Data source">Usage records tagged by phase</td><td data-label="Status">To instrument</td></tr></tbody></table></div><p class="outro">Only cost, time and the lead's share of spend are measured so far. The rest are proposed instrumentation, and I will say so until they are logged.</p>
       </div>
     </section>
@@ -130,7 +122,7 @@
     <section class="sec" aria-labelledby="s6">
       <p class="label">Evidence</p>
       <div>
-        <h2 id="s6">The first test: a small app, three runs each, and no clear saving</h2>
+        <h2 id="s6">The small benchmark cost 13.9% less but took 18.1% longer</h2>
         <p class="intro">I ran Claude Sonnet 4.5 on the same small to-do app, three solo runs and three with a lead plus workers, in alternating order.</p><div class="tblwrap"><table class="tbl"><thead><tr><th scope="col">Same small to-do app</th><th scope="col">Solo</th><th scope="col">Lead plus workers</th></tr></thead><tbody><tr><td data-label="Same small to-do app">Mean API cost</td><td data-label="Solo">$0.245</td><td data-label="Lead plus workers"><b>$0.211</b> (13.9% lower)</td></tr><tr><td data-label="Same small to-do app">Cost range</td><td data-label="Solo">$0.240 to $0.254</td><td data-label="Lead plus workers">$0.195 to $0.237</td></tr><tr><td data-label="Same small to-do app">Mean time</td><td data-label="Solo">103 s</td><td data-label="Lead plus workers"><b>122 s</b> (18.1% longer)</td></tr><tr><td data-label="Same small to-do app">Share of team cost from the lead</td><td data-label="Solo">Not applicable</td><td data-label="Lead plus workers">About 88%</td></tr></tbody></table></div><p class="outro">I set the rule before running: at least 20% lower cost with ranges that do not overlap. The saving is under 20% and the ranges overlap, so the verdict is <b>no clear cost saving at this size</b>. This is why the case is about counting the lead: my first worker-only story overstated the saving. All six runs passed their own tests, but the suites differ, so that is not a common quality check.</p>
       </div>
     </section>
@@ -138,7 +130,7 @@
     <section class="sec" aria-labelledby="s7">
       <p class="label">What each number can support</p>
       <div>
-        <h2 id="s7">Not every number means the same thing: observation, measurement or hypothesis</h2>
+        <h2 id="s7">The benchmark is evidence for one task, not a universal saving</h2>
         <div class="tblwrap"><table class="tbl"><thead><tr><th scope="col">Claim</th><th scope="col">What it rests on</th></tr></thead><tbody><tr><td data-label="Claim">More than 50% lower API cost on my iOS app</td><td data-label="What it rests on">My own observation. No invoices or matched baseline</td></tr><tr><td data-label="Claim">13.9% lower cost, 18.1% slower</td><td data-label="What it rests on"><b>Measured:</b> 3 solo and 3 team runs on one small app, lead included</td></tr><tr><td data-label="Claim">12.5% lower team cost with Opus 5.5</td><td data-label="What it rests on">One interrupted pair of runs. Not a clean comparison</td></tr><tr><td data-label="Claim">Worker execution about 3.6 times faster</td><td data-label="What it rests on">One earlier trial, workers only, a different task. Raw logs not found</td></tr><tr><td data-label="Claim">Bigger gains on larger, well-divided projects</td><td data-label="What it rests on">A hypothesis. Untested</td></tr></tbody></table></div><p class="outro">The 50% figure is not a result of the six-run study, and the 3.6 times figure is not delivery speed. Mixing them up is the easiest way to overclaim.</p>
       </div>
     </section>
@@ -146,25 +138,25 @@
     <section class="sec" aria-labelledby="s8">
       <p class="label">What I learned</p>
       <div>
-        <h2 id="s8">Three lessons: exact handoffs, a frozen finish line, and count the lead</h2>
-        <ul class="blist"><li><b>Exact handoffs matter.</b> A worker guessed an import path the brief had not named. Specify interfaces and paths, not just types.</li><li><b>Agree the finish line before generating.</b> A shared acceptance suite, written afterwards, split the runs on one edge case: all three Sonnet solo runs reused task IDs after everything was deleted, while the team and Opus runs did not. The contract was ambiguous on it. Next time the suite is frozen first.</li><li><b>Count the lead.</b> About 88% of team spend still came from the lead. Benefit depends on how well the task divides, not on its size.</li></ul>
+        <h2 id="s8">Delegation needs clear handoffs and a frozen acceptance test</h2>
+        <ul class="blist"><li>Make task boundaries and handoffs explicit.</li><li>Freeze acceptance tests before comparing runs.</li><li>Include planning and review in total cost.</li></ul>
       </div>
     </section>
 
     <section class="sec" aria-labelledby="s9">
       <p class="label">Next</p>
       <div>
-        <h2 id="s9">Next: a larger task, a frozen test and three matched pairs, with the repo open to try</h2>
+        <h2 id="s9">A larger matched benchmark will test where coordination pays off</h2>
         <div class="prose"><p>The next experiment is a larger task with clearly independent parts. I will freeze the acceptance suite before any code is generated, run three matched pairs with the same model, tool version and permissions, and count review and repair in cost and time. Team-level cost attribution and policies come later, only if demand shows up.</p><p>The tool is open source under the MIT licence. Code and issues: <a href="https://github.com/VeeraPD/ensemble-mcp" rel="noopener">github.com/VeeraPD/ensemble-mcp</a>.</p></div>
       </div>
     </section>
 
     <nav class="pn" aria-label="More cases">
-      <a href="case-ticketpilot.html"><span class="label">← Case 02</span><b>TicketPilot</b></a>
-      <a href="case-voice-capture.html"><span class="label">Case 04 →</span><b>Voice capture</b></a>
+      <a href="case-atelier.html"><span class="label">← Case 03</span><b>Atélier</b></a>
+      <a href="case-voice-capture.html"><span class="label">Case 05 →</span><b>Voice capture</b></a>
     </nav>
   </main>
-  <footer class="legal"><span>© R. Veera Manoharan</span><span>Case 03</span></footer>
+  <footer class="legal"><span>© R. Veera Manoharan</span><span>Case 04</span></footer>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>

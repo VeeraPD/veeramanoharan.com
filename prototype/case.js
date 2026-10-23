@@ -38,6 +38,7 @@
   }
 
   gsap.registerPlugin(ScrollTrigger);
+  document.querySelectorAll("details").forEach(function(d){d.addEventListener("toggle",function(){ScrollTrigger.refresh()})});
   var S=.8;
   if(fine&&window.Lenis){var lenis=new Lenis({lerp:.1,smoothWheel:true});lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(function(t){lenis.raf(t*1000)});gsap.ticker.lagSmoothing(0)}
 
@@ -53,18 +54,6 @@
   gsap.utils.toArray('.sec').forEach(function(s){
     gsap.fromTo(s.querySelectorAll(':scope>.label, h2'),{opacity:.25,y:22},{opacity:1,y:0,ease:'none',scrollTrigger:{trigger:s,start:'top 85%',end:'top 60%',scrub:S}});
     gsap.fromTo(s.querySelectorAll('.prose>*, .quote, .nums, .honest, .flow, .facts, .note, .intro, .blist, .tblwrap, .steps, .outro, .shots, .tree, .tiles, .vframe, .vcap, .road, .fig'),{opacity:0,y:18},{opacity:1,y:0,stagger:.1,ease:'none',scrollTrigger:{trigger:s,start:'top 75%',end:'top 40%',scrub:S}});
-  });
-  /* decisions: the two options slide in from either side, then the chosen one lights up and the reason follows */
-  gsap.utils.toArray('.dec').forEach(function(d){
-    var o=d.querySelectorAll('.opt'),chosen=d.querySelector('.opt.chosen'),rest=d.querySelector('.opt:not(.chosen)');
-    var t=gsap.timeline({defaults:{ease:'none'},scrollTrigger:{trigger:d,start:'top 82%',end:'top 38%',scrub:S}});
-    t.fromTo(d.querySelector('h3'),{opacity:.25},{opacity:1,duration:.3},0)
-     .fromTo(o[0],{opacity:0,x:-30},{opacity:1,x:0,duration:.4},.1)
-     .fromTo(o[1],{opacity:0,x:30},{opacity:1,x:0,duration:.4},.1)
-     .fromTo(chosen,{scale:.97},{scale:1,duration:.3},.55)
-     .fromTo(chosen.querySelector('.tick'),{opacity:0,y:-6},{opacity:1,y:0,duration:.2},.6)
-     .to(rest,{opacity:.55,duration:.3},.6)
-     .fromTo(d.querySelector('.why'),{opacity:0,y:10},{opacity:1,y:0,duration:.3},.75);
   });
   /* screens open like the lead image */
   gsap.utils.toArray('.shots .frame').forEach(function(f){

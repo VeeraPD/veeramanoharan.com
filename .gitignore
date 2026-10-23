@@ -6,3 +6,6 @@ dist/
 # private notes, kept local
 WIPlist.md
 Core Intent.md
+
+# Local staging and dependency sandbox for the separate TicketPilot app
+/ticketpilot-upgrade/

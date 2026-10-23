@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>TicketPilot · Case 02 · R. Veera Manoharan</title>
+<title>TicketPilot · Case 01 · R. Veera Manoharan</title>
 <script>(function(){var r=document.documentElement,m=null,mo=null;try{m=localStorage.getItem('mode');mo=localStorage.getItem('motion')}catch(e){}r.setAttribute('data-mode',m==='cream'?'cream':'dark');if(mo==='off')r.setAttribute('data-paused','true')})();</script>
-<meta name="description" content="TicketPilot, an AI ticket-routing prototype: process evidence from 7,554 incidents, a failed baseline test, and a recommendation to hold deployment.">
+<meta name="description" content="TicketPilot: AI-powered IT support. Describe the issue. Find the right team. Learn from every exception.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&display=swap">
@@ -28,132 +28,117 @@
 
   <main id="main">
     <header class="open">
-      <p class="label">Case 02 · B2B · AI · Prototype · 2026 · 7 min read</p>
-      <h1>TicketPilot: an AI router that failed its own test</h1>
+      <p class="label">Case 01 · B2B · AI · Prototype · 2026 · 6 min read</p>
+      <h1>TicketPilot: AI-powered IT support</h1>
       <p class="label ps">Problem statement</p>
-      <p class="stand">In IT support, tickets get passed between teams and employees wait while each team repeats the investigation.</p>
-      <p class="links"><a class="pill ghost" href="#decisions">Skip to the decisions</a></p>
+      <p class="stand">Describe the issue. Find the right team. Learn from every exception.</p>
+      
+      <div class="tldr" aria-label="Problem, issue and solution"><div><p class="label">Problem</p><h2>IT support starts with a guessing game</h2><p>Employees know what is wrong, but often do not know which service category or support team to choose. They need a simple way to ask for help.</p></div><div><p class="label">Issue</p><h2>Unclear requests create extra work</h2><p>Support teams manually interpret and reassign tickets. Ambiguous descriptions need human judgment, while recurring confusion needs a clear path back to product development.</p></div><div><p class="label">Solution</p><h2>Describe it. Route it. Learn from it.</h2><p>TicketPilot uses retrieved service knowledge to recommend the right team, with human review for ambiguity. The product combines LLM-powered triage with a planned feedback loop that turns recurring exceptions into improvements.</p></div></div><p class="preview-status"><span class="label">Progress</span> 25-case RAG test: 20/20 owner recommendations correct; one unsupported automatic route.</p>
       <figure class="lead-img"><img src="images/ticketpilot-cover.webp" width="1920" height="1080" style="aspect-ratio:16/9" alt="TicketPilot title card: Less ticket bouncing, a clearer path to resolution. Classify, explain, resolve." decoding="async"></figure>
-      <div class="tldr" aria-label="TL;DR"><div><p class="label">Problem</p><p>In a real public IT-support log, half of incidents pass through more than one team and 15.6% bounce straight back to a team that already had them.</p></div><div><p class="label">Product</p><p>Reads a new ticket, proposes the resolving team and shows matched past fixes with sources. An engineer approves the route; the employee confirms the outcome.</p></div><div><p class="label">North Star</p><p>Durable first-owner resolution rate (proposed): resolved on time by the first owner, confirmed by the employee, not reopened in 7 days.</p></div><div><p class="label">Result</p><p>The prototype failed its test: 10% first-time-right against a keyword rule's 90%. Recommendation: hold deployment, fund bounded discovery.</p></div></div>
     </header>
 
-    <nav class="story" aria-label="The case in headlines"><p class="label">The case in headlines</p><ol><li><a href="#s0">Half of IT incidents change teams, and about 1 in 6 bounce straight back</a></li><li><a href="#s1">Three people share one request: the employee, the engineer and the manager</a></li><li><a href="#s3">Four things had to be true, and none is proven yet</a></li><li><a href="#s4">North Star: tickets resolved by the first owner, confirmed and not reopened</a></li><li><a href="#s5">I cut eight must-haves to five, keeping only what tests the core idea</a></li><li><a href="#s6">The product: AI proposes the owner, a person approves, the employee confirms</a></li><li><a href="#s7">Four calls that kept the AI honest</a></li><li><a href="#s8">The test failed: 10% first-time-right against a 90% keyword baseline</a></li><li><a href="#s9">Even if it worked, review effort decides whether the economics hold</a></li><li><a href="#s10">So: hold the router and fund 90 days of gated discovery</a></li></ol></nav>
-    <dl class="summary" style="--cols:5">
-      <div><dt class="label">Role</dt><dd>Product owner and builder, with AI development tools</dd></div>
-      <div><dt class="label">Type</dt><dd>Enterprise AI prototype (portfolio project)</dd></div>
-      <div><dt class="label">Data</dt><dd>Public BPI 2013 incident log, plus synthetic ticket text</dd></div>
-      <div><dt class="label">Status</dt><dd>Recommendation: HOLD (Oct 2026)</dd></div>
-      <div><dt class="label">Skills</dt><dd>Problem framing, AI evaluation, metrics, business case</dd></div>
+
+    <dl class="summary" style="--cols:4">
+      <div><dt class="label">Role</dt><dd>Product, prototype and evaluation</dd></div>
+      <div><dt class="label">Stage</dt><dd>MVP; LLM path added</dd></div>
+      <div><dt class="label">Stack</dt><dd>React, Python, LangChain</dd></div>
+      <div><dt class="label">Data</dt><dd>Public process log + synthetic ticket text</dd></div>
     </dl>
 
     <section class="sec" aria-labelledby="s0">
       <p class="label">Problem</p>
       <div>
-        <h2 id="s0">Half of IT incidents change teams, and about 1 in 6 bounce straight back</h2>
-        <p class="intro">The pattern comes from one public incident log (BPI Challenge 2013). It shows where friction exists. It does not show why, or that it can be removed.</p><ul class="blist"><li><b>7,554 incidents and 9,454 handoffs</b> between support teams: 1.25 handoffs per incident on average.</li><li><b>50.6%</b> of incidents touch more than one team.</li><li><b>15.6%</b> bounce directly from team A to B and back to A.</li><li><b>Hypothesis:</b> some bounces happen because the ticket's wording points to a different team than the one that ends up resolving it, and past resolutions could predict the right owner.</li></ul><p class="outro">Many transfers may be legitimate specialist escalations. Finding out how many is the first job of any real pilot.</p>
+        <h2 id="s0">Employees need help without learning the support taxonomy</h2>
+        <p class="intro">Employees know their problem, not the support taxonomy. Teams need enough context to route it correctly.</p><ul class="blist"><li>Unclear descriptions add manual classification and reassignment.</li><li>Regional language and unfamiliar terminology can make routing harder.</li><li>Recurring confusion needs a route back to the product team.</li></ul><p class="outro">Process context: 7,554 public incidents; 50.6% touched multiple teams and 15.6% bounced A–B–A. The log does not establish which transfers were avoidable.</p>
       </div>
     </section>
 
     <section class="sec" aria-labelledby="s1">
-      <p class="label">Users</p>
+      <p class="label">Business value</p>
       <div>
-        <h2 id="s1">Three people share one request: the employee, the engineer and the manager</h2>
-        <figure class="fig"><div class="dgwrap"><svg class="dg " viewBox="0 0 800 262" role="img" aria-label="One request through TicketPilot. Maya, a sales employee, reports an issue without choosing a team. TicketPilot classifies it and proposes a team, or abstains when evidence is weak. Daniel, a support engineer, approves or overrides the route. A resolver does the work, which is simulated in this prototype. Maya confirms the outcome or asks for more help. Elena, the IT service manager, watches handoffs, outcomes and review load on sample data."><defs><marker id="d3a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk" d="M0,0L10,5L0,10z"/></marker><marker id="d3h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk hot" d="M0,0L10,5L0,10z"/></marker></defs><text class="lb" x="70" y="46" text-anchor="middle">REQUESTER</text><text class="lb hot" x="235" y="46" text-anchor="middle">AI</text><text class="lb" x="400" y="46" text-anchor="middle">SUPPORT ENGINEER</text><text class="lb" x="565" y="46" text-anchor="middle">RESOLVER</text><text class="lb" x="730" y="46" text-anchor="middle">REQUESTER</text><rect class="bx " x="0" y="56" width="140" height="76" rx="10"/><text class="t" x="70" y="82.5" text-anchor="middle">Maya reports</text><text class="s" x="70" y="99.5" text-anchor="middle">describes the issue,</text><text class="s" x="70" y="114.5" text-anchor="middle">picks no team</text><rect class="bx hot" x="165" y="56" width="140" height="76" rx="10"/><text class="t" x="235" y="82.5" text-anchor="middle">TicketPilot</text><text class="s" x="235" y="99.5" text-anchor="middle">proposes a team,</text><text class="s" x="235" y="114.5" text-anchor="middle">or abstains</text><rect class="bx " x="330" y="56" width="140" height="76" rx="10"/><text class="t" x="400" y="82.5" text-anchor="middle">Daniel decides</text><text class="s" x="400" y="99.5" text-anchor="middle">approves or</text><text class="s" x="400" y="114.5" text-anchor="middle">overrides the route</text><rect class="bx ghost" x="495" y="56" width="140" height="76" rx="10"/><text class="t" x="565" y="82.5" text-anchor="middle">Work is done</text><text class="s" x="565" y="99.5" text-anchor="middle">simulated in</text><text class="s" x="565" y="114.5" text-anchor="middle">this prototype</text><rect class="bx " x="660" y="56" width="140" height="76" rx="10"/><text class="t" x="730" y="82.5" text-anchor="middle">Maya confirms</text><text class="s" x="730" y="99.5" text-anchor="middle">solved, or still</text><text class="s" x="730" y="114.5" text-anchor="middle">needs help</text><path class="ln " d="M140 94H163" marker-end="url(#d3a)"/><path class="ln " d="M305 94H328" marker-end="url(#d3a)"/><path class="ln " d="M470 94H493" marker-end="url(#d3a)"/><path class="ln " d="M635 94H658" marker-end="url(#d3a)"/><path class="ln hot dash" d="M235 132V178" marker-end="url(#d3h)"/><text class="al hot" x="245" y="160" text-anchor="start">weak evidence: a person decides</text><rect class="bx soft" x="165" y="182" width="470" height="62" rx="10"/><text class="t" x="400" y="209" text-anchor="middle">Elena, IT service manager</text><text class="s" x="400" y="226" text-anchor="middle">watches handoffs, outcomes and review load (sample data)</text><path class="ln dash" d="M730 132V212H637" marker-end="url(#d3a)"/></svg></div><p class="swipe" aria-hidden="true">Scroll sideways for the full diagram →</p><figcaption>One request from report to confirmed outcome. <span class="how"><b>How to read it.</b> Read the top row left to right: an employee reports, the AI proposes a team, an engineer decides, the work is done, the employee confirms. Only the second box is AI; a person approves the route and the employee confirms the result. The bottom box is the manager, who watches the whole flow.</span></figcaption></figure><div class="tblwrap"><table class="tbl"><thead><tr><th scope="col">Persona</th><th scope="col">Job to be done</th><th scope="col">Role in the product</th></tr></thead><tbody><tr><td data-label="Persona"><b>Maya Rao</b>, sales employee</td><td data-label="Job to be done">Get dashboard access back before a meeting</td><td data-label="Role in the product">Describes the issue once, then confirms the outcome</td></tr><tr><td data-label="Persona"><b>Daniel Chen</b>, support engineer</td><td data-label="Job to be done">Resolve the right work without repeating an investigation</td><td data-label="Role in the product">Inspects the evidence, approves or overrides the route</td></tr><tr><td data-label="Persona"><b>Elena Park</b>, IT service manager</td><td data-label="Job to be done">Improve service quality and plan support capacity</td><td data-label="Role in the product">Sees handoffs, outcomes and review load</td></tr></tbody></table></div><p class="outro">The personas and the company, Northstar, are fictional. They are not research participants or customers.</p>
+        <h2 id="s1">Simpler requests and less triage are the value to validate</h2>
+        <div class="tblwrap"><table class="tbl"><thead><tr><th scope="col">Value dimension</th><th scope="col">Intended benefit</th><th scope="col">How to validate</th></tr></thead><tbody><tr><td data-label="Value dimension">Employee experience</td><td data-label="Intended benefit">Describe an issue without understanding internal categories</td><td data-label="How to validate">Submission time, task completion and employee satisfaction</td></tr><tr><td data-label="Value dimension">Operational efficiency</td><td data-label="Intended benefit">Reduce manual classification and reassignment while preserving review for ambiguity</td><td data-label="How to validate">Hands-on triage time, initial routing time, correct-route coverage and review effort</td></tr><tr><td data-label="Value dimension">Continuous improvement</td><td data-label="Intended benefit">Convert repeated review patterns into prioritized improvements</td><td data-label="How to validate">Recurring exceptions, reviewed feature requests and recurrence after a change</td></tr></tbody></table></div><p class="outro">Benefits to validate in a workflow pilot.</p>
       </div>
     </section>
 
     <section class="sec" aria-labelledby="s2">
-      <p class="label">Key insight</p>
+      <p class="label">North Star Metric</p>
       <div>
-        <h2 id="s2" class="vh">Key insight</h2>
-        <p class="quote">A convincing demo does not overturn a failed quality gate.</p><p class="note">The prototype looks good on a hand-picked ticket. Across 50 held-out descriptions it did not beat a simple keyword rule. I kept the failed result and built the recommendation around it.</p>
+        <h2 id="s2">Better routing is a leading indicator; durable resolution is the NSM</h2>
+        <div class="prose"><p><b>Proposed NSM: durable first-owner resolution rate.</b> The share of eligible tickets resolved on time by the first accountable team, confirmed by the employee and not reopened within seven days.</p><p><b>What improved:</b> correct automatic routing rose from 36% to 76% (+40 percentage points), and review fell from 64% to 20% on the same 25 cases. One automatic route was unsupported.</p><p><b>What is unmeasured:</b> the NSM itself. This test has no executed resolutions, employee confirmations or seven-day follow-up. A controlled pilot must establish that outcome.</p></div>
       </div>
     </section>
 
     <section class="sec" aria-labelledby="s3">
-      <p class="label">Hypotheses</p>
+      <p class="label">Workflow</p>
       <div>
-        <h2 id="s3">Four things had to be true, and none is proven yet</h2>
-        <div class="tblwrap"><table class="tbl"><thead><tr><th scope="col">Hypothesis</th><th scope="col">Evidence today</th><th scope="col">Next test</th></tr></thead><tbody><tr><td data-label="Hypothesis">A meaningful share of transfers is avoidable</td><td data-label="Evidence today">Historical handoff patterns only</td><td data-label="Next test">Service owners annotate a sample of real handoffs</td></tr><tr><td data-label="Hypothesis">Ownership is predictable from ticket text</td><td data-label="Evidence today">Failed on the synthetic test</td><td data-label="Next test">Frozen holdout on real ticket text</td></tr><tr><td data-label="Hypothesis">Retrieved fixes cut repeat investigation</td><td data-label="Evidence today">Prototype shows sources; usefulness not rated</td><td data-label="Next test">Blind rating of 50 or more suggestions</td></tr><tr><td data-label="Hypothesis">A sponsor would fund a bounded pilot</td><td data-label="Evidence today">A conditional cost model only</td><td data-label="Next test">Sponsor and Finance workshop</td></tr></tbody></table></div>
+        <h2 id="s3">TicketPilot interprets requests and keeps uncertain routes with people</h2>
+        <figure class="fig"><div class="dgwrap"><svg class="dg " viewBox="0 0 800 300" role="img" aria-label="An employee describes an issue. TicketPilot retrieves knowledge and recommends a team. Clear cases are eligible for routing; uncertain cases require review. The current UI requires engineer approval. Shared review reports and development requests are planned."><defs><marker id="d1a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk" d="M0,0L10,5L0,10z"/></marker><marker id="d1h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk hot" d="M0,0L10,5L0,10z"/></marker></defs><rect class="bx " x="0" y="30" width="170" height="90" rx="10"/><text class="t" x="85" y="63.5" text-anchor="middle">Describe</text><text class="s" x="85" y="80.5" text-anchor="middle">Natural-language</text><text class="s" x="85" y="95.5" text-anchor="middle">employee request</text><rect class="bx hot" x="210" y="30" width="170" height="90" rx="10"/><text class="t" x="295" y="63.5" text-anchor="middle">Interpret</text><text class="s" x="295" y="80.5" text-anchor="middle">Retrieve evidence</text><text class="s" x="295" y="95.5" text-anchor="middle">and propose a team</text><rect class="bx " x="420" y="30" width="170" height="90" rx="10"/><text class="t" x="505" y="63.5" text-anchor="middle">Review or route</text><text class="s" x="505" y="80.5" text-anchor="middle">Uncertainty → review</text><text class="s" x="505" y="95.5" text-anchor="middle">UI approval remains</text><rect class="bx " x="630" y="30" width="170" height="90" rx="10"/><text class="t" x="715" y="63.5" text-anchor="middle">Support acts</text><text class="s" x="715" y="80.5" text-anchor="middle">Assigned team</text><text class="s" x="715" y="95.5" text-anchor="middle">resolves the incident</text><path class="ln " d="M170 75H208" marker-end="url(#d1a)"/><path class="ln " d="M380 75H418" marker-end="url(#d1a)"/><path class="ln " d="M590 75H628" marker-end="url(#d1a)"/><path class="ln hot dash" d="M505 120V181" marker-end="url(#d1h)"/><rect class="bx soft" x="350" y="185" width="310" height="90" rx="10"/><text class="t" x="505" y="218.5" text-anchor="middle">Learn from exceptions</text><text class="s" x="505" y="235.5" text-anchor="middle">Planned: shared reports → feature requests</text><text class="s" x="505" y="250.5" text-anchor="middle">Track whether recurring confusion falls</text><path class="ln dash" d="M350 230H295V122" marker-end="url(#d1a)"/></svg></div><p class="swipe" aria-hidden="true">Scroll sideways for the full diagram →</p><figcaption>Routing is implemented; shared improvement reporting is the next product capability.</figcaption></figure><ul class="blist"><li><b>Submit:</b> describe the issue naturally.</li><li><b>Interpret:</b> identify the issue and team using an LLM with retrieved service knowledge.</li><li><b>Route or escalate:</b> assign clear requests; send ambiguity to a reviewer.</li><li><b>Capture:</b> record reviewer decisions and recurring confusion.</li><li><b>Improve:</b> turn repeated patterns into development requests.</li></ul><p class="outro">Target workflow. The MVP supports human-approved routing; the LangChain + LLM path has completed a 50-case synthetic benchmark. Shared improvement reporting remains planned. Support teams resolve incidents.</p>
       </div>
     </section>
 
     <section class="sec" aria-labelledby="s4">
-      <p class="label">Goals and metrics</p>
+      <p class="label">Solution</p>
       <div>
-        <h2 id="s4">North Star: tickets resolved by the first owner, confirmed and not reopened</h2>
-        <div class="tree"><div class="ns"><span class="label">North Star</span><b>Durable first-owner resolution rate</b><span>Proposed, not yet instrumented. Share of cases the first accountable team resolved on time, the employee confirmed, and nobody reopened within 7 days.</span></div><div class="ls" style="--n:3"><div class="l1"><b>Handoffs per case</b><span>Historical baseline 1.25; the effect of the product is unmeasured</span></div><div class="l1"><b>Confirmation coverage</b><span>Share of cases where the employee's outcome is known</span></div><div class="l1"><b>Reopen rate</b><span>Guards against closing a ticket too early</span></div></div><p class="guard"><b>Guardrails:</b> confident routing error and the human-review rate. <b>Rejected as North Star:</b> recommendations accepted (rewards trusting the AI) and tickets closed (rewards closing early).</p></div>
+        <h2 id="s4">The MVP connects employee requests, routing evidence and human approval</h2>
+        <figure><div class="vframe "><video controls muted loop playsinline preload="metadata" poster="images/ticketpilot-cover.webp" style="--vr:16/9" aria-label="TicketPilot 60-second trailer: a sales employee reports an issue, the AI proposes a team, a support engineer approves, the employee confirms"><source src="videos/ticketpilot-trailer.mp4" type="video/mp4"></video></div><figcaption class="vcap">The 60-second trailer. Sample organisation; integrations and fixes are simulated.</figcaption></figure><div class="tiles"><div><b>Employee portal</b><span>Describe the issue without choosing a team.</span></div><div><b>Support workspace</b><span>Inspect the evidence and approve or correct the route.</span></div><div><b>Manager view</b><span>Review service health; shared exception reporting remains planned.</span></div><div><b>Draft the next steps</b><span>The LLM synthesizes retrieved fixes into cited guidance. A resolver verifies and performs the work.</span></div></div><div class="product-screens"><figure><img src="images/ticketpilot-routing.webp" alt="TicketPilot support workspace with recommended team and similar resolved cases" loading="lazy" decoding="async"><figcaption>Support sees the proposed team and evidence before approving the route. Recorded MVP screen; not the new LLM benchmark.</figcaption></figure><figure><img src="images/ticketpilot-portal.webp" alt="TicketPilot employee portal for describing an IT issue" loading="lazy" decoding="async"><figcaption>The employee starts with a description rather than a support-team selection.</figcaption></figure></div>
       </div>
     </section>
 
-    <section class="sec" aria-labelledby="s5">
-      <p class="label">Scope</p>
+    <section class="sec" id="decisions" aria-labelledby="s5">
+      <p class="label">Decisions and trade-offs</p>
       <div>
-        <h2 id="s5">I cut eight must-haves to five, keeping only what tests the core idea</h2>
-        <div class="tblwrap"><table class="tbl"><thead><tr><th scope="col">Item</th><th scope="col">Call</th><th scope="col">Why</th></tr></thead><tbody><tr><td data-label="Item">Process analysis on the real incident log</td><td data-label="Call"><b>Kept</b></td><td data-label="Why">Grounds the problem in evidence</td></tr><tr><td data-label="Item">Classification, with abstention and human approval</td><td data-label="Call"><b>Kept</b></td><td data-label="Why">The core of the product</td></tr><tr><td data-label="Item">Fix suggestions with inspectable sources</td><td data-label="Call"><b>Kept</b></td><td data-label="Why">Retrieved, not generated, so each can be checked</td></tr><tr><td data-label="Item">Frozen baseline comparison, failures reported</td><td data-label="Call"><b>Kept</b></td><td data-label="Why">AI has to beat a cheap alternative</td></tr><tr><td data-label="Item">Executive pack: value model, rollout, scorecard</td><td data-label="Call"><b>Kept</b></td><td data-label="Why">Turns the result into a decision</td></tr><tr><td data-label="Item">Voice input, alerts, learning dashboard, automatic fixes</td><td data-label="Call">Cut</td><td data-label="Why">Extensions before the core was proven</td></tr></tbody></table></div><p class="outro">I used MoSCoW rather than RICE: the evidence did not support honest reach and impact numbers.</p>
+        <h2 id="s5">I kept human approval, a simple baseline and review costs</h2>
+        <div class="decs">
+          <article class="dec">
+            <h3><span>01</span>Make routing reviewable</h3>
+            <p class="decision-choice">Show similar cases and let engineers override.</p>
+            <p class="why"><b>Why:</b> Review makes uncertain decisions visible and correctable.</p>
+            <p class="decision-trade"><b>Trade-off:</b> Immediate automatic assignment in the MVP.</p>
+          </article>
+          <article class="dec">
+            <h3><span>02</span>Compare before scaling</h3>
+            <p class="decision-choice">Benchmark against simple keyword rules.</p>
+            <p class="why"><b>Why:</b> Coverage, accuracy and review effort all affect value.</p>
+            <p class="decision-trade"><b>Trade-off:</b> A deployment decision based on the demo alone.</p>
+          </article>
+          <article class="dec">
+            <h3><span>03</span>Model the work saved</h3>
+            <p class="decision-choice">Count hands-on effort and deduct review costs.</p>
+            <p class="why"><b>Why:</b> The business case needs measurable capacity benefits.</p>
+            <p class="decision-trade"><b>Trade-off:</b> Treating elapsed waiting time as labor saved.</p>
+          </article></div>
       </div>
     </section>
 
     <section class="sec" aria-labelledby="s6">
-      <p class="label">Solution</p>
+      <p class="label">Feedback loop</p>
       <div>
-        <h2 id="s6">The product: AI proposes the owner, a person approves, the employee confirms</h2>
-        <figure><div class="vframe "><video controls muted loop playsinline preload="metadata" poster="images/ticketpilot-cover.webp" style="--vr:16/9" aria-label="TicketPilot 60-second trailer: a sales employee reports an issue, the AI proposes a team, a support engineer approves, the employee confirms"><source src="videos/ticketpilot-trailer.mp4" type="video/mp4"></video></div><figcaption class="vcap">The 60-second trailer. Sample organisation; integrations and fixes are simulated.</figcaption></figure><div class="tiles"><div><b>AI classifies, a person decides</b><span>TicketPilot proposes a team from matched past resolutions. Weak evidence abstains. The engineer approves or overrides.</span></div><div><b>Fixes come with sources</b><span>Suggestions are retrieved from past resolution notes and current articles, not generated, so each can be inspected.</span></div><div><b>Suggested is not done</b><span>A suggested fix, recorded work and the employee's confirmation are three separate steps.</span></div></div><p class="outro">Early feedback said it felt like a test summary and that people could not tell who does what. I changed it to lead with one request journey, named roles and a guided tour. That was feedback on the project, not customer interviews.</p>
+        <h2 id="s6">Repeated review patterns become product improvement priorities</h2>
+        <div class="prose"><p>Review decisions should reveal missing knowledge, unclear ownership and language gaps. Recurring patterns become prioritized feature requests.</p><p>The MVP retains decisions in the browser; shared reporting and feature-request creation are next-stage capabilities.</p></div>
       </div>
     </section>
 
-    <section class="sec" id="decisions" aria-labelledby="s7">
-      <p class="label">Decisions and trade-offs</p>
+    <section class="sec" aria-labelledby="s7">
+      <p class="label">Architecture</p>
       <div>
-        <h2 id="s7">Four calls that kept the AI honest</h2>
-        <div class="decs">
-          <article class="dec">
-            <h3><span>01</span>Inspectable retrieval, not an agent stack</h3>
-            <div class="opts">
-              <div class="opt chosen"><p class="label">What I chose <span class="tick">Chosen</span></p><p>Direct retrieval and voting over similar past tickets</p></div>
-              <div class="opt"><p class="label">What I gave up</p><p>The LLM agent stack in my original plan</p></div>
-            </div>
-            <p class="why"><b>Why.</b> Behaviour I can inspect, at low setup cost. It also means I cannot claim an LLM agent was built: it was not.</p>
-          </article>
-          <article class="dec">
-            <h3><span>02</span>A person approves the route</h3>
-            <div class="opts">
-              <div class="opt chosen"><p class="label">What I chose <span class="tick">Chosen</span></p><p>TicketPilot classifies; the engineer approves or overrides</p></div>
-              <div class="opt"><p class="label">What I gave up</p><p>Fully automatic assignment</p></div>
-            </div>
-            <p class="why"><b>Why.</b> A wrong confident route costs more than a slower right one. Weak evidence abstains to a person.</p>
-          </article>
-          <article class="dec">
-            <h3><span>03</span>Keep the failed result</h3>
-            <div class="opts">
-              <div class="opt chosen"><p class="label">What I chose <span class="tick">Chosen</span></p><p>Report 10% against 90% and recommend HOLD</p></div>
-              <div class="opt"><p class="label">What I gave up</p><p>A cleaner headline</p></div>
-            </div>
-            <p class="why"><b>Why.</b> Hiding the abstentions or the baseline would make the demo look better and the decision worse.</p>
-          </article>
-          <article class="dec">
-            <h3><span>04</span>Count effort, not waiting</h3>
-            <div class="opts">
-              <div class="opt chosen"><p class="label">What I chose <span class="tick">Chosen</span></p><p>Value only hands-on minutes, and count review as a cost</p></div>
-              <div class="opt"><p class="label">What I gave up</p><p>The bigger number from elapsed delay</p></div>
-            </div>
-            <p class="why"><b>Why.</b> Hours a ticket waits are not hours someone worked. My first formula multiplied delay by volume; I replaced it.</p>
-          </article></div>
+        <h2 id="s7">LangChain grounds team recommendations in retrieved service knowledge</h2>
+        <figure class="fig"><div class="dgwrap"><svg class="dg " viewBox="0 0 800 240" role="img" aria-label="A React request goes through the Python API. Retrieved tickets and current knowledge articles become LLM context through LangChain. Code validates the selected team, citations and review requirement before presenting the result."><defs><marker id="d2a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk" d="M0,0L10,5L0,10z"/></marker><marker id="d2h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk hot" d="M0,0L10,5L0,10z"/></marker></defs><rect class="bx " x="0" y="35" width="170" height="96" rx="10"/><text class="t" x="85" y="71.5" text-anchor="middle">Request</text><text class="s" x="85" y="88.5" text-anchor="middle">React portal</text><text class="s" x="85" y="103.5" text-anchor="middle">Python API</text><rect class="bx " x="210" y="35" width="170" height="96" rx="10"/><text class="t" x="295" y="71.5" text-anchor="middle">Retrieve</text><text class="s" x="295" y="88.5" text-anchor="middle">5 past tickets</text><text class="s" x="295" y="103.5" text-anchor="middle">2 current KB articles</text><rect class="bx hot" x="420" y="35" width="170" height="96" rx="10"/><text class="t" x="505" y="71.5" text-anchor="middle">Interpret</text><text class="s" x="505" y="88.5" text-anchor="middle">LangChain</text><text class="s" x="505" y="103.5" text-anchor="middle">DeepSeek Flash</text><rect class="bx " x="630" y="35" width="170" height="96" rx="10"/><text class="t" x="715" y="71.5" text-anchor="middle">Validate</text><text class="s" x="715" y="88.5" text-anchor="middle">Team + evidence</text><text class="s" x="715" y="103.5" text-anchor="middle">Confidence + review</text><path class="ln " d="M170 83H208" marker-end="url(#d2a)"/><path class="ln " d="M380 83H418" marker-end="url(#d2a)"/><path class="ln " d="M590 83H628" marker-end="url(#d2a)"/><rect class="bx soft" x="210" y="165" width="590" height="56" rx="10"/><text class="t" x="505" y="196.5" text-anchor="middle">Ambiguity, unsupported evidence or provider failure → human review</text></svg></div><p class="swipe" aria-hidden="true">Scroll sideways for the full diagram →</p><figcaption>The tested LLM route retrieves evidence, validates a structured response and sends uncertain cases to review.</figcaption></figure><div class="tblwrap"><table class="tbl"><thead><tr><th scope="col">Layer</th><th scope="col">Choice</th><th scope="col">Why</th><th scope="col">Status</th></tr></thead><tbody><tr><td data-label="Layer">Experience</td><td data-label="Choice">React + TypeScript</td><td data-label="Why">Employee, support and manager views</td><td data-label="Status">Working MVP</td></tr><tr><td data-label="Layer">Routing and guidance</td><td data-label="Choice">Lexical RAG + LangChain + DeepSeek Flash</td><td data-label="Why">Retrieve existing cases, choose a team and draft cited resolution steps</td><td data-label="Status">25-case development test complete</td></tr><tr><td data-label="Layer">Safeguards</td><td data-label="Choice">Schema, cited evidence and review gate</td><td data-label="Why">Uncertainty and provider errors require human review</td><td data-label="Status">37 Python/workbench tests pass</td></tr><tr><td data-label="Layer">Baseline</td><td data-label="Choice">Lexical retrieval and keyword rules</td><td data-label="Why">Preserve a reproducible comparison</td><td data-label="Status">50-case lexical benchmark reproduced</td></tr></tbody></table></div><p class="outro">Provider credentials stay on the server. Enterprise connectors, shared storage and external assignment remain future work.</p>
       </div>
     </section>
 
     <section class="sec" aria-labelledby="s8">
       <p class="label">Evaluation</p>
       <div>
-        <h2 id="s8">The test failed: 10% first-time-right against a 90% keyword baseline</h2>
-        <div class="tblwrap"><table class="tbl"><thead><tr><th scope="col">Measure</th><th scope="col">Result</th><th scope="col">How to read it</th></tr></thead><tbody><tr><td data-label="Measure">Keyword baseline, first-time-right</td><td data-label="Result"><b>45 of 50 (90%)</b></td><td data-label="How to read it">Frozen rules on the same descriptions</td></tr><tr><td data-label="Measure">TicketPilot, first-time-right</td><td data-label="Result"><b>5 of 50 (10%)</b></td><td data-label="How to read it">Abstentions count as not assigned</td></tr><tr><td data-label="Measure">Recommendation accuracy</td><td data-label="Result">44 of 50 (88%)</td><td data-label="How to read it">Includes the team proposed on cases it held back</td></tr><tr><td data-label="Measure">Sent to human review</td><td data-label="Result">45 of 50 (90%)</td><td data-label="How to read it">Little coverage, and a real review cost</td></tr><tr><td data-label="Measure">Wrong confident assignments</td><td data-label="Result">0 of 5</td><td data-label="How to read it">Too few to show a low error rate: zero errors in 5 still allows about 45% at 95% confidence</td></tr></tbody></table></div><p class="outro">The 50 test cases are five variants of ten authored scenarios, so they are synthetic and correlated. This is a failed comparison against a baseline, not a measure of real-world accuracy. The gate also needs review: beating a 90% baseline by 10 points requires 100%. That review has to happen before the next experiment, not after seeing its results.</p>
+        <h2 id="s8">RAG improved routing coverage, while an adversarial case exposed a gap</h2>
+        <p class="intro">A new paired test used 20 known-owner requests and five ambiguous, unknown or adversarial requests, including four Hinglish examples. Both engines used the same original case memory. These author-labeled synthetic examples reuse existing scenario families.</p><div class="tblwrap"><table class="tbl"><thead><tr><th scope="col">Measure</th><th scope="col">Lexical MVP</th><th scope="col">RAG + LLM</th></tr></thead><tbody><tr><td data-label="Measure">Correct owner recommendations, known requests</td><td data-label="Lexical MVP">19/20 (95%)</td><td data-label="RAG + LLM">20/20 (100%)</td></tr><tr><td data-label="Measure">Correct automatic routing, all 25 requests</td><td data-label="Lexical MVP">9/25 (36%)</td><td data-label="RAG + LLM">19/25 (76%)</td></tr><tr><td data-label="Measure">Sent to human review</td><td data-label="Lexical MVP">16/25 (64%)</td><td data-label="RAG + LLM">5/25 (20%)</td></tr><tr><td data-label="Measure">Wrong automatic assignments</td><td data-label="Lexical MVP">0/9</td><td data-label="RAG + LLM">1/20 (5%)</td></tr><tr><td data-label="Measure">Ambiguous requests withheld</td><td data-label="Lexical MVP">5/5</td><td data-label="RAG + LLM">4/5</td></tr><tr><td data-label="Measure">Generated resolution drafts</td><td data-label="Lexical MVP">0</td><td data-label="RAG + LLM">20; human verification required</td></tr></tbody></table></div><p class="outro">The unsupported adversarial request received a Hardware route and an inappropriate repair draft. Cited evidence did not guarantee applicability. No incident was executed or resolved. The earlier 50-case benchmark remains separate. <a href="evidence/ticketpilot-rag25.md">Experiment notes</a> · <a href="evidence/ticketpilot-rag25.json">Case-level results</a></p>
       </div>
     </section>
 
     <section class="sec" aria-labelledby="s9">
       <p class="label">Value case</p>
       <div>
-        <h2 id="s9">Even if it worked, review effort decides whether the economics hold</h2>
+        <h2 id="s9">Lower review effort improves the conditional business case</h2>
         <p class="intro">Base case, with every input assumed: 20,000 tickets a year, 25% fewer handoffs, 10 hands-on minutes per handoff, $45 an hour, 20% of tickets reviewed for 5 minutes, $12,000 to build and $6,600 a year to run. That gives about 710 net hours and $25,332 a year, with payback in 5.7 months.</p><div class="tblwrap"><table class="tbl"><thead><tr><th scope="col">Handoff reduction</th><th scope="col">Review share</th><th scope="col">Annual net value</th><th scope="col">Payback</th></tr></thead><tbody><tr><td data-label="Handoff reduction">10%</td><td data-label="Review share">20%</td><td data-label="Annual net value">-$2,827</td><td data-label="Payback">None</td></tr><tr><td data-label="Handoff reduction"><b>25% (base)</b></td><td data-label="Review share"><b>20%</b></td><td data-label="Annual net value"><b>$25,332</b></td><td data-label="Payback"><b>5.7 months</b></td></tr><tr><td data-label="Handoff reduction">50%</td><td data-label="Review share">20%</td><td data-label="Annual net value">$72,264</td><td data-label="Payback">2.0 months</td></tr><tr><td data-label="Handoff reduction">25%</td><td data-label="Review share">40%</td><td data-label="Annual net value">$10,332</td><td data-label="Payback">13.9 months</td></tr><tr><td data-label="Handoff reduction">25%</td><td data-label="Review share">90%</td><td data-label="Annual net value">-$27,168</td><td data-label="Payback">None</td></tr></tbody></table></div><p class="outro">The 90% row uses the review share the offline test actually showed. Even if the 25% reduction held, net value would be negative. None of this is realised saving, and the reduction has not been demonstrated.</p>
       </div>
     </section>
@@ -161,17 +146,17 @@
     <section class="sec" aria-labelledby="s10">
       <p class="label">Recommendation</p>
       <div>
-        <h2 id="s10">So: hold the router and fund 90 days of gated discovery</h2>
-        <p class="intro">Authorise bounded discovery within an illustrative $12,000 build budget and hold deployment of the current router. Each stage is released only when its gate passes. These are my proposals, not approvals from anyone.</p><div class="tblwrap"><table class="tbl"><thead><tr><th scope="col">Stage</th><th scope="col">Work</th><th scope="col">Exit gate</th></tr></thead><tbody><tr><td data-label="Stage"><b>Days 1 to 30</b>: discovery and offline quality</td><td data-label="Work">Validate the transfers and labels, interview users, measure effort, test on approved real ticket text</td><td data-label="Exit gate">No live assignment. Pass the quality, review and safety gates, or rework or stop</td></tr><tr><td data-label="Stage"><b>Days 31 to 60</b>: one team, controlled</td><td data-label="Work">Shadow mode first, then human-approved routing on one registered cohort</td><td data-label="Exit gate">Fewer handoffs, no worse p90 time, 60% of resolvers active weekly for two weeks</td></tr><tr><td data-label="Stage"><b>Days 61 to 90</b>: value validation</td><td data-label="Work">Mature the outcome cohorts; Finance validates effort and cost</td><td data-label="Exit gate">Expand only with passing quality, adoption and safety, and payback within 12 months</td></tr></tbody></table></div><p class="outro"><b>What I would do differently:</b> compare against the cheap alternative first, get real ticket text earlier, and set the gate and the baseline together. I wrote a gate that demands 100% before I knew the baseline.</p>
+        <h2 id="s10">Next, validate real requests and workflow value before deployment</h2>
+        <p class="intro">Keep human approval, strengthen evidence-applicability checks, and validate real requests before measuring service outcomes.</p><div class="tblwrap"><table class="tbl"><thead><tr><th scope="col">Stage</th><th scope="col">Work</th><th scope="col">Exit gate</th></tr></thead><tbody><tr><td data-label="Stage">RAG development test: complete</td><td data-label="Work">25 paired cases; 37 tests pass</td><td data-label="Exit gate">Coverage improved; one unsupported route needs investigation</td></tr><tr><td data-label="Stage">Representative validation</td><td data-label="Work">Approved real requests and independently agreed gates</td><td data-label="Exit gate">Check language coverage, evidence quality and review effort</td></tr><tr><td data-label="Stage">Workflow pilot</td><td data-label="Work">One team, human-approved routing</td><td data-label="Exit gate">Measure submission effort, routing time and net capacity value</td></tr></tbody></table></div><p class="outro">Current release decision: keep the lexical router out of live assignment while the next version is validated.</p>
       </div>
     </section>
 
     <nav class="pn" aria-label="More cases">
-      <a href="case-atelier.html"><span class="label">← Case 01</span><b>Atélier</b></a>
-      <a href="case-ensemble.html"><span class="label">Case 03 →</span><b>Ensemble</b></a>
+      <a href="index.html#work"><span class="label">← All work</span><b>Back to the index</b></a>
+      <a href="case-medtech-genai.html"><span class="label">Case 02 →</span><b>Medical device GenAI</b></a>
     </nav>
   </main>
-  <footer class="legal"><span>© R. Veera Manoharan</span><span>Case 02</span></footer>
+  <footer class="legal"><span>© R. Veera Manoharan</span><span>Case 01</span></footer>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>

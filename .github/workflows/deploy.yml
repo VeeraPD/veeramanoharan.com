@@ -27,6 +27,7 @@ jobs:
           cp prototype/index.html prototype/case-*.html prototype/case.css prototype/case.js _site/
           cp -r prototype/fun _site/
           cp -r prototype/images _site/
+          cp -r prototype/evidence _site/
           if [ -n "$(ls -A prototype/videos 2>/dev/null)" ]; then cp -r prototype/videos _site/; fi
           echo "veeramanoharan.com" > _site/CNAME
           touch _site/.nojekyll

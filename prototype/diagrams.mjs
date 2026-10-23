@@ -29,6 +29,28 @@ function arr(d, cls = '', end = true) {
 const row = (xs, y, w, h, items) => items.map((it, i) => box(xs[i], y, w, h, it[0], it[1] || [], it[2] || '')).join('');
 const chain = (xs, w, y, cls = '') => xs.slice(0, -1).map((x, i) => arr(`M${x + w} ${y}H${xs[i + 1] - 2}`, cls)).join('');
 
+export const ticketpilotTriage = () => svg(800, 300,
+  'An employee describes an issue. TicketPilot retrieves knowledge and recommends a team. Clear cases are eligible for routing; uncertain cases require review. The current UI requires engineer approval. Shared review reports and development requests are planned.',
+  () => row([0, 210, 420, 630], 30, 170, 90, [
+    ['Describe', ['Natural-language', 'employee request']],
+    ['Interpret', ['Retrieve evidence', 'and propose a team'], 'hot'],
+    ['Review or route', ['Uncertainty → review', 'UI approval remains']],
+    ['Support acts', ['Assigned team', 'resolves the incident']],
+  ]) + chain([0, 210, 420, 630], 170, 75)
+    + arr('M505 120V181', 'hot dash')
+    + box(350, 185, 310, 90, 'Learn from exceptions', ['Planned: shared reports → feature requests', 'Track whether recurring confusion falls'], 'soft')
+    + arr('M350 230H295V122', 'dash'));
+
+export const ticketpilotLLM = () => svg(800, 240,
+  'A React request goes through the Python API. Retrieved tickets and current knowledge articles become LLM context through LangChain. Code validates the selected team, citations and review requirement before presenting the result.',
+  () => row([0, 210, 420, 630], 35, 170, 96, [
+    ['Request', ['React portal', 'Python API']],
+    ['Retrieve', ['5 past tickets', '2 current KB articles']],
+    ['Interpret', ['LangChain', 'DeepSeek Flash'], 'hot'],
+    ['Validate', ['Team + evidence', 'Confidence + review']],
+  ]) + chain([0, 210, 420, 630], 170, 83)
+    + box(210, 165, 590, 56, 'Ambiguity, unsupported evidence or provider failure → human review', [], 'soft'));
+
 /* ======================= ATÉLIER ======================= */
 export const atelierJourney = () => svg(800, 264,
   'Journey of the primary persona, an MBA student before a quiz. Today: remembers the idea, tries a keyword, gets no match, scrolls notebooks. With Atélier: remembers the idea, asks in her own words, gets the matched page and a one-tap gist from her own notes.',
@@ -162,4 +184,44 @@ export const ensembleFlow = () => svg(800, 290,
       + ys.map((y) => arr(`M508 ${y + 32}H540V138H588`)).join('')
       + box(590, 100, 210, 76, 'Lead reviews', ['combines, runs checks,', 'fixes or re-delegates'], 'hot')
       + txt(400, 284, 'in the benchmark: data model, CLI, tests', 'al', 'middle');
+  });
+
+/* ======================= TICKETPILOT STACK ======================= */
+export const ticketpilotStack = () => svg(800, 290,
+  'TicketPilot architecture. A React 19 and TanStack Start front end in TypeScript keeps each visitor\'s workflow in the browser. A Node server proxies only the route, health and process endpoints to a private Python service. The Python service retrieves five similar past tickets by cosine similarity, votes on the resolving team and abstains below a 0.75 confidence threshold. It reads a synthetic ticket history and knowledge base, and aggregates from the real BPI 2013 incident log. A separate Streamlit workbench holds the evaluation, process analysis and value model.',
+  () => {
+    const xs = [0, 208, 416, 624], w = 176;
+    return [['BROWSER', 0], ['SERVER', 1], ['REASONING', 2], ['DATA', 3]].map(([t, i]) => lab(xs[i], 22, t)).join('')
+      + box(xs[0], 34, w, 124, 'React 19 + TanStack Start', ['TypeScript, Tailwind', 'workflow kept in the', 'browser, per visitor'])
+      + box(xs[1], 34, w, 124, 'Node server', ['same-origin /api proxy', 'route, health, process', 'only: no open relay'])
+      + box(xs[2], 34, w, 124, 'Python service', ['top 5 similar tickets,', 'weighted team vote,', 'abstains below 0.75'], 'hot')
+      + box(xs[3], 34, w, 124, 'Data', ['500 synthetic tickets', '30 knowledge articles', '65,533 real BPI events'])
+      + chain(xs, w, 96)
+      + box(xs[2], 196, 360, 62, 'Streamlit workbench (local)', ['evaluation, process X-ray, value model'], 'ghost')
+      + arr('M592 196V160', 'dash') + arr('M704 196V160', 'dash')
+      + txt(0, 222, 'Checked: TypeScript build,', 'al') + txt(0, 238, '9 React tests, 25 Python tests,', 'al') + txt(0, 254, 'live HTTP through the proxy', 'al');
+  });
+
+/* ======================= RESUME FIT COPILOT: the usability pilot ======================= */
+export const usabilityStudy = () => svg(800, 262,
+  'The usability pilot. Three personas from desk research are played by six AI agents, two each. The agents drive the real app in a real browser, seeing only the screen. Each writes a report: a five-second test, a journey log, task outcomes and pain points. The builder re-runs every defect by hand. The result feeds product decisions.',
+  () => {
+    const xs = [0, 165, 330, 495, 660], w = 140;
+    return row(xs, 24, w, 92, [['3 personas', ['Ravi, Meghna,', 'Farhan, from', 'desk research']], ['6 AI agents', ['2 per persona,', 'blind to the code,', 'screen only'], 'hot'], ['The real app', ['real browser,', 'laptops and', 'phones']], ['A report each', ['5-second test,', 'journey log,', 'pain points']], ['I re-run it', ['every defect,', 'by hand']]])
+      + chain(xs, w, 70)
+      + arr('M730 116V168H500', 'hot')
+      + box(330, 170, 310, 66, 'Product decisions', ['checker first, an LLM judges, rules can veto'], 'hot')
+      + txt(0, 160, 'Cannot show: demand,', 'al') + txt(0, 176, 'or what anyone would pay.', 'al') + txt(0, 192, 'Same model family as', 'al') + txt(0, 208, 'the builder: shared blind spots.', 'al');
+  });
+
+/* ======================= MEDTECH GENAI ASSISTANT ======================= */
+export const medtechFlow = () => svg(800, 250,
+  'The assistant workflow. Usability tasks are taken five at a time. A local Llama model, guided by the IEC 62366 usability standard, drafts an analysis for each batch. An engineer reviews the draft, corrects it and manually approves it. Only approved content is used on the project. Nothing skips the engineer.',
+  () => {
+    const xs = [0, 165, 330, 495, 660], w = 140;
+    return [['INPUT', 0], ['AI', 1], ['AI', 2], ['ENGINEER', 3], ['OUTPUT', 4]].map(([t, i]) => lab(xs[i] + 70, 20, t, 'middle', i === 3 ? 'lb hot' : 'lb')).join('')
+      + row(xs, 30, w, 86, [['User tasks', ['five at a time,', 'not the whole', 'report']], ['Local Llama', ['open-source model', 'running on site']], ['Draft analysis', ['guided by the', 'IEC 62366 standard']], ['Reviews, corrects, approves', ['manual sign-off'], 'hot'], ['Used on the project', ['approved content', 'only']]])
+      + chain(xs, w, 73)
+      + arr('M565 116V176H400V118', 'dash') + txt(400, 196, 'engineer corrections: errors are caught here, not downstream', 'al hot', 'middle')
+      + txt(400, 232, 'Limits seen in the pilot: slow local processing, missing device context, plausible but wrong text', 'al', 'middle');
   });

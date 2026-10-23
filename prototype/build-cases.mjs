@@ -8,6 +8,8 @@ import { writeFileSync, existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as D from './diagrams.mjs';
+import { editCases } from './case-copy.mjs';
+import { structureCases } from './case-story.mjs';
 
 const OUT = dirname(fileURLToPath(import.meta.url));
 
@@ -15,11 +17,262 @@ const OUT = dirname(fileURLToPath(import.meta.url));
    CONTENT
    ---------------------------------------------------------------------------- */
 const CASES = [
-  /* ===================== 01 ATÉLIER ===================== */
+  /* ===================== 01 TICKETPILOT ===================== */
   {
-    file: 'case-atelier.html', short: 'Atélier', num: '01',
+    file: 'case-ticketpilot.html', short: 'TicketPilot', num: '01',
+    title: 'TicketPilot: simplifying IT support with AI-powered triage',
+    kicker: 'Case 01 · B2B · AI · Prototype · 2026',
+    stand: 'Employees should be able to describe an IT problem without knowing the right service category. TicketPilot is an AI-powered ITSM product designed to automate triage with LLMs, RAG and LangChain, keep ambiguous requests under human review, and turn recurring confusion into product improvements. The current MVP validates a narrower retrieval-based workflow.',
+    desc: 'An ITSM triage prototype: natural-language requests, human routing safeguards and a proposed improvement loop, with separate process and routing evaluations.',
+    lead: { img: 'images/ticketpilot-cover.webp', w: 1920, h: 1080, ratio: '16/9', alt: 'TicketPilot title card: Less ticket bouncing, a clearer path to resolution. Classify, explain, resolve.' },
+    tldr: [
+      ['Problem', 'Employees face unfamiliar service categories; support teams spend effort interpreting and reassigning requests. Recurring confusion needs a path back to development.'],
+      ['Product', 'Describe an issue naturally, get a proposed team and supporting evidence, then review the route. The fuller vision adds automatic routing for clear cases and reports that turn repeated exceptions into feature requests.'],
+      ['Value', 'Simpler employee experience, less manual triage and continuous improvement. These are intended benefits; operational uplift has not yet been measured.'],
+      ['Evidence', '7,554 incidents establish process context. A separate 50-case synthetic routing test scored 10% first-time-right versus 90% for keyword rules. Hold this router; validate the wider workflow.'],
+    ],
+    snapshot: [
+      ['Role', 'Owned end to end: discovery, architecture, evaluation, executive business case and rollout plan. Built with AI development tools'],
+      ['Type', 'ITSM product MVP (portfolio project)'],
+      ['Stack', 'React 19 and TanStack Start (TypeScript), Python reasoning service, Streamlit workbench'],
+      ['Data', 'Public BPI 2013 incident log, plus synthetic ticket text'],
+      ['Status', 'Recommendation: HOLD (Oct 2026)'],
+      ['Skills', 'Problem framing, AI evaluation, metrics, business case'],
+    ],
+    sections: [
+      { label: 'Problem', title: 'Employees describe problems; support teams need clear ownership', type: 'bullets',
+        intro: 'The product starts with three problems: employees may not know the right category, manual triage adds support effort, and recurring misunderstandings need a structured route into improvements. Unclear descriptions and regional language differences are cases to validate. Public BPI Challenge 2013 data provides process context:',
+        items: [
+          '<b>7,554 incidents and 9,454 handoffs</b> between support teams: 1.25 handoffs per incident on average.',
+          '<b>50.6%</b> of incidents touch more than one team.',
+          '<b>15.6%</b> bounce directly from team A to B and back to A.',
+          '<b>Hypothesis:</b> some bounces happen because the ticket\'s wording points to a different team than the one that ends up resolving it, and past resolutions could predict the right owner.',
+        ],
+        outro: 'Many transfers may be legitimate specialist escalations. Finding out how many is the first job of any real pilot.' },
+      { label: 'Workflow', title: 'Submit, interpret, route or escalate, capture feedback, improve', type: 'bullets',
+        intro: 'The expected product follows five steps, using LLMs, RAG and LangChain to interpret requests and support routing. The current MVP demonstrates submission, lexical retrieval-based recommendations and human approval. Automatic routing, the LLM stack and shared improvement reporting are the next product capabilities to build and validate.',
+        items: [
+          '<b>1. Submit:</b> the employee describes a problem naturally without selecting a support team.',
+          '<b>2. Interpret:</b> retrieve relevant past tickets and identify a likely owner. The planned LLM, RAG and LangChain approach would combine language interpretation with service knowledge; the built engine uses lexical similarity and team voting.',
+          '<b>3. Route or escalate:</b> the target is automatic routing for clear requests and human review for ambiguity. In the current prototype, an engineer approves or overrides routing, and weak evidence triggers abstention.',
+          '<b>4. Capture feedback:</b> retain reviewer decisions and examine ambiguous requests. The demo retains workflow decisions in the browser; shared reporting is a proposed extension.',
+          '<b>5. Improve:</b> group recurring misunderstandings into reports and development feature requests. This proposed loop needs durable storage, ownership and validation.',
+        ],
+        outro: 'TicketPilot supports classification and assignment decisions. Support teams remain responsible for incident resolution; suggested fixes are assistance and enterprise actions are simulated.' },
+      { label: 'Business value', title: 'Value comes from employee experience, triage efficiency and continuous improvement', type: 'table',
+        head: ['Value dimension', 'Intended benefit', 'How to validate'],
+        rows: [
+          ['Employee experience', 'Describe an issue without understanding internal categories', 'Submission time, task completion and employee satisfaction'],
+          ['Operational efficiency', 'Reduce manual classification and reassignment while preserving review for ambiguity', 'Hands-on triage time, initial routing time, correct-route coverage and review effort'],
+          ['Continuous improvement', 'Convert repeated review patterns into prioritized improvements', 'Recurring exceptions, reviewed feature requests and recurrence after a change'],
+        ],
+        outro: 'These benefits are hypotheses. The historical process analysis and offline routing test do not establish realized savings or operational improvement.' },
+      { label: 'Feedback loop', title: 'Repeated exceptions should become development priorities', type: 'prose',
+        paras: [
+          'Human review is a deliberate safeguard and a source of product insight. The proposed loop records the request, suggested owner, reviewer decision and reason for correction, then groups recurring ambiguity for service-owner review.',
+          'Reports would distinguish missing knowledge, unclear team boundaries and language coverage gaps. Repeated patterns would create feature requests with examples and an owner; later evaluations would check whether recurrence fell.',
+          'The integrated demo retains decisions in the browser. An older local workbench has separate correction machinery, but the visitor-facing API does not write shared learning memory. Cross-user reports and automatic feature-request creation remain proposed.',
+        ] },
+      { label: 'Solution', title: 'The MVP makes a request understandable and its route reviewable', type: 'video',
+        frame: 'plain', src: 'videos/ticketpilot-trailer.mp4', poster: 'images/ticketpilot-cover.webp', ratio: '16/9',
+        alt: 'TicketPilot 60-second trailer: a sales employee reports an issue, the AI proposes a team, a support engineer approves, the employee confirms',
+        cap: 'The 60-second trailer. Sample organisation; integrations and fixes are simulated.',
+        still: { img: 'images/ticketpilot-routing.webp', alt: 'Daniel, the support engineer, approving the route TicketPilot proposed: Recommended team Applications, with similar resolved cases', cap: 'Daniel approves the proposed route. TicketPilot recommends; a person decides.' },
+        tiles: [
+          ['AI classifies, a person decides', 'TicketPilot proposes a team from matched past resolutions. Weak evidence abstains. The engineer approves or overrides.'],
+          ['Fixes come with sources', 'Suggestions are retrieved from past resolution notes and current articles, not generated, so each can be inspected.'],
+          ['Suggested is not done', 'A suggested fix, recorded work and the employee\'s confirmation are three separate steps.'],
+        ],
+        outro: 'Early feedback said it felt like a test summary and that people could not tell who does what. I changed it to lead with one request journey, named roles and a guided tour. That was feedback on the project, not customer interviews.' },
+      { label: 'Users', title: 'Three people share one request: the employee, the engineer and the manager', type: 'table',
+        fig: { svg: D.ticketpilotFlow, cap: 'One request from report to confirmed outcome.', read: 'Read the top row left to right: an employee reports, the AI proposes a team, an engineer decides, the work is done, the employee confirms. Only the second box is AI; a person approves the route and the employee confirms the result. The bottom box is the manager, who watches the whole flow.' },
+        head: ['Persona', 'Job to be done', 'Role in the product'],
+        rows: [
+          ['<b>Maya Rao</b>, sales employee', 'Get dashboard access back before a meeting', 'Describes the issue once, then confirms the outcome'],
+          ['<b>Daniel Chen</b>, support engineer', 'Resolve the right work without repeating an investigation', 'Inspects the evidence, approves or overrides the route'],
+          ['<b>Elena Park</b>, IT service manager', 'Improve service quality and plan support capacity', 'Sees handoffs, outcomes and review load'],
+        ],
+        outro: 'The personas and the company, Northstar, are fictional. They are not research participants or customers.' },
+      { label: 'Key insight', type: 'quote',
+        text: 'Make the request simple, keep people in control of uncertain routes, and learn from exceptions.',
+        note: 'Classification is one component of the service experience. Its quality matters alongside submission effort, review workload and the ability to identify recurring problems. Each needs its own validation.' },
+      { label: 'Hypotheses', title: 'Four things had to be true, and none is proven yet', type: 'table',
+        head: ['Hypothesis', 'Evidence today', 'Next test'],
+        rows: [
+          ['A meaningful share of transfers is avoidable', 'Historical handoff patterns only', 'Service owners annotate a sample of real handoffs'],
+          ['Ownership is predictable from ticket text', 'Failed on the synthetic test', 'Frozen holdout on real ticket text'],
+          ['Retrieved fixes cut repeat investigation', 'Prototype shows sources; usefulness not rated', 'Blind rating of 50 or more suggestions'],
+          ['A sponsor would fund a bounded pilot', 'A conditional cost model only', 'Sponsor and Finance workshop'],
+        ] },
+      { label: 'Scope', title: 'I cut eight must-haves to five, keeping only what tests the core idea', type: 'table',
+        head: ['Item', 'Call', 'Why'],
+        rows: [
+          ['Process analysis on the real incident log', '<b>Kept</b>', 'Grounds the problem in evidence'],
+          ['Classification, with abstention and human approval', '<b>Kept</b>', 'The core of the product'],
+          ['Fix suggestions with inspectable sources', '<b>Kept</b>', 'Retrieved, not generated, so each can be checked'],
+          ['Frozen baseline comparison, failures reported', '<b>Kept</b>', 'AI has to beat a cheap alternative'],
+          ['Executive pack: value model, rollout, scorecard', '<b>Kept</b>', 'Turns the result into a decision'],
+          ['Voice input, alerts, learning dashboard, automatic fixes', 'Cut', 'Extensions before the core was proven'],
+        ],
+        outro: 'I used MoSCoW rather than RICE: the evidence did not support honest reach and impact numbers.' },
+      { label: 'Architecture', title: 'The target product uses LLMs, RAG and LangChain; the MVP uses lexical retrieval', type: 'table',
+        fig: { svg: D.ticketpilotStack, cap: 'The TicketPilot stack, from browser to data.', read: 'Read left to right: a request starts in the browser, passes through a Node server that only forwards three endpoints, and reaches the Python service, which finds the five most similar past tickets and votes on the team. The dashed lines under it show the local Streamlit workbench reading the same data for evaluation and the value model.' },
+        head: ['Layer', 'Choice', 'Why', 'Status'],
+        rows: [
+          ['Front end', 'React 19, TanStack Start, TypeScript, Tailwind', 'One coherent role-based experience for the employee, engineer and manager', 'Built; 9 tests and a production build pass'],
+          ['API proxy', 'Node server, same origin, three endpoints', 'No open relay; the Python service stays private', 'Built; live HTTP routing checked'],
+          ['Reasoning', 'Python: token-count cosine similarity, top 5, weighted team vote, 0.75 threshold, abstention', 'Behaviour I can inspect, no paid API, a baseline any LLM must beat', 'Built; 25 Python tests pass'],
+          ['Evidence', 'Standard-library XES parsing of the real BPI 2013 log; separate synthetic ticket text', 'Real process facts without inventing a join to fake text', 'Built; datasets kept apart'],
+          ['Not integrated', 'Claude, LangGraph, LangChain, Chroma, pydantic, LangSmith', 'Named in my original plan, never built. I do not claim them', 'Not built'],
+          ['Hosting', 'Container layout and checklist prepared', 'A visitor needs the Python service too, so a front-end-only publish is not enough', 'Not deployed; Docker run unverified'],
+        ],
+        outro: 'Production would still need authenticated identities, a system-of-record connector, durable storage, a validated team taxonomy and a measured confidence score. Those are adoption constraints as much as engineering work.' },
+      { label: 'Goals and metrics', title: 'North Star: tickets resolved by the first owner, confirmed and not reopened', type: 'tree',
+        ns: ['Durable first-owner resolution rate', 'Proposed, not yet instrumented. Share of cases the first accountable team resolved on time, the employee confirmed, and nobody reopened within 7 days.'],
+        l1: [
+          ['Handoffs per case', 'Historical baseline 1.25; the effect of the product is unmeasured'],
+          ['Confirmation coverage', 'Share of cases where the employee\'s outcome is known'],
+          ['Reopen rate', 'Guards against closing a ticket too early'],
+        ],
+        guard: '<b>Guardrails:</b> confident routing error and the human-review rate. <b>Rejected as North Star:</b> recommendations accepted (rewards trusting the AI) and tickets closed (rewards closing early).' },
+      { label: 'Decisions and trade-offs', title: 'Four calls that kept the AI honest', type: 'decisions', id: 'decisions',
+        items: [
+          { q: 'Inspectable retrieval, not an agent stack', chose: 'Direct retrieval and voting over similar past tickets', gave: 'The LLM agent stack in my original plan', why: 'Behaviour I can inspect, at low setup cost. It also means I cannot claim an LLM agent was built: it was not.' },
+          { q: 'A person approves the route', chose: 'TicketPilot classifies; the engineer approves or overrides', gave: 'Fully automatic assignment', why: 'A wrong confident route costs more than a slower right one. Weak evidence abstains to a person.' },
+          { q: 'Keep the failed result', chose: 'Report 10% against 90% and recommend HOLD', gave: 'A cleaner headline', why: 'Hiding the abstentions or the baseline would make the demo look better and the decision worse.' },
+          { q: 'Count effort, not waiting', chose: 'Value only hands-on minutes, and count review as a cost', gave: 'The bigger number from elapsed delay', why: 'Hours a ticket waits are not hours someone worked. My first formula multiplied delay by volume; I replaced it.' },
+        ] },
+      { label: 'Evaluation', title: 'The MVP router missed its gate; the target product remains untested', type: 'table',
+        intro: 'This evaluated the current MVP routing component against keyword rules on 50 synthetic descriptions. It did not evaluate the expected LLM/LangChain product, an operational pilot or the 7,554 historical incidents. Employee experience, throughput and the feedback loop were not evaluated. The result supports holding deployment of this router; it does not establish the value of the target product.',
+        head: ['Measure', 'Result', 'How to read it'],
+        rows: [
+          ['Keyword baseline, first-time-right', '<b>45 of 50 (90%)</b>', 'Frozen rules on the same descriptions'],
+          ['TicketPilot, first-time-right', '<b>5 of 50 (10%)</b>', 'Abstentions count as not assigned'],
+          ['Recommendation accuracy', '44 of 50 (88%)', 'Includes the team proposed on cases it held back'],
+          ['Sent to human review', '45 of 50 (90%)', 'Little coverage, and a real review cost'],
+          ['Wrong confident assignments', '0 of 5', 'Too few to show a low error rate: zero errors in 5 still allows about 45% at 95% confidence'],
+        ],
+        outro: 'The 50 test cases are five variants of ten authored scenarios, so they are synthetic and correlated. This is a failed comparison against a baseline, not a measure of real-world accuracy. The gate also needs review: beating a 90% baseline by 10 points requires 100%. That review has to happen before the next experiment, not after seeing its results.' },
+      { label: 'Value case', title: 'Even if it worked, review effort decides whether the economics hold', type: 'table',
+        intro: 'Base case, with every input assumed: 20,000 tickets a year, 25% fewer handoffs, 10 hands-on minutes per handoff, $45 an hour, 20% of tickets reviewed for 5 minutes, $12,000 to build and $6,600 a year to run. That gives about 710 net hours and $25,332 a year, with payback in 5.7 months.',
+        head: ['Handoff reduction', 'Review share', 'Annual net value', 'Payback'],
+        rows: [
+          ['10%', '20%', '-$2,827', 'None'],
+          ['<b>25% (base)</b>', '<b>20%</b>', '<b>$25,332</b>', '<b>5.7 months</b>'],
+          ['50%', '20%', '$72,264', '2.0 months'],
+          ['25%', '40%', '$10,332', '13.9 months'],
+          ['25%', '90%', '-$27,168', 'None'],
+        ],
+        outro: 'The 90% row uses the review share the offline test actually showed. Even if the 25% reduction held, net value would be negative. None of this is realised saving, and the reduction has not been demonstrated.' },
+      { label: 'Recommendation', title: 'So: hold the router and fund 90 days of gated discovery', type: 'table',
+        intro: 'Authorise bounded discovery within an illustrative $12,000 build budget and hold deployment of the current router. Each stage is released only when its gate passes. These are my proposals, not approvals from anyone.',
+        head: ['Stage', 'Work', 'Exit gate'],
+        rows: [
+          ['<b>Days 1 to 30</b>: discovery and offline quality', 'Validate the transfers and labels, interview users, measure effort, test on approved real ticket text', 'No live assignment. Pass the quality, review and safety gates, or rework or stop'],
+          ['<b>Days 31 to 60</b>: one team, controlled', 'Shadow mode first, then human-approved routing on one registered cohort', 'Fewer handoffs, no worse p90 time, 60% of resolvers active weekly for two weeks'],
+          ['<b>Days 61 to 90</b>: value validation', 'Mature the outcome cohorts; Finance validates effort and cost', 'Expand only with passing quality, adoption and safety, and payback within 12 months'],
+        ],
+        outro: '<b>What I would do differently:</b> compare against the cheap alternative first, get real ticket text earlier, and set the gate and the baseline together. I wrote a gate that demands 100% before I knew the baseline.' },
+    ],
+  },
+
+  /* ===================== 02 MEDTECH GENAI ASSISTANT ===================== */
+  {
+    file: 'case-medtech-genai.html', short: 'Medical device GenAI', num: '02',
+    title: 'Making GenAI useful in medical device engineering',
+    kicker: 'Case 02 · AI product · MedTech · Pilot · Human-in-the-loop',
+    stand: 'Medical device teams spend hours documenting how users interact with a device. Part of that work is repetitive, but engineers must stay accountable for every result.',
+    desc: 'How I built and piloted a local LLM assistant that cut usability analysis and report drafting time by about 50%, and how the pilot\'s limits shaped a more reliable successor workflow.',
+    lead: { art: 'a07', mesh: 'g-mint', alt: 'Abstract document with analysed and approved lines' },
+    tldr: [
+      ['Problem', 'Usability engineering for a complex device can mean analysing hundreds of user tasks and documenting them to standards such as IEC 62366. Much of the writing is repetitive and slow.'],
+      ['Product', 'An internal assistant on a local Llama model that drafts the analysis five tasks at a time. Engineers review, correct and manually approve every output.'],
+      ['Success metric', 'Time to produce the usability analysis and report draft, with mandatory engineer sign-off as the guardrail.'],
+      ['Result', 'About 50% less analysis and drafting time in a pilot with 4 to 5 engineers. Limits found: slow local processing, missing context and plausible but wrong text.'],
+    ],
+    snapshot: [
+      ['Role', 'Product ideation, development and pilot ownership'],
+      ['Domain', 'Medical technology, generative AI, workflow automation'],
+      ['Pilot', '4 to 5 engineers, then an internal project'],
+      ['Technology', 'Llama, an open-source LLM, running locally'],
+      ['Skills', 'Workflow design, AI product judgment, stakeholder buy-in, piloting'],
+    ],
+    sections: [
+      { label: 'Problem', title: 'Usability documentation is slow, repetitive in parts, and still needs engineering judgement', type: 'bullets',
+        intro: 'Medical device development involves extensive usability engineering. Teams assess how users interact with a device, identify use-related risks and document their findings to standards such as IEC 62366.',
+        items: [
+          'For a complex device, that can mean analysing hundreds of individual user tasks.',
+          'Much of it needs careful engineering judgement, but parts of the documentation are repetitive and time-consuming.',
+          'The opportunity: use generative AI to cut that effort without removing engineers from the critical decisions.',
+        ],
+        outro: 'The question I set out to answer: could an LLM speed up usability analysis while keeping engineers accountable for the results?' },
+      { label: 'Users', title: 'The users were usability engineers, who had to stay accountable for every output', type: 'bullets',
+        items: [
+          '<b>Who:</b> the engineers who prepare and sign off usability analyses and reports.',
+          '<b>Their job:</b> accurate, standards-compliant documentation. Their time was best spent reviewing and validating, not drafting first versions.',
+          '<b>How I earned trust:</b> I showed the concept through working examples and a prototype, then piloted it with a small group of engineers before it was used on an internal project.',
+        ] },
+      { label: 'Key insight', type: 'quote',
+        text: 'The goal was not to replace engineering judgement. It was to reduce the time spent preparing first drafts, so engineers could spend it reviewing them.',
+        note: 'That framing set every later decision: small batches, mandatory review and manual approval.' },
+      { label: 'Goals and metrics', title: 'Success meant less drafting time, with engineer sign-off as the line that could not move', type: 'bullets',
+        items: [
+          '<b>Goal:</b> reduce the time engineers spend preparing initial analyses and report drafts.',
+          '<b>Metric:</b> time to produce the usability analysis and report draft.',
+          '<b>Guardrail:</b> no output is used until an engineer has reviewed, corrected and manually approved it.',
+        ],
+        outro: 'The claim is deliberately narrow: faster drafting and analysis for specific activities, not a shorter medical device development or reporting timeline.' },
+      { label: 'Solution', title: 'The solution: a local Llama assistant that drafts five tasks at a time, and engineers approve every output', type: 'prose',
+        fig: { svg: D.medtechFlow, cap: 'The assistant workflow, from tasks to approved content.', read: 'Read left to right. Five user tasks go to a local Llama model, which drafts an analysis guided by the IEC 62366 standard. The engineer box, highlighted, is the only way to the final box: nothing is used until it is reviewed, corrected and manually approved. The dashed line shows corrections going back to the draft. The note at the bottom lists the limits the pilot found.' },
+        paras: [
+          'I proposed an internal assistant built on Llama, an open-source language model running locally. Rather than automate the whole reporting process, I designed the workflow around small batches. The assistant processed five tasks at a time and drafted analyses guided by IEC 62366.',
+        ] },
+      { label: 'Decisions and trade-offs', title: 'Three calls: small batches, mandatory approval, and proof through a prototype and a small pilot', type: 'decisions', id: 'decisions',
+        items: [
+          { q: 'Scope of automation', chose: 'Five tasks at a time, with a draft analysis for each batch', gave: 'End-to-end automation of the whole report', why: 'Small batches keep each output reviewable. A smaller scope was also easier to prove.' },
+          { q: 'Who signs off', chose: 'Engineers review, correct and manually approve every output', gave: 'Some of the speed', why: 'In medical device engineering, errors cannot be accepted without verification. Review is a product requirement, not a workaround.' },
+          { q: 'How to introduce it', chose: 'Working examples and a prototype first, then a pilot with a small group', gave: 'A faster, wider rollout', why: 'Engineers had to trust it before an internal project relied on it.' },
+        ] },
+      { label: 'Pilot findings', title: 'The pilot showed three limits: slow local processing, missing context, and plausible but wrong text', type: 'bullets',
+        items: [
+          '<b>Performance was a constraint.</b> Running the model locally caused processing delays that reduced some of the benefit.',
+          '<b>Context mattered more than expected.</b> The assistant did not have complete device information, so it sometimes misread the device or the purpose of a task.',
+          '<b>Plausible output was not always correct.</b> The model sometimes produced inaccurate interpretations or unsupported details.',
+        ],
+        outro: 'These findings confirmed why review and sign-off had to be mandatory. Generating text was the easy part; generating dependable, context-aware analysis needed a better approach.' },
+      { label: 'Results', title: 'Result: about 50% less time on analysis and drafting, not on the whole timeline', type: 'table',
+        head: ['Measure', 'Result'],
+        rows: [
+          ['Analysis and report drafting time', '<b>About 50% lower</b>'],
+          ['Pilot participants', '4 to 5 engineers'],
+          ['Where the gain came from', 'Faster preparation of initial analyses. Engineers still reviewed, corrected and approved everything'],
+          ['What is not claimed', 'That the whole development or reporting timeline was halved'],
+        ],
+        outro: 'More important than the number: the pilot showed where generative AI added value and where its limits had to be addressed.' },
+      { label: 'Successor', title: 'The lessons shaped a successor with better context, stronger safeguards and the same human accountability', type: 'bullets',
+        intro: 'The pilot did not use retrieval-augmented generation (RAG), which was still emerging as a practical approach in our workflow. It showed exactly why relevant, reliable context mattered. A later, separate workflow used enterprise-protected AI capabilities and RAG.',
+        items: [
+          '<b>Better context:</b> supply relevant reference information instead of relying on the model\'s own knowledge and a limited prompt.',
+          '<b>Stronger safeguards:</b> use enterprise-protected AI capabilities suited to organisational requirements.',
+          '<b>Human accountability:</b> keep engineering review and approval, and never treat generated analysis as authoritative.',
+        ],
+        outro: 'I have not measured an improvement from the successor, so I make no claim that RAG removed errors or added further time savings.' },
+      { label: 'What I learned', title: 'Start with the workflow, treat context as the product, design oversight in, and let a pilot teach', type: 'bullets',
+        items: [
+          '<b>Start with the workflow, not the model.</b> The value came from finding a repetitive, high-effort activity and deciding which parts AI could support.',
+          '<b>Context determines usefulness.</b> A capable model can still be unreliable when it lacks the information to understand the task.',
+          '<b>Design human oversight into the product.</b> In high-stakes work, review and approval are core requirements.',
+          '<b>A pilot should generate learning, not just output.</b> The limits were as valuable as the time saved.',
+        ],
+        outro: '<b>The real product challenge was not getting AI to generate an answer. It was making that answer useful, verifiable and worth an engineer\'s time.</b>' },
+    ],
+  },
+
+  /* ===================== 03 ATÉLIER ===================== */
+  {
+    file: 'case-atelier.html', short: 'Atélier', num: '03',
     title: 'Atélier: search your handwritten notes by meaning',
-    kicker: 'Case 01 · B2C · AI · Built · 2026',
+    kicker: 'Case 03 · B2C · AI · Built · 2026',
     stand: 'MBA students write their notes by hand on iPad, but search only finds a page if they remember the exact words they wrote.',
     desc: 'Atélier, an iPad notes app that searches handwriting by meaning: the problem, what classmates said, the bets, the scope calls and how success is measured.',
     lead: { img: 'images/atelier-cover.webp', w: 1600, h: 1200, ratio: '4/3', alt: 'Atélier on two iPads: the note library with "Search your handwriting", and a handwritten page with an "echo of past notes" hint' },
@@ -124,132 +377,11 @@ const CASES = [
     ],
   },
 
-  /* ===================== 02 TICKETPILOT ===================== */
+  /* ===================== 04 ENSEMBLE (blog structure) ===================== */
   {
-    file: 'case-ticketpilot.html', short: 'TicketPilot', num: '02',
-    title: 'TicketPilot: an AI router that failed its own test',
-    kicker: 'Case 02 · B2B · AI · Prototype · 2026',
-    stand: 'In IT support, tickets get passed between teams and employees wait while each team repeats the investigation.',
-    desc: 'TicketPilot, an AI ticket-routing prototype: process evidence from 7,554 incidents, a failed baseline test, and a recommendation to hold deployment.',
-    lead: { img: 'images/ticketpilot-cover.webp', w: 1920, h: 1080, ratio: '16/9', alt: 'TicketPilot title card: Less ticket bouncing, a clearer path to resolution. Classify, explain, resolve.' },
-    tldr: [
-      ['Problem', 'In a real public IT-support log, half of incidents pass through more than one team and 15.6% bounce straight back to a team that already had them.'],
-      ['Product', 'Reads a new ticket, proposes the resolving team and shows matched past fixes with sources. An engineer approves the route; the employee confirms the outcome.'],
-      ['North Star', 'Durable first-owner resolution rate (proposed): resolved on time by the first owner, confirmed by the employee, not reopened in 7 days.'],
-      ['Result', 'The prototype failed its test: 10% first-time-right against a keyword rule\'s 90%. Recommendation: hold deployment, fund bounded discovery.'],
-    ],
-    snapshot: [
-      ['Role', 'Product owner and builder, with AI development tools'],
-      ['Type', 'Enterprise AI prototype (portfolio project)'],
-      ['Data', 'Public BPI 2013 incident log, plus synthetic ticket text'],
-      ['Status', 'Recommendation: HOLD (Oct 2026)'],
-      ['Skills', 'Problem framing, AI evaluation, metrics, business case'],
-    ],
-    sections: [
-      { label: 'Problem', title: 'Half of IT incidents change teams, and about 1 in 6 bounce straight back', type: 'bullets',
-        intro: 'The pattern comes from one public incident log (BPI Challenge 2013). It shows where friction exists. It does not show why, or that it can be removed.',
-        items: [
-          '<b>7,554 incidents and 9,454 handoffs</b> between support teams: 1.25 handoffs per incident on average.',
-          '<b>50.6%</b> of incidents touch more than one team.',
-          '<b>15.6%</b> bounce directly from team A to B and back to A.',
-          '<b>Hypothesis:</b> some bounces happen because the ticket\'s wording points to a different team than the one that ends up resolving it, and past resolutions could predict the right owner.',
-        ],
-        outro: 'Many transfers may be legitimate specialist escalations. Finding out how many is the first job of any real pilot.' },
-      { label: 'Users', title: 'Three people share one request: the employee, the engineer and the manager', type: 'table',
-        fig: { svg: D.ticketpilotFlow, cap: 'One request from report to confirmed outcome.', read: 'Read the top row left to right: an employee reports, the AI proposes a team, an engineer decides, the work is done, the employee confirms. Only the second box is AI; a person approves the route and the employee confirms the result. The bottom box is the manager, who watches the whole flow.' },
-        head: ['Persona', 'Job to be done', 'Role in the product'],
-        rows: [
-          ['<b>Maya Rao</b>, sales employee', 'Get dashboard access back before a meeting', 'Describes the issue once, then confirms the outcome'],
-          ['<b>Daniel Chen</b>, support engineer', 'Resolve the right work without repeating an investigation', 'Inspects the evidence, approves or overrides the route'],
-          ['<b>Elena Park</b>, IT service manager', 'Improve service quality and plan support capacity', 'Sees handoffs, outcomes and review load'],
-        ],
-        outro: 'The personas and the company, Northstar, are fictional. They are not research participants or customers.' },
-      { label: 'Key insight', type: 'quote',
-        text: 'A convincing demo does not overturn a failed quality gate.',
-        note: 'The prototype looks good on a hand-picked ticket. Across 50 held-out descriptions it did not beat a simple keyword rule. I kept the failed result and built the recommendation around it.' },
-      { label: 'Hypotheses', title: 'Four things had to be true, and none is proven yet', type: 'table',
-        head: ['Hypothesis', 'Evidence today', 'Next test'],
-        rows: [
-          ['A meaningful share of transfers is avoidable', 'Historical handoff patterns only', 'Service owners annotate a sample of real handoffs'],
-          ['Ownership is predictable from ticket text', 'Failed on the synthetic test', 'Frozen holdout on real ticket text'],
-          ['Retrieved fixes cut repeat investigation', 'Prototype shows sources; usefulness not rated', 'Blind rating of 50 or more suggestions'],
-          ['A sponsor would fund a bounded pilot', 'A conditional cost model only', 'Sponsor and Finance workshop'],
-        ] },
-      { label: 'Goals and metrics', title: 'North Star: tickets resolved by the first owner, confirmed and not reopened', type: 'tree',
-        ns: ['Durable first-owner resolution rate', 'Proposed, not yet instrumented. Share of cases the first accountable team resolved on time, the employee confirmed, and nobody reopened within 7 days.'],
-        l1: [
-          ['Handoffs per case', 'Historical baseline 1.25; the effect of the product is unmeasured'],
-          ['Confirmation coverage', 'Share of cases where the employee\'s outcome is known'],
-          ['Reopen rate', 'Guards against closing a ticket too early'],
-        ],
-        guard: '<b>Guardrails:</b> confident routing error and the human-review rate. <b>Rejected as North Star:</b> recommendations accepted (rewards trusting the AI) and tickets closed (rewards closing early).' },
-      { label: 'Scope', title: 'I cut eight must-haves to five, keeping only what tests the core idea', type: 'table',
-        head: ['Item', 'Call', 'Why'],
-        rows: [
-          ['Process analysis on the real incident log', '<b>Kept</b>', 'Grounds the problem in evidence'],
-          ['Classification, with abstention and human approval', '<b>Kept</b>', 'The core of the product'],
-          ['Fix suggestions with inspectable sources', '<b>Kept</b>', 'Retrieved, not generated, so each can be checked'],
-          ['Frozen baseline comparison, failures reported', '<b>Kept</b>', 'AI has to beat a cheap alternative'],
-          ['Executive pack: value model, rollout, scorecard', '<b>Kept</b>', 'Turns the result into a decision'],
-          ['Voice input, alerts, learning dashboard, automatic fixes', 'Cut', 'Extensions before the core was proven'],
-        ],
-        outro: 'I used MoSCoW rather than RICE: the evidence did not support honest reach and impact numbers.' },
-      { label: 'Solution', title: 'The product: AI proposes the owner, a person approves, the employee confirms', type: 'video',
-        frame: 'plain', src: 'videos/ticketpilot-trailer.mp4', poster: 'images/ticketpilot-cover.webp', ratio: '16/9',
-        alt: 'TicketPilot 60-second trailer: a sales employee reports an issue, the AI proposes a team, a support engineer approves, the employee confirms',
-        cap: 'The 60-second trailer. Sample organisation; integrations and fixes are simulated.',
-        still: { img: 'images/ticketpilot-routing.webp', alt: 'Daniel, the support engineer, approving the route TicketPilot proposed: Recommended team Applications, with similar resolved cases', cap: 'Daniel approves the proposed route. TicketPilot recommends; a person decides.' },
-        tiles: [
-          ['AI classifies, a person decides', 'TicketPilot proposes a team from matched past resolutions. Weak evidence abstains. The engineer approves or overrides.'],
-          ['Fixes come with sources', 'Suggestions are retrieved from past resolution notes and current articles, not generated, so each can be inspected.'],
-          ['Suggested is not done', 'A suggested fix, recorded work and the employee\'s confirmation are three separate steps.'],
-        ],
-        outro: 'Early feedback said it felt like a test summary and that people could not tell who does what. I changed it to lead with one request journey, named roles and a guided tour. That was feedback on the project, not customer interviews.' },
-      { label: 'Decisions and trade-offs', title: 'Four calls that kept the AI honest', type: 'decisions', id: 'decisions',
-        items: [
-          { q: 'Inspectable retrieval, not an agent stack', chose: 'Direct retrieval and voting over similar past tickets', gave: 'The LLM agent stack in my original plan', why: 'Behaviour I can inspect, at low setup cost. It also means I cannot claim an LLM agent was built: it was not.' },
-          { q: 'A person approves the route', chose: 'TicketPilot classifies; the engineer approves or overrides', gave: 'Fully automatic assignment', why: 'A wrong confident route costs more than a slower right one. Weak evidence abstains to a person.' },
-          { q: 'Keep the failed result', chose: 'Report 10% against 90% and recommend HOLD', gave: 'A cleaner headline', why: 'Hiding the abstentions or the baseline would make the demo look better and the decision worse.' },
-          { q: 'Count effort, not waiting', chose: 'Value only hands-on minutes, and count review as a cost', gave: 'The bigger number from elapsed delay', why: 'Hours a ticket waits are not hours someone worked. My first formula multiplied delay by volume; I replaced it.' },
-        ] },
-      { label: 'Evaluation', title: 'The test failed: 10% first-time-right against a 90% keyword baseline', type: 'table',
-        head: ['Measure', 'Result', 'How to read it'],
-        rows: [
-          ['Keyword baseline, first-time-right', '<b>45 of 50 (90%)</b>', 'Frozen rules on the same descriptions'],
-          ['TicketPilot, first-time-right', '<b>5 of 50 (10%)</b>', 'Abstentions count as not assigned'],
-          ['Recommendation accuracy', '44 of 50 (88%)', 'Includes the team proposed on cases it held back'],
-          ['Sent to human review', '45 of 50 (90%)', 'Little coverage, and a real review cost'],
-          ['Wrong confident assignments', '0 of 5', 'Too few to show a low error rate: zero errors in 5 still allows about 45% at 95% confidence'],
-        ],
-        outro: 'The 50 test cases are five variants of ten authored scenarios, so they are synthetic and correlated. This is a failed comparison against a baseline, not a measure of real-world accuracy. The gate also needs review: beating a 90% baseline by 10 points requires 100%. That review has to happen before the next experiment, not after seeing its results.' },
-      { label: 'Value case', title: 'Even if it worked, review effort decides whether the economics hold', type: 'table',
-        intro: 'Base case, with every input assumed: 20,000 tickets a year, 25% fewer handoffs, 10 hands-on minutes per handoff, $45 an hour, 20% of tickets reviewed for 5 minutes, $12,000 to build and $6,600 a year to run. That gives about 710 net hours and $25,332 a year, with payback in 5.7 months.',
-        head: ['Handoff reduction', 'Review share', 'Annual net value', 'Payback'],
-        rows: [
-          ['10%', '20%', '-$2,827', 'None'],
-          ['<b>25% (base)</b>', '<b>20%</b>', '<b>$25,332</b>', '<b>5.7 months</b>'],
-          ['50%', '20%', '$72,264', '2.0 months'],
-          ['25%', '40%', '$10,332', '13.9 months'],
-          ['25%', '90%', '-$27,168', 'None'],
-        ],
-        outro: 'The 90% row uses the review share the offline test actually showed. Even if the 25% reduction held, net value would be negative. None of this is realised saving, and the reduction has not been demonstrated.' },
-      { label: 'Recommendation', title: 'So: hold the router and fund 90 days of gated discovery', type: 'table',
-        intro: 'Authorise bounded discovery within an illustrative $12,000 build budget and hold deployment of the current router. Each stage is released only when its gate passes. These are my proposals, not approvals from anyone.',
-        head: ['Stage', 'Work', 'Exit gate'],
-        rows: [
-          ['<b>Days 1 to 30</b>: discovery and offline quality', 'Validate the transfers and labels, interview users, measure effort, test on approved real ticket text', 'No live assignment. Pass the quality, review and safety gates, or rework or stop'],
-          ['<b>Days 31 to 60</b>: one team, controlled', 'Shadow mode first, then human-approved routing on one registered cohort', 'Fewer handoffs, no worse p90 time, 60% of resolvers active weekly for two weeks'],
-          ['<b>Days 61 to 90</b>: value validation', 'Mature the outcome cohorts; Finance validates effort and cost', 'Expand only with passing quality, adoption and safety, and payback within 12 months'],
-        ],
-        outro: '<b>What I would do differently:</b> compare against the cheap alternative first, get real ticket text earlier, and set the gate and the baseline together. I wrote a gate that demands 100% before I knew the baseline.' },
-    ],
-  },
-
-  /* ===================== 03 ENSEMBLE (blog structure) ===================== */
-  {
-    file: 'case-ensemble.html', short: 'Ensemble', num: '03',
+    file: 'case-ensemble.html', short: 'Ensemble', num: '04',
     title: 'Ensemble: an AI lead that directs cheaper AI workers',
-    kicker: 'Case 03 · Developer tool · AI · Open source · 2026',
+    kicker: 'Case 04 · Developer tool · AI · Open source · 2026',
     stand: 'Developers pay a strong AI model\'s price for routine coding, and independent pieces of work wait in line behind each other.',
     desc: 'Ensemble, an open-source tool where a lead AI delegates coding to cheaper workers: why I built it, the cost ratio I use as the North Star, and a small study that found no clear saving at this size.',
     links: [{ label: 'GitHub repo ↗', href: 'https://github.com/VeeraPD/ensemble-mcp', primary: true }],
@@ -346,11 +478,11 @@ const CASES = [
     ],
   },
 
-  /* ===================== 04 VOICE CAPTURE ===================== */
+  /* ===================== 05 VOICE CAPTURE ===================== */
   {
-    file: 'case-voice-capture.html', short: 'Voice capture', num: '04',
+    file: 'case-voice-capture.html', short: 'Voice capture', num: '05',
     title: 'Voice capture for Hinglish: testing whether to build',
-    kicker: 'Case 04 · Discovery · In progress · 2026',
+    kicker: 'Case 05 · Discovery · In progress · 2026',
     stand: 'Phone speech-to-text works for American English but breaks on Indian accents and on Hinglish, the Hindi-English mix many Indians speak every day.',
     desc: 'A discovery study on speech-to-text for Hinglish and Indian accents: hypotheses, an engine comparison, unit economics and a build, pivot or kill rule. In progress.',
     lead: { art: 'a03', mesh: 'g-rose', alt: 'Abstract sound wave' },
@@ -523,14 +655,121 @@ const CASES = [
         ] },
     ],
   },
+
+  /* ===================== LAB: RESUME FIT COPILOT (LLM-based usability pilot) ===================== */
+  {
+    file: 'case-resume-copilot.html', short: 'Resume Fit Copilot', num: 'Lab', lab: true, tag: 'AI Lab',
+    title: 'Resume Fit Copilot: six AI test users found what my passing test run missed',
+    kicker: 'AI Lab · AI product · Usability pilot · 2026',
+    stand: 'Job seekers use ChatGPT to write resume bullets they cannot defend in an interview, and no tool tells them which claims their real work backs.',
+    desc: 'Resume Fit Copilot, an evidence-backed resume checker: an LLM-based usability pilot with six synthetic users, four blockers found, and a product reset to checker-first.',
+    lead: { art: 'a07', mesh: 'g-mint', alt: 'Abstract resume page with ticked and unticked lines' },
+    tldr: [
+      ['Problem', 'People paste AI-written bullets such as "led a team" or "raised conversion 25%" that their real work does not back, and freeze when an interviewer asks.'],
+      ['Product', 'A resume checker that holds your real evidence and checks every claim against it, line by line. Rules veto any claim the evidence does not back.'],
+      ['Target metric', 'Proposed, not yet met: catch at least 95% of invented or inflated claims and flag no more than 5% of true ones, on a labelled set that includes real resumes.'],
+      ['Result', 'In a pilot with six AI test users, 0 of 6 left with bullets they would send and 4 blockers appeared. All 6 named the checker the best part, so I reset the product to checker-first.'],
+    ],
+    snapshot: [
+      ['Role', 'Product owner and builder, with AI development tools: framing, architecture, evaluation, pilot'],
+      ['Type', 'AI product, portfolio MVP (Release 2)'],
+      ['Stack', 'Python, LangChain and LangGraph, local embeddings, Streamlit; AWS serverless demo built, not deployed'],
+      ['Status', 'Reset to checker-first after the pilot (Oct 2026)'],
+      ['Skills', 'Discovery, AI evaluation, usability research, architecture, decision logs'],
+    ],
+    sections: [
+      { label: 'Problem', title: 'AI writes the bullets, but nobody can tell the user which ones they can defend', type: 'bullets',
+        intro: 'The need comes from desk research, not interviews. No real user has been interviewed yet.',
+        items: [
+          '<b>The anxiety is real.</b> In January 2026, 84% of Indian professionals told LinkedIn they feel unprepared for the job search and 94% plan to use AI tools in it. One release, widely reprinted, so medium confidence.',
+          '<b>Employers distrust inflated claims.</b> In a February 2026 US survey, 80% of hiring managers said resumes fail to match real skills at least sometimes.',
+          '<b>The gap:</b> chat assistants write well but cannot refuse a claim your work does not support, and score-based checkers match keywords, not truth. I found no tool that tells you which of your claims you can defend.',
+        ] },
+      { label: 'Users', title: 'Three personas: the urgent pivoter, the planned pivoter and the overseas-bound', type: 'table',
+        intro: 'The personas are proto-personas built from sources, checked against research. They are not research participants.',
+        head: ['Persona', 'Job to be done', 'What makes them leave'],
+        rows: [
+          ['<b>Ravi</b>, 34, laid off after 8 years in IT services (primary)', '"Get me bullets I can send tonight and defend in the interview."', '15 to 20 minutes spent with nothing to send'],
+          ['<b>Meghna</b>, 29, business analyst doing an MBA (primary)', '"Make my bullets read like a decision maker\'s, without lying."', 'It looks amateur, loses her work, or contradicts her own resume'],
+          ['<b>Farhan</b>, 38, applying to jobs in Dubai (backup)', '"Tell me if my CV matches this job, and give me one I can send."', 'It feels built for IT people, or like a trick'],
+        ] },
+      { label: 'Key insight', type: 'quote',
+        text: 'A chat assistant writes better. It cannot refuse a claim your evidence does not back.',
+        note: 'That refusal is the product. Retrieval proposes candidate evidence; a rule-based verifier decides what a bullet may claim. Numbers, tools, names and ownership verbs must all come from one cited line, and you approve every bullet.' },
+      { label: 'Product', title: 'The product: an evidence bank, a fit map and a verifier that refuses what the evidence does not back', type: 'table',
+        head: ['Feature', 'What it does'],
+        rows: [
+          ['<b>Evidence bank</b>', 'One fact per line with a stable ID. Client names tagged once and always hidden'],
+          ['<b>Requirement map</b>', 'Each job requirement is Covered, Likely (confirm), Weak, Missing or Check yourself, judged one evidence line at a time'],
+          ['<b>Gap coach</b>', 'For each gap, your nearest experience and three questions. The app refuses to use a fill-in line until you complete it'],
+          ['<b>Cited bullets</b>', 'One bullet per evidence line, checked by rules, retried if it fails, reviewed by you'],
+          ['<b>Check AI text</b>', 'Paste bullets from any AI. Each is matched to your evidence and cited or flagged, with a safer version'],
+        ],
+        outro: 'Built on Python, LangChain retrievers (word and local-embedding meaning search, fused) and a rule-based verifier, with a Streamlit interface. Offline results looked strong: the verifier accepted 0 of 30 unsupported bullets, and the checker flagged 11 of 11 invented bullets. But those cases are synthetic and labelled by the AI that wrote the code, so they are not real-world accuracy.' },
+      { label: 'Pilot method', title: 'The pilot: six AI agents played three personas on the real app, blind to the code', type: 'prose',
+        fig: { svg: D.usabilityStudy, cap: 'How the LLM-based usability pilot worked.', read: 'Read left to right. Three personas are each played by two AI agents, who drive the real app in a real browser and see only what is on screen. Each writes a report. I then re-ran every defect by hand. The bottom box is what the findings changed. The note at left is what this method cannot show.' },
+        paras: [
+          'I passed a 14-case scripted test run, so I wanted to see what happens when someone who does not know the app uses it. Six AI agents, two per persona, each played a person who had just arrived from a friend\'s link. They could not read the code or docs, only look at the screen, and had to act with the persona\'s patience, reading speed and device. Each ran a 5-second test on the landing page, then tried five tasks, from loading a resume to checking AI-written bullets.',
+          'The inputs were messy on purpose: a resume pasted as people copy it from a PDF, job posts written like real postings, and AI bullets with known overclaims planted. Limits: the agents share a model family with the builder, they knew they were in a study, and minutes are estimates. The pilot finds usability problems and defects. It cannot prove demand.',
+        ] },
+      { label: 'Results', title: 'Result: 0 of 6 left with bullets to send, yet all 6 named the checker the best part', type: 'table',
+        head: ['Measure', 'Result'],
+        rows: [
+          ['Left with bullets they would send', '<b>0 of 6</b>'],
+          ['Planted overclaims caught by "Check AI text"', '<b>All of them, in all 6 sessions</b>'],
+          ['Named the checker the best part', '6 of 6'],
+          ['Would pay Rs 499 for the app as it was', '<b>0 of 6</b>. Five would come back, for the checker only'],
+          ['Blocker defects in the core path', '4, all reproduced by hand'],
+        ],
+        outro: 'This is why the scripted run missed them: it used a clean demo bank and approved every bullet in one pass. Real resumes are not clean.' },
+      { label: 'Findings', title: 'Four blockers sat in the core path, and a passing test run had hidden them', type: 'bullets',
+        items: [
+          '<b>One or two bullets from a whole resume.</b> The import kept the skills list as evidence and dropped real facts, so the first bullet was often the skills list copied word for word.',
+          '<b>A crash on the second save</b> that wiped the user\'s work on reload.',
+          '<b>The job parser skipped "Key Responsibilities"</b>, so it lost 7 of 16 requirements on one post and 6 of 14 on another.',
+          '<b>The export was not a CV.</b> A heading and a few bullets, which the overseas persona could not send.',
+        ],
+        outro: 'The checker itself had one flaw that cost trust: it flagged a user\'s own true sentence because the import had split cause and result into two lines.' },
+      { label: 'Decisions and trade-offs', title: 'Four calls after the pilot: checker first, an LLM judges, rules can veto, two scores shown apart', type: 'decisions', id: 'decisions',
+        items: [
+          { q: 'What the product is', chose: 'A checker first, an organiser second, the writer frozen', gave: 'Fixing the writer in a Release 2.1 nobody had asked for', why: 'The pilot proved the checker was the one thing people valued, and it works alongside ChatGPT instead of competing with it.' },
+          { q: 'Who judges a claim', chose: 'An LLM judges with a quoted reason; hard rules can only make the verdict stricter', gave: 'Rules alone, which missed nuance in every session', why: 'An LLM can be talked into "close enough". For numbers, named tools, ownership verbs and client names, the answer must be provable.' },
+          { q: 'How to score', chose: 'Two scores shown apart: Defensibility and Job fit', gave: 'One number, or no score', why: 'A high job fit built on claims you cannot defend is exactly the harm this product exists to prevent, so the two are never combined.' },
+          { q: 'Proof of work', chose: 'Compare the resume against an older resume or one-tap answers ("Did you lead the team of 5?")', gave: 'Requiring an evidence bank up front', why: 'A resume cannot prove itself, and a blank evidence bank is where users gave up.' },
+        ] },
+      { label: 'Business case', title: 'Demand is unproven, so a paid probe comes before more building', type: 'bullets',
+        intro: 'Zero of six would pay for the product as it was. That is a statement about visible value, not willingness to pay, because the testers were AI agents.',
+        items: [
+          '<b>Proxy signals say checking is a habit:</b> third-party trackers put India at roughly a third of Resume Worded\'s visits, around 600,000 a month, and about 20% of Jobscan\'s. Medium confidence, and none of it shows people pay for defensibility.',
+          '<b>The gate:</b> a fake-door page and a Rs 499 one-job probe, then five real users in acceptance testing, before any new feature work. Neither has been run.',
+        ] },
+      { label: 'Feedback loop', title: 'A feedback loop for an enterprise-style demo: report, AI triage, Jira, with code in charge', type: 'bullets',
+        items: [
+          '<b>Architecture:</b> a serverless AWS design (S3 and CloudFront for the page, one Lambda, one DynamoDB table, SSM for secrets and a kill switch) with a Jira Cloud project for reported problems.',
+          '<b>Safety by design:</b> the LLM only fills a fixed-choice schema and treats the user\'s report as untrusted text. Code applies every rule. The Jira client has no close, transition or delete method. Daily and per-call spend caps stop LLM triage.',
+          '<b>Status:</b> built and tested on my machine. Not deployed, so there is no live link. The keyword triage scored 30 of 30 on samples its own author wrote, which is not a meaningful result; the LLM triage is not measured.',
+        ] },
+      { label: 'What I learned', title: 'A clean demo is not a test: put strangers on messy inputs before anything else', type: 'bullets',
+        items: [
+          '<b>My dry run only proved that the app does what I wrote.</b> The pilot, with unfamiliar users and a pasted-from-PDF resume, found four problems the dry run could not.',
+          '<b>An AI user study is a cheap first filter, not evidence of demand.</b> It found usability faults in hours. Willingness to pay still needs real people.',
+          '<b>Next:</b> re-run the pilot on the same inputs after the checker-first rebuild (each persona should leave with 4 or more bullets they would send), then the paid probe and a five-person acceptance test.',
+        ] },
+    ],
+  },
+
 ];
 
 /* ----------------------------------------------------------------------------
    TEMPLATE
    ---------------------------------------------------------------------------- */
+editCases(CASES);
+structureCases(CASES);
+
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 
 const SYMBOLS = {
+  a07: '<symbol id="a07" viewBox="0 0 200 150"><g transform="translate(100 75) scale(.95)" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="-52" y="-62" width="104" height="124" rx="10" opacity=".6"/><path d="M-34 -36l6 6 12 -12"/><path d="M-8 -34H34"/><path d="M-34 -6l6 6 12 -12"/><path d="M-8 -4H26"/><path d="M-32 22l12 12M-20 22l-12 12"/><path d="M-8 28H30" opacity=".5"/></g></symbol>',
   a03: '<symbol id="a03" viewBox="0 0 200 150"><g transform="translate(100 75) scale(.95)" fill="currentColor"><rect x="-72" y="-5" width="8" height="10" rx="4"/><rect x="-56" y="-13" width="8" height="26" rx="4"/><rect x="-40" y="-22" width="8" height="44" rx="4"/><rect x="-24" y="-15" width="8" height="30" rx="4"/><rect x="-8" y="-29" width="8" height="58" rx="4"/><rect x="8" y="-18" width="8" height="36" rx="4"/><rect x="24" y="-9" width="8" height="18" rx="4"/><rect x="40" y="-24" width="8" height="48" rx="4"/><rect x="56" y="-12" width="8" height="24" rx="4"/></g></symbol>',
   a05: '<symbol id="a05" viewBox="0 0 200 150"><g transform="translate(100 75) scale(.95)" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M-52 0H-6M-6 0L40 -44M-6 0H40M-6 0L40 44"/><circle cx="-58" cy="0" r="13" fill="currentColor" stroke="none"/><circle cx="-6" cy="0" r="8"/><rect x="40" y="-60" width="34" height="32" rx="7" fill="currentColor" opacity=".45" stroke="none"/><rect x="40" y="-16" width="34" height="32" rx="7" fill="currentColor" opacity=".45" stroke="none"/><rect x="40" y="28" width="34" height="32" rx="7" fill="currentColor" opacity=".45" stroke="none"/></g></symbol>',
 };
@@ -564,16 +803,14 @@ function section(s, i) {
     case 'decisions': body = `<div class="decs">${s.items.map((d, k) => `
           <article class="dec">
             <h3><span>${String(k + 1).padStart(2, '0')}</span>${d.q}</h3>
-            <div class="opts">
-              <div class="opt chosen"><p class="label">What I chose <span class="tick">Chosen</span></p><p>${d.chose}</p></div>
-              <div class="opt"><p class="label">What I gave up</p><p>${d.gave}</p></div>
-            </div>
-            <p class="why"><b>Why.</b> ${d.why}</p>
+            <p class="decision-choice">${d.chose}</p>
+            <p class="why"><b>Why:</b> ${d.why}</p>
+            <p class="decision-trade"><b>Trade-off:</b> ${d.gave}</p>
           </article>`).join('')}</div>`; break;
   }
   /* figures: s.fig = { svg, cap, after } or an array of them; drawn before the body unless after:true */
   const figs = [].concat(s.fig || []);
-  const fig = (f) => `<figure class="fig${f.after ? ' after' : ''}"><div class="dgwrap">${f.svg()}</div><p class="swipe" aria-hidden="true">Scroll sideways for the full diagram →</p><figcaption>${f.cap}${f.read ? ` <span class="how"><b>How to read it.</b> ${f.read}</span>` : ''}</figcaption></figure>`;
+  const fig = (f) => `<figure class="fig${f.after ? ' after' : ''}"><div class="dgwrap">${f.svg()}</div><p class="swipe" aria-hidden="true">Scroll sideways for the full diagram →</p><figcaption>${f.cap}${f.read ? ` <details class="figure-guide"><summary>Diagram guide</summary><span class="how">${f.read}</span></details>` : ''}</figcaption></figure>`;
   const before = figs.filter((f) => !f.after).map(fig).join('');
   const after = figs.filter((f) => f.after).map(fig).join('');
   return `
@@ -581,25 +818,19 @@ function section(s, i) {
       <p class="label">${s.label}</p>
       <div>
         ${h2}
-        ${intro}${before}${body}${outro}${after}
+        ${s.compact ? `<details class="supporting"><summary>View ${s.label.toLowerCase()}</summary><div class="supporting-body">${intro}${before}${body}${outro}${after}</div></details>` : `${intro}${before}${body}${outro}${after}${s.screens ? `<div class="product-screens">${s.screens.map(x => `<figure><img src="${x.img}" alt="${esc(x.alt)}" loading="lazy" decoding="async"><figcaption>${x.cap}</figcaption></figure>`).join('')}</div>` : ''}`}
       </div>
     </section>`;
-}
-
-/* the section titles in order: read alone they tell the whole case */
-function story(c) {
-  const items = c.sections.map((s, i) => (s.title ? `<li><a href="#s${i}">${s.title}</a></li>` : '')).join('');
-  return `<nav class="story" aria-label="The case in headlines"><p class="label">The case in headlines</p><ol>${items}</ol></nav>`;
 }
 
 function page(c, prev, next) {
   const lead = c.lead.img
     ? `<figure class="lead-img"><img src="${c.lead.img}" width="${c.lead.w}" height="${c.lead.h}" style="aspect-ratio:${c.lead.ratio}" alt="${esc(c.lead.alt)}" decoding="async"></figure>`
     : `<div class="lead-img art grain mesh ${c.lead.mesh}" role="img" aria-label="${esc(c.lead.alt)}"><svg aria-hidden="true"><use href="#${c.lead.art}"/></svg></div>`;
-  const links = [...(c.links || []), { label: 'Skip to the decisions', href: '#decisions' }]
+  const links = (c.links || [])
     .map((l) => `<a class="pill${l.primary ? '' : ' ghost'}" href="${l.href}"${l.href.startsWith('http') ? ' rel="noopener"' : ''}>${l.label}</a>`).join('');
   const sym = c.lead.art ? `<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">${SYMBOLS[c.lead.art]}</svg>\n` : '';
-  const tldr = `<div class="tldr" aria-label="TL;DR">${c.tldr.map(([k, v]) => `<div><p class="label">${k}</p><p>${v}</p></div>`).join('')}</div>`;
+  const tldr = `<div class="tldr" aria-label="Problem, issue and solution">${c.preview.map(({label, title, text}) => `<div><p class="label">${label}</p><h2>${title}</h2><p>${text}</p></div>`).join('')}</div><p class="preview-status"><span class="label">Progress</span> ${c.previewStatus}</p>`;
   const snap = c.snapshot.map(([k, v]) => `<div><dt class="label">${k}</dt><dd>${v}</dd></div>`).join('\n      ');
   const tag = c.lab ? (c.tag || 'AI Lab') : `Case ${c.num}`;
   const home = c.lab ? 'index.html#fun' : 'index.html#work', homeTxt = c.lab ? 'Fun projects' : 'All work';
@@ -642,12 +873,12 @@ ${sym}<a class="skip" href="#main">Skip to content</a>
       <h1>${c.title}</h1>
       <p class="label ps">Problem statement</p>
       <p class="stand">${c.stand}</p>
-      <p class="links">${links}</p>
-      ${lead}
+      ${links ? `<p class="links">${links}</p>` : ''}
       ${tldr}
+      ${lead}
     </header>
 
-    ${story(c)}
+
     <dl class="summary" style="--cols:${c.snapshot.length}">
       ${snap}
     </dl>
